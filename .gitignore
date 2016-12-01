@@ -5,5 +5,5 @@ projectXenv/*
 *.sql
 .DS_Store
 *server*.log
-settings.py
+projectX/settings.py
 runServer.sh

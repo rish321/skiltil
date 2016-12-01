@@ -20,8 +20,8 @@ class ContactForm(SiteForm):
 
 	def __init__(self, *args, **kwargs):
         	super(ContactForm, self).__init__(*args, **kwargs)
-        	self.fields['contact_name'].label = "Name:"
-		self.fields['contact_phone'].label = "Phone:"
+        	self.fields['contact_name'].label = "Name:* "
+		self.fields['contact_phone'].label = "Phone:* "
         	self.fields['contact_email'].label = "Email:"
 		self.fields['preferred_communication_time'].label = mark_safe("Preferred Time for Communication:<br />")
         	self.fields['content'].label = mark_safe("Comments:<br />")

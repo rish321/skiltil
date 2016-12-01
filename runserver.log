@@ -1,0 +1,57 @@
+Performing system checks...
+
+System check identified no issues (0 silenced).
+December 01, 2016 - 13:33:22
+Django version 1.10.3, using settings 'projectX.settings'
+Starting development server at http://0.0.0.0:80/
+Quit the server with CONTROL-C.
+<QuerySet [<Skill: Candle Making - Creative Art>, <Skill: 3D sketching - Creative Art>, <Skill: 3 D painting - Creative Art>, <Skill: Candle Stand - Creative Art>, <Skill: Clay Modelling - Creative Art>]>
+<QuerySet [<Skill: Religious Songs - Singing>, <Skill: Religious Songs - Singing>, <Skill: Shaadi Rasam Songs - Singing>]>
+<QuerySet [<Skill: 3D sketching - Art>, <Skill: Candle Making - Art>, <Skill: Candle Stand - Art>, <Skill: Clay Modelling - Art>, <Skill: Craft - Art>, <Skill: Diya Painting - Art>, <Skill: Festival Decoration Advice - Art>, <Skill: Foil Painting - Art>, <Skill: Interior Decoration Advice - Art>, <Skill: Knitting - Art>, <Skill: Mandir Decoration - Art>, <Skill: Mehandi - Art>, <Skill: Oil Painting - Art>, <Skill: Origami - Art>, <Skill: Painting - Art>, <Skill: Paper Quilling - Art>, <Skill: Pencil Sketching - Art>, <Skill: Rangoli - Art>, <Skill: Stitching - Art>, <Skill: Stocking flower - Art>, '...(remaining elements truncated)...']>
+<QuerySet [<Skill: Excel - Computer Skills>, <Skill: Using a Computer - Computer Skills>]>
+<QuerySet [<Skill: Moonwalk - Dance>, <Skill: Salsa - Dance>, <Skill: Song  Choreography - Dance>, <Skill: Bharatnatyam - Dance>]>
+<QuerySet [<Skill: Basic Android App - Education>, <Skill: C - Education>, <Skill: DBMS - Education>, <Skill: Discrete Structure - Education>, <Skill: JAVA - Education>, <Skill: Networking - Education>, <Skill: OS - Education>, <Skill: Solaris - Education>, <Skill: Veritas - Education>]>
+<QuerySet [<Skill: Basic Yoga - Exercise>, <Skill: Facial exercise - Exercise>, <Skill: Gymming - Exercise>, <Skill: Home Workouts - Exercise>, <Skill: Shambhavi Mahamudra - Exercise>, <Skill: Surya Namaskar - Exercise>, <Skill: Aerobics - Exercise>]>
+<QuerySet [<Skill: Apparel Designing - Fashion>, <Skill: Hair Growth Tips - Fashion>, <Skill: Ladies makeup & Home Salon - Fashion>, <Skill: Men's Styling - Fashion>, <Skill: Nail Art - Fashion>, <Skill: Saree Draping (Regional) - Fashion>, <Skill: Women's Grooming - Fashion>, <Skill: Women's Grooming (formal) - Fashion>, <Skill: Women's Hairstyling - Fashion>, <Skill: Men's Home Salon - Fashion>]>
+<QuerySet [<Skill: Financial Advice - Finance>]>
+<QuerySet [<Skill: Badminton - Game/Sport training >, <Skill: Basketball - Game/Sport training >, <Skill: Clash Royale  - Game/Sport training >, <Skill: Pool/Snooker - Game/Sport training >, <Skill: Volleyball - Game/Sport training >]>
+<QuerySet [<Skill: English - Languages>, <Skill: German - Languages>, <Skill: Hindi - Languages>, <Skill: Japanese - Languages>, <Skill: Kannada - Languages>]>
+<QuerySet [<Skill: Legal Advice - Law>]>
+<QuerySet [<Skill: Flute - Musical Instrument>, <Skill: Guitar - Musical Instrument>]>
+<QuerySet [<Skill: Oratory - Personality>, <Skill: Resume writing - Personality>, <Skill: Anchoring tips - Personality>]>
+<QuerySet [<Skill: Mobile Photography - Photography>, <Skill: Professional Photography - Photography>, <Skill: Wildlife Photography - Photography>]>
+<QuerySet [<Skill: Religious Songs - Singing>, <Skill: Shaadi Rasam Songs - Singing>]>
+<QuerySet [<Skill: Mathematics - School Subject Classes>, <Skill: Physics - School Subject Classes>]>
+<QuerySet [<Skill: Palmistry - Vedic Astrology>, <Skill: Tarot Card Reading - Vedic Astrology>, <Skill: Vaastu Shastra - Vedic Astrology>]>
+<QuerySet [<Skill: Aachar (Pickel) - Food>, <Skill: Apple Jam - Food>, <Skill: Baati Chokha - Food>, <Skill: Baby corn manchuria - Food>, <Skill: Banana Pancake - Food>, <Skill: Biscuit - Food>, <Skill: Bread making - Food>, <Skill: Caramel Sauce - Food>, <Skill: Cake without icing - Food>, <Skill: Cake with icing - Food>, <Skill: Chicken Kabab - Food>, <Skill: Chicken Malai Tikka - Food>, <Skill: Chilli Rava Toast - Food>, <Skill: Choco Lava Cake - Food>, <Skill: Chola Bhatura - Food>, <Skill: Chutneys - Food>, <Skill: Dhokla - Food>, <Skill: Doughnut - Food>, <Skill: French Fries - Food>, <Skill: Honey Chilli Potato - Food>, '...(remaining elements truncated)...']>
+Candle Making
+Candle Making
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Subject: New contact form submission
+From: Your website
+To: ris.90s@gmail.com
+Date: Thu, 01 Dec 2016 13:33:43 -0000
+Message-ID: <20161201133343.31022.2860@rishabhs-MacBook-Pro-2.local>
+Reply-To: ris.90s@gmail.com
+
+Contact Name:
+Rishabh
+
+Phone:
+983276
+
+Email:
+ris.90s@gmail.com
+
+To Learn:
+Candle Making
+
+Preferred Time for Communication:
+7:20
+
+Content:
+dsdsds
+
+-------------------------------------------------------------------------------

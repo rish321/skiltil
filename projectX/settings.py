@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '=swlc(#&pqqdr^$3kumc_ul4+072x(57(2g#jzd)6g7viws6$g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -79,9 +79,9 @@ DATABASES = {
         #'ENGINE': 'django.db.backends.sqlite3',
         #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 	'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'skiltil',
+        'NAME': 'projectX',
         'USER': 'rishabh',
-        'PASSWORD': 'rishabhprod',
+        'PASSWORD': 'rishabh321',
         'HOST': 'localhost',
         'PORT': '',
     }

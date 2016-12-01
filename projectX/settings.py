@@ -23,10 +23,16 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '=swlc(#&pqqdr^$3kumc_ul4+072x(57(2g#jzd)6g7viws6$g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+<<<<<<< HEAD
 DEBUG = False
 
 #ALLOWED_HOSTS = [u'localhost', u'104.198.192.78']
 ALLOWED_HOSTS = ['*']
+=======
+DEBUG = True
+
+ALLOWED_HOSTS = [u'localhost', u'192.168.1.16']
+>>>>>>> 129bfef3c2ab5c59bfd2756e37d33c16224ee6f4
 
 
 # Application definition
@@ -80,9 +86,15 @@ DATABASES = {
         #'ENGINE': 'django.db.backends.sqlite3',
         #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 	'ENGINE': 'django.db.backends.postgresql_psycopg2',
+<<<<<<< HEAD
         'NAME': 'skiltil',
         'USER': 'rishabh',
         'PASSWORD': 'rishabhprod',
+=======
+        'NAME': 'projectX',
+        'USER': 'rishabh',
+        'PASSWORD': 'rishabh321',
+>>>>>>> 129bfef3c2ab5c59bfd2756e37d33c16224ee6f4
         'HOST': 'localhost',
         'PORT': '',
     }
@@ -128,8 +140,12 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
+<<<<<<< HEAD
 	os.path.join(BASE_DIR, "static"),
 	'/home/rishabh/projectX/static/',
+=======
+    os.path.join(BASE_DIR, "static"),
+>>>>>>> 129bfef3c2ab5c59bfd2756e37d33c16224ee6f4
 ]
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 

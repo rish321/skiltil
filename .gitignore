@@ -6,3 +6,4 @@ projectXenv/*
 .DS_Store
 server*.log
 projectX/settings.py
+runServer.sh

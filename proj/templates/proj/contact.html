@@ -1,0 +1,19 @@
+<html>
+	<head>
+		<title>
+			Contact Us
+		</title>
+	</head>
+	{% block content %}
+	<h1>Contact Us</h1>
+	<h4>Thanks for reaching out. Please fill your information. We'll get back to you</h4>
+	<form role="form" action="" method="post">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<div style="text-align:center">
+			<button type="submit" style="width: 100px; height: 30px">Submit</button>
+		</div>
+	</form>
+	{% endblock %}
+
+</html>

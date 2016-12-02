@@ -35,6 +35,9 @@ def contact(request):
 	
 	skillName = request.GET.get('skill', '')
 	print skillName
+	skills = Skill.objects.filter(skill_name = skillName)
+	if len(skills) > 0:
+		skill = skills[0]
 
 	# new logic!
 	if request.method == 'POST':
@@ -83,5 +86,6 @@ def contact(request):
 
 	return render(request, 'proj/contact.html', {
 		'form': form_class,
+		'skill': skill,
 	})
 

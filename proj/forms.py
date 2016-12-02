@@ -24,4 +24,4 @@ class ContactForm(SiteForm):
 		self.fields['contact_phone'].label = "Phone:* "
         	self.fields['contact_email'].label = "Email:"
 		self.fields['preferred_communication_time'].label = mark_safe("Preferred Time for Communication:<br />")
-        	self.fields['content'].label = mark_safe("Comments:<br />")
+        	self.fields['content'].label = mark_safe("Anything else you want to convey to us:<br />")

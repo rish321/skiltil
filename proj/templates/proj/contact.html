@@ -1,12 +1,25 @@
 <html>
 	<head>
 		<title>
-			Contact Us
+			{{ skill.skill_name }}	
 		</title>
+		{% load static %}
+		<link rel="stylesheet" type="text/css" href={% static "css/header-basic-light.css" %} />
 	</head>
 	{% block content %}
-	<h1>Contact Us</h1>
-	<h4>Thanks for reaching out. Please fill your information. We'll get back to you</h4>
+	
+	<header class="header-basic-light">
+		<div class="header-limiter">
+			<h2>SkilTil</h2>
+		</div>
+	</header>
+	<div width=100% style="text-align:center">	
+		<img src="{{ skill.image_src }}"  height="100" width="130" >
+		<h4>{{ skill.skill_name }}</h4>
+	</div>
+	{{ skill.details|linebreaksbr }}
+	<!--h1>Contact Us</h1-->
+	<h4>To proceed contact us. Please fill your information. We'll get back to you</h4>
 	<form role="form" action="" method="post">
 		{% csrf_token %}
 		{{ form.as_p }}

@@ -6,18 +6,55 @@
 		<title>Learn from Home</title>
 		<meta name="description" content="Simple Multi-Item Slider: Category slider with CSS animations" />
 		<meta name="keywords" content="jquery plugin, item slider, categories, apple slider, css animation" />
-		<link rel="shortcut icon" href="../favicon.ico"> 
+		<!--link rel="shortcut icon" href="../favicon.ico"-->
+		<link rel="shortcut icon" type="image/png" href="{{STATIC_URL}}/favicon.ico"/> 
 		{% load static %}
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 		<link rel="stylesheet" type="text/css" href={% static "css/style.css" %} />
 		<script src={% static "js/modernizr.custom.63321.js" %}></script>
+		<link rel="stylesheet" type="text/css" href={% static "css/overlay.css" %} />
+		<link rel="stylesheet" type="text/css" href={% static "css/header-basic-light.css" %} />
 	</head>
 
 	<body>
-		<div class="container">	
-			<header class="clearfix">
-				<h1>Learn from Home <span>at affordable prices</span></h1>
+		<div id="myNav" class="overlay">
+			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+			<div class="overlay-content">
+				<a>Step 1. Select something you want to learn from our vast variety of topics.</a>
+				<a>Step 2. Fill in your details</a>
+				<a>Step 3. We'll contact you on your preferred timings.</a>
+				<a>Step 4. We'll connect yu through a video chat to a teacher.</a>
+				<a>Step 5. Highlights are shared after the class.</a>
+				<a>Step 6. Invoice is shared after which you can pay.</a>
+			</div>
+		</div>
+		
+
+
+		<div class="container">
+			
+			<!--div width=20% style="text-align:center">	
+				<img src={% static "favicon.ico" %}   height="50" width="50" />
+				<h1>SkilTil</h1>
+			</div-->
+
+
+			<header class="header-basic-light">
+				<div class="header-limiter">
+					<h1><img src={% static "favicon.ico" %}   height="40" width="40"/></h1>
+					<nav>
+						<span style="font-size:30px;cursor:pointer" onclick="openNav()">
+							<h1><span>How we Work</span></h1>
+						</span>
+					</nav>
+					<h2>SkilTil</h2>
+				</div>
 			</header>
+
+			
+			<!--header class="clearfix">
+				<h1>Skiltil <span>at affordable prices</span></h1>
+			</header-->
 
 			<!--div id="modal_wrapper">
 				<div id="modal_window">
@@ -78,6 +115,16 @@
 				"status=no,height=" + height + ",width=" + width + ",resizable=yes,left="
 				+ leftPosition + ",top=" + topPosition + ",screenX=" + leftPosition + ",screenY="
 				+ topPosition + ",toolbar=no,menubar=no,scrollbars=no,location=no,directories=no");
+			}
+		</script>
+
+		<script>
+			function openNav() {
+				document.getElementById("myNav").style.width = "100%";
+			}
+
+			function closeNav() {
+				document.getElementById("myNav").style.width = "0%";
 			}
 		</script>
 

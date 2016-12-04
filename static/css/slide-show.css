@@ -1,0 +1,19 @@
+@keyframes cf {
+  50% {/* at 50%, it avoids alternate mode */
+    opacity: 0;
+  }
+}
+
+#cf {/* same size as image */
+  height: 300px;
+  width: 90%;
+  margin:auto;
+}
+
+#cf img {
+  position: absolute;/* lets stack them */
+}
+
+#cf .top {
+  animation: cf 10s infinite; /* let it run for ever */
+}

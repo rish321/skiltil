@@ -288,17 +288,17 @@
 }
 
 /* Media Queries */
-@media screen and (max-width: 910px){
+@media screen and (max-width: 700px){
 	.mi-slider nav {
 		max-width: 90%;
 	}
 	.mi-slider nav a {
 		font-size: 12px;
-		padding: 40px 10px 30px 14px;
+		padding: 10px 10px 30px 14px;
 	}
 }
 
-@media screen and (max-width: 740px){
+@media screen and (max-width: 700px){
 	.mi-slider {
 		height: 300px;
 	}
@@ -307,29 +307,66 @@
 	}
 }
 
-@media screen and (max-width: 490px){
+@media screen and (max-width: 700px){
 	.mi-slider {
 		text-align: center;
-		height: auto;
+		//height: auto;
+		margin-top: 10px;
 	}
 
 	.mi-slider ul {
-		position: relative;
-		display: inline;
+		/*position: relative;
+		//display: inline;
 		bottom: auto;
-		pointer-events: auto;
+		pointer-events: auto;*/
+		//bottom: auto;
+		list-style-type: none;
+	        position: absolute;
+        	width: 100%;
+	        left: 0;
+        	top: 160px;
+		//bottom: 100px;
+	        //overflow: hidden;
+        	text-align: center;
+	        pointer-events: none;
 	}
 
 	.mi-slider ul li {
-		-webkit-animation: none !important;
+		/*-webkit-animation: none !important;
 		animation: none !important;
 		-webkit-transform: translateX(0) !important;
-		transform: translateX(0) !important;
+		transform: translateX(0) !important;*/
 		padding: 10px 3px;
-		min-width: 140px;
+		min-width: 100px;
+		max-height: 800px;
+		display: inline-block;
+		//padding: 20px;
+	        //width: 20%;
+        	//min-width: 20px;
+	        -webkit-transform: translateX(600%);
+        	transform: translateX(600%);
+	        -webkit-transition: opacity 0.2s linear;
+        	transition: opacity 0.2s linear;
+	}
+
+	.mi-slider ul li h4 {
+	        display: inline-block;
+        	font-family: Baskerville, "Baskerville Old Face", "Hoefler Text", Garamond, "Times New Roman", serif;
+	        //font-style: italic;
+        	font-weight: 400;
+	        font-size: 12px;
+        	padding: 20px 10px 0;
+		overflow: hidden;
+		height: 60px;
 	}
 
 	.mi-slider nav {
-		display: none;
+		//display: none;
+		position: relative;
+	        top: 10px;
+        	text-align: center;
+	        //max-width: 90%;
+        	margin: 0 auto;
+	        border-top: 5px solid #333;
 	}
 }

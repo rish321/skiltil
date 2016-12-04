@@ -6,6 +6,8 @@
 		{% load static %}
 		<link rel="stylesheet" type="text/css" href={% static "css/header-basic-light.css" %} />
 	</head>
+
+
 	{% block content %}
 	
 	<header class="header-basic-light">
@@ -13,12 +15,18 @@
 			<h2>SkilTil</h2>
 		</div>
 	</header>
+	<body>
+
 	<div width=100% style="text-align:center">	
 		<img src="{{ skill.image_src }}"  height="100" width="130" >
 		<h4>{{ skill.skill_name }}</h4>
 	</div>
-	{{ skill.details|linebreaksbr }}
+
+	<div style="margin-left:10px; margin-right:10px">
+		{{ skill.details|linebreaksbr }}
+	</div>
 	<!--h1>Contact Us</h1-->
+	<div style="margin-left:10px; margin-right:10px">
 	<h4>To proceed contact us. Please fill your information. We'll get back to you</h4>
 	<form role="form" action="" method="post">
 		{% csrf_token %}
@@ -27,6 +35,9 @@
 			<button type="submit" style="width: 100px; height: 30px">Submit</button>
 		</div>
 	</form>
+	</div>
+
 	{% endblock %}
+	</body>
 
 </html>

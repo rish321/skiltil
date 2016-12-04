@@ -12,67 +12,94 @@
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 		<link rel="stylesheet" type="text/css" href={% static "css/style.css" %} />
 		<script src={% static "js/modernizr.custom.63321.js" %}></script>
+		<script src={% static "js/jquery-3.1.1.min.js" %}></script>
+		<script src={% static "js/jquery.unveil.js" %}></script>
 		<link rel="stylesheet" type="text/css" href={% static "css/overlay.css" %} />
 		<link rel="stylesheet" type="text/css" href={% static "css/header-basic-light.css" %} />
+		<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+		<link rel="stylesheet" type="text/css" href={% static "css/slide.css" %} />
+		<link rel="stylesheet" type="text/css" href={% static "css/step.css" %} />
+		<link rel="stylesheet" type="text/css" href={% static "css/video_frame.css" %} />
+		<style>
+		body { 
+			background-color: #EFEFEF;
+		}
+		</style>
 	</head>
 
 	<body>
-		<div id="myNav" class="overlay">
-			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-			<div class="overlay-content">
-				<a>Step 1. Select something you want to learn from our vast variety of topics.</a>
-				<a>Step 2. Fill in your details</a>
-				<a>Step 3. We'll contact you on your preferred timings.</a>
-				<a>Step 4. We'll connect yu through a video chat to a teacher.</a>
-				<a>Step 5. Highlights are shared after the class.</a>
-				<a>Step 6. Invoice is shared after which you can pay.</a>
+		<div id="video_play" class="overlay">
+                        <a href="javascript:void(0)" class="closebtn" onclick="closeVideoNav()">&times;</a>
+                        <div class="overlay-content">
+				<iframe width="100%" height="450px" text-align="center" vertical-align="middle" src="https://www.youtube.com/embed/nreOh6e3Kdg" frameborder="0" allowfullscreen></iframe>
 			</div>
 		</div>
 		
-
-
-		<div class="container">
-			
-			<!--div width=20% style="text-align:center">	
-				<img src={% static "favicon.ico" %}   height="50" width="50" />
-				<h1>SkilTil</h1>
-			</div-->
-
-
-			<header class="header-basic-light">
+		<div id="myNav" class="overlay">
+			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+			<div class="overlay-content">
+				<div class="box_container"> 
+					<div class="green_box">1.<img src={% static "images/check.png" %}   height="35" width="35"/></div>
+					<div class="red_box">Choose your interest.</div>
+				</div>
+				<div class="box_container">
+					<div class="green_box">2.<img src={% static "images/share.svg" %}   height="35" width="35"/></div>
+                                        <div class="red_box">Share your contact details with us.</div>
+				</div>
+				<div class="box_container">
+					<div class="green_box">3.<img src={% static "images/call.svg" %}   height="35" width="35"/></div>
+					<div class="red_box">We'll contact you on your preferred timings.</div>
+				</div>
+				<div class="box_container">
+					<div class="green_box">4.<img src={% static "images/video_call.png" %}   height="35" width="35"/></div>
+                                        <div class="red_box">We'll connect you through a video chat to a teacher.</div>
+				</div>
+				<div class="box_container">
+					<div class="green_box">5.<img src={% static "images/highlight.png" %}   height="35" width="35"/></div>
+					<div class="red_box">Highlights are shared after the class.</div>
+				</div>
+				<div class="box_container">
+					<div class="green_box">6.<img src={% static "images/invoice.png" %}   height="35" width="35"/></div>
+                                        <div class="red_box">Invoice is shared after which you can pay.</div>
+				</div>
+			</div>
+		</div>
+		
+			<header class="header-basic-light" style="width:100%">
 				<div class="header-limiter">
-					<h1><img src={% static "favicon.ico" %}   height="40" width="40"/></h1>
+					<h2><img src={% static "favicon.ico" %}   height="50" width="50"/></h2>
 					<nav>
 						<span style="font-size:30px;cursor:pointer" onclick="openNav()">
-							<h1><span>How we Work</span></h1>
+							<h2><span>How we Work</span></h2>
 						</span>
 					</nav>
-					<h2>SkilTil</h2>
+					<h1><b><span style="color: #0000ff">Skil</span><span style="color: #ff0000">Til</span></b></h1>
 				</div>
 			</header>
+		<!--div class="container"-->
 
-			
-			<!--header class="clearfix">
-				<h1>Skiltil <span>at affordable prices</span></h1>
-			</header-->
+			<div class="w3-display-container" id="myslideFrame">
 
-			<!--div id="modal_wrapper">
-				<div id="modal_window">
-					<div style="text-align: right;"><a id="modal_close" href="#">close <b>X</b></a></div>
-					<p>Complete the form below to send an email:</p>
-						<form id="modal_feedback" method="POST" action="#" accept-charset="UTF-8">
-							<p><label>Your Name<strong>*</strong><br>
-							<input type="text" autofocus required size="48" name="name" value=""></label></p>
-							<p><label>Email Address<strong>*</strong><br>
-							<input type="email" required title="Please enter a valid email address" size="48" name="email" value=""></label></p>
-							<p><label>Subject<br>
-							<input type="text" size="48" name="subject" value=""></label></p>
-							<p><label>Enquiry<strong>*</strong><br>
-							<textarea required name="message" cols="48" rows="8"></textarea></label></p>
-							<p><input type="submit" name="feedbackForm" value="Send Message"></p>
-						</form>
+				<img class="mySlides" src={% static "images/1.jpeg" %} style="width:100%">
+				<img class="mySlides" src={% static "images/2.jpeg" %} style="width:100%">
+				<img class="mySlides" src={% static "images/3.jpeg" %} style="width:100%">
+				<img class="mySlides" src={% static "images/4.jpeg" %} style="width:100%">
+				<a href=# onclick="popUpWin('contact?skill=Cashless%20Payments', 300, 420)" ><img class="mySlides" src={% static "images/5.jpeg" %} style="width:100%"></a>
+
+				<div class="w3-center w3-sectin w3-large w3-text-white w3-display-bottommiddle" style="width:100%">
+					<div class="w3-left w3-padding-left w3-hover-text-khaki" onclick="plusDivs(-1)" >&#10094;</div>
+					<div class="w3-right w3-padding-right w3-hover-text-khaki" onclick="plusDivs(1)" >&#10095;</div>
+					<span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)" ></span>
+					<span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)" ></span>
+					<span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)" ></span>
+					<span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(4)" ></span>
+                                        <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(5)" ></span>
 				</div>
-			</div-->
+			</div>
+		<!--/div-->
+		<!--div class="container"-->
+
+
 			
 			<div class="main">
 				<div id="mi-slider" class="mi-slider">
@@ -86,7 +113,7 @@
 					    		</ul>
 						{% endfor %}
 					{% else %}
-					    <p>No polls are available.</p>
+					    <p>There seems to be some problem.</p>
 					{% endif %}
 					<nav>
 						{% for skill_topic in skill_topic_list %}
@@ -95,11 +122,12 @@
 					</nav>
 				</div>
 			</div>
-		</div>
+		<!--/div-->
 
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
 		<script src={% static "js/jquery.catslider.js" %}></script>
+
 		<script>
 			$(function() {
 				$( '#mi-slider' ).catslider();
@@ -122,94 +150,77 @@
 			function openNav() {
 				document.getElementById("myNav").style.width = "100%";
 			}
-
 			function closeNav() {
 				document.getElementById("myNav").style.width = "0%";
 			}
 		</script>
 
-		<!--script type="text/javascript">
-		// Original JavaScript code by Chirp Internet: www.chirp.com.au
-		// Please acknowledge use of this code by including this header.
-			var checkForm = function(e)
-  			{
-				var form = (e.target) ? e.target : e.srcElement;
-					if(form.name.value == "") {
-					alert("Please enter your Name");
-					form.name.focus();
-					e.preventDefault ? e.preventDefault() : e.returnValue = false;
-					return;
-				}
-				if(form.email.value == "") {
-					alert("Please enter a valid Email address");
-					form.email.focus();
-					e.preventDefault ? e.preventDefault() : e.returnValue = false;
-					return;
-				}
-				if(form.message.value == "") {
-					alert("Please enter your comment or question in the Message box");
-					form.message.focus();
-					e.preventDefault ? e.preventDefault() : e.returnValue = false;
-					return;
-				}
-			};
-		</script>
+		<script>
+                        function openVideoNav() {
+                                document.getElementById("video_play").style.width = "100%";
+                        }
+                        function closeVideoNav() {
+                                document.getElementById("video_play").style.width = "0%";
+                        }
+			window.onload = openVideoNav;
+                </script>
+		
 
-		<script type="text/javascript">
-		// Original JavaScript code by Chirp Internet: www.chirp.com.au
-		// Please acknowledge use of this code by including this header.
 
-			var modal_init = function() {
-				var modalWrapper = document.getElementById("modal_wrapper");
-				var modalWindow  = document.getElementById("modal_window");
-				var openModal = function(e)
-				{
-					modalWrapper.className = "overlay";
-					var overflow = modalWindow.offsetHeight - document.documentElement.clientHeight;
-					if(overflow > 0) {
-						modalWindow.style.maxHeight = (parseInt(window.getComputedStyle(modalWindow).height) - overflow) + "px";
-					}
-					modalWindow.style.marginTop = (-modalWindow.offsetHeight)/2 + "px";
-					modalWindow.style.marginLeft = (-modalWindow.offsetWidth)/2 + "px";
-					e.preventDefault ? e.preventDefault() : e.returnValue = false;
-				};
-				var closeModal = function(e)
-				{
-					modalWrapper.className = "";
-					e.preventDefault ? e.preventDefault() : e.returnValue = false;
-				};
-				var clickHandler = function(e) {
-					if(!e.target) e.target = e.srcElement;
-					if(e.target.tagName == "DIV") {
-						if(e.target.id != "modal_window") closeModal(e);
-					}
-				};
-				var keyHandler = function(e) {
-					if(e.keyCode == 27) closeModal(e);
-				};
-				if(document.addEventListener) {
-					document.getElementById("modal_open").addEventListener("click", openModal, false);
-					document.getElementById("modal_close").addEventListener("click", closeModal, false);
-					document.addEventListener("click", clickHandler, false);
-					document.addEventListener("keydown", keyHandler, false);
-				} else {
-					document.getElementById("modal_open").attachEvent("onclick", openModal);
-					document.getElementById("modal_close").attachEvent("onclick", closeModal);
-					document.attachEvent("onclick", clickHandler);
-					document.attachEvent("onkeydown", keyHandler);
+		<script>
+			var slideIndex = 1;
+			openWindow();
+			function openWindow() {
+		                //var x = document.getElementsByClassName("mySlides");
+                		//var parent_elem = document.getElementById('myslideFrame')
+		                //var widthRatio = parseInt(parent_elem.offsetWidth) / parseInt(x[0].width)
+                		//for (i = 0; i < x.length; i++) {
+		                    // x[i].style.width = "100%";
+                		//    if (x[i].height > maxheight)
+				//	{
+                        	//		maxheight = x[i].height;
+                    		//	}
+                		//}
+		                //document.getElementById('myslideFrame').style.height = maxheight * widthRatio + "px";
+        		        showDivs(slideIndex);
+            		};
+			function plusDivs(n) {
+				pauseCarousel()
+				showDivs(slideIndex += n);
+			}
+			function currentDiv(n) {
+				pauseCarousel()
+				showDivs(slideIndex = n);
+			}
+			function showDivs(n) {
+				var i;
+				var x = document.getElementsByClassName("mySlides");
+				var dots = document.getElementsByClassName("demo");
+				if (n==undefined){n = ++slideIndex}
+				if (n > x.length) {slideIndex = 1}    
+				if (n < 1) {slideIndex = x.length}
+				for (i = 0; i < x.length; i++) {
+					x[i].style.display = "none";  
 				}
-			};
+				for (i = 0; i < dots.length; i++) {
+					dots[i].className = dots[i].className.replace(" w3-white", "");
+				}
+				x[slideIndex-1].style.display = "block";  
+				dots[slideIndex-1].className += " w3-white";
+				t = setTimeout(showDivs, 5000);
+			}
+			function pauseCarousel() {
+				clearTimeout(t)
+			}
+			function startCarousel() {
+				t = setTimeout(showDivs, 5000);
+			}
 		</script>
 		
 		<script type="text/javascript">
-			if(document.addEventListener) {
-				document.getElementById("modal_feedback").addEventListener("submit", checkForm, false);
-				document.addEventListener("DOMContentLoaded", modal_init, false);
-			} else {
-				document.getElementById("modal_feedback").attachEvent("onsubmit", checkForm);
-				window.attachEvent("onload", modal_init);
-			}
-		</script!-->
-
+			$(function(){
+				$("img").unveil(200);
+			});
+		</script>
 	</body>
 </html>

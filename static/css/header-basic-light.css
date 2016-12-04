@@ -1,5 +1,5 @@
 .header-basic-light{
-	padding: 20px 40px;
+	padding: 20px 20px;
 	box-sizing:border-box;
 	box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.15);
 	height: 80px;
@@ -14,7 +14,7 @@
 
 /* Logo */
 
-.header-basic-light .header-limiter h1{
+.header-basic-light .header-limiter h2{
 	float: left;
 	font: normal 28px Cookie, Arial, Helvetica, sans-serif;
 	line-height: 40px;
@@ -26,7 +26,7 @@
         line-height: 45px;
 }
 
-.header-basic-light .header-limiter h1 span {
+.header-basic-light .header-limiter h2 span {
 	color: #5383d3;
 }
 
@@ -68,7 +68,7 @@
 		height: 85px;
 	}
 
-	.header-basic-light .header-limiter h1 {
+	.header-basic-light .header-limiter h2 {
 		float: none;
 		margin: -8px 0 10px;
 		text-align: center;

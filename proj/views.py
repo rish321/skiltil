@@ -16,12 +16,22 @@ def index(request):
 	skill_topic_list = SkillTopic.objects.all()
 	skill_topics = []
 	skill_list = []
+	other_skill_list = []
 	for skillTopic in skill_topic_list:
 		skills = Skill.objects.filter(topic = skillTopic)
 		print skills
-		if len(skills) > 0:
+		if len(skills) > 3:
 			skill_topics.append(skillTopic)
 			skill_list.append(skills)
+		else:
+			print skills
+			if len(skills) > 0:
+				other_skill_list.extend(skills)
+	if len(other_skill_list) > 0:
+		print "break here"
+		print other_skill_list
+		skill_topics.append(SkillTopic.objects.filter(topic_name = "Others") [0])
+		skill_list.append(other_skill_list)
 	template = loader.get_template('proj/index.html')
 	context = {
 		'skill_list': skill_list,

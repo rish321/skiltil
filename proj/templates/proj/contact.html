@@ -5,6 +5,17 @@
 		<title>
 			{{ skill.skill_name }}	
 		</title>
+
+		<meta name="description" content="Wide variety of topics to choose from, learn at your own pace." />
+                <meta name="keywords" content="skiltil, learn from home" />
+
+                <meta property="og:site_name" content="Skiltil">
+                <meta property="og:title" content="Contact Us - {{ skill.skill_name }}" />
+                <meta property="og:description" content="Wide variety of topics to choose from, learn at your own pace." />
+                <meta property="og:image" itemprop="image" content="http://skiltil.in/static/images/logo.jpeg">
+                <meta property="og:type" content="website" />
+
+
 		{% load static %}
 		<link rel="stylesheet" type="text/css" href={% static "css/header-basic-light.css" %} />
 		{% analytical_head_bottom %}
@@ -15,7 +26,8 @@
 	
 	<header class="header-basic-light">
 		<div class="header-limiter">
-			<h2>SkilTil</h2>
+			<h2><img src={% static "favicon.ico" %}   height="50" width="50"/></h2>
+                        <h1><b><span style="color: #0000ff">Skil</span><span style="color: #ff0000">Til</span></b></h1>
 		</div>
 	</header>
 	<body>
@@ -30,7 +42,9 @@
 	</div>
 	<!--h1>Contact Us</h1-->
 	<div style="margin-left:10px; margin-right:10px">
-	<h4>To proceed contact us. Please fill your information. We'll get back to you</h4>
+	<h4>To proceed contact us. Please fill your information. We'll get back to you. Or call us at 
+		<a href="tel:+919844850018"> +91-9844850018.</a>
+	</h4>
 	<form role="form" action="" method="post">
 		{% csrf_token %}
 		{{ form.as_p }}

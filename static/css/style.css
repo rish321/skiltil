@@ -58,12 +58,14 @@
 }
 
 .mi-slider ul li img {
-	background-size: contain;
+
 	background-position: center;
 	background-repeat: no-repeat;
 	height: 25%;
 	width: 100%;
-	border: none;
+	//border: none;
+	border: 2px solid blue;
+	background-size: contain;
 }
 
 .mi-slider ul li h4 {

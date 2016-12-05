@@ -1,10 +1,13 @@
+{% load analytical %}
 <html>
 	<head>
+		{% analytical_head_top %}
 		<title>
 			{{ skill.skill_name }}	
 		</title>
 		{% load static %}
 		<link rel="stylesheet" type="text/css" href={% static "css/header-basic-light.css" %} />
+		{% analytical_head_bottom %}
 	</head>
 
 
@@ -16,7 +19,7 @@
 		</div>
 	</header>
 	<body>
-
+	{% analytical_body_top %}
 	<div width=100% style="text-align:center">	
 		<img src="{{ skill.image_src }}"  height="100" width="130" >
 		<h4>{{ skill.skill_name }}</h4>
@@ -38,6 +41,11 @@
 	</div>
 
 	{% endblock %}
+	{% analytical_body_bottom %}
+        <script src="//static.getclicky.com/js" type="text/javascript
+"></script>
+        <script type="text/javascript">try{ clicky.init(101008337); }
+catch(e){}</script>
 	</body>
 
 </html>

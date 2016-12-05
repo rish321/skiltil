@@ -19,17 +19,17 @@ def index(request):
 	other_skill_list = []
 	for skillTopic in skill_topic_list:
 		skills = Skill.objects.filter(topic = skillTopic)
-		print skills
+		#print skills
 		if len(skills) > 3:
 			skill_topics.append(skillTopic)
 			skill_list.append(skills)
 		else:
-			print skills
+			#print skills
 			if len(skills) > 0:
 				other_skill_list.extend(skills)
 	if len(other_skill_list) > 0:
-		print "break here"
-		print other_skill_list
+		#print "break here"
+		#print other_skill_list
 		skill_topics.append(SkillTopic.objects.filter(topic_name = "Others") [0])
 		skill_list.append(other_skill_list)
 	template = loader.get_template('proj/index.html')
@@ -44,7 +44,7 @@ def contact(request):
 	form_class = ContactForm
 	
 	skillName = request.GET.get('skill', '')
-	print skillName
+	#print skillName
 	skills = Skill.objects.filter(skill_name = skillName)
 	if len(skills) > 0:
 		skill = skills[0]
@@ -87,7 +87,7 @@ def contact(request):
                 	"New contact form submission",
                 	content,
                 	"Your website" +'',
-                	['ris.90s@gmail.com'],
+                	['help.skiltil@gmail.com'],
                 	headers = {'Reply-To': contact_email }
             	)
             	email.send()

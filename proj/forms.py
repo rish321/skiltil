@@ -12,7 +12,7 @@ class SiteForm(forms.Form):
 class ContactForm(SiteForm):
 	contact_name = forms.CharField(required=True)
 	contact_phone = forms.CharField(required=True)
-	contact_email = forms.EmailField(required=False)
+	contact_email = forms.CharField(required=False)
 	preferred_communication_time = forms.CharField(required=False)
 	content = forms.CharField(
         	required=False, widget=forms.Textarea(attrs={'rows': 4})

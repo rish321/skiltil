@@ -11,6 +11,7 @@ from django.core.mail import EmailMessage
 from django.shortcuts import redirect
 from django.template import Context
 from django.template.loader import get_template
+from django.http import Http404
 
 def index(request):
 	skill_topic_list = SkillTopic.objects.all()
@@ -48,6 +49,7 @@ def contact(request):
 	skills = Skill.objects.filter(skill_name = skillName)
 	if len(skills) > 0:
 		skill = skills[0]
+	
 
 	# new logic!
 	if request.method == 'POST':

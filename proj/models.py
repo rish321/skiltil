@@ -16,5 +16,6 @@ class Skill(models.Model):
 	topic = models.ForeignKey(SkillTopic, default=None)
 	image_src = models.CharField(max_length=200)
 	details = models.TextField(default="")
+	clicks = models.IntegerField(default=0)
 	def __str__(self):
         	return self.skill_name + " - " + self.topic.topic_name

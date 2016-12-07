@@ -2,3 +2,7 @@ Traceback (most recent call last):
   File "/Users/rishabh/projectX/proj/views.py", line 105, in contact
     'skill': skill,
 UnboundLocalError: local variable 'skill' referenced before assignment
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 58, in contact
+    skill.update(clicks=skill.clicks+1)
+AttributeError: 'Skill' object has no attribute 'update'

@@ -21,7 +21,7 @@ def index(request):
 		skill_list = []
 		other_skill_list = []
 		for skillTopic in skill_topic_list:
-			skills = Skill.objects.filter(topic = skillTopic)
+			skills = Skill.objects.filter(topic = skillTopic).extra(order_by = ['-clicks'])
 			#print skills
 			if len(skills) > 3:
 				skill_topics.append(skillTopic)
@@ -55,6 +55,7 @@ def contact(request):
 		skills = Skill.objects.filter(skill_name = skillName)
 		if len(skills) > 0:
 			skill = skills[0]
+			Skill.objects.filter(skill_name = skillName).update(clicks=skill.clicks+1)
 	
 
 		# new logic!

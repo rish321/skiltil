@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 105, in contact
+    'skill': skill,
+UnboundLocalError: local variable 'skill' referenced before assignment

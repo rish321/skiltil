@@ -6,3 +6,35 @@ Traceback (most recent call last):
   File "/Users/rishabh/projectX/proj/views.py", line 58, in contact
     skill.update(clicks=skill.clicks+1)
 AttributeError: 'Skill' object has no attribute 'update'
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 42, in index
+    template = loader.get_template('proj/index.html')
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader.py", line 21, in get_template
+    return engine.get_template(template_name)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 39, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/engine.py", line 160, in get_template
+    template, origin = self.find_template(template_name)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/engine.py", line 134, in find_template
+    name, template_dirs=dirs, skip=skip,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loaders/base.py", line 44, in get_template
+    contents, origin, origin.template_name, self.engine,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 191, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 233, in compile_nodelist
+    return parser.parse()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+TemplateSyntaxError: Could not parse the remainder: ''skill_topic' from ''skill_topic'
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 37, in index
+    skillCount /= len(skills)
+ZeroDivisionError: integer division or modulo by zero
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 37, in index
+    skillCount /= len(skills)
+ZeroDivisionError: integer division or modulo by zero
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 37, in index
+    skillCount /= len(skills)
+ZeroDivisionError: integer division or modulo by zero

@@ -14,17 +14,38 @@ from django.template.loader import get_template
 from django.http import Http404
 import traceback
 
+class SkillCount(object):
+	def __init__(self, skill_name, count):
+        	self.skill_name = skill_name
+		self.count = count
+
 def index(request):
 	try:
 		skill_topic_list = SkillTopic.objects.all()
 		skill_topics = []
 		skill_list = []
 		other_skill_list = []
+		orderskills = Skill.objects.extra(order_by = ['-clicks'])[:20]
+		skill_topics.append("Trending")
+		skill_list.append(orderskills)
+		skillCountList = []
+		for skillTopic in skill_topic_list:
+			skills = Skill.objects.filter(topic = skillTopic)
+			skillCount = 0;
+			for skill in skills:
+				skillCount += skill.clicks
+			#if len(skills) > 0:
+			#	skillCount /= len(skills)
+			skillCountList.append(SkillCount(skillTopic, skillCount))
+		skillCountList.sort(key=lambda x: x.count, reverse=True)
+		skill_topic_list = []
+		for skillCount in skillCountList:
+			skill_topic_list.append(skillCount.skill_name)
 		for skillTopic in skill_topic_list:
 			skills = Skill.objects.filter(topic = skillTopic).extra(order_by = ['-clicks'])
 			#print skills
-			if len(skills) > 3:
-				skill_topics.append(skillTopic)
+			if len(skills) > 4:
+				skill_topics.append(skillTopic.topic_name)
 				skill_list.append(skills)
 			else:
 				#print skills
@@ -33,7 +54,8 @@ def index(request):
 		if len(other_skill_list) > 0:
 			#print "break here"
 			#print other_skill_list
-			skill_topics.append(SkillTopic.objects.filter(topic_name = "Others") [0])
+			skill_topics.append("Others")#SkillTopic.objects.filter(topic_name = "Others") [0])
+			other_skill_list.sort(key=lambda x: x.clicks, reverse=True)
 			skill_list.append(other_skill_list)
 		template = loader.get_template('proj/index.html')
 		context = {

@@ -12,7 +12,9 @@ from django.shortcuts import redirect
 from django.template import Context
 from django.template.loader import get_template
 from django.http import Http404
+#import operator
 import traceback
+from django.db.models import F
 
 class SkillCount(object):
 	def __init__(self, skill_name, count):
@@ -21,28 +23,15 @@ class SkillCount(object):
 
 def index(request):
 	try:
-		skill_topic_list = SkillTopic.objects.all()
+		skill_topic_list = SkillTopic.objects.extra(order_by = ('-classes_given', '-clicks'))
 		skill_topics = []
 		skill_list = []
 		other_skill_list = []
-		orderskills = Skill.objects.extra(order_by = ['-clicks'])[:20]
+		orderskills = Skill.objects.extra(order_by = ('-classes_given','-clicks','-no_teachers'))[:20]
 		skill_topics.append("Trending")
 		skill_list.append(orderskills)
-		skillCountList = []
 		for skillTopic in skill_topic_list:
-			skills = Skill.objects.filter(topic = skillTopic)
-			skillCount = 0;
-			for skill in skills:
-				skillCount += skill.clicks
-			#if len(skills) > 0:
-			#	skillCount /= len(skills)
-			skillCountList.append(SkillCount(skillTopic, skillCount))
-		skillCountList.sort(key=lambda x: x.count, reverse=True)
-		skill_topic_list = []
-		for skillCount in skillCountList:
-			skill_topic_list.append(skillCount.skill_name)
-		for skillTopic in skill_topic_list:
-			skills = Skill.objects.filter(topic = skillTopic).extra(order_by = ['-clicks'])
+			skills = Skill.objects.filter(topic = skillTopic).extra(order_by = ('-classes_given','-clicks','-no_teachers'))
 			#print skills
 			if len(skills) > 4:
 				skill_topics.append(skillTopic.topic_name)
@@ -54,9 +43,9 @@ def index(request):
 		if len(other_skill_list) > 0:
 			#print "break here"
 			#print other_skill_list
-			skill_topics.append("Others")#SkillTopic.objects.filter(topic_name = "Others") [0])
-			other_skill_list.sort(key=lambda x: x.clicks, reverse=True)
-			skill_list.append(other_skill_list)
+			skill_topics.append("Others")
+			other_skill_list1 = sorted(other_skill_list, key = lambda x: (x.classes_given, x.clicks, x.no_teachers), reverse = True)
+			skill_list.append(other_skill_list1)
 		template = loader.get_template('proj/index.html')
 		context = {
 			'skill_list': skill_list,
@@ -78,6 +67,7 @@ def contact(request):
 		if len(skills) > 0:
 			skill = skills[0]
 			Skill.objects.filter(skill_name = skillName).update(clicks=skill.clicks+1)
+			SkillTopic.objects.filter(topic_name = skill.topic).update(clicks=F('clicks') + 1)
 	
 
 		# new logic!

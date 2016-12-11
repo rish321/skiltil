@@ -7,3 +7,4 @@ projectXenv/*
 *server*.log
 projectX/settings.py
 runServer.sh
+errlog.txt

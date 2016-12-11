@@ -38,3 +38,17 @@ Traceback (most recent call last):
   File "/Users/rishabh/projectX/proj/views.py", line 37, in index
     skillCount /= len(skills)
 ZeroDivisionError: integer division or modulo by zero
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 81, in contact
+    SkillTopic.objects.filter(topic_name = skill.topic).update(clicks=F('clicks') + 1)
+NameError: global name 'F' is not defined
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 60, in index
+    other_skill_list1 = sorted(other_skill_list, key=operator.itemgetter("-classes_given", "-clicks"))
+TypeError: 'Skill' object has no attribute '__getitem__'
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 61, in index
+    other_skill_list1 = sorted(other_skill_list, key = lambda x: (x[6], x[5]), reverse = True)
+  File "/Users/rishabh/projectX/proj/views.py", line 61, in <lambda>
+    other_skill_list1 = sorted(other_skill_list, key = lambda x: (x[6], x[5]), reverse = True)
+TypeError: 'Skill' object does not support indexing

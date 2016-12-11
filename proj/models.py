@@ -8,6 +8,8 @@ from django.utils.encoding import python_2_unicode_compatible
 
 class SkillTopic(models.Model):
 	topic_name = models.CharField(max_length=200)
+	clicks = models.IntegerField(default=0)
+	classes_given = models.IntegerField(default=0)
 	def __str__(self):
 	        return self.topic_name
 
@@ -17,5 +19,7 @@ class Skill(models.Model):
 	image_src = models.CharField(max_length=200)
 	details = models.TextField(default="")
 	clicks = models.IntegerField(default=0)
+	classes_given = models.IntegerField(default=0)
+	no_teachers = models.IntegerField(default=0)
 	def __str__(self):
         	return self.skill_name + " - " + self.topic.topic_name

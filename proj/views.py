@@ -12,14 +12,12 @@ from django.shortcuts import redirect
 from django.template import Context
 from django.template.loader import get_template
 from django.http import Http404
+from django.shortcuts import render_to_response
+from django.template.context import RequestContext
+from django.db.models import Q
 #import operator
 import traceback
 from django.db.models import F
-
-class SkillCount(object):
-	def __init__(self, skill_name, count):
-        	self.skill_name = skill_name
-		self.count = count
 
 def index(request):
 	try:
@@ -41,7 +39,7 @@ def index(request):
 				if len(skills) > 0:
 					other_skill_list.extend(skills)
 		if len(other_skill_list) > 0:
-			#print "break here"
+			print "break here"
 			#print other_skill_list
 			skill_topics.append("Others")
 			other_skill_list1 = sorted(other_skill_list, key = lambda x: (x.classes_given, x.clicks, x.no_teachers), reverse = True)
@@ -52,10 +50,12 @@ def index(request):
 			'skill_topic_list': skill_topics,
 		}
 		return HttpResponse(template.render(context, request))
+		#return HttpResponse("No Issues")
 	except Exception as e:
 		print "exception caught"
 		print '%s (%s)' % (e.message, type(e))
 		traceback.print_exc(file=open("errlog.txt","a"))
+		return HttpResponse("Some issue")
 
 def contact(request):
 	try:
@@ -123,3 +123,16 @@ def contact(request):
 		print "exception caught"
 		print '%s (%s)' % (e.message, type(e))
 		traceback.print_exc(file=open("errlog.txt","a"))
+
+'''def ajax_user_search( request ):
+
+    if request.is_ajax():
+        q = request.GET.get( 'q' )
+        if q is not None:            
+            results = User.objects.filter( 
+                Q( first_name__contains = q ) |
+                Q( last_name__contains = q ) |
+                Q( username__contains = q ) ).order_by( 'username' )
+
+            return render_to_response( 'proj/results.html', { 'results': results, }, context_instance = RequestContext( request ) )
+    #return HttpResponse("Hello hi")'''

@@ -40,12 +40,10 @@
 	<div style="margin-left:10px; margin-right:10px">
 		{{ skill.details|linebreaksbr }}
 	</div>
-	<!--h1>Contact Us</h1-->
 	<div style="margin-left:10px; margin-right:10px">
-	<h4>To proceed contact us. Please fill your information. We'll get back to you. 
-		<br>
-		Or whatsapp/call us at 
-		<a href="tel:+919844850018"> +91-9844850018.</a>
+
+	<h4>Please fill your information. We'll get back to you on your preferred time.
+
 	</h4>
 	<form role="form" action="" method="post">
 		{% csrf_token %}
@@ -54,6 +52,14 @@
 			<button type="submit" style="width: 100px; height: 30px">Submit</button>
 		</div>
 	</form>
+
+	<h4>
+		Mail us at
+		<a href="mailto:help.skiltil@gmail.com?Subject=Just%20a%20Hi" target="_top">help.skiltil@gmail.com</a>
+		<br>
+		Or whatsapp/call us at 
+		<a href="tel:+919844850018"> +91-9844850018.</a>
+	</h4>
 	</div>
 
 	{% endblock %}

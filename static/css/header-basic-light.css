@@ -1,9 +1,10 @@
 .header-basic-light{
-	padding: 20px 20px;
+	//padding: 20px 20px;
 	box-sizing:border-box;
 	box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.15);
-	height: 80px;
+	height: 60px;
 	background-color: #fff;
+	padding: 10px;
 }
 
 .header-basic-light .header-limiter {
@@ -22,11 +23,16 @@
 }
 
 .header-basic-light .header-limiter name {
-	font: large 38px Cookie, Helvetica, sans-serif;
+	font: 40px Cookie, Helvetica, sans-serif;
         line-height: 45px;
+	float: left;
+	margin-left: 10px;
 }
 
 .header-basic-light .header-limiter h2 span {
+	font-size: 15px;
+	cursor: pointer;
+	margin-left:20px;
 	color: #5383d3;
 }
 
@@ -38,9 +44,10 @@
 }
 
 .header-basic-light .header-limiter nav{
-	font:15px Arial, Helvetica, sans-serif;
+	font:25px Arial, Helvetica, sans-serif;
 	line-height: 40px;
 	float: right;
+	align: middle;
 }
 
 .header-basic-light .header-limiter nav a{

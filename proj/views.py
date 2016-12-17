@@ -123,3 +123,15 @@ def contact(request):
 		print "exception caught"
 		print '%s (%s)' % (e.message, type(e))
 		traceback.print_exc(file=open("errlog.txt","a"))
+
+
+def teachers(request):
+        try:
+		skills = Skill.objects.filter(no_teachers > 0)
+		#for skill in skills:
+	        #        skillMatch = SkillMatch.objects.filter(skill=skill)
+		
+	except Exception as e:
+                print "exception caught"
+                print '%s (%s)' % (e.message, type(e))
+                traceback.print_exc(file=open("errlog.txt","a"))

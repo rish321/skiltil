@@ -14,6 +14,7 @@ class Customer(models.Model):
 	skype_id = models.CharField(max_length=200, blank = True)
 	gmail_id = models.CharField(max_length=200, blank = True)
 	paytm_id = models.CharField(max_length=200, blank = True)
+	no_subjects = models.IntegerField(default=0)
 	wallet_amount = models.FloatField(default=0)
 	classes_taken = models.IntegerField(default=0)
 	classes_given = models.IntegerField(default=0)
@@ -27,6 +28,7 @@ class Customer(models.Model):
 		self.classes_taken = len(sessions)
 		self.classes_given = 0
 		skillMatches = SkillMatch.objects.filter(customer = self)
+		self.no_subjects = len(skillMatches)
 		for skillMatch in skillMatches:
 			self.classes_given += skillMatch.classes_given
 			teacherSessions = Session.objects.filter(skill_match = skillMatch)

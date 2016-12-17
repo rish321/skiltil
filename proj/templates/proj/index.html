@@ -19,26 +19,109 @@
 		<link rel="shortcut icon" type="image/png" href="{{STATIC_URL}}/favicon.ico"/> 
 		{% load static %}
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<script type=”text/javascript” src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<link rel="stylesheet" type="text/css" href={% static "css/style.css" %} />
 		<script src={% static "js/modernizr.custom.63321.js" %}></script>
 		<script src={% static "js/jquery-3.1.1.min.js" %}></script>
 		<script src={% static "js/jquery.unveil.js" %}></script>
+		<script src={% static "js/classie.js" %}></script>
 		<link rel="stylesheet" type="text/css" href={% static "css/overlay.css" %} />
+		<link rel="stylesheet" type="text/css" href={% static "css/search.css" %} />
 		<link rel="stylesheet" type="text/css" href={% static "css/header-basic-light.css" %} />
 		<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 		<link rel="stylesheet" type="text/css" href={% static "css/slide.css" %} />
 		<link rel="stylesheet" type="text/css" href={% static "css/step.css" %} />
 		<link rel="stylesheet" type="text/css" href={% static "css/video_frame.css" %} />
+		<link rel="stylesheet" type="text/css" href={% static "css/component.css" %} />
 		<style>
 		body { 
 			background-color: #EFEFEF;
 		}
 		</style>
+
+
+		<script type="text/javascript">
+			$(document).ready(function() {
+				var query = $('#querya');
+				console.log(query)
+				$("#spinner").hide();
+				var resultsa = $("#resultsa");
+				query.bind('input', function() {
+					//spinner.css('display', 'none');
+					q = query.val();
+					console.log(q)
+					console.log(q.length);
+					if(q.length > 0) {
+						//alert(q);
+						$("#spinner").show()
+						$.ajax({
+						        url: '/skill/ajax_skill_search/',
+						        data: {
+							      'q': q
+					        	},
+							async: true,
+						        dataType: 'html',
+						        success: function (result) {
+								console.log("success");
+								console.log(resultsa);
+								console.log(result);
+								$("#spinner").hide()
+								//alert(result);
+								//$(‘#results’).html('&nbsp;').load(data)
+								//spinner.hide()
+								resultsa.html( result );
+								//makeTableScroll();
+						        },
+							error: function(xhr,errmsg,err) {
+								console.log("error");
+								$("#spinner").hide()
+								alert(errmsg);
+								//$('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+ " <a href='#' class='close'>&times;</a></div>");
+							}
+						});
+					 } else 
+						resultsa.html ("");
+				});
+
+			});
+		</script>
+
+		<!--script>
+		        function makeTableScroll() {
+        	    		var maxRows = 4;
+	
+			        var table = document.getElementById('myTable');
+            			var wrapper = table.parentNode;
+            			var rowsInTable = table.rows.length;
+	            		var height = 0;
+        	    		if (rowsInTable > maxRows) {
+                			for (var i = 0; i < maxRows; i++) {
+                	    			height += table.rows[i].clientHeight;
+                			}
+	                		wrapper.style.height = height + "px";
+        	    		}
+        		}
+		</script-->
+
+
 		{% analytical_head_bottom %}
 	</head>
 
 	<body>
 		{% analytical_body_top %}
+
+
+
+		<!--div id=”centered”>
+ 			<div>
+
+				<span id=”spinner”><img src={% static "images/loader.gif" %}/></span>
+				<br>
+			</div>	
+		</div-->
+		<!--div id=”centered” style="width:300px;" background-color="white;">
+
+		</div-->
 
 		<!--div id="fb-root"></div>
 		<!--script>
@@ -53,16 +136,16 @@
 		</script-->
 
 
-		<div id="video_play" class="overlay">
-                        <a href="javascript:void(0)" class="closebtn" onclick="closeVideoNav()">&times;</a>
-                        <div class="overlay-content">
+		<div id="video_play" class="overlay.overlay">
+                        <a href="javascript:void(0)" class="overlay.closebtn" onclick="closeVideoNav()">&times;</a>
+                        <div class="overlay.overlay-content">
 				<iframe width="100%" height="450px" text-align="center" vertical-align="middle" src="https://www.youtube.com/embed/nreOh6e3Kdg" frameborder="0" allowfullscreen></iframe>
 			</div>
 		</div>
 		
-		<div id="myNav" class="overlay">
+		<div id="myNav" class="overlay.overlay">
 			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-			<div class="overlay-content">
+			<div class="overlay.overlay-content">
 				<div class="box_container"> 
 					<div class="green_box">1.<img src={% static "images/check.png" %}   height="35" width="35"/></div>
 					<div class="red_box">Choose your interest.</div>
@@ -92,7 +175,10 @@
 		
 			<header class="header-basic-light" style="width:100%">
 				<div class="header-limiter">
-					<h2><img src={% static "favicon.ico" %}   height="50" width="50"/></h2>
+					<h2>
+						<img src={% static "favicon.ico" %}   height="40" width="40"/>
+						<b><span style="font-size:40px;color: #0000ff">Skil</span><span style="font-size:40px;color: #ff0000">Til</span></b>
+					</h2>
 					<nav>
 						<span style="font-size:30px;cursor:pointer" onclick="openNav()">
 							<h2><span>How we Work</span></h2>
@@ -101,12 +187,21 @@
                                                         <h2><span>Login</span></h2>
                                                 </span-->
 					</nav>
-					<h1><b><span style="color: #0000ff">Skil</span><span style="color: #ff0000">Til</span></b></h1>
+						<div id="morphsearch" class="morphsearch">
+                       				        <form class="morphsearch-form">
+			                                        <input id="querya" class="morphsearch-input" type="text" placeholder="Search..."/>
+                        			                <!--button class="morphsearch-submit" type="submit">Search</button-->
+			                                </form>
+                        			        <div class="morphsearch-content">
+                                        			<div class="dummy-column" id="resultsa">
+		                                        	</div>
+	        		                        </div><!-- /morphsearch-content -->
+        	        		                <span class="morphsearch-close"></span>
+                       				</div><!-- /morphsearch -->
 				</div>
 			</header>
-		<!--div class="container"-->
 
-			<div class="w3-display-container" id="myslideFrame">
+			<div class="w3-display-container" id="myslideFrame" >
 
 				<img class="mySlides" src={% static "images/1.jpeg" %} style="width:100%">
 				<img class="mySlides" src={% static "images/2.jpeg" %} style="width:100%">
@@ -266,10 +361,67 @@
 		</script>
 		
 		<script type="text/javascript">
-			$(function(){
+			$(document).ready(function(){
 				$("img").unveil(200);
 			});
 		</script>
+
+
+		<script>
+			(function() {
+				var morphSearch = document.getElementById( 'morphsearch' ),
+					input = morphSearch.querySelector( 'input.morphsearch-input' ),
+					ctrlClose = morphSearch.querySelector( 'span.morphsearch-close' ),
+					isOpen = isAnimating = false,
+					// show/hide search area
+					toggleSearch = function(evt) {
+						// return if open and the input gets focused
+						if( evt.type.toLowerCase() === 'focus' && isOpen ) return false;
+
+						var offsets = morphsearch.getBoundingClientRect();
+						if( isOpen ) {
+							classie.remove( morphSearch, 'open' );
+							//classie.remove( morphsearch-input, 'open');
+
+							// trick to hide input text once the search overlay closes 
+							// todo: hardcoded times, should be done after transition ends
+							if( input.value !== '' ) {
+								setTimeout(function() {
+									classie.add( morphSearch, 'hideInput' );
+									setTimeout(function() {
+										classie.remove( morphSearch, 'hideInput' );
+										input.value = '';
+									}, 300 );
+								}, 500);
+							}
+							
+							input.blur();
+						}
+						else {
+							classie.add( morphSearch, 'open' );
+							//classie.add( morphsearch-input, 'open' );
+						}
+						isOpen = !isOpen;
+					};
+
+				// events
+				input.addEventListener( 'focus', toggleSearch );
+				ctrlClose.addEventListener( 'click', toggleSearch );
+				// esc key closes search overlay
+				// keyboard navigation events
+				document.addEventListener( 'keydown', function( ev ) {
+					var keyCode = ev.keyCode || ev.which;
+					if( keyCode === 27 && isOpen ) {
+						toggleSearch(ev);
+					}
+				} );
+
+
+				/***** for demo purposes only: don't allow to submit the form *****/
+				morphSearch.querySelector( 'button[type="submit"]' ).addEventListener( 'click', function(ev) { ev.preventDefault(); } );
+			})();
+		</script>
+
 
 		<!--script>
 			// This is called with the results from from FB.getLoginStatus().

@@ -1,0 +1,27 @@
+{% if results|length %}
+ 
+	<table id="myTable">
+		<!--tr>
+			<td><span style="font-weight:bold">Skill</span></td>
+			<td>Topic</td>
+		<tr-->
+ 	
+		{% for skill in results %}
+			<tr style="cursor: pointer;" href="#" onclick="popUpWin('contact?skill={{ skill.skill_name }}', 300, 420)">
+				<td>
+					<img src={{ skill.image_src }} height="35" width="35"/>
+				</td>
+				<td>
+					{{ skill.skill_name }}<br/>
+				</td>
+				<td>
+					{{ skill.topic.topic_name }}
+				</td>
+			</tr>
+		{% endfor %}
+	</table>
+{% else %}
+	<div class=”note”>
+		Request this Skill and we'll get back to you
+	</div>
+{% endif %}

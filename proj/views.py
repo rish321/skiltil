@@ -11,7 +11,9 @@ from django.core.mail import EmailMessage
 from django.shortcuts import redirect
 from django.template import Context
 from django.template.loader import get_template
+from django.shortcuts import render_to_response
 from django.http import Http404
+from django.db.models import Q
 #import operator
 import traceback
 from django.db.models import F
@@ -123,3 +125,14 @@ def contact(request):
 		print "exception caught"
 		print '%s (%s)' % (e.message, type(e))
 		traceback.print_exc(file=open("errlog.txt","a"))
+
+def ajax_skill_search( request ):
+	results = []
+        q = request.GET.get( 'q' )
+	print q
+        if q is not None:            
+	        results = Skill.objects.filter( 
+               	Q( skill_name__icontains = q ) | Q( topic__topic_name__icontains = q ))
+		print results
+	        return render_to_response( 'proj/results_new.html', { 'results': results, } )
+	return HttpResponse("Here" + str(results))

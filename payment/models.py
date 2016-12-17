@@ -6,7 +6,15 @@ from django.utils import timezone
 
 # Create your models here.
 
+class PaymentQuerySet(models.QuerySet):
+    def delete(self, *args, **kwargs):
+        for obj in self:
+            obj.delete(*args, **kwargs)
+        super(PaymentQuerySet, self).delete(*args, **kwargs)
+
+
 class Payment(models.Model):
+	objects = PaymentQuerySet.as_manager()
         customer = models.ForeignKey("customers.Customer", default=None)
         amount = models.FloatField(default=0)
         time = models.DateTimeField(default=timezone.now)
@@ -17,9 +25,20 @@ class Payment(models.Model):
                 #super(Customer, self.customer).save(*args, **kwargs)
                 super(Payment, self).save(*args, **kwargs)
 		self.customer.save(*args, **kwargs)
+	def delete(self, *args, **kwargs):
+		customer = self.customer
+		super(Payment, self).delete(*args, **kwargs)
+		customer.save(*args, **kwargs)
+
+class PayoutQuerySet(models.QuerySet):
+    def delete(self, *args, **kwargs):
+        for obj in self:
+            obj.delete(*args, **kwargs)
+        super(PayoutQuerySet, self).delete(*args, **kwargs)
 
 
 class Payout(models.Model):
+	objects = PayoutQuerySet.as_manager()
         customer = models.ForeignKey("customers.Customer", default=None)
         amount = models.FloatField(default=0)
         time = models.DateTimeField(default=timezone.now)
@@ -30,3 +49,7 @@ class Payout(models.Model):
                 #super(Customer, self.customer).save(*args, **kwargs)
                 super(Payout, self).save(*args, **kwargs)
 		self.customer.save(*args, **kwargs)
+	def delete(self, *args, **kwargs):
+		customer = self.customer
+		super(Payout, self).delete(*args, **kwargs)
+		customer.save(*args, **kwargs)

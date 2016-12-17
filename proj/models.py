@@ -21,8 +21,16 @@ class SkillTopic(models.Model):
 			self.clicks += skill.clicks
 			self.classes_given += skill.classes_given
 		super(SkillTopic, self).save(*args, **kwargs)
+		
+
+class SkillQuerySet(models.QuerySet):
+    def delete(self, *args, **kwargs):
+        for obj in self:
+		obj.delete(*args, **kwargs)
+        super(SkillQuerySet, self).delete(*args, **kwargs)
 
 class Skill(models.Model):
+	objects = SkillQuerySet.as_manager()
 	skill_name = models.CharField(max_length=200)
 	topic = models.ForeignKey(SkillTopic, default=None)
 	image_src = models.CharField(max_length=200)
@@ -33,7 +41,6 @@ class Skill(models.Model):
 	def __str__(self):
         	return self.skill_name + " - " + self.topic.topic_name
 	def save(self, *args, **kwargs):
-		#sessions = Session.objects.filter(belong_session = self)
 		self.classes_given = 0
 		skillMatches = SkillMatch.objects.filter(skill = self)
 		self.no_teachers = len(skillMatches)
@@ -41,3 +48,7 @@ class Skill(models.Model):
 			self.classes_given += skillMatch.classes_given
 		super(Skill, self).save(*args, **kwargs)
 		self.topic.save(*args, **kwargs)
+	def delete(self, *args, **kwargs):
+		topic = self.topic
+		super(Skill, self).delete(*args, **kwargs)
+		topic.save(*args, **kwargs)

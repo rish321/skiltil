@@ -22,8 +22,14 @@ CALLOPTIONS = (
     (2, 'Unfinished'),
 )
 
+class SessionQuerySet(models.QuerySet):
+    def delete(self, *args, **kwargs):
+        for obj in self:
+            obj.delete(*args, **kwargs)
+        super(SessionQuerySet, self).delete(*args, **kwargs)
 
 class Session(models.Model):
+	objects = SessionQuerySet.as_manager()
 	skill_match = models.ForeignKey("customers.SkillMatch", default=None)
 	student = models.ForeignKey("customers.Customer", default=None)
 	status = models.IntegerField(choices=CALLOPTIONS)
@@ -90,9 +96,21 @@ class Session(models.Model):
 		super(Session, self).save(*args, **kwargs)
 		self.skill_match.save(*args, **kwargs)
 		self.student.save(*args, **kwargs)
+	def delete(self, *args, **kwargs):
+		skillMatch = self.skill_match
+		student = self.student
+		super(Session, self).delete(*args, **kwargs)
+		skillMatch.save(*args, **kwargs)
+		student.save(*args, **kwargs)
 
+class CallQuerySet(models.QuerySet):
+    def delete(self, *args, **kwargs):
+        for obj in self:
+            obj.delete(*args, **kwargs)
+        super(CallQuerySet, self).delete(*args, **kwargs)
 
 class Call(models.Model):
+	objects = CallQuerySet.as_manager()
 	start_time = models.DateTimeField()
 	end_time = models.DateTimeField()
 	belong_session = models.ForeignKey(Session, default=None)
@@ -107,24 +125,7 @@ class Call(models.Model):
 	       	self.call_duration = self.end_time - self.start_time
 		super(Call, self).save(*args, **kwargs)
 		self.belong_session.save(*args, **kwargs)
-		'''self.belong_session.start_time = min(self.start_time, self.belong_session.start_time)
-		self.belong_session.end_time = max(self.end_time, self.belong_session.end_time)
-		self.belong_session.call_time_range = self.belong_session.end_time - self.belong_session.start_time
-		if self.follow_up == False:
-			calls = Call.objects.filter(belong_session = self.belong_session)	
-			self.belong_session.total_duration = timedelta()
-			self.belong_session.total_duration = self.call_duration
-			self.belong_session.total_calls = 1
-			for call in calls:
-				self.belong_session.total_duration += call.call_duration
-				self.belong_session.total_calls += 1
-			self.belong_session.amount_to_teacher = calculateTeacherAmount(self.belong_session.total_duration)
-			x, self.belong_session.money_refund = calculateStudentAmount(self.belong_session.time_refund)
-			self.belong_session.amount_from_student, self.belong_session.minutes_duration = calculateStudentAmount(self.belong_session.total_duration)
-			self.belong_session.balance_amount = self.belong_session.amount_from_student - self.belong_session.money_refund
-			self.belong_session.skill_match.customer.wallet_amount += self.belong_session.amount_to_teacher
-			self.belong_session.student.wallet_amount -= self.belong_session.balance_amount
-		super(Customer, self.belong_session.skill_match.customer).save(*args, **kwargs)
-                super(Customer, self.belong_session.student).save(*args, **kwargs)
-		super(Session, self.belong_session).save(*args, **kwargs)'''
-        	#super(Call, self).save(*args, **kwargs)
+	def delete(self, *args, **kwargs):
+		belongSession = self.belong_session
+		super(Call, self).delete(*args, **kwargs)
+		belongSession.save(*args, **kwargs)

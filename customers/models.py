@@ -40,11 +40,19 @@ class Customer(models.Model):
 			self.wallet_amount -= payout.amount
 		super(Customer, self).save(*args, **kwargs)
 		
+class SkillMatchQuerySet(models.QuerySet):
+    def delete(self, *args, **kwargs):
+        for obj in self:
+            obj.delete(*args, **kwargs)
+        super(SkillMatchQuerySet, self).delete(*args, **kwargs)
+
 
 class SkillMatch(models.Model):
+	objects = SkillMatchQuerySet.as_manager()
 	skill = models.ForeignKey("proj.Skill", default=None)
 	customer = models.ForeignKey(Customer, default=None)
 	classes_given = models.IntegerField(default=0)
+	details = models.TextField(default="")
 	def __str__(self):
                 return self.skill.skill_name + " - " + self.customer.customer_name
 	def save(self, *args, **kwargs):
@@ -53,5 +61,9 @@ class SkillMatch(models.Model):
 		super(SkillMatch, self).save(*args, **kwargs)
 		self.skill.save(*args, **kwargs)
 		self.customer.save(*args, **kwargs)
-		#self.skill.no_teachers += 1
-                #super(Skill, self.skill).save(*args, **kwargs)
+	def delete(self, *args, **kwargs):
+		skill = self.skill
+		customer = self.customer
+		super(SkillMatch, self).delete(*args, **kwargs)
+		skill.save(*args, **kwargs)
+		customer.save(*args, **kwargs)

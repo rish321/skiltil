@@ -46,14 +46,6 @@ body {
     font-size: 60px;
 }
 
-.vericaltext{
-    width:1px;
-    word-wrap: break-word;
-    font-family: monospace; /* this is just for good looks */
-    white-space:pre-wrap; /* this is for displaying whitespaces including Moz-FF.*/
-}
-
-
 @media screen and (max-height: 450px) {
   .overlay a {font-size: 20px}
   .overlay .closebtn {

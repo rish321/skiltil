@@ -1,67 +1,32 @@
-{% load analytical %}
-<html>
-	<head>
-		{% analytical_head_top %}
-		<title>
-			{{ skill.skill_name }}	
-		</title>
-
-		<meta name="description" content="Wide variety of topics to choose from, learn at your own pace." />
-                <meta name="keywords" content="skiltil, learn from home" />
-
-                <meta property="og:site_name" content="Skiltil">
-                <meta property="og:title" content="Contact Us - {{ skill.skill_name }}" />
-                <meta property="og:description" content="Wide variety of topics to choose from, learn at your own pace." />
-                <meta property="og:image" itemprop="image" content="http://skiltil.in/static/images/logo.jpeg">
-                <meta property="og:type" content="website" />
-
-
+{% extends "proj/base.html" %}
+	{% block title %} {{ skill.skill_name }} {% endblock %}
+	{% block stylesheet %}
 		{% load static %}
-		<link rel="stylesheet" type="text/css" href={% static "css/header-basic-light.css" %} />
-		{% analytical_head_bottom %}
-	</head>
+	{% endblock %}
 
-
-	{% block content %}
+	{% block body %}
 	
-	<header class="header-basic-light">
-		<div class="header-limiter">
-			<h2><img src={% static "favicon.ico" %}   height="50" width="50"/></h2>
-                        <h1><b><span style="color: #0000ff">Skil</span><span style="color: #ff0000">Til</span></b></h1>
+		<div width=100% style="text-align:center">	
+			<img src="{{ skill.image_src }}"  height="100" width="130" >
+			<h4>{{ skill.skill_name }}</h4>
 		</div>
-	</header>
-	<body>
-	{% analytical_body_top %}
-	<div width=100% style="text-align:center">	
-		<img src="{{ skill.image_src }}"  height="100" width="130" >
-		<h4>{{ skill.skill_name }}</h4>
-	</div>
 
-	<div style="margin-left:10px; margin-right:10px">
-		{{ skill.details|linebreaksbr }}
-	</div>
-	<!--h1>Contact Us</h1-->
-	<div style="margin-left:10px; margin-right:10px">
-	<h4>To proceed contact us. Please fill your information. We'll get back to you. 
-		<br>
-		Or whatsapp/call us at 
-		<a href="tel:+919844850018"> +91-9844850018.</a>
-	</h4>
-	<form role="form" action="" method="post">
-		{% csrf_token %}
-		{{ form.as_p }}
-		<div style="text-align:center">
-			<button type="submit" style="width: 100px; height: 30px">Submit</button>
+		<div style="margin-left:10px; margin-right:10px">
+			{{ skill.details|linebreaksbr }}
 		</div>
-	</form>
-	</div>
+		<div style="margin-left:10px; margin-right:10px">
+		<h4>To proceed contact us. Please fill your information. We'll get back to you. 
+			<br>
+			Or whatsapp/call us at 
+			<a href="tel:+919844850018"> +91-9844850018.</a>
+		</h4>
+		<form role="form" action="" method="post">
+			{% csrf_token %}
+			{{ form.as_p }}
+			<div style="text-align:center">
+				<button type="submit" style="width: 100px; height: 30px">Submit</button>
+			</div>
+		</form>
+		</div>
 
 	{% endblock %}
-	{% analytical_body_bottom %}
-        <script src="//static.getclicky.com/js" type="text/javascript
-"></script>
-        <script type="text/javascript">try{ clicky.init(101008337); }
-catch(e){}</script>
-	</body>
-
-</html>

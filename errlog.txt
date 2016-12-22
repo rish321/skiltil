@@ -52,3 +52,853 @@ Traceback (most recent call last):
   File "/Users/rishabh/projectX/proj/views.py", line 61, in <lambda>
     other_skill_list1 = sorted(other_skill_list, key = lambda x: (x[6], x[5]), reverse = True)
 TypeError: 'Skill' object does not support indexing
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 130, in teachers
+    cutomers = Customers.objects.filter(no_subjects > 0).extra(order_by = ('-no_subjects', '-classes_given'))
+NameError: global name 'Customers' is not defined
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 130, in teachers
+    cutomers = Customers.objects.filter(no_subjects > 0).extra(order_by = ('-no_subjects', '-classes_given'))
+NameError: global name 'Customers' is not defined
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 130, in teachers
+    cutomers = Customers.objects.filter(no_subjects > 0).extra(order_by = ('-no_subjects', '-classes_given'))
+NameError: global name 'Customers' is not defined
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 130, in teachers
+    cutomers = Customers.objects.filter(no_subjects > 0).extra(order_by = ('-no_subjects', '-classes_given'))
+NameError: global name 'Customers' is not defined
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 130, in teachers
+    cutomers = Customers.objects.filter(no_subjects > 0).extra(order_by = ('-no_subjects', '-classes_given'))
+NameError: global name 'Customers' is not defined
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 131, in teachers
+    cutomers = Customers.objects.filter(no_subjects > 0).extra(order_by = ('-no_subjects', '-classes_given'))
+NameError: global name 'Customers' is not defined
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 131, in teachers
+    cutomers = Customer.objects.filter(no_subjects > 0).extra(order_by = ('-no_subjects', '-classes_given'))
+NameError: global name 'no_subjects' is not defined
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 131, in teachers
+    cutomers = Customer.objects.filter(no_subjects > 0).extra(order_by = ('-no_subjects', '-classes_given'))
+NameError: global name 'no_subjects' is not defined
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 131, in teachers
+    cutomers = Customer.objects.filter(no_subjects > 0).extra(order_by = ('-no_subjects', '-classes_given'))
+NameError: global name 'no_subjects' is not defined
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 133, in teachers
+    for customer in customer:
+UnboundLocalError: local variable 'customer' referenced before assignment
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 133, in teachers
+    for customer in customers:
+NameError: global name 'customers' is not defined
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 131, in teachers
+    customers = Customer.objects.filter(no_subjects>0).extra(order_by = ('-no_subjects', '-classes_given'))
+NameError: global name 'no_subjects' is not defined
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 131, in teachers
+    customers = Customer.objects.filter(Customer.no_subjects > 0).extra(order_by = ('-no_subjects', '-classes_given'))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/query.py", line 796, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/query.py", line 814, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1227, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1253, in _add_q
+    allow_joins=allow_joins, split_subq=split_subq,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1130, in build_filter
+    arg, value = filter_expr
+TypeError: 'bool' object is not iterable
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 131, in teachers
+    customers = Customer.objects.filter(Customer.no_subjects > 0).extra(order_by = ('-no_subjects', '-classes_given'))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/query.py", line 796, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/query.py", line 814, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1227, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1253, in _add_q
+    allow_joins=allow_joins, split_subq=split_subq,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1130, in build_filter
+    arg, value = filter_expr
+TypeError: 'bool' object is not iterable
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 138, in teachers
+    customers.remove(customer)
+AttributeError: 'QuerySet' object has no attribute 'remove'
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 138, in teachers
+    customers.remove(customer)
+AttributeError: 'QuerySet' object has no attribute 'remove'
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 131, in teachers
+    customers = Customer.objects.filter(classes_given > 0).extra(order_by = ('-no_subjects', '-classes_given'))
+NameError: global name 'classes_given' is not defined
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 131, in teachers
+    customers = Customer.objects.filter(classes_given > 0).extra(order_by = ('-no_subjects', '-classes_given'))
+NameError: global name 'classes_given' is not defined
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 131, in teachers
+    customers = Customer.objects.filter(self.classes_given > 0).extra(order_by = ('-no_subjects', '-classes_given'))
+NameError: global name 'self' is not defined
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 131, in teachers
+    customers = Customer.objects.filter(casses_given_gte=0).extra(order_by = ('-no_subjects', '-classes_given'))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/query.py", line 796, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/query.py", line 814, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1227, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1253, in _add_q
+    allow_joins=allow_joins, split_subq=split_subq,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1133, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1019, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1327, in names_to_path
+    "Choices are: %s" % (name, ", ".join(available)))
+FieldError: Cannot resolve keyword 'casses_given_gte' into field. Choices are: classes_given, classes_taken, customer_name, gmail_id, id, no_subjects, payment, payout, paytm_id, session, skillmatch, skype_id, wallet_amount
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 131, in teachers
+    customers = Customer.objects.filter(casses_given_gte=0).extra(order_by = ('-no_subjects', '-classes_given'))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/query.py", line 796, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/query.py", line 814, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1227, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1253, in _add_q
+    allow_joins=allow_joins, split_subq=split_subq,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1133, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1019, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1327, in names_to_path
+    "Choices are: %s" % (name, ", ".join(available)))
+FieldError: Cannot resolve keyword 'casses_given_gte' into field. Choices are: classes_given, classes_taken, customer_name, gmail_id, id, no_subjects, payment, payout, paytm_id, session, skillmatch, skype_id, wallet_amount
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 131, in teachers
+    customers = Customer.objects.filter(classes_given_gte=0).extra(order_by = ('-no_subjects', '-classes_given'))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/query.py", line 796, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/query.py", line 814, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1227, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1253, in _add_q
+    allow_joins=allow_joins, split_subq=split_subq,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1133, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1019, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1327, in names_to_path
+    "Choices are: %s" % (name, ", ".join(available)))
+FieldError: Cannot resolve keyword 'classes_given_gte' into field. Choices are: classes_given, classes_taken, customer_name, gmail_id, id, no_subjects, payment, payout, paytm_id, session, skillmatch, skype_id, wallet_amount
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 131, in teachers
+    customers = Customer.objects.filter(classes_given>0).extra(order_by = ('-no_subjects', '-classes_given'))
+NameError: global name 'classes_given' is not defined
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 131, in teachers
+    customers = customers.models.Customer.objects.filter(classes_given>0).extra(order_by = ('-no_subjects', '-classes_given'))
+UnboundLocalError: local variable 'customers' referenced before assignment
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 131, in teachers
+    customersa = customers.models.Customer.objects.filter(classes_given>0).extra(order_by = ('-no_subjects', '-classes_given'))
+NameError: global name 'customers' is not defined
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 131, in teachers
+    customers = Customer.objects.filter(no_subjects_gt = 0).extra(order_by = ('-no_subjects', '-classes_given'))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/query.py", line 796, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/query.py", line 814, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1227, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1253, in _add_q
+    allow_joins=allow_joins, split_subq=split_subq,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1133, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1019, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1327, in names_to_path
+    "Choices are: %s" % (name, ", ".join(available)))
+FieldError: Cannot resolve keyword 'no_subjects_gt' into field. Choices are: classes_given, classes_taken, customer_name, gmail_id, id, no_subjects, payment, payout, paytm_id, session, skillmatch, skype_id, wallet_amount
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 131, in teachers
+    customers = Customer.objects.filter(no__subjects > 0).extra(order_by = ('-no_subjects', '-classes_given'))
+NameError: global name 'no__subjects' is not defined
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 131, in teachers
+    customers = Customer.objects.filter(customer__no_subjects > 0).extra(order_by = ('-no_subjects', '-classes_given'))
+NameError: global name 'customer__no_subjects' is not defined
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 131, in teachers
+    customers = Customer.objects.filter(customer__no_subjects__gte=0).extra(order_by = ('-no_subjects', '-classes_given'))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/query.py", line 796, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/query.py", line 814, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1227, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1253, in _add_q
+    allow_joins=allow_joins, split_subq=split_subq,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1133, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1019, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1327, in names_to_path
+    "Choices are: %s" % (name, ", ".join(available)))
+FieldError: Cannot resolve keyword 'customer' into field. Choices are: classes_given, classes_taken, customer_name, gmail_id, id, no_subjects, payment, payout, paytm_id, session, skillmatch, skype_id, wallet_amount
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 131, in teachers
+    customers = Customer.objects.filter(Customer__no_subjects__gte=0).extra(order_by = ('-no_subjects', '-classes_given'))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/query.py", line 796, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/query.py", line 814, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1227, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1253, in _add_q
+    allow_joins=allow_joins, split_subq=split_subq,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1133, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1019, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1327, in names_to_path
+    "Choices are: %s" % (name, ", ".join(available)))
+FieldError: Cannot resolve keyword 'Customer' into field. Choices are: classes_given, classes_taken, customer_name, gmail_id, id, no_subjects, payment, payout, paytm_id, session, skillmatch, skype_id, wallet_amount
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 141, in teachers
+    skillMatchList.append(skillMatchs)
+NameError: global name 'skillMatchList' is not defined
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 143, in teachers
+    template = loader.get_template('proj/teachers.html')
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader.py", line 21, in get_template
+    return engine.get_template(template_name)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 39, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/engine.py", line 160, in get_template
+    template, origin = self.find_template(template_name)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/engine.py", line 134, in find_template
+    name, template_dirs=dirs, skip=skip,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loaders/base.py", line 44, in get_template
+    contents, origin, origin.template_name, self.engine,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 191, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 233, in compile_nodelist
+    return parser.parse()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+TemplateSyntaxError: Invalid block tag on line 76: 'i', expected 'empty' or 'endfor'. Did you forget to register or load this tag?
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 143, in teachers
+    template = loader.get_template('proj/teachers.html')
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader.py", line 21, in get_template
+    return engine.get_template(template_name)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 39, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/engine.py", line 160, in get_template
+    template, origin = self.find_template(template_name)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/engine.py", line 134, in find_template
+    name, template_dirs=dirs, skip=skip,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loaders/base.py", line 44, in get_template
+    contents, origin, origin.template_name, self.engine,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 191, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 233, in compile_nodelist
+    return parser.parse()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+TemplateSyntaxError: Invalid block tag on line 125: 'endfor', expected 'endif'. Did you forget to register or load this tag?
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 121, in contact
+    'skill': skill,
+UnboundLocalError: local variable 'skill' referenced before assignment
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 147, in teachers
+    return HttpResponse(template.render(context, request))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 68, in render
+    reraise(exc, self.backend)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 89, in reraise
+    six.reraise(exc.__class__, new, sys.exc_info()[2])
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 152, in render
+    compiled_parent = self.get_parent(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 149, in get_parent
+    return self.find_template(parent, context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 129, in find_template
+    template_name, skip=history,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/engine.py", line 146, in find_template
+    raise TemplateDoesNotExist(name, tried=tried)
+TemplateDoesNotExist: base.html
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 147, in teachers
+    return HttpResponse(template.render(context, request))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 68, in render
+    reraise(exc, self.backend)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 89, in reraise
+    six.reraise(exc.__class__, new, sys.exc_info()[2])
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 152, in render
+    compiled_parent = self.get_parent(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 149, in get_parent
+    return self.find_template(parent, context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 129, in find_template
+    template_name, skip=history,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/engine.py", line 146, in find_template
+    raise TemplateDoesNotExist(name, tried=tried)
+TemplateDoesNotExist: base.html
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 147, in teachers
+    return HttpResponse(template.render(context, request))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 68, in render
+    reraise(exc, self.backend)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 89, in reraise
+    six.reraise(exc.__class__, new, sys.exc_info()[2])
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 152, in render
+    compiled_parent = self.get_parent(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 149, in get_parent
+    return self.find_template(parent, context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 129, in find_template
+    template_name, skip=history,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/engine.py", line 146, in find_template
+    raise TemplateDoesNotExist(name, tried=tried)
+TemplateDoesNotExist: base.html
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 147, in teachers
+    return HttpResponse(template.render(context, request))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 174, in render
+    return compiled_parent._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/defaulttags.py", line 439, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/resolvers.py", line 392, in _reverse_with_prefix
+    (lookup_view_s, args, kwargs, len(patterns), patterns)
+NoReverseMatch: Reverse for '' with arguments '()' and keyword arguments '{}' not found. 0 pattern(s) tried: []
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 147, in teachers
+    return HttpResponse(template.render(context, request))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 174, in render
+    return compiled_parent._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/defaulttags.py", line 439, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/resolvers.py", line 392, in _reverse_with_prefix
+    (lookup_view_s, args, kwargs, len(patterns), patterns)
+NoReverseMatch: Reverse for '' with arguments '()' and keyword arguments '{}' not found. 0 pattern(s) tried: []
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 147, in teachers
+    return HttpResponse(template.render(context, request))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 152, in render
+    compiled_parent = self.get_parent(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 149, in get_parent
+    return self.find_template(parent, context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 129, in find_template
+    template_name, skip=history,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/engine.py", line 134, in find_template
+    name, template_dirs=dirs, skip=skip,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loaders/base.py", line 44, in get_template
+    contents, origin, origin.template_name, self.engine,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 191, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 233, in compile_nodelist
+    return parser.parse()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 574, in invalid_block_tag
+    "or load this tag?" % (token.lineno, command)
+TemplateSyntaxError: Invalid block tag on line 139: 'index'. Did you forget to register or load this tag?
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 147, in teachers
+    return HttpResponse(template.render(context, request))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 152, in render
+    compiled_parent = self.get_parent(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 149, in get_parent
+    return self.find_template(parent, context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 129, in find_template
+    template_name, skip=history,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/engine.py", line 134, in find_template
+    name, template_dirs=dirs, skip=skip,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loaders/base.py", line 44, in get_template
+    contents, origin, origin.template_name, self.engine,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 191, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 233, in compile_nodelist
+    return parser.parse()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 574, in invalid_block_tag
+    "or load this tag?" % (token.lineno, command)
+TemplateSyntaxError: Invalid block tag on line 139: 'index'. Did you forget to register or load this tag?
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 147, in teachers
+    return HttpResponse(template.render(context, request))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 174, in render
+    return compiled_parent._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/defaulttags.py", line 439, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/resolvers.py", line 392, in _reverse_with_prefix
+    (lookup_view_s, args, kwargs, len(patterns), patterns)
+NoReverseMatch: Reverse for '' with arguments '()' and keyword arguments '{}' not found. 0 pattern(s) tried: []
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 147, in teachers
+    return HttpResponse(template.render(context, request))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 174, in render
+    return compiled_parent._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/defaulttags.py", line 439, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/resolvers.py", line 392, in _reverse_with_prefix
+    (lookup_view_s, args, kwargs, len(patterns), patterns)
+NoReverseMatch: Reverse for '' with arguments '()' and keyword arguments '{}' not found. 0 pattern(s) tried: []
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 147, in teachers
+    return HttpResponse(template.render(context, request))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 174, in render
+    return compiled_parent._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/defaulttags.py", line 439, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/resolvers.py", line 392, in _reverse_with_prefix
+    (lookup_view_s, args, kwargs, len(patterns), patterns)
+NoReverseMatch: Reverse for '' with arguments '()' and keyword arguments '{}' not found. 0 pattern(s) tried: []
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 147, in teachers
+    return HttpResponse(template.render(context, request))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 174, in render
+    return compiled_parent._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/defaulttags.py", line 439, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/resolvers.py", line 392, in _reverse_with_prefix
+    (lookup_view_s, args, kwargs, len(patterns), patterns)
+NoReverseMatch: Reverse for '' with arguments '()' and keyword arguments '{}' not found. 0 pattern(s) tried: []
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 147, in teachers
+    return HttpResponse(template.render(context, request))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 174, in render
+    return compiled_parent._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/defaulttags.py", line 439, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/resolvers.py", line 392, in _reverse_with_prefix
+    (lookup_view_s, args, kwargs, len(patterns), patterns)
+NoReverseMatch: Reverse for '' with arguments '()' and keyword arguments '{}' not found. 0 pattern(s) tried: []
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 147, in teachers
+    return HttpResponse(template.render(context, request))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 174, in render
+    return compiled_parent._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/defaulttags.py", line 439, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/resolvers.py", line 392, in _reverse_with_prefix
+    (lookup_view_s, args, kwargs, len(patterns), patterns)
+NoReverseMatch: Reverse for '' with arguments '()' and keyword arguments '{}' not found. 0 pattern(s) tried: []
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 147, in teachers
+    return HttpResponse(template.render(context, request))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 174, in render
+    return compiled_parent._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/defaulttags.py", line 439, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/resolvers.py", line 392, in _reverse_with_prefix
+    (lookup_view_s, args, kwargs, len(patterns), patterns)
+NoReverseMatch: Reverse for '' with arguments '()' and keyword arguments '{}' not found. 0 pattern(s) tried: []
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 147, in teachers
+    return HttpResponse(template.render(context, request))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 174, in render
+    return compiled_parent._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/defaulttags.py", line 439, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/resolvers.py", line 392, in _reverse_with_prefix
+    (lookup_view_s, args, kwargs, len(patterns), patterns)
+NoReverseMatch: Reverse for '' with arguments '()' and keyword arguments '{}' not found. 0 pattern(s) tried: []
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 147, in teachers
+    return HttpResponse(template.render(context, request))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 174, in render
+    return compiled_parent._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/defaulttags.py", line 439, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/resolvers.py", line 392, in _reverse_with_prefix
+    (lookup_view_s, args, kwargs, len(patterns), patterns)
+NoReverseMatch: Reverse for '' with arguments '()' and keyword arguments '{}' not found. 0 pattern(s) tried: []
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 147, in teachers
+    return HttpResponse(template.render(context, request))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 174, in render
+    return compiled_parent._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/defaulttags.py", line 439, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/resolvers.py", line 392, in _reverse_with_prefix
+    (lookup_view_s, args, kwargs, len(patterns), patterns)
+NoReverseMatch: Reverse for '' with arguments '()' and keyword arguments '{}' not found. 0 pattern(s) tried: []
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 147, in teachers
+    return HttpResponse(template.render(context, request))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 174, in render
+    return compiled_parent._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/defaulttags.py", line 439, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/resolvers.py", line 392, in _reverse_with_prefix
+    (lookup_view_s, args, kwargs, len(patterns), patterns)
+NoReverseMatch: Reverse for '' with arguments '()' and keyword arguments '{}' not found. 0 pattern(s) tried: []
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 147, in teachers
+    return HttpResponse(template.render(context, request))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 174, in render
+    return compiled_parent._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/defaulttags.py", line 439, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/resolvers.py", line 392, in _reverse_with_prefix
+    (lookup_view_s, args, kwargs, len(patterns), patterns)
+NoReverseMatch: Reverse for '' with arguments '()' and keyword arguments '{}' not found. 0 pattern(s) tried: []
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 50, in index
+    template = loader.get_template('proj/index.html')
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader.py", line 21, in get_template
+    return engine.get_template(template_name)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 39, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/engine.py", line 160, in get_template
+    template, origin = self.find_template(template_name)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/engine.py", line 134, in find_template
+    name, template_dirs=dirs, skip=skip,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loaders/base.py", line 44, in get_template
+    contents, origin, origin.template_name, self.engine,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 191, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 233, in compile_nodelist
+    return parser.parse()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+TemplateSyntaxError: Invalid block tag on line 29: 'static', expected 'endblock'. Did you forget to register or load this tag?
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 121, in contact
+    'skill': skill,
+UnboundLocalError: local variable 'skill' referenced before assignment
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 121, in contact
+    'skill': skill,
+UnboundLocalError: local variable 'skill' referenced before assignment

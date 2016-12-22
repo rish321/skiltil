@@ -1,0 +1,22 @@
+figure.contactitem {
+    	vertical-align: top;
+    	display: inline-block;
+    	text-align: center;
+    	width: 18%;
+	cursor:pointer;
+}
+figure.contactitem img {
+    	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	background-color: grey;
+}
+figure.contactitem .caption {
+	margin-top: 10px;
+    	display: block;
+	color: #EFFFEF;
+}
+figure.contactitem .info {
+    	display: block;
+}
+

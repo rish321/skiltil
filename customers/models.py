@@ -54,7 +54,7 @@ class SkillMatch(models.Model):
 	skill = models.ForeignKey("proj.Skill", default=None)
 	customer = models.ForeignKey(Customer, default=None)
 	classes_given = models.IntegerField(default=0)
-	details = models.TextField(default="")
+	details = models.TextField(default="", blank = True)
 	def __str__(self):
                 return self.skill.skill_name + " - " + self.customer.customer_name
 	def save(self, *args, **kwargs):

@@ -1,0 +1,65 @@
+{% extends "proj/base.html" %}
+	{% block title %} Teachers@skiltil {% endblock %}
+	{% block stylesheet %}
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	{% endblock %}
+        {% block body %}
+                <div style="text-align:center;width:80%; margin:0 auto;color:#5A5;margin-bottom:25px;margin-top:25px;">
+                        <font size="5">
+                                We handpick our teachers very carefully and they drive the customer satisfaction index on our platform to be very high. Our teachers are highly motivated and knowledgable people with an expertise in whatever subject they are taking.
+                        </font>
+                </div>
+
+                <div class="container">
+        		<div class="panel-group" id="accordion">
+                                {% for teacher in teachers %}
+                                        <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                        <h4 class="panel-title">
+                                                                <a data-toggle="collapse" data-parent="#accordion" style="color:blue;" href="#collapse{{forloop.counter}}"> {{ teacher.customer.customer_name }} </a>
+                                                        </h4>
+                                                </div>
+                                                {% if forloop.counter == 1 %}
+                                                        <div id="collapse{{forloop.counter}}" class="panel-collapse collapse in">
+                                                {% else %}
+                                                        <div id="collapse{{forloop.counter}}" class="panel-collapse collapse">
+                                                {% endif %}
+                                                        <div class="panel-body">
+                                                                <table border="0" width="100%" style="margin: 0px;">
+                                                                        {% if forloop.counter == 1 %}
+                                                                            	<tr>
+                                                                            		<td style="text-align: left;width:20%;">
+                        		                                                        <b>Skill</b>
+                                                                        	        </td>
+                                                                                        <td style="text-align: left;width:70%;">
+                                                                                    	        <b>Details</b>
+                                                                                        </td>
+                                                                                	<td style="text-align: right;width:10%">
+                                                                                            	<b>#classes</b>
+                                                            	                	</td>
+                                                                                </tr>
+                                                                        {% endif %}
+                                                                        {% for skillMatch in teacher.skillMatchs %}
+                                                            	        <tr>
+                                                    	        	        <td style="text-align: left;width:20%;">
+                		                                                        {{ skillMatch.skill.skill_name }}
+                                                                        	</td>
+                                                                                <td style="text-align: left;width:70%;">
+                                                                                    	{{ skillMatch.details }}
+                                                                                </td>
+                                                                        	<td style="text-align: right;width:10%;">
+                            	                                                        {{ skillMatch.classes_given }}
+                                            	                        	</td>
+                                                                        </tr>
+                                                                        {% endfor %}
+                                    	                        </table>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                {% endfor %}
+                        </div> 	
+                </div>
+
+	{% endblock %}	

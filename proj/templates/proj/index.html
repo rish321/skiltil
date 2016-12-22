@@ -1,46 +1,12 @@
-{% load analytical %}
-<html>
-	<head>
-		{% analytical_head_top %}
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-		<title>Learn from Home</title>
-		<meta name="description" content="Wide variety of topics to choose from, learn at your own pace." />
-		<meta name="keywords" content="skiltil, learn from home" />
-
-		<meta property="og:site_name" content="Skiltil">
-		<meta property="og:title" content="Learn from Home" />
-		<meta property="og:description" content="Wide variety of topics to choose from, learn at your own pace." />
-		<meta property="og:image" itemprop="image" content="http://skiltil.in/static/images/logo.jpeg">
-		<meta property="og:type" content="website" />
-			
-		<!--link rel="shortcut icon" href="../favicon.ico"-->
-		<link rel="shortcut icon" type="image/png" href="{{STATIC_URL}}/favicon.ico"/> 
-		{% load static %}
-		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-		<link rel="stylesheet" type="text/css" href={% static "css/style.css" %} />
-		<script src={% static "js/modernizr.custom.63321.js" %}></script>
-		<script src={% static "js/jquery-3.1.1.min.js" %}></script>
-		<script src={% static "js/jquery.unveil.js" %}></script>
-		<link rel="stylesheet" type="text/css" href={% static "css/overlay.css" %} />
-		<link rel="stylesheet" type="text/css" href={% static "css/header-basic-light.css" %} />
+{% extends "proj/base.html" %}
+	{% block title %} Learn from Home {% endblock %}	
+	{% block stylesheet %}
 		<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
-		<link rel="stylesheet" type="text/css" href={% static "css/slide.css" %} />
-		<link rel="stylesheet" type="text/css" href={% static "css/step.css" %} />
-		<link rel="stylesheet" type="text/css" href={% static "css/video_frame.css" %} />
-		<style>
-		body { 
-			background-color: #EFEFEF;
-		}
-		</style>
-		{% analytical_head_bottom %}
-	</head>
+		{% load static %}
 
-	<body>
-		{% analytical_body_top %}
+	{% endblock %}
+	{% block body %}
 
-		<!--div id="fb-root"></div>
 		<!--script>
 			(function(d, s, id) {
 				var js, fjs = d.getElementsByTagName(s)[0];
@@ -59,112 +25,84 @@
 				<iframe width="100%" height="450px" text-align="center" vertical-align="middle" src="https://www.youtube.com/embed/nreOh6e3Kdg" frameborder="0" allowfullscreen></iframe>
 			</div>
 		</div>
-		
-		<div id="myNav" class="overlay">
-			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-			<div class="overlay-content">
-				<div class="box_container"> 
-					<div class="green_box">1.<img src={% static "images/check.png" %}   height="35" width="35"/></div>
-					<div class="red_box">Choose your interest.</div>
-				</div>
-				<div class="box_container">
-					<div class="green_box">2.<img src={% static "images/share.svg" %}   height="35" width="35"/></div>
-                                        <div class="red_box">Share your contact details with us.</div>
-				</div>
-				<div class="box_container">
-					<div class="green_box">3.<img src={% static "images/call.svg" %}   height="35" width="35"/></div>
-					<div class="red_box">We'll contact you on your preferred timings.</div>
-				</div>
-				<div class="box_container">
-					<div class="green_box">4.<img src={% static "images/video_call.png" %}   height="35" width="35"/></div>
-                                        <div class="red_box">We'll connect you through a video chat to a teacher.</div>
-				</div>
-				<div class="box_container">
-					<div class="green_box">5.<img src={% static "images/highlight.png" %}   height="35" width="35"/></div>
-					<div class="red_box">Highlights are shared after the class.</div>
-				</div>
-				<div class="box_container">
-					<div class="green_box">6.<img src={% static "images/invoice.png" %}   height="35" width="35"/></div>
-                                        <div class="red_box">Invoice is shared after which you can pay.</div>
-				</div>
+
+
+		<div class="w3-display-container" id="myslideFrame" style="background-color: #EFEFEF;">
+			<img class="mySlides" src={% static "images/1.jpeg" %} style="width:80%; margin:0 auto;">
+			<img class="mySlides" src={% static "images/2.jpeg" %} style="width:80%; margin:0 auto;">
+			<img class="mySlides" src={% static "images/3.jpeg" %} style="width:80%; margin:0 auto;">
+			<img class="mySlides" src={% static "images/4.jpeg" %} style="width:80%; margin:0 auto;">
+			<a href=# onclick="popUpWin('contact?skill=Cashless%20Payments', 300, 420)" ><img class="mySlides" src={% static "images/5.jpeg" %} style="width:80%; margin:0 auto;"></a>
+			<div class="w3-center w3-sectin w3-large w3-text-white w3-display-bottommiddle" style="width:90%">
+				<div class="w3-left w3-padding-left  w3-text-blue w3-hover-indigo w3-hover-text-khaki" style="cursor:pointer;" onclick="plusDivs(-1)" >&#10094;</div>
+				<div class="w3-right w3-padding-right w3-text-blue w3-hover-indigo w3-hover-text-khaki" style="cursor:pointer;" onclick="plusDivs(1)" >&#10095;</div>
+				<span class="w3-badge demo w3-border w3-transparent w3-hover-teal" style="height:7px;cursor:pointer;" onclick="currentDiv(1)" ></span>
+				<span class="w3-badge demo w3-border w3-transparent w3-hover-teal" style="height:7px;cursor:pointer;" onclick="currentDiv(2)" ></span>
+				<span class="w3-badge demo w3-border w3-transparent w3-hover-teal" style="height:7px;cursor:pointer;" onclick="currentDiv(3)" ></span>
+				<span class="w3-badge demo w3-border w3-transparent w3-hover-teal" style="height:7px;cursor:pointer;" onclick="currentDiv(4)" ></span>
+                                <span class="w3-badge demo w3-border w3-transparent w3-hover-teal" style="height:7px;cursor:pointer;" onclick="currentDiv(5)" ></span>
 			</div>
 		</div>
-		
-			<header class="header-basic-light" style="width:100%">
-				<div class="header-limiter">
-					<h2>
-						<img src={% static "favicon.ico" %} height="40" width="40"/>
-					</h2>
-					<nav>
-							<h2><span href="teachers">Our Teachers</span></h2>
-							<h2><span onclick="openNav()">How we Work</span></h2>
-							<h2><span onclick="openNav()">Pricing</span></h2>
-                                                        <h2><span nclick="openNav()">Contact Us</span></h2>
-						<!--span style="font-size:30px;cursor:pointer" onclick="openLoginNav()">
-                                                        <h2><span>Login</span></h2>
-                                                </span-->
-					</nav>
-					<name><b><span style="color: #0000ff">Skil</span><span style="color: #ff0000">Til</span></b></name>
-				</div>
-			</header>
-		<!--div class="container"-->
 
-			<div class="w3-display-container" id="myslideFrame">
+		<div class="main">
+			<div id="mi-slider" class="mi-slider">
+				{% if skill_list %}
+					{% for skills in skill_list %}
+  						<ul>
+							{% for skill in skills %}
+								<li>
+									<a href=# onclick="popUpWin('contact?skill={{ skill.skill_name }}', 300, 420)"; clicky.log('#contact?skill={{ skill.skill_name }}','contact?skill={{ skill.skill_name }}');  >
+										<img src="{% static "images/loading_icon.gif" %}" data-src="{{ skill.image_src }}" class="lazyload">
+										<h4>{{ skill.skill_name }}</h4>
 
-				<img class="mySlides" src={% static "images/1.jpeg" %} style="width:100%">
-				<img class="mySlides" src={% static "images/2.jpeg" %} style="width:100%">
-				<img class="mySlides" src={% static "images/3.jpeg" %} style="width:100%">
-				<img class="mySlides" src={% static "images/4.jpeg" %} style="width:100%">
-				<a href=# onclick="popUpWin('contact?skill=Cashless%20Payments', 300, 420)" ><img class="mySlides" src={% static "images/5.jpeg" %} style="width:100%"></a>
+										<table border="0" width="100%" style="margin: 0px;">
+											{% if skill.no_teachers > 0  %}
+											<tr>
+												<td>
+													Teachers available now:
+												</td>
+												<td style="text-align: right;width:5%">
+													{{ skill.no_teachers }}
+												</td>
+											</tr>
+											{% endif %}
+											{% if skill.classes_given > 0  %}
+											<tr>
+												<td>
+													Successful classes:
+												</td>
+												<td style="text-align: right;width:5%">
+													{{ skill.classes_given }}
+												</td>
+											</tr>
+											{% endif %}
+											<!--{% if skill.clicks > 0  %}
+											<tr>
+												<td>
+													People wanting to learn:
+												</td>
+												<td style="text-align: right;width:5%">
+													{{ skill.clicks }}
+												</td>
+											</tr>
+											{% endif %}-->
+										</table>
 
-				<div class="w3-center w3-sectin w3-large w3-text-white w3-display-bottommiddle" style="width:100%">
-					<div class="w3-left w3-padding-left w3-hover-text-khaki" onclick="plusDivs(-1)" >&#10094;</div>
-					<div class="w3-right w3-padding-right w3-hover-text-khaki" onclick="plusDivs(1)" >&#10095;</div>
-					<span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)" ></span>
-					<span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)" ></span>
-					<span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)" ></span>
-					<span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(4)" ></span>
-                                        <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(5)" ></span>
-				</div>
+									</a></li>
+
+							{% endfor %}
+				    		</ul>
+					{% endfor %}
+				{% else %}
+					<p>There seems to be some problem.</p>
+				{% endif %}
+				<nav>
+					{% for skill_topic in skill_topic_list %}
+						<a href="#" clicky.log('#{{ skill_topic }}', '{{ skill_topic }}');>{{skill_topic}}</a>
+					{% endfor %}
+				</nav>
 			</div>
-		<!--/div-->
-
-		<!--div id="login_overlay" class="overlay">
-                        <a href="javascript:void(0)" class="closebtn" onclick="closeLoginNav()">&times;</a>
-                        <div class="overlay-content">
-				<div class="fb-login-button" scope="public_profile,email,user_friends,user_likes" data-max-rows="2" data-size="large" data-show-faces="true" ></div>
-                        </div>
-                </div-->
-		
-		<!--div class="container" text-align="center">
-			<fb:login-button scope="public_profile,email,user_friends,user_likes" text-align="center" onlogin="checkLoginState();"></fb:login-button>
-		</div-->
-		<!--div class="fb-login-button" scope="public_profile,email,user_friends,user_likes" data-max-rows="2" data-size="large" data-show-faces="true" ></div-->
-		<!--div class="container"-->
-
-
-			
-			<div class="main">
-				<div id="mi-slider" class="mi-slider">
-					{% if skill_list %}
-						{% for skills in skill_list %}
-    							<ul>
-								{% for skill in skills %}
-									<li><a href=# onclick="popUpWin('contact?skill={{ skill.skill_name }}', 300, 420)"; clicky.log('#contact?skill={{ skill.skill_name }}','contact?skill={{ skill.skill_name }}');  ><img src="{{ skill.image_src }}"><h4>{{ skill.skill_name }}</h4></a></li>
-								{% endfor %}
-					    		</ul>
-						{% endfor %}
-					{% else %}
-					    <p>There seems to be some problem.</p>
-					{% endif %}
-					<nav>
-						{% for skill_topic in skill_topic_list %}
-							<a href="#" clicky.log('#{{ skill_topic }}', '{{ skill_topic }}');>{{skill_topic}}</a>
-						{% endfor %}
-					</nav>
-				</div>
-			</div>
-		<!--/div-->
+		</div>
 
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
@@ -177,36 +115,6 @@
 		</script>
 
 		<script>
-			function popUpWin(url, width, height) {
-				var leftPosition, topPosition;
-				leftPosition = (window.screen.width / 2) - ((width / 2) + 10);
-				topPosition = (window.screen.height / 2) - ((height / 2) + 50);
-				window.open(url, "Window2",
-				"status=no,height=" + height + ",width=" + width + ",resizable=yes,left="
-				+ leftPosition + ",top=" + topPosition + ",screenX=" + leftPosition + ",screenY="
-				+ topPosition + ",toolbar=no,menubar=no,scrollbars=no,location=no,directories=no");
-			}
-		</script>
-
-		<script>
-			function openNav() {
-				document.getElementById("myNav").style.width = "100%";
-			}
-			function closeNav() {
-				document.getElementById("myNav").style.width = "0%";
-			}
-		</script>
-		
-		<!--script>
-			function openLoginNav() {
-				document.getElementById("login_overlay").style.width = "100%";
-			}
-			function closeLoginNav() {
-				document.getElementById("login_overlay").style.width = "0%";
-			}
-		</script-->
-
-		<script>
                         function openVideoNav() {
                                 document.getElementById("video_play").style.width = "100%";
                         }
@@ -216,8 +124,6 @@
 			window.onload = openVideoNav;
                 </script>
 		
-
-
 		<script>
 			var slideIndex = 1;
 			openWindow();
@@ -268,11 +174,7 @@
 			}
 		</script>
 		
-		<script type="text/javascript">
-			$(function(){
-				$("img").unveil(200);
-			});
-		</script>
+
 
 		<!--script>
 			// This is called with the results from from FB.getLoginStatus().
@@ -354,11 +256,4 @@
 						});
 				}
 		</script-->
-		
-		{% analytical_body_bottom %}
-		<!--a title="Web Analytics" href="http://clicky.com/101008337"><img alt="Web Analytics" src="//static.getclicky.com/media/links/badge.gif" border="0"    height="5" width="5"/></a-->
-		<script src="//static.getclicky.com/js" type="text/javascript"></script>
-		<script type="text/javascript">try{ clicky.init(101008337); }catch(e){}</script>
-		<!--noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/101008337ns.gif" /></p></noscript-->
-	</body>
-</html>
+	{% endblock %}

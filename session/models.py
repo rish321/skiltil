@@ -14,6 +14,8 @@ from datetime import timedelta
 from datetime import datetime
 from operator import attrgetter
 from django.utils import timezone
+from base.models import BaseModel
+#from proj.models import BaseModel
 #from djangotoolbox.fields import ListField
 
 CALLOPTIONS = (
@@ -28,7 +30,7 @@ class SessionQuerySet(models.QuerySet):
             obj.delete(*args, **kwargs)
         super(SessionQuerySet, self).delete(*args, **kwargs)
 
-class Session(models.Model):
+class Session(BaseModel):
 	objects = SessionQuerySet.as_manager()
 	skill_match = models.ForeignKey("customers.SkillMatch", default=None)
 	student = models.ForeignKey("customers.Customer", default=None)
@@ -109,7 +111,7 @@ class CallQuerySet(models.QuerySet):
             obj.delete(*args, **kwargs)
         super(CallQuerySet, self).delete(*args, **kwargs)
 
-class Call(models.Model):
+class Call(BaseModel):
 	objects = CallQuerySet.as_manager()
 	start_time = models.DateTimeField()
 	end_time = models.DateTimeField()

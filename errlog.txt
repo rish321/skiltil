@@ -902,3 +902,127 @@ Traceback (most recent call last):
   File "/Users/rishabh/projectX/proj/views.py", line 121, in contact
     'skill': skill,
 UnboundLocalError: local variable 'skill' referenced before assignment
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 54, in index
+    return HttpResponse(template.render(context, request))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 174, in render
+    return compiled_parent._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 70, in render
+    result = block.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/defaulttags.py", line 315, in render
+    return nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/defaulttags.py", line 209, in render
+    nodelist.append(node.render_annotated(context))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/defaulttags.py", line 166, in render
+    len_values = len(values)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/query.py", line 238, in __len__
+    self._fetch_all()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/query.py", line 1087, in _fetch_all
+    self._result_cache = list(self.iterator())
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/query.py", line 54, in __iter__
+    results = compiler.execute_sql()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 824, in execute_sql
+    sql, params = self.as_sql()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 369, in as_sql
+    extra_select, order_by, group_by = self.pre_sql_setup()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 47, in pre_sql_setup
+    order_by = self.get_order_by()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 293, in get_order_by
+    field, self.query.get_meta(), default_order=asc))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 553, in find_ordering_name
+    field, targets, alias, joins, path, opts = self._setup_joins(pieces, opts, alias)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 586, in _setup_joins
+    pieces, opts, alias)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1402, in setup_joins
+    names, opts, allow_many, fail_on_missing=True)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1327, in names_to_path
+    "Choices are: %s" % (name, ", ".join(available)))
+FieldError: Cannot resolve keyword '' into field. Choices are: classes_given, clicks, created_date, details, id, image_src, modified_date, no_teachers, skill_name, skillmatch, topic, topic_id
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 54, in index
+    return HttpResponse(template.render(context, request))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 174, in render
+    return compiled_parent._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 70, in render
+    result = block.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/defaulttags.py", line 315, in render
+    return nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/defaulttags.py", line 209, in render
+    nodelist.append(node.render_annotated(context))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/defaulttags.py", line 166, in render
+    len_values = len(values)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/query.py", line 238, in __len__
+    self._fetch_all()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/query.py", line 1087, in _fetch_all
+    self._result_cache = list(self.iterator())
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/query.py", line 54, in __iter__
+    results = compiler.execute_sql()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 824, in execute_sql
+    sql, params = self.as_sql()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 369, in as_sql
+    extra_select, order_by, group_by = self.pre_sql_setup()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 47, in pre_sql_setup
+    order_by = self.get_order_by()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 293, in get_order_by
+    field, self.query.get_meta(), default_order=asc))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 553, in find_ordering_name
+    field, targets, alias, joins, path, opts = self._setup_joins(pieces, opts, alias)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 586, in _setup_joins
+    pieces, opts, alias)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1402, in setup_joins
+    names, opts, allow_many, fail_on_missing=True)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1327, in names_to_path
+    "Choices are: %s" % (name, ", ".join(available)))
+FieldError: Cannot resolve keyword '' into field. Choices are: classes_given, clicks, created_date, details, id, image_src, modified_date, no_teachers, skill_name, skillmatch, topic, topic_id

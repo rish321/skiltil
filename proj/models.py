@@ -6,8 +6,18 @@
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from customers.models import SkillMatch
+from base.models import BaseModel
 
-class SkillTopic(models.Model):
+from django.utils import timezone
+
+#class BaseModel(models.Model):
+#	created_date = models.DateTimeField(auto_now_add=True)
+#	modified_date = models.DateTimeField(auto_now=True)
+#
+#	class Meta:
+#        	abstract = True
+
+class SkillTopic(BaseModel):
 	topic_name = models.CharField(max_length=200)
 	clicks = models.IntegerField(default=0)
 	classes_given = models.IntegerField(default=0)
@@ -29,7 +39,7 @@ class SkillQuerySet(models.QuerySet):
 		obj.delete(*args, **kwargs)
         super(SkillQuerySet, self).delete(*args, **kwargs)
 
-class Skill(models.Model):
+class Skill(BaseModel):
 	objects = SkillQuerySet.as_manager()
 	skill_name = models.CharField(max_length=200)
 	topic = models.ForeignKey(SkillTopic, default=None)

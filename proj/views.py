@@ -28,22 +28,21 @@ def index(request):
 		skill_topics = []
 		skill_list = []
 		other_skill_list = []
+		newArrivals = Skill.objects.extra(order_by = ('-created_date', '-clicks'))[:20]
+		skill_topics.append("New Arrivals")
+		skill_list.append(newArrivals)
 		orderskills = Skill.objects.extra(order_by = ('-classes_given','-no_teachers','-clicks'))[:20]
 		skill_topics.append("Trending")
 		skill_list.append(orderskills)
 		for skillTopic in skill_topic_list:
 			skills = Skill.objects.filter(topic = skillTopic).extra(order_by = ('-classes_given','-no_teachers','-clicks'))
-			#print skills
-			if len(skills) > 4:
+			if len(skills) > 5:
 				skill_topics.append(skillTopic.topic_name)
 				skill_list.append(skills)
 			else:
-				#print skills
 				if len(skills) > 0:
 					other_skill_list.extend(skills)
 		if len(other_skill_list) > 0:
-			#print "break here"
-			#print other_skill_list
 			skill_topics.append("Others")
 			other_skill_list1 = sorted(other_skill_list, key = lambda x: (x.classes_given, x.no_teachers, x.clicks), reverse = True)
 			skill_list.append(other_skill_list1)

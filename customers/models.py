@@ -8,8 +8,9 @@ from django.db import models
 from session.models import Session
 from payment.models import Payment, Payout
 from django.utils.encoding import python_2_unicode_compatible
+from base.models import BaseModel
 
-class Customer(models.Model):
+class Customer(BaseModel):
 	customer_name = models.CharField(max_length=200)
 	skype_id = models.CharField(max_length=200, blank = True)
 	gmail_id = models.CharField(max_length=200, blank = True)
@@ -49,7 +50,7 @@ class SkillMatchQuerySet(models.QuerySet):
         super(SkillMatchQuerySet, self).delete(*args, **kwargs)
 
 
-class SkillMatch(models.Model):
+class SkillMatch(BaseModel):
 	objects = SkillMatchQuerySet.as_manager()
 	skill = models.ForeignKey("proj.Skill", default=None)
 	customer = models.ForeignKey(Customer, default=None)

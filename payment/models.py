@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.db import models
 #from customers.models import Customer
 from django.utils import timezone
+from base.models import BaseModel
 
 # Create your models here.
 
@@ -13,7 +14,7 @@ class PaymentQuerySet(models.QuerySet):
         super(PaymentQuerySet, self).delete(*args, **kwargs)
 
 
-class Payment(models.Model):
+class Payment(BaseModel):
 	objects = PaymentQuerySet.as_manager()
         customer = models.ForeignKey("customers.Customer", default=None)
         amount = models.FloatField(default=0)
@@ -37,7 +38,7 @@ class PayoutQuerySet(models.QuerySet):
         super(PayoutQuerySet, self).delete(*args, **kwargs)
 
 
-class Payout(models.Model):
+class Payout(BaseModel):
 	objects = PayoutQuerySet.as_manager()
         customer = models.ForeignKey("customers.Customer", default=None)
         amount = models.FloatField(default=0)

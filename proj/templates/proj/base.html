@@ -140,7 +140,7 @@
 		<header class="header-basic-light" style="width:100%;">
 			<div class="header-limiter">
 				<h2>
-					<img href="#" src={% static "favicon.ico" %} height="40" width="40"/>
+					<img onclick="openHomePage()" src={% static "favicon.ico" %} height="40" width="40"/>
 				</h2>
 				<nav>
 					<h2><span onclick="openTeachersPage()">    	Our Teachers </span></h2>
@@ -151,7 +151,7 @@
 	                                        <h2><span>Login</span></h2>
         	                        </span-->
 				</nav>
-				<name><b href="#"><span style="color: #0000ff">Skil</span><span style="color: #ff0000">Til</span></b></name>
+				<name><b onclick="openHomePage()"><span style="color: #0000ff">Skil</span><span style="color: #ff0000">Til</span></b></name>
 			</div>
 		</header>
 
@@ -194,6 +194,12 @@
 			}
 			function closeContactNav() {
 				document.getElementById("contactNav").style.width = "0%";
+			}
+		</script>
+
+		<script>
+			function openHomePage() {
+				window.open("/","_self")
 			}
 		</script>
 

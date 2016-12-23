@@ -1,7 +1,7 @@
 {% if results|length %}
 	<h2>Skills</h2>
 		{% for skill in results %}
-                                                <a class="dummy-media-object" href="#" onclick="popUpWin('contact?skill={{ skill.skill_name }}', 300, 420)">
+                                                <a class="dummy-media-object" href="#" onclick="popUpWin('contact?skill={{ skill.skill_name }}', 600, 420)">
                                                         <img class="round" src={{ skill.image_src }} height="50px" />
                                                         <h3>{{ skill.skill_name }}</h3>
                                                         <!--h2>{{ skill.topic.topic_name }}</h2-->

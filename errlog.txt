@@ -1699,3 +1699,311 @@ tz
 uservoice
 woopra
 yandex_metrica
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 56, in index
+    return HttpResponse(template.render(context, request))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 174, in render
+    return compiled_parent._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/defaulttags.py", line 439, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/resolvers.py", line 392, in _reverse_with_prefix
+    (lookup_view_s, args, kwargs, len(patterns), patterns)
+NoReverseMatch: Reverse for '' with arguments '()' and keyword arguments '{}' not found. 0 pattern(s) tried: []
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 56, in index
+    return HttpResponse(template.render(context, request))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 174, in render
+    return compiled_parent._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/defaulttags.py", line 439, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/resolvers.py", line 392, in _reverse_with_prefix
+    (lookup_view_s, args, kwargs, len(patterns), patterns)
+NoReverseMatch: Reverse for 'proj.views.index' with arguments '()' and keyword arguments '{}' not found. 0 pattern(s) tried: []
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 56, in index
+    return HttpResponse(template.render(context, request))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 174, in render
+    return compiled_parent._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/defaulttags.py", line 439, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/resolvers.py", line 392, in _reverse_with_prefix
+    (lookup_view_s, args, kwargs, len(patterns), patterns)
+NoReverseMatch: Reverse for 'proj.views.index' with arguments '()' and keyword arguments '{}' not found. 0 pattern(s) tried: []
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 56, in index
+    return HttpResponse(template.render(context, request))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 174, in render
+    return compiled_parent._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/defaulttags.py", line 439, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/resolvers.py", line 392, in _reverse_with_prefix
+    (lookup_view_s, args, kwargs, len(patterns), patterns)
+NoReverseMatch: Reverse for '' with arguments '()' and keyword arguments '{}' not found. 0 pattern(s) tried: []
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 56, in index
+    return HttpResponse(template.render(context, request))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 174, in render
+    return compiled_parent._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/defaulttags.py", line 439, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/resolvers.py", line 392, in _reverse_with_prefix
+    (lookup_view_s, args, kwargs, len(patterns), patterns)
+NoReverseMatch: Reverse for '' with arguments '()' and keyword arguments '{}' not found. 0 pattern(s) tried: []
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 56, in index
+    return HttpResponse(template.render(context, request))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 174, in render
+    return compiled_parent._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/defaulttags.py", line 439, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/resolvers.py", line 392, in _reverse_with_prefix
+    (lookup_view_s, args, kwargs, len(patterns), patterns)
+NoReverseMatch: Reverse for 'proj.views.teachers' with arguments '()' and keyword arguments '{}' not found. 0 pattern(s) tried: []
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 56, in index
+    return HttpResponse(template.render(context, request))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 174, in render
+    return compiled_parent._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/defaulttags.py", line 439, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/resolvers.py", line 392, in _reverse_with_prefix
+    (lookup_view_s, args, kwargs, len(patterns), patterns)
+NoReverseMatch: Reverse for '' with arguments '()' and keyword arguments '{}' not found. 0 pattern(s) tried: []
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 56, in index
+    return HttpResponse(template.render(context, request))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 174, in render
+    return compiled_parent._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/defaulttags.py", line 439, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/resolvers.py", line 392, in _reverse_with_prefix
+    (lookup_view_s, args, kwargs, len(patterns), patterns)
+NoReverseMatch: Reverse for '' with arguments '()' and keyword arguments '{}' not found. 0 pattern(s) tried: []
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 56, in index
+    return HttpResponse(template.render(context, request))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 174, in render
+    return compiled_parent._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/defaulttags.py", line 439, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/resolvers.py", line 392, in _reverse_with_prefix
+    (lookup_view_s, args, kwargs, len(patterns), patterns)
+NoReverseMatch: Reverse for '' with arguments '()' and keyword arguments '{}' not found. 0 pattern(s) tried: []
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 56, in index
+    return HttpResponse(template.render(context, request))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 174, in render
+    return compiled_parent._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/defaulttags.py", line 439, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/resolvers.py", line 392, in _reverse_with_prefix
+    (lookup_view_s, args, kwargs, len(patterns), patterns)
+NoReverseMatch: Reverse for '' with arguments '()' and keyword arguments '{}' not found. 0 pattern(s) tried: []
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 56, in index
+    return HttpResponse(template.render(context, request))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 174, in render
+    return compiled_parent._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/defaulttags.py", line 439, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/urls/resolvers.py", line 392, in _reverse_with_prefix
+    (lookup_view_s, args, kwargs, len(patterns), patterns)
+NoReverseMatch: Reverse for '' with arguments '()' and keyword arguments '{}' not found. 0 pattern(s) tried: []

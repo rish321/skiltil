@@ -2,6 +2,7 @@
 from django import forms
 
 from django.utils.safestring import mark_safe
+from models import CustomerRequest
 
 class SiteForm(forms.Form):
     def __init__(self, *args, **kwargs):
@@ -13,6 +14,7 @@ class ContactForm(SiteForm):
 	contact_name = forms.CharField(required=True)
 	contact_phone = forms.CharField(required=True)
 	contact_email = forms.CharField(required=False)
+	skill = forms.CharField(required=False)
 	preferred_communication_time = forms.CharField(required=False)
 	content = forms.CharField(
         	required=False, widget=forms.Textarea(attrs={'rows': 4})
@@ -22,6 +24,7 @@ class ContactForm(SiteForm):
         	super(ContactForm, self).__init__(*args, **kwargs)
         	self.fields['contact_name'].label = "Name:* "
 		self.fields['contact_phone'].label = "Phone:* "
-        	self.fields['contact_email'].label = "Email:"
+        	self.fields['contact_email'].label = "Email: "
+		self.fields['skill'].label = "Skill: "
 		self.fields['preferred_communication_time'].label = mark_safe("Preferred Time for Communication:<br />")
         	self.fields['content'].label = mark_safe("Anything else you want to convey to us:<br />")

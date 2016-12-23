@@ -1,8 +1,54 @@
 {% extends "proj/base.html" %}
 	{% block title %} Learn from Home {% endblock %}	
 	{% block stylesheet %}
-		<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 		{% load static %}
+		<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+		<link rel="stylesheet" type="text/css" href={% static "css/component.css" %} />
+
+		<script type="text/javascript">
+			$(document).ready(function() {
+				var query = $('#querya');
+				console.log(query)
+				//$("#spinner").hide();
+				var resultsa = $("#resultsa");
+				query.bind('input', function() {
+					//spinner.css('display', 'none');
+					q = query.val();
+					console.log(q)
+					console.log(q.length);
+					if(q.length > 0) {
+						//alert(q);
+						//$("#spinner").show()
+						$.ajax({
+						        url: '/skill/ajax_skill_search/',
+						        data: {
+							      'q': q
+					        	},
+							async: true,
+						        dataType: 'html',
+						        success: function (result) {
+								console.log("success");
+								console.log(resultsa);
+								console.log(result);
+								//$("#spinner").hide()
+								//alert(result);
+								//$(‘#results’).html('&nbsp;').load(data)
+								//spinner.hide()
+								resultsa.html( result );
+								//makeTableScroll();
+						        },
+							error: function(xhr,errmsg,err) {
+								console.log("error");
+								//$("#spinner").hide()
+								alert(errmsg);
+								//$('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+ " <a href='#' class='close'>&times;</a></div>");
+							}
+						});
+					 } else 
+						resultsa.html ("");
+				});
+			});
+		</script>
 
 	{% endblock %}
 	{% block body %}
@@ -32,7 +78,7 @@
 			<img class="mySlides" src={% static "images/2.jpeg" %} style="width:80%; margin:0 auto;">
 			<img class="mySlides" src={% static "images/3.jpeg" %} style="width:80%; margin:0 auto;">
 			<img class="mySlides" src={% static "images/4.jpeg" %} style="width:80%; margin:0 auto;">
-			<a href=# onclick="popUpWin('contact?skill=Cashless%20Payments', 300, 420)" ><img class="mySlides" src={% static "images/5.jpeg" %} style="width:80%; margin:0 auto;"></a>
+			<a href=# onclick="popUpWin('contact?skill=Cashless%20Payments', 600, 420)" ><img class="mySlides" src={% static "images/5.jpeg" %} style="width:80%; margin:0 auto;"></a>
 			<div class="w3-center w3-sectin w3-large w3-text-white w3-display-bottommiddle" style="width:90%">
 				<div class="w3-left w3-padding-left  w3-text-blue w3-hover-indigo w3-hover-text-khaki" style="cursor:pointer;" onclick="plusDivs(-1)" >&#10094;</div>
 				<div class="w3-right w3-padding-right w3-text-blue w3-hover-indigo w3-hover-text-khaki" style="cursor:pointer;" onclick="plusDivs(1)" >&#10095;</div>
@@ -51,7 +97,7 @@
   						<ul>
 							{% for skill in skills %}
 								<li>
-									<a href=# onclick="popUpWin('contact?skill={{ skill.skill_name }}', 300, 420)"; clicky.log('#contact?skill={{ skill.skill_name }}','contact?skill={{ skill.skill_name }}');  >
+									<a href=# onclick="popUpWin('contact?skill={{ skill.skill_name }}', 600, 420)"; clicky.log('#contact?skill={{ skill.skill_name }}','contact?skill={{ skill.skill_name }}');  >
 										<img src="{% static "images/loading_icon.gif" %}" data-src="{{ skill.image_src }}" class="lazyload">
 										<h4>{{ skill.skill_name }}</h4>
 
@@ -103,6 +149,32 @@
 				</nav>
 			</div>
 		</div>
+
+		<div id="morphsearch" class="morphsearch">
+			<form class="morphsearch-form">
+				<input id="querya" class="morphsearch-input" type="search" placeholder="Search Skiltil..."/>
+				<button class="morphsearch-submit" type="submit">Search</button>
+			</form>
+			<div class="morphsearch-content">
+				<div class="dummy-column" id="resultsa">
+				</div>
+				
+			</div><!-- /morphsearch-content -->
+			<span class="morphsearch-close"></span>
+		</div>
+
+
+		<script>
+			function popUpWin(url, width, height) {
+				var leftPosition, topPosition;
+				leftPosition = (window.screen.width / 2) - ((width / 2) + 10);
+				topPosition = (window.screen.height / 2) - ((height / 2) + 50);
+				window.open(url, "Window2",
+				"status=no,height=" + height + ",width=" + width + ",resizable=yes,left="
+				+ leftPosition + ",top=" + topPosition + ",screenX=" + leftPosition + ",screenY="
+				+ topPosition + ",toolbar=no,menubar=no,scrollbars=no,location=no,directories=no");
+			}
+		</script>
 
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 

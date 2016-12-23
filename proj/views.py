@@ -4,7 +4,7 @@
 from django.http import HttpResponse
 
 from django.template import loader
-from .models import Skill, SkillTopic
+from .models import Skill, SkillTopic, CustomerRequest
 from customers.models import Customer, SkillMatch
 from .forms import ContactForm
 from django.shortcuts import render
@@ -12,7 +12,9 @@ from django.core.mail import EmailMessage
 from django.shortcuts import redirect
 from django.template import Context
 from django.template.loader import get_template
+from django.shortcuts import render_to_response
 from django.http import Http404
+from django.db.models import Q
 #import operator
 import traceback
 from django.db.models import F
@@ -28,7 +30,7 @@ def index(request):
 		skill_topics = []
 		skill_list = []
 		other_skill_list = []
-		newArrivals = Skill.objects.extra(order_by = ('-created_date', '-clicks'))[:20]
+		newArrivals = Skill.objects.extra(order_by = ('-created_date', 'clicks'))[:20]
 		skill_topics.append("New Arrivals")
 		skill_list.append(newArrivals)
 		orderskills = Skill.objects.extra(order_by = ('-classes_given','-no_teachers','-clicks'))[:20]
@@ -59,9 +61,11 @@ def index(request):
 
 def contact(request):
 	try:
-		form_class = ContactForm
-	
 		skillName = request.GET.get('skill', '')
+		data = {'skill': skillName}
+		form_class = ContactForm(initial=data)
+	
+
 		#print skillName
 		skills = Skill.objects.filter(skill_name = skillName)
 		if len(skills) > 0:
@@ -72,7 +76,9 @@ def contact(request):
 
 		# new logic!
 		if request.method == 'POST':
-	        	form = form_class(data=request.POST)
+	        	form = ContactForm(data=request.POST)
+
+			
 
 	        	if form.is_valid():
         	    		contact_name = request.POST.get(
@@ -84,10 +90,16 @@ def contact(request):
 	            		contact_email = request.POST.get(
         	        		'contact_email'
 	        	    	, '')
+	            		skill = request.POST.get(
+        	        		'skill'
+				, '')
 				preferred_communication_time = request.POST.get(
 	                                'preferred_communication_time'
         	                , '')
+
         		form_content = request.POST.get('content', '')
+			customerRequest = CustomerRequest(contact_name=contact_name, contact_phone=contact_phone, contact_email=contact_email, skill=skill, preferred_communication_time=preferred_communication_time, content=form_content, default_skill=skillName)
+			customerRequest.save()
 	
         	    	template = get_template('proj/contact_template.txt')
             		context = Context({
@@ -95,6 +107,7 @@ def contact(request):
 	                	'contact_name': contact_name,
 				'contact_phone': contact_phone,
 	        	        'contact_email': contact_email,
+				'skill': skill,
 				'preferred_communication_time': preferred_communication_time,
 	        	        'form_content': form_content,
         	    	})
@@ -116,6 +129,8 @@ def contact(request):
 			return HttpResponse('<script type="text/javascript">window.close(); window.parent.location.href = "/";</script>')
 
 		return render(request, 'proj/contact.html', {
+
+			
 			'form': form_class,
 			'skill': skill,
 		})
@@ -134,10 +149,10 @@ def teachers(request):
         try:
 		customers = Customer.objects.filter(no_subjects__gt=0).extra(order_by = ('-no_subjects', '-classes_given'))
 		customerSkillList = []
-		for customer in customers:
-			customerSkill = CustomerSkill(customer)
+		for customer1 in customers:
+			customerSkill = CustomerSkill(customer1)
 			customerSkillList.append(customerSkill)
-		        skillMatchs = SkillMatch.objects.filter(customer=customer)
+		        skillMatchs = SkillMatch.objects.filter(customer=customer1).order_by('-classes_given')
 			customerSkill.skillMatchs.extend(skillMatchs)
 		template = loader.get_template('proj/teachers.html')
                 context = {
@@ -148,3 +163,16 @@ def teachers(request):
                 print "exception caught"
                 print '%s (%s)' % (e.message, type(e))
                 traceback.print_exc(file=open("errlog.txt","a"))
+
+
+def ajax_skill_search( request ):
+	results = []
+        q = request.GET.get( 'q' )
+	print q
+        if q is not None:            
+	        results = Skill.objects.filter( 
+	               	Q( skill_name__icontains = q ) | Q( topic__topic_name__icontains = q )
+		).order_by('-classes_given','-no_teachers','-clicks')
+		print results
+	        return render_to_response( 'proj/results_new.html', { 'results': results, } )
+	return HttpResponse("Here" + str(results))

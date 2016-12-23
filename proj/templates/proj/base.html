@@ -17,19 +17,23 @@
 		<meta property="og:type" content="website" />
 			
 		<!--link rel="shortcut icon" href="../favicon.ico"-->
-		<link rel="shortcut icon" type="image/png" href="{{STATIC_URL}}/favicon.ico"/> 
 		{% load static %}
+		<link rel="shortcut icon" type="image/png" href={% static "/favicon.ico" %}/> 
 		<link rel="stylesheet" type="text/css" href={% static "css/contact.css" %} />
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 		<link rel="stylesheet" type="text/css" href={% static "css/style.css" %} />
 		<script src={% static "js/modernizr.custom.63321.js" %}></script>
-		<script src={% static "js/jquery-3.1.1.min.js" %}></script>
+		<script src={% static "js/jquery-3.1.1.min.js" %} ></script>
 		<script src={% static "js/lazysizes.min.js" %} async=""></script>
+		<script src={% static "js/classie.js" %} ></script>
 		<link rel="stylesheet" type="text/css" href={% static "css/overlay.css" %} />
 		<link rel="stylesheet" type="text/css" href={% static "css/header-basic-light.css" %} />
 		<link rel="stylesheet" type="text/css" href={% static "css/step.css" %} />
+
 		{% block stylesheet %}{% endblock %}
 		<!--link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css"-->
+
+
 
 
 		<style>
@@ -75,7 +79,7 @@
 			</div>
 		</div>
 
-		<div id="contactNav" class="overlay" style="background:#334455">
+		<div id="contactNav" class="overlay" style="background:#334455;z-index:3;">
                         <a href="javascript:void(0)" class="closebtn" onclick="closeContactNav()">&times;</a>
                         <div class="overlay-content" style="color:white;">
 				<h1 style="width:100%;text-align:center;margin-bottom:100px;"><b>Contact Skiltil</b></h1>
@@ -151,19 +155,9 @@
 			</div>
 		</header>
 
-		{% block body %}{% endblock %}
 
-		<script>
-			function popUpWin(url, width, height) {
-				var leftPosition, topPosition;
-				leftPosition = (window.screen.width / 2) - ((width / 2) + 10);
-				topPosition = (window.screen.height / 2) - ((height / 2) + 50);
-				window.open(url, "Window2",
-				"status=no,height=" + height + ",width=" + width + ",resizable=yes,left="
-				+ leftPosition + ",top=" + topPosition + ",screenX=" + leftPosition + ",screenY="
-				+ topPosition + ",toolbar=no,menubar=no,scrollbars=no,location=no,directories=no");
-			}
-		</script>
+	        {% block body %}	
+		{% endblock %}
 
 		<script>
                         function openVideoNav() {
@@ -287,6 +281,61 @@
 			function startCarousel() {
 				t = setTimeout(showDivs, 5000);
 			}
+		</script>
+
+		<script>
+			(function() {
+				var morphSearch = document.getElementById( 'morphsearch' ),
+					input = morphSearch.querySelector( 'input.morphsearch-input' ),
+					ctrlClose = morphSearch.querySelector( 'span.morphsearch-close' ),
+					isOpen = isAnimating = false,
+					// show/hide search area
+					toggleSearch = function(evt) {
+						// return if open and the input gets focused
+						if( evt.type.toLowerCase() === 'focus' && isOpen ) return false;
+
+						var offsets = morphsearch.getBoundingClientRect();
+						if( isOpen ) {
+							classie.remove( morphSearch, 'open' );
+
+							// trick to hide input text once the search overlay closes 
+							// todo: hardcoded times, should be done after transition ends
+							if( input.value !== '' ) {
+								var resultsa = $("#resultsa");
+								resultsa.html("");
+								setTimeout(function() {
+									classie.add( morphSearch, 'hideInput' );
+									setTimeout(function() {
+										classie.remove( morphSearch, 'hideInput' );
+										input.value = '';
+									}, 300 );
+								}, 500);
+							}
+							
+							input.blur();
+						}
+						else {
+							classie.add( morphSearch, 'open' );
+						}
+						isOpen = !isOpen;
+					};
+
+				// events
+				input.addEventListener( 'focus', toggleSearch );
+				ctrlClose.addEventListener( 'click', toggleSearch );
+				// esc key closes search overlay
+				// keyboard navigation events
+				document.addEventListener( 'keydown', function( ev ) {
+					var keyCode = ev.keyCode || ev.which;
+					if( keyCode === 27 && isOpen ) {
+						toggleSearch(ev);
+					}
+				} );
+
+
+				/***** for demo purposes only: don't allow to submit the form *****/
+				morphSearch.querySelector( 'button[type="submit"]' ).addEventListener( 'click', function(ev) { ev.preventDefault(); } );
+			})();
 		</script>
 		
 

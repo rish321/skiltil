@@ -17,6 +17,21 @@ from django.utils import timezone
 #	class Meta:
 #        	abstract = True
 
+class CustomerRequest(BaseModel):
+	contact_name = models.CharField(max_length=50, blank=False)
+	contact_phone = models.CharField(max_length=50, blank=False)
+	contact_email = models.CharField(max_length=50, blank=True)
+	default_skill = models.CharField(max_length=50, blank=True)
+	skill = models.CharField(max_length=200, blank=True)
+	preferred_communication_time = models.CharField(max_length=50, blank=True)
+	content = models.TextField(blank=True)
+
+	def __str__(self):
+        	return self.contact_name + " - " + self.contact_phone + " - " + self.contact_email + " - " + self.default_skill + " - " + self.skill
+
+
+
+
 class SkillTopic(BaseModel):
 	topic_name = models.CharField(max_length=200)
 	clicks = models.IntegerField(default=0)

@@ -1026,3 +1026,330 @@ Traceback (most recent call last):
   File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1327, in names_to_path
     "Choices are: %s" % (name, ", ".join(available)))
 FieldError: Cannot resolve keyword '' into field. Choices are: classes_given, clicks, created_date, details, id, image_src, modified_date, no_teachers, skill_name, skillmatch, topic, topic_id
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 122, in contact
+    'skill': skill,
+UnboundLocalError: local variable 'skill' referenced before assignment
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 122, in contact
+    'skill': skill,
+UnboundLocalError: local variable 'skill' referenced before assignment
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 122, in contact
+    'skill': skill,
+UnboundLocalError: local variable 'skill' referenced before assignment
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 122, in contact
+    'skill': skill,
+UnboundLocalError: local variable 'skill' referenced before assignment
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 122, in contact
+    'skill': skill,
+UnboundLocalError: local variable 'skill' referenced before assignment
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 51, in index
+    template = loader.get_template('proj/index.html')
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader.py", line 21, in get_template
+    return engine.get_template(template_name)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 39, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/engine.py", line 160, in get_template
+    template, origin = self.find_template(template_name)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/engine.py", line 134, in find_template
+    name, template_dirs=dirs, skip=skip,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loaders/base.py", line 44, in get_template
+    contents, origin, origin.template_name, self.engine,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 191, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 233, in compile_nodelist
+    return parser.parse()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+TemplateSyntaxError: Invalid block tag on line 5: 'static', expected 'endblock'. Did you forget to register or load this tag?
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 51, in index
+    template = loader.get_template('proj/index.html')
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader.py", line 21, in get_template
+    return engine.get_template(template_name)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 39, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/engine.py", line 160, in get_template
+    template, origin = self.find_template(template_name)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/engine.py", line 134, in find_template
+    name, template_dirs=dirs, skip=skip,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loaders/base.py", line 44, in get_template
+    contents, origin, origin.template_name, self.engine,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 191, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 233, in compile_nodelist
+    return parser.parse()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+TemplateSyntaxError: 'block' tag with name 'body' appears more than once
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 51, in index
+    template = loader.get_template('proj/index.html')
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader.py", line 21, in get_template
+    return engine.get_template(template_name)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 39, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/engine.py", line 160, in get_template
+    template, origin = self.find_template(template_name)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/engine.py", line 134, in find_template
+    name, template_dirs=dirs, skip=skip,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loaders/base.py", line 44, in get_template
+    contents, origin, origin.template_name, self.engine,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 191, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 233, in compile_nodelist
+    return parser.parse()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+TemplateSyntaxError: 'block' tag with name 'body' appears more than once
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 51, in index
+    template = loader.get_template('proj/index.html')
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader.py", line 21, in get_template
+    return engine.get_template(template_name)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 39, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/engine.py", line 160, in get_template
+    template, origin = self.find_template(template_name)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/engine.py", line 134, in find_template
+    name, template_dirs=dirs, skip=skip,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loaders/base.py", line 44, in get_template
+    contents, origin, origin.template_name, self.engine,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 191, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 233, in compile_nodelist
+    return parser.parse()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+TemplateSyntaxError: Invalid block tag on line 5: 'static', expected 'endblock'. Did you forget to register or load this tag?
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 51, in index
+    template = loader.get_template('proj/index.html')
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader.py", line 21, in get_template
+    return engine.get_template(template_name)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 39, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/engine.py", line 160, in get_template
+    template, origin = self.find_template(template_name)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/engine.py", line 134, in find_template
+    name, template_dirs=dirs, skip=skip,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loaders/base.py", line 44, in get_template
+    contents, origin, origin.template_name, self.engine,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 191, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 233, in compile_nodelist
+    return parser.parse()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+TemplateSyntaxError: Invalid block tag on line 5: 'static', expected 'endblock'. Did you forget to register or load this tag?
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 51, in index
+    template = loader.get_template('proj/index.html')
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader.py", line 21, in get_template
+    return engine.get_template(template_name)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 39, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/engine.py", line 160, in get_template
+    template, origin = self.find_template(template_name)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/engine.py", line 134, in find_template
+    name, template_dirs=dirs, skip=skip,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loaders/base.py", line 44, in get_template
+    contents, origin, origin.template_name, self.engine,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 191, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 233, in compile_nodelist
+    return parser.parse()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+TemplateSyntaxError: Invalid block tag on line 332: 'endblock'. Did you forget to register or load this tag?
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 51, in index
+    template = loader.get_template('proj/index.html')
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader.py", line 21, in get_template
+    return engine.get_template(template_name)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 39, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/engine.py", line 160, in get_template
+    template, origin = self.find_template(template_name)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/engine.py", line 134, in find_template
+    name, template_dirs=dirs, skip=skip,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loaders/base.py", line 44, in get_template
+    contents, origin, origin.template_name, self.engine,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 191, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 233, in compile_nodelist
+    return parser.parse()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+TemplateSyntaxError: Invalid block tag on line 332: 'endblock'. Did you forget to register or load this tag?
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 123, in contact
+    'skill': skill,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/shortcuts.py", line 30, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader.py", line 68, in render_to_string
+    return template.render(context, request)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 174, in render
+    return compiled_parent._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 70, in render
+    result = block.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 1044, in render
+    output = self.filter_expression.resolve(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 711, in resolve
+    obj = self.var.resolve(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 852, in resolve
+    value = self._resolve_lookup(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 915, in _resolve_lookup
+    current = current()
+  File "/Users/rishabh/projectX/proj/forms.py", line 20, in __init__
+    self.fields['contact_name'].label = "Name:* "
+KeyError: 'contact_name'
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 97, in contact
+    customerRequest = CustomerRequest(contact_name=contact_name, contact_phone=contact_phone, contact_email=contact_email, skill=skill, preferred_communication_time=preferred_communication_timei, content=form_content, default_skill=skillName)
+NameError: global name 'preferred_communication_timei' is not defined
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 98, in contact
+    customerRequest.save()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/base.py", line 796, in save
+    force_update=force_update, update_fields=update_fields)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/base.py", line 824, in save_base
+    updated = self._save_table(raw, cls, force_insert, force_update, using, update_fields)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/base.py", line 908, in _save_table
+    result = self._do_insert(cls._base_manager, using, fields, update_pk, raw)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/base.py", line 947, in _do_insert
+    using=using, raw=raw)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/query.py", line 1045, in _insert
+    return query.get_compiler(using=using).execute_sql(return_id)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 1054, in execute_sql
+    cursor.execute(sql, params)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/backends/utils.py", line 79, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/raven/contrib/django/client.py", line 112, in execute
+    return real_execute(self, sql, params)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/utils.py", line 94, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+ProgrammingError: column "default_skill" of relation "proj_customerrequest" does not exist
+LINE 1: ..."contact_name", "contact_phone", "contact_email", "default_s...
+                                                             ^
+
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 79, in contact
+    form = form_class(data=request.POST)
+TypeError: 'ContactForm' object is not callable
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 156, in teachers
+    customerSkill.skillMatchs.extend(skillMatchs)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/query.py", line 256, in __iter__
+    self._fetch_all()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/query.py", line 1087, in _fetch_all
+    self._result_cache = list(self.iterator())
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/query.py", line 54, in __iter__
+    results = compiler.execute_sql()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 824, in execute_sql
+    sql, params = self.as_sql()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 369, in as_sql
+    extra_select, order_by, group_by = self.pre_sql_setup()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 47, in pre_sql_setup
+    order_by = self.get_order_by()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 293, in get_order_by
+    field, self.query.get_meta(), default_order=asc))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 553, in find_ordering_name
+    field, targets, alias, joins, path, opts = self._setup_joins(pieces, opts, alias)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 586, in _setup_joins
+    pieces, opts, alias)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1402, in setup_joins
+    names, opts, allow_many, fail_on_missing=True)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1327, in names_to_path
+    "Choices are: %s" % (name, ", ".join(available)))
+FieldError: Cannot resolve keyword '' into field. Choices are: classes_given, created_date, customer, customer_id, details, id, modified_date, session, skill, skill_id
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 156, in teachers
+    customerSkill.skillMatchs.extend(skillMatchs)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/query.py", line 256, in __iter__
+    self._fetch_all()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/query.py", line 1087, in _fetch_all
+    self._result_cache = list(self.iterator())
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/query.py", line 54, in __iter__
+    results = compiler.execute_sql()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 824, in execute_sql
+    sql, params = self.as_sql()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 369, in as_sql
+    extra_select, order_by, group_by = self.pre_sql_setup()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 47, in pre_sql_setup
+    order_by = self.get_order_by()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 293, in get_order_by
+    field, self.query.get_meta(), default_order=asc))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 553, in find_ordering_name
+    field, targets, alias, joins, path, opts = self._setup_joins(pieces, opts, alias)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 586, in _setup_joins
+    pieces, opts, alias)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1402, in setup_joins
+    names, opts, allow_many, fail_on_missing=True)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1327, in names_to_path
+    "Choices are: %s" % (name, ", ".join(available)))
+FieldError: Cannot resolve keyword '' into field. Choices are: classes_given, created_date, customer, customer_id, details, id, modified_date, session, skill, skill_id
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 155, in teachers
+    skillMatchs = SkillMatch.objects.filter(customer=customer).extra(order_by = classes_given)
+NameError: global name 'classes_given' is not defined
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 153, in teachers
+    customerSkill = CustomerSkill(customer)
+NameError: global name 'customer' is not defined
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 156, in teachers
+    customerSkill.skillMatchs.extend(skillMatchs)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/query.py", line 256, in __iter__
+    self._fetch_all()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/query.py", line 1087, in _fetch_all
+    self._result_cache = list(self.iterator())
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/query.py", line 54, in __iter__
+    results = compiler.execute_sql()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 824, in execute_sql
+    sql, params = self.as_sql()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 369, in as_sql
+    extra_select, order_by, group_by = self.pre_sql_setup()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 47, in pre_sql_setup
+    order_by = self.get_order_by()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 293, in get_order_by
+    field, self.query.get_meta(), default_order=asc))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 553, in find_ordering_name
+    field, targets, alias, joins, path, opts = self._setup_joins(pieces, opts, alias)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 586, in _setup_joins
+    pieces, opts, alias)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1402, in setup_joins
+    names, opts, allow_many, fail_on_missing=True)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1327, in names_to_path
+    "Choices are: %s" % (name, ", ".join(available)))
+FieldError: Cannot resolve keyword '' into field. Choices are: classes_given, created_date, customer, customer_id, details, id, modified_date, session, skill, skill_id

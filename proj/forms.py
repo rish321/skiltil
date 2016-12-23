@@ -17,7 +17,7 @@ class ContactForm(SiteForm):
 	skill = forms.CharField(required=False)
 	preferred_communication_time = forms.CharField(required=False)
 	content = forms.CharField(
-        	required=False, widget=forms.Textarea(attrs={'rows': 4})
+        	required=False, widget=forms.Textarea(attrs={'width':"100%", 'rows': 4})
 	)
 
 	def __init__(self, *args, **kwargs):

@@ -1353,3 +1353,349 @@ Traceback (most recent call last):
   File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/query.py", line 1327, in names_to_path
     "Choices are: %s" % (name, ", ".join(available)))
 FieldError: Cannot resolve keyword '' into field. Choices are: classes_given, created_date, customer, customer_id, details, id, modified_date, session, skill, skill_id
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 56, in index
+    return HttpResponse(template.render(context, request))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 206, in render
+    with context.bind_template(self):
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/contextlib.py", line 17, in __enter__
+    return self.gen.next()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/context.py", line 236, in bind_template
+    updates.update(processor(self.request))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/material/frontend/context_processors.py", line 16, in modules
+    'modules': modules_registry.available_modules(request.user),
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/material/frontend/registry.py", line 24, in available_modules
+    return [module for module in self.installed_modules()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/material/frontend/registry.py", line 20, in installed_modules
+    if getattr(module, 'installed', True)]
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/material/frontend/apps.py", line 68, in installed
+    return DbModule.objects.installed(self.label)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/material/frontend/models.py", line 14, in installed
+    installed_cache = [mod.label for mod in self.get_queryset().filter(installed=True)]
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/query.py", line 256, in __iter__
+    self._fetch_all()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/query.py", line 1087, in _fetch_all
+    self._result_cache = list(self.iterator())
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/query.py", line 54, in __iter__
+    results = compiler.execute_sql()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 835, in execute_sql
+    cursor.execute(sql, params)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/backends/utils.py", line 79, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/raven/contrib/django/client.py", line 112, in execute
+    return real_execute(self, sql, params)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/utils.py", line 94, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+ProgrammingError: relation "frontend_module" does not exist
+LINE 1: ...dule"."label", "frontend_module"."installed" FROM "frontend_...
+                                                             ^
+
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 56, in index
+    return HttpResponse(template.render(context, request))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 206, in render
+    with context.bind_template(self):
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/contextlib.py", line 17, in __enter__
+    return self.gen.next()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/context.py", line 236, in bind_template
+    updates.update(processor(self.request))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/material/frontend/context_processors.py", line 16, in modules
+    'modules': modules_registry.available_modules(request.user),
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/material/frontend/registry.py", line 24, in available_modules
+    return [module for module in self.installed_modules()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/material/frontend/registry.py", line 20, in installed_modules
+    if getattr(module, 'installed', True)]
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/material/frontend/apps.py", line 68, in installed
+    return DbModule.objects.installed(self.label)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/material/frontend/models.py", line 14, in installed
+    installed_cache = [mod.label for mod in self.get_queryset().filter(installed=True)]
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/query.py", line 256, in __iter__
+    self._fetch_all()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/query.py", line 1087, in _fetch_all
+    self._result_cache = list(self.iterator())
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/query.py", line 54, in __iter__
+    results = compiler.execute_sql()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 835, in execute_sql
+    cursor.execute(sql, params)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/backends/utils.py", line 79, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/raven/contrib/django/client.py", line 112, in execute
+    return real_execute(self, sql, params)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/utils.py", line 94, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+ProgrammingError: relation "frontend_module" does not exist
+LINE 1: ...dule"."label", "frontend_module"."installed" FROM "frontend_...
+                                                             ^
+
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 56, in index
+    return HttpResponse(template.render(context, request))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 152, in render
+    compiled_parent = self.get_parent(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 149, in get_parent
+    return self.find_template(parent, context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 129, in find_template
+    template_name, skip=history,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/engine.py", line 134, in find_template
+    name, template_dirs=dirs, skip=skip,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loaders/base.py", line 44, in get_template
+    contents, origin, origin.template_name, self.engine,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 191, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 233, in compile_nodelist
+    return parser.parse()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+TemplateSyntaxError: 'material_form' is not a registered tag library. Must be one of:
+admin_list
+admin_modify
+admin_static
+admin_urls
+analytical
+cache
+chartbeat
+clickmap
+clicky
+crazy_egg
+gauges
+google_analytics
+gosquared
+hubspot
+i18n
+intercom
+kiss_insights
+kiss_metrics
+l10n
+log
+mixpanel
+olark
+optimizely
+performable
+piwik
+rating_mailru
+raven
+snapengage
+spring_metrics
+static
+staticfiles
+tz
+uservoice
+woopra
+yandex_metrica
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 56, in index
+    return HttpResponse(template.render(context, request))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 152, in render
+    compiled_parent = self.get_parent(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 149, in get_parent
+    return self.find_template(parent, context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 129, in find_template
+    template_name, skip=history,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/engine.py", line 134, in find_template
+    name, template_dirs=dirs, skip=skip,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loaders/base.py", line 44, in get_template
+    contents, origin, origin.template_name, self.engine,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 191, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 233, in compile_nodelist
+    return parser.parse()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+TemplateSyntaxError: 'material_form' is not a registered tag library. Must be one of:
+admin_list
+admin_modify
+admin_static
+admin_urls
+analytical
+cache
+chartbeat
+clickmap
+clicky
+crazy_egg
+gauges
+google_analytics
+gosquared
+hubspot
+i18n
+intercom
+kiss_insights
+kiss_metrics
+l10n
+log
+mixpanel
+olark
+optimizely
+performable
+piwik
+rating_mailru
+raven
+snapengage
+spring_metrics
+static
+staticfiles
+tz
+uservoice
+woopra
+yandex_metrica
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 56, in index
+    return HttpResponse(template.render(context, request))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 152, in render
+    compiled_parent = self.get_parent(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 149, in get_parent
+    return self.find_template(parent, context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 129, in find_template
+    template_name, skip=history,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/engine.py", line 134, in find_template
+    name, template_dirs=dirs, skip=skip,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loaders/base.py", line 44, in get_template
+    contents, origin, origin.template_name, self.engine,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 191, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 233, in compile_nodelist
+    return parser.parse()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+TemplateSyntaxError: 'material_form' is not a registered tag library. Must be one of:
+admin_list
+admin_modify
+admin_static
+admin_urls
+analytical
+cache
+chartbeat
+clickmap
+clicky
+crazy_egg
+gauges
+google_analytics
+gosquared
+hubspot
+i18n
+intercom
+kiss_insights
+kiss_metrics
+l10n
+log
+mixpanel
+olark
+optimizely
+performable
+piwik
+rating_mailru
+raven
+snapengage
+spring_metrics
+static
+staticfiles
+tz
+uservoice
+woopra
+yandex_metrica
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 56, in index
+    return HttpResponse(template.render(context, request))
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 152, in render
+    compiled_parent = self.get_parent(context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 149, in get_parent
+    return self.find_template(parent, context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader_tags.py", line 129, in find_template
+    template_name, skip=history,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/engine.py", line 134, in find_template
+    name, template_dirs=dirs, skip=skip,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loaders/base.py", line 44, in get_template
+    contents, origin, origin.template_name, self.engine,
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 191, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 233, in compile_nodelist
+    return parser.parse()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+TemplateSyntaxError: 'material_form' is not a registered tag library. Must be one of:
+admin_list
+admin_modify
+admin_static
+admin_urls
+analytical
+cache
+chartbeat
+clickmap
+clicky
+crazy_egg
+gauges
+google_analytics
+gosquared
+hubspot
+i18n
+intercom
+kiss_insights
+kiss_metrics
+l10n
+log
+mixpanel
+olark
+optimizely
+performable
+piwik
+rating_mailru
+raven
+snapengage
+spring_metrics
+static
+staticfiles
+tz
+uservoice
+woopra
+yandex_metrica

@@ -137,7 +137,7 @@
 			</div>
 		</div>
 		
-		<header class="header-basic-light" style="width:100%">
+		<header class="header-basic-light" style="width:100%;">
 			<div class="header-limiter">
 				<h2>
 					<img href="#" src={% static "favicon.ico" %} height="40" width="40"/>
@@ -155,9 +155,10 @@
 			</div>
 		</header>
 
-
-	        {% block body %}	
-		{% endblock %}
+		<div class="body-container">
+		        {% block body %}	
+			{% endblock %}
+		</div>
 
 		<script>
                         function openVideoNav() {

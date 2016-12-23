@@ -1,6 +1,6 @@
 .header-basic-light{
 	//padding: 20px 20px;
-	//position: absolute;
+	position: fixed;
 	z-index: 1;
 	box-sizing:border-box;
 	box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.15);
@@ -23,6 +23,11 @@
 	line-height: 40px;
 	margin: 0;
 	cursor: pointer;
+}
+
+.body-container {
+	margin-top:80px;
+	margin-bottom:40px;
 }
 
 .header-basic-light .header-limiter name {
@@ -107,6 +112,11 @@
 
 	.header-basic-light .header-limiter nav a {
 		font-size: 13px;
+	}
+
+	.body-container {
+        	margin-top:125px;
+		margin-bottom:40px;
 	}
 
 }

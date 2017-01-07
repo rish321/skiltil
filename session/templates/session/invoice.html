@@ -12,6 +12,9 @@
 		font-size:120%;
 		font-weight: bold;
 	}
+	sm {
+		font-size: 80%;
+	}
 </style>
 
 <body style="text-align:center;width:90%;margin-left: auto;margin-right: auto;">
@@ -69,10 +72,12 @@
 					{% endif  %}
 				</td>
 				<td style="width:25%;">
-					{{ call.start_time }}
+					{{ call.start_time|date:'h:i:s A' }}
+					<sm>{{ call.start_time|date:'(M j, Y)' }}</sm>
 				</td>
 				<td style="width:25%;">
-					{{ call.end_time }}
+					{{ call.end_time|date:'h:i:s A' }}
+					<sm>{{ call.end_time|date:'(M j, Y)' }}</sm>
 				</td>
 				<td style="width:25%;">
 					{{ call.call_duration }}
@@ -188,10 +193,12 @@
 					{% endif  %}
 				</td>
 				<td style="width:25%;">
-					{{ call.start_time }}
+					{{ call.start_time|date:'h:i:s A' }}
+					<sm>{{ call.start_time|date:'(M j, Y)' }}</sm>
 				</td>
 				<td style="width:25%;">
-					{{ call.end_time }}
+					{{ call.end_time|date:'h:i:s A' }}
+					<sm>{{ call.end_time|date:'(M j, Y)' }}</sm>
 				</td>
 				<td style="width:25%;">
 					{{ call.call_duration }}

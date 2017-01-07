@@ -97,7 +97,7 @@ class Session(BaseModel):
 		self.amount_from_student = self.calculateStudentAmount(self.total_duration)
 		self.balance_amount = self.amount_from_student - self.money_refund
 		super(Session, self).save(*args, **kwargs)
-		sessions = Session.objects.filter(student = self.student).order_by('start_time')
+		sessions = Session.objects.filter(student = self.student).filter(skill_match__skill = self.skill_match.skill).order_by('start_time')
 		print sessions
 		number = 1
 		for session in  sessions:

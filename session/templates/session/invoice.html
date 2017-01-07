@@ -1,0 +1,230 @@
+	
+{% load static %}
+
+<style>
+
+	table {
+		margin-left: auto;
+		margin-right: auto;
+		border: 1px solid black;	
+	}
+	bo {
+		font-size:120%;
+		font-weight: bold;
+	}
+</style>
+
+<body style="text-align:center;width:90%;margin-left: auto;margin-right: auto;">
+	<a style="font-size:300%;"> <img src = {% static "favicon.ico" %} height="40" width="40"/> Skiltil Invoice </a>
+	<br>
+	<table style="width:100%;">
+		<tr style="width:100%;">
+			<td style="width:25%;">
+				Student
+			</td>
+			<td style="width:25%;">
+				Skill
+			</td>
+			<td style="width:50%;">
+				Date
+			</td>
+		</tr>
+
+		<tr>
+			<td style="width:20%;">
+				<bo>{{ session.student.customer_name }}</bo>
+			</td>
+			<td style="width:20%;">
+				<bo>{{ session.skill_match.skill.skill_name }}</bo>
+			</td>
+			<td style="width:60%;">
+				<bo>{{ session.start_time.date }}<bo>
+			</td>	
+		</tr>
+	</table>
+	<table style="width:100%;">
+
+		<tr>
+			<td style="width:25%;">
+				Session
+			</td>
+			<td style="width:25%;">
+				<b>Time Start</b>
+			</td>
+			<td style="width:25%;">
+				<b>Time End</b>
+			</td>
+			<td style="width:25%;">
+				<b>Call Duration</b>
+			</td>
+		</tr>
+		<tr class="spacer"></tr>
+
+		{% for call in calls %}
+			<tr>
+				<td style="width:25%;">
+					Call
+					{% if calls|length > 1  %}
+						 {{forloop.counter}}
+					{% endif  %}
+				</td>
+				<td style="width:25%;">
+					{{ call.start_time }}
+				</td>
+				<td style="width:25%;">
+					{{ call.end_time }}
+				</td>
+				<td style="width:25%;">
+					{{ call.call_duration }}
+				</td>
+			</tr>
+		{% endfor %}
+
+		<tr class="spacer"></tr>
+
+		{% if calls|length > 1  %}
+			<tr>
+				<td style="width:25%;">
+					<b>Total</b>
+				</td>
+				<td style="width:25%;">
+					
+				</td>
+				<td style="width:25%;">
+					
+				</td>
+				<td style="width:25%;">
+					<b>{{ session.total_duration }}</b>
+				</td>
+			</tr>
+		{% endif  %}
+	
+		{% if session.money_refund > 0  %}
+			<tr>
+				<td style="width:25%;">
+					<b>Discount Minutes</b>
+				</td>
+				<td style="width:25%;">
+					
+				</td>
+				<td style="width:25%;">
+					
+				</td>
+				<td style="width:25%;">
+					<b>{{ session.time_refund }}</b>
+				</td>
+			</tr>
+		{% endif  %}
+	
+		<tr style="font-size:200%;">
+			<td style="width:25%;">
+				<b>Spending</b>
+			</td>
+			<td style="width:25%;">
+				<b>Rs. {{session.balance_amount|floatformat:2 }}</b>
+			</td>
+		</tr>
+	</table>
+	
+
+
+	<br>
+	<br>
+	<br>
+
+
+
+	<a style="font-size:300%;"> <img src = {% static "favicon.ico" %} height="40" width="40"/> Skiltil Invoice </a>
+	<br>
+	<table style="width:100%;">
+		<tr style="width:100%;">
+			<td style="width:25%;">
+				Teacher
+			</td>
+			<td style="width:25%;">
+				Skill
+			</td>
+			<td style="width:50%;">
+				Date
+			</td>
+		</tr>
+
+		<tr>
+			<td style="width:20%;">
+				<bo>{{ session.skill_match.customer.customer_name }}</bo>
+			</td>
+			<td style="width:20%;">
+				<bo>{{ session.skill_match.skill.skill_name }}</bo>
+			</td>
+			<td style="width:60%;">
+				<bo>{{ session.start_time.date }}<bo>
+			</td>	
+		</tr>
+	</table>
+	<table style="width:100%;">
+
+		<tr>
+			<td style="width:25%;">
+				Session
+			</td>
+			<td style="width:25%;">
+				<b>Time Start</b>
+			</td>
+			<td style="width:25%;">
+				<b>Time End</b>
+			</td>
+			<td style="width:25%;">
+				<b>Call Duration</b>
+			</td>
+		</tr>
+		<tr class="spacer"></tr>
+
+		{% for call in calls %}
+			<tr>
+				<td style="width:25%;">
+					Call
+					{% if calls|length > 1  %}
+						 {{forloop.counter}}
+					{% endif  %}
+				</td>
+				<td style="width:25%;">
+					{{ call.start_time }}
+				</td>
+				<td style="width:25%;">
+					{{ call.end_time }}
+				</td>
+				<td style="width:25%;">
+					{{ call.call_duration }}
+				</td>
+			</tr>
+		{% endfor %}
+
+		<tr class="spacer"></tr>
+
+		{% if calls|length > 1  %}
+			<tr>
+				<td style="width:25%;">
+					<b>Total</b>
+				</td>
+				<td style="width:25%;">
+					
+				</td>
+				<td style="width:25%;">
+					
+				</td>
+				<td style="width:25%;">
+					<b>{{ session.total_duration }}</b>
+				</td>
+			</tr>
+		{% endif  %}
+	
+		<tr style="font-size:200%;">
+			<td style="width:25%;">
+				<b>Earning</b>
+			</td>
+			<td style="width:25%;">
+				<b>Rs. {{session.amount_to_teacher|floatformat:2 }}</b>
+			</td>
+		</tr>
+	</table>
+</body>

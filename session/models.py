@@ -37,6 +37,7 @@ class Session(BaseModel):
 	status = models.IntegerField(choices=CALLOPTIONS)
 	time_refund = models.DurationField(default=timedelta)
 	follow_up = models.BooleanField()
+	session_number = models.IntegerField(default=1)
 	total_calls = models.IntegerField(default=0)
 	total_duration = models.DurationField(default=timedelta)
 	minutes_duration = models.IntegerField(default=0)
@@ -48,7 +49,7 @@ class Session(BaseModel):
 	amount_from_student = models.FloatField(default=0)
 	balance_amount = models.FloatField(default=0)
 	def __str__(self):
-                return self.skill_match.skill.skill_name + " - " + self.skill_match.customer.customer_name + " - " + self.student.customer_name
+                return self.skill_match.skill.skill_name + " - " + self.skill_match.customer.customer_name + " - " + self.student.customer_name + " - Session" + str(self.session_number)
 
 	def calculateTeacherAmount(self, timeDuration):
 		timeSeconds = timeDuration.total_seconds()
@@ -80,7 +81,7 @@ class Session(BaseModel):
 		return cost
 
 	def save(self, *args, **kwargs):
-		calls = Call.objects.filter(belong_session = self)	
+		calls = Call.objects.filter(belong_session = self)
 		self.total_duration = timedelta()
 		self.total_calls = 0
 		self.start_time = timezone.now()
@@ -96,6 +97,13 @@ class Session(BaseModel):
 		self.amount_from_student = self.calculateStudentAmount(self.total_duration)
 		self.balance_amount = self.amount_from_student - self.money_refund
 		super(Session, self).save(*args, **kwargs)
+		sessions = Session.objects.filter(student = self.student).order_by('start_time')
+		print sessions
+		number = 1
+		for session in  sessions:
+			session.session_number = number
+			number += 1
+			super(Session, session).save(*args, **kwargs)
 		self.skill_match.save(*args, **kwargs)
 		self.student.save(*args, **kwargs)
 	def delete(self, *args, **kwargs):

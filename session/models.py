@@ -34,7 +34,7 @@ class Session(BaseModel):
 	objects = SessionQuerySet.as_manager()
 	skill_match = models.ForeignKey("customers.SkillMatch", default=None)
 	student = models.ForeignKey("customers.Customer", default=None)
-	status = models.IntegerField(choices=CALLOPTIONS)
+	status = models.IntegerField(choices=CALLOPTIONS, default=1)
 	time_refund = models.DurationField(default=timedelta)
 	follow_up = models.BooleanField()
 	session_number = models.IntegerField(default=1)
@@ -124,7 +124,7 @@ class Call(BaseModel):
 	start_time = models.DateTimeField()
 	end_time = models.DateTimeField()
 	belong_session = models.ForeignKey(Session, default=None)
-	status = models.IntegerField(choices=CALLOPTIONS)
+	status = models.IntegerField(choices=CALLOPTIONS, default=1)
 	follow_up = models.BooleanField()
 	call_duration = models.DurationField(default = timedelta)
 	#firstEntry = True;

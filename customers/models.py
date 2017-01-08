@@ -15,6 +15,7 @@ class Customer(BaseModel):
 	skype_id = models.CharField(max_length=200, blank = True)
 	gmail_id = models.CharField(max_length=200, blank = True)
 	paytm_id = models.CharField(max_length=200, blank = True)
+	phone_number = models.CharField(max_length=200, blank = True)
 	no_subjects = models.IntegerField(default=0)
 	wallet_amount = models.FloatField(default=0)
 	classes_taken = models.IntegerField(default=0)
@@ -54,8 +55,8 @@ class SkillMatch(BaseModel):
 	objects = SkillMatchQuerySet.as_manager()
 	skill = models.ForeignKey("proj.Skill", default=None)
 	customer = models.ForeignKey(Customer, default=None)
-	classes_given = models.IntegerField(default=0)
 	details = models.TextField(default="", blank = True)
+	classes_given = models.IntegerField(default=0)
 	def __str__(self):
                 return self.skill.skill_name + " - " + self.customer.customer_name
 	def save(self, *args, **kwargs):

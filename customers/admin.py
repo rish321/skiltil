@@ -4,12 +4,19 @@ from django.contrib import admin
 
 from .models import SkillMatch, Customer
 
-admin.site.register(SkillMatch)
+@admin.register(SkillMatch)
+class SkillMatchAdmin(admin.ModelAdmin):
+	raw_id_fields = ["skill", "customer"]
+	list_filter = ["skill__topic", "skill", "customer"]
+	list_display = ["skill", "customer", "classes_given"]
+	search_fields = ["skill__topic__topic_name", "skill__skill_name", "customer__customer_name"]
+	readonly_fields = ["classes_given"]
 
-#@admin.register(Customer)
-#class CustomerAdmin(admin.CustomerAdmin):
-#	model = Customer
-#	list_display = ['customer_name', 'skype_id', 'gmail_id', 'wallet_amount']
-#        search_fields = ['customer_name']
-#	#pass
-admin.site.register(Customer)
+@admin.register(Customer)
+class CustomerAdmin(admin.ModelAdmin):
+	list_display = ["customer_name", "skype_id", "gmail_id", "paytm_id", "phone_number", "no_subjects", "wallet_amount", "classes_taken", "classes_given"]
+	search_fields = ["customer_name", "skype_id", "gmail_id", "paytm_id", "phone_number"]
+	readonly_fields = ["no_subjects", "wallet_amount", "classes_taken", "classes_given"]
+
+#admin.site.register(SkillMatch)
+#admin.site.register(Customer)

@@ -43,6 +43,7 @@
                     dataType: 'html',
                     beforeSend: function () {
                         $('#loading').show();
+                        $('#page-content-wrapper').hide();
                     },
                     success: function (htmlReturned) {
                         $("#right__panel").html(htmlReturned);
@@ -51,6 +52,7 @@
                     },
                     complete: function () {
                         $('#loading').hide();
+                        $('#page-content-wrapper').show();
                     }
                 });
             });
@@ -67,6 +69,7 @@
                     beforeSend: function () {
                         //console.log(url);
                         $('#loading').show();
+                        $('#page-content-wrapper').hide();
                     },
                     success: function (htmlReturned) {
                         $("#left__panel").html(htmlReturned);
@@ -76,6 +79,7 @@
                         console.log("loaded first")
                         $(".preload-item-js").click();
                         $('#loading').hide();
+                        $('#page-content-wrapper').show();
                     }
                 });
             }
@@ -111,7 +115,7 @@
 
     <div class="container">
         <div id="loading"
-             style="position: absolute; z-index:3; width: 100%; height: 100%; background: url({% static "images/loading_icon.gif" %}) no-repeat center center;">
+             style="position: absolute; z-index:3; width: 100%; height: 100%; background: url({% static "images/loading_big.gif" %}) no-repeat center center;">
 
         </div>
         <div id="wrapper">

@@ -1,331 +1,215 @@
 {% extends "proj/base.html" %}
-	{% block title %} Learn from Home {% endblock %}	
-	{% block stylesheet %}
-		{% load static %}
-		<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
-		<link rel="stylesheet" type="text/css" href={% static "css/component.css" %} />
-
-		<script type="text/javascript">
-			$(document).ready(function() {
-				var query = $('#querya');
-				console.log(query)
-				//$("#spinner").hide();
-				var resultsa = $("#resultsa");
-				query.bind('input', function() {
-					//spinner.css('display', 'none');
-					q = query.val();
-					console.log(q)
-					console.log(q.length);
-					if(q.length > 0) {
-						//alert(q);
-						//$("#spinner").show()
-						$.ajax({
-						        url: '/skill/ajax_skill_search/',
-						        data: {
-							      'q': q
-					        	},
-							async: true,
-						        dataType: 'html',
-						        success: function (result) {
-								console.log("success");
-								console.log(resultsa);
-								console.log(result);
-								//$("#spinner").hide()
-								//alert(result);
-								//$(‘#results’).html('&nbsp;').load(data)
-								//spinner.hide()
-								resultsa.html( result );
-								//makeTableScroll();
-						        },
-							error: function(xhr,errmsg,err) {
-								console.log("error");
-								//$("#spinner").hide()
-								alert(errmsg);
-								//$('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+ " <a href='#' class='close'>&times;</a></div>");
-							}
-						});
-					 } else 
-						resultsa.html ("");
-				});
-			});
-		</script>
-
-	{% endblock %}
-	{% block body %}
-
-		<!--script>
-			(function(d, s, id) {
-				var js, fjs = d.getElementsByTagName(s)[0];
-				if (d.getElementById(id)) return;
-				js = d.createElement(s); js.id = id;
-				js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=1291723094225037";
-				fjs.parentNode.insertBefore(js, fjs);
-			}
-			(document, 'script', 'facebook-jssdk'));
-		</script-->
+{% block title %} Learn from Home {% endblock %}
+{% block stylesheet %}
+    {% load static %}
+    <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+    <!--link rel="stylesheet" type="text/css" href={% static "css/component.css" %} />
+		<link rel="stylesheet" type="text/css" href={% static "css/corousal-shape.css" %} /-->
+    <link rel="stylesheet" type="text/css" href={% static "css/search_expand.css" %}/>
+    <link rel="stylesheet" type="text/css" href={% static "css/simple-sidebar.css" %}/>
+    <link rel="stylesheet" type="text/css" href={% static "css/lin-style.css" %}/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src={% static "js/bootstrap.min.js" %}></script>
+    <script src={% static "js/jquery.js" %}></script>
 
 
-		<div id="video_play" class="overlay">
-                        <a href="javascript:void(0)" class="closebtn" onclick="closeVideoNav()">&times;</a>
-                        <div class="overlay-content">
-				<iframe width="100%" height="450px" text-align="center" vertical-align="middle" src="https://www.youtube.com/embed/nreOh6e3Kdg" frameborder="0" allowfullscreen></iframe>
-			</div>
-		</div>
+
+    <script type="text/javascript">
 
 
-		<div class="w3-display-container" id="myslideFrame" style="background-color: #EFEFEF;">
-			<!--<img class="mySlides" src={% static "images/1.jpeg" %} style="width:80%; margin:0 auto;">
-			<img class="mySlides" src={% static "images/2.jpeg" %} style="width:80%; margin:0 auto;">
-			<img class="mySlides" src={% static "images/3.jpeg" %} style="width:80%; margin:0 auto;">-->
-			<img class="mySlides" src={% static "images/6.png" %} style="width:80%; margin:0 auto;">
-			<a href=# onclick="popUpWin('contact?skill=Cashless%20Payments', 600, 420)" ><img class="mySlides" src={% static "images/5.jpeg" %} style="width:80%; margin:0 auto;"></a>
-			<div class="w3-center w3-sectin w3-large w3-text-white w3-display-bottommiddle" style="width:90%">
-				<div class="w3-left w3-padding-left  w3-text-blue w3-hover-indigo w3-hover-text-khaki" style="cursor:pointer;" onclick="plusDivs(-1)" >&#10094;</div>
-				<div class="w3-right w3-padding-right w3-text-blue w3-hover-indigo w3-hover-text-khaki" style="cursor:pointer;" onclick="plusDivs(1)" >&#10095;</div>
-				<!--span class="w3-badge demo w3-border w3-transparent w3-hover-teal" style="height:7px;cursor:pointer;" onclick="currentDiv(1)" ></span>
-				<span class="w3-badge demo w3-border w3-transparent w3-hover-teal" style="height:7px;cursor:pointer;" onclick="currentDiv(2)" ></span>
-				<span class="w3-badge demo w3-border w3-transparent w3-hover-teal" style="height:7px;cursor:pointer;" onclick="currentDiv(3)" ></span-->
-				<span class="w3-badge demo w3-border w3-transparent w3-hover-teal" style="height:7px;cursor:pointer;" onclick="currentDiv(1)" ></span>
-                                <span class="w3-badge demo w3-border w3-transparent w3-hover-teal" style="height:7px;cursor:pointer;" onclick="currentDiv(2)" ></span>
-			</div>
-		</div>
+        $(document).ready(function () {
+            $('#loading').hide();
 
-		<div class="main">
-			<div id="mi-slider" class="mi-slider">
-				{% if skill_list %}
-					{% for skills in skill_list %}
-  						<ul>
-							{% for skill in skills %}
-								<li>
-									<a href=# onclick="popUpWin('contact?skill={{ skill.skill_name }}', 600, 420)"; clicky.log('#contact?skill={{ skill.skill_name }}','contact?skill={{ skill.skill_name }}');  >
-										<img src="{% static "images/loading_icon.gif" %}" data-src="{{ skill.image_src }}" class="lazyload">
-										<h4>{{ skill.skill_name }}</h4>
+            var getMethod = "GET";
+            var query = $('#search_skiltil');
 
-										<table border="0" width="100%" style="margin: 0px;">
-											{% if skill.no_teachers > 0  %}
-											<tr>
-												<td>
-													Teachers available now:
-												</td>
-												<td style="text-align: right;width:5%">
-													{{ skill.no_teachers }}
-												</td>
-											</tr>
-											{% endif %}
-											{% if skill.classes_given > 0  %}
-											<tr>
-												<td>
-													Successful classes:
-												</td>
-												<td style="text-align: right;width:5%">
-													{{ skill.classes_given }}
-												</td>
-											</tr>
-											{% endif %}
-											<!--{% if skill.clicks > 0  %}
-											<tr>
-												<td>
-													People wanting to learn:
-												</td>
-												<td style="text-align: right;width:5%">
-													{{ skill.clicks }}
-												</td>
-											</tr>
-											{% endif %}-->
-										</table>
+            $(document).on("click", ".menu__item, .preload-item-js", function (e) {
+                //alert("here1");
+                //alert("here2");
+                $(".menu__item").css("background-color", "black");
+                $(this).css("background-color", "#FFEFFF");
+                var topic_id = e.target.id;
+                console.log(topic_id);
+                var sectionUrl = "/skills/" + topic_id;
+                if (topic_id == "")
+                    sectionUrl = "/skills/topic_id/" + e.target.name;
+                /*You can add a loader function here;*/
+                console.log(sectionUrl);
+                $.ajax({
+                    url: sectionUrl,
+                    data: {
+                        'q': query.val()
+                    },
+                    type: getMethod,
+                    async: true,
+                    dataType: 'html',
+                    beforeSend: function () {
+                        $('#loading').show();
+                    },
+                    success: function (htmlReturned) {
+                        $("#right__panel").html(htmlReturned);
+                        //alert("This will only be executed once");
+                        /* Remove Loader */
+                    },
+                    complete: function () {
+                        $('#loading').hide();
+                    }
+                });
+            });
 
-									</a></li>
-
-							{% endfor %}
-				    		</ul>
-					{% endfor %}
-				{% else %}
-					<p>There seems to be some problem.</p>
-				{% endif %}
-				<nav>
-					{% for skill_topic in skill_topic_list %}
-						<a href="#" clicky.log('#{{ skill_topic }}', '{{ skill_topic }}');>{{skill_topic}}</a>
-					{% endfor %}
-				</nav>
-			</div>
-		</div>
-
-		<div id="morphsearch" class="morphsearch">
-			<form class="morphsearch-form">
-				<input id="querya" class="morphsearch-input" type="search" placeholder="Search Skiltil..."/>
-				<button class="morphsearch-submit" type="submit">Search</button>
-			</form>
-			<div class="morphsearch-content">
-				<div class="dummy-column" id="resultsa">
-				</div>
-				
-			</div><!-- /morphsearch-content -->
-			<span class="morphsearch-close"></span>
-		</div>
+            function ajax_skill_topics() {
+                $.ajax({
+                    url: "/skill_topics/",
+                    type: getMethod,
+                    async: true,
+                    dataType: 'html',
+                    data: {
+                        'q': query.val()
+                    },
+                    beforeSend: function () {
+                        //console.log(url);
+                        $('#loading').show();
+                    },
+                    success: function (htmlReturned) {
+                        $("#left__panel").html(htmlReturned);
+                        //alert("This will only be executed once");
+                    },
+                    complete: function () {
+                        console.log("loaded first")
+                        $(".preload-item-js").click();
+                        $('#loading').hide();
+                    }
+                });
+            }
 
 
-		<script>
-			function popUpWin(url, width, height) {
-				var leftPosition, topPosition;
-				leftPosition = (window.screen.width / 2) - ((width / 2) + 10);
-				topPosition = (window.screen.height / 2) - ((height / 2) + 50);
-				window.open(url, "Window2",
-				"status=no,height=" + height + ",width=" + width + ",resizable=yes,left="
-				+ leftPosition + ",top=" + topPosition + ",screenX=" + leftPosition + ",screenY="
-				+ topPosition + ",toolbar=no,menubar=no,scrollbars=no,location=no,directories=no");
-			}
-		</script>
-
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-
-		<script src={% static "js/jquery.catslider.js" %}></script>
-
-		<script>
-			$(function() {
-				$( '#mi-slider' ).catslider();
-			});
-		</script>
-
-		<script>
-                        function openVideoNav() {
-                                document.getElementById("video_play").style.width = "100%";
-                        }
-                        function closeVideoNav() {
-                                document.getElementById("video_play").style.width = "0%";
-                        }
-			window.onload = openVideoNav;
-                </script>
-		
-		<script>
-			var slideIndex = 1;
-			openWindow();
-			function openWindow() {
-		                //var x = document.getElementsByClassName("mySlides");
-                		//var parent_elem = document.getElementById('myslideFrame')
-		                //var widthRatio = parseInt(parent_elem.offsetWidth) / parseInt(x[0].width)
-                		//for (i = 0; i < x.length; i++) {
-		                    // x[i].style.width = "100%";
-                		//    if (x[i].height > maxheight)
-				//	{
-                        	//		maxheight = x[i].height;
-                    		//	}
-                		//}
-		                //document.getElementById('myslideFrame').style.height = maxheight * widthRatio + "px";
-        		        showDivs(slideIndex);
-            		};
-			function plusDivs(n) {
-				pauseCarousel()
-				showDivs(slideIndex += n);
-			}
-			function currentDiv(n) {
-				pauseCarousel()
-				showDivs(slideIndex = n);
-			}
-			function showDivs(n) {
-				var i;
-				var x = document.getElementsByClassName("mySlides");
-				var dots = document.getElementsByClassName("demo");
-				if (n==undefined){n = ++slideIndex}
-				if (n > x.length) {slideIndex = 1}    
-				if (n < 1) {slideIndex = x.length}
-				for (i = 0; i < x.length; i++) {
-					x[i].style.display = "none";  
-				}
-				for (i = 0; i < dots.length; i++) {
-					dots[i].className = dots[i].className.replace(" w3-white", "");
-				}
-				x[slideIndex-1].style.display = "block";  
-				dots[slideIndex-1].className += " w3-white";
-				t = setTimeout(showDivs, 5000);
-			}
-			function pauseCarousel() {
-				clearTimeout(t)
-			}
-			function startCarousel() {
-				t = setTimeout(showDivs, 5000);
-			}
-		</script>
-		
+            console.log(query);
+            ajax_skill_topics();
+            query.bind('input', function () {
+                q = query.val();
+                console.log(q);
+                console.log(q.length);
+                if (q.length > 0) {
+                    $("#form-group").addClass("active");
+                } else {
+                    $("#form-group").removeClass("active");
+                }
+                ajax_skill_topics();
+            });
 
 
-		<!--script>
-			// This is called with the results from from FB.getLoginStatus().
-			function statusChangeCallback(response) {
-				console.log('statusChangeCallback');
-				console.log(response);
-				// The response object is returned with a status field that lets the
-				// app know the current login status of the person.
-				// Full docs on the response object can be found in the documentation
-				// for FB.getLoginStatus().
-				if (response.status === 'connected') {
-					// Logged into your app and Facebook.
-					testAPI();
-					window.alert(response.authResponse.accessToken);
-				} else if (response.status === 'not_authorized') {
-					// The person is logged into Facebook, but not your app.
-					document.getElementById('status').innerHTML = 'Please log ' +
-						'into this app.';
-					} else {
-						// The person is not logged into Facebook, so we're not sure if
-						// they are logged into this app or not.
-						document.getElementById('status').innerHTML = 'Please log ' +
-							'into Facebook.';
-					}
-				}
+        });
 
-				// This function is called when someone finishes with the Login
-				// Button.  See the onlogin handler attached to it in the sample
-				// code below.
-				function checkLoginState() {
-					FB.getLoginStatus(function(response) {
-						statusChangeCallback(response);
-					});
-				}
 
-				window.fbAsyncInit = function() {
-					FB.init({
-						appId      : '1291723094225037',
-						cookie     : true,  // enable cookies to allow the server to access the session
-						xfbml      : true,  // parse social plugins on this page
-						version    : 'v2.8' // use graph api version 2.8
-					});
 
-					// Now that we've initialized the JavaScript SDK, we call 
-					// FB.getLoginStatus().  This function gets the state of the
-					// person visiting this page and can return one of three states to
-					// the callback you provide.  They can be:
-					//
-					// 1. Logged into your app ('connected')
-					// 2. Logged into Facebook, but not your app ('not_authorized')
-					// 3. Not logged into Facebook and can't tell if they are logged into
-					//    your app or not.
-					//
-					// These three cases are handled in the callback function.
+    </script>
 
-					FB.getLoginStatus(function(response) {
-						statusChangeCallback(response);
-					});
+{% endblock %}
+{% block body %}
 
-				};
 
-				// Load the SDK asynchronously
-				(function(d, s, id) {
-					var js, fjs = d.getElementsByTagName(s)[0];
-					if (d.getElementById(id)) return;
-					js = d.createElement(s); js.id = id;
-					js.src = "//connect.facebook.net/en_US/sdk.js";
-					fjs.parentNode.insertBefore(js, fjs);
-				}(document, 'script', 'facebook-jssdk'));
 
-				// Here we run a very simple test of the Graph API after login is
-				// successful.  See statusChangeCallback() for when this call is made.
-				function testAPI() {
-					console.log('Welcome!  Fetching your information.... ');
-					FB.api('/me', function(response) {
-						console.log('Successful login for: ' + response.name);
-						document.getElementById('status').innerHTML =
-							'Thanks for logging in, ' + response.name + '!';
-						});
-				}
-		</script-->
-	{% endblock %}
+
+
+    <div class="container">
+        <div id="loading"
+             style="position: absolute; z-index:3; width: 100%; height: 100%; background: url({% static "images/loading_icon.gif" %}) no-repeat center center;">
+
+        </div>
+        <div id="wrapper">
+            <!-- Sidebar -->
+            <div id="sidebar-wrapper">
+                <ul class="sidebar-nav">
+                    <li class="sidebar-brand">
+                        <div class="row" style="margin:20px;">
+                            <form action="" class="search-form">
+                                <div class="form-group has-feedback" id="form-group">
+                                    <label for="search" class="sr-only">Search</label>
+                                    <input type="text" class="form-control" name="search" id="search_skiltil"
+                                           placeholder="Search Skiltil">
+                                    <span class="glyphicon glyphicon-search form-control-feedback"
+                                          style="margin-right:10px;"></span>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+                    <div id="left__panel">
+
+                    </div>
+                </ul>
+            </div>
+            <!-- /#sidebar-wrapper -->
+
+            <!-- Page Content -->
+            <div class="row">
+                <div id="page-content-wrapper">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xs-12" style="height:35px;">
+                                <div class="hidden-sm hidden-md hidden-lg hidden-xl">
+                                    <span class="glyphicon glyphicon-menu-hamburger" data-toggle="offcanvas"
+                                          id="menu-toggle" aria-hidden="true" style="cursor: pointer"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="container-fluid" id="right__panel">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function popUpWin(url, width, height) {
+
+            var leftPosition, topPosition;
+            leftPosition = (window.screen.width / 2) - ((width / 2) + 10);
+            topPosition = (window.screen.height / 2) - ((height / 2) + 50);
+
+            window.open(url, "Window2",
+                "status=no,height=" + height + ",width=" + width + ",resizable=yes,left="
+                + leftPosition + ",top=" + topPosition + ",screenX=" + leftPosition + ",screenY="
+                + topPosition + ",toolbar=no,menubar=no,scrollbars=yes,location=no,directories=no");
+        }
+    </script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+    <script>
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            var trigger = $('#menu-toggle'),
+
+                isClosed = false;
+
+            trigger.click(function () {
+                hamburger_cross();
+            });
+
+            function hamburger_cross() {
+
+                if (isClosed == true) {
+
+                    trigger.removeClass('is-open');
+                    trigger.addClass('is-closed');
+                    isClosed = false;
+                } else {
+
+                    trigger.removeClass('is-closed');
+                    trigger.addClass('is-open');
+                    isClosed = true;
+                }
+            }
+        });
+    </script>
+
+{% endblock %}

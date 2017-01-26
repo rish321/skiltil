@@ -1,0 +1,55 @@
+.lin {
+    display: inline-block;
+    padding-top: 15px;
+    margin-top: 10px;
+    // width: 20 %;
+    background: #444;
+    min-width: 20px;
+    border-radius: 15%;
+    max-height: 250px;
+    min-height: 250px;
+    max-width: 300px;
+}
+
+.lin a {
+    outline: none;
+    cursor: pointer;
+}
+
+.lin a, img {
+    display: block;
+    margin: 0 auto;
+}
+
+.lin td {
+    color: #ccc;
+    font-size: 10px;
+}
+
+.lin img {
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 150px;
+    width: 100%;
+    // border: none;
+    // border: 2 px solid blue;
+    border-radius: 20%;
+    // background-size: contain;
+}
+
+.lin h4 {
+    //display: inline-block;
+    font-family: Baskerville, "Baskerville Old Face", "Hoefler Text", Garamond, "Times New Roman", serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 18px;
+    padding: 0px 10px 0;
+    text-align: center;
+    color: #fff;
+    white-space:nowrap;
+    overflow:hidden;
+}
+
+.lin:hover {
+    opacity: 0.7;
+}

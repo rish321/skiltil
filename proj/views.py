@@ -18,46 +18,39 @@ from django.db.models import Q
 #import operator
 import traceback
 from django.db.models import F
+import re
 
 class SkillCount(object):
 	def __init__(self, skill_name, count):
-        	self.skill_name = skill_name
+		self.skill_name = skill_name
 		self.count = count
+
+class PreDefStrings(object):
+	def __init__(self, string, code):
+		self.string = string
+		self.code = code
+	def __str__(self):
+		return self.string
+
+PreDefTrending = PreDefStrings("Trending", "trending")
+PreDefNewArrival = PreDefStrings("New Arrivals", "new_arrivals")
+
+TRENDING = "Trending"
+NEW_ARRIVALS = "New Arrivals"
 
 def index(request):
 	try:
-		skill_topic_list = SkillTopic.objects.extra(order_by = ('-classes_given', '-clicks'))
-		skill_topics = []
-		skill_list = []
-		other_skill_list = []
-		orderskills = Skill.objects.extra(order_by = ('-classes_given','-no_teachers','-clicks'))[:20]
-		skill_topics.append("Trending")
-		skill_list.append(orderskills)
-		newArrivals = Skill.objects.extra(order_by = ('-created_date', 'clicks'))[:20]
-		skill_topics.append("New Arrivals")
-		skill_list.append(newArrivals)
-		for skillTopic in skill_topic_list:
-			skills = Skill.objects.filter(topic = skillTopic).extra(order_by = ('-classes_given','-no_teachers','-clicks'))
-			if len(skills) > 6:
-				skill_topics.append(skillTopic.topic_name)
-				skill_list.append(skills)
-			else:
-				if len(skills) > 0:
-					other_skill_list.extend(skills)
-		if len(other_skill_list) > 0:
-			skill_topics.append("Others")
-			other_skill_list1 = sorted(other_skill_list, key = lambda x: (x.classes_given, x.no_teachers, x.clicks), reverse = True)
-			skill_list.append(other_skill_list1)
 		template = loader.get_template('proj/index.html')
 		context = {
-			'skill_list': skill_list,
-			'skill_topic_list': skill_topics,
+			#'skill_list': skill_list,
+			#'skill_topic_list': skill_topics,
 		}
 		return HttpResponse(template.render(context, request))
 	except Exception as e:
 		print "exception caught"
 		print '%s (%s)' % (e.message, type(e))
 		traceback.print_exc(file=open("errlog.txt","a"))
+
 
 def contact(request):
 	try:
@@ -147,7 +140,7 @@ class CustomerSkill(object):
 
 def teachers(request):
         try:
-		customers = Customer.objects.filter(no_subjects__gt=0).extra(order_by = ('-no_subjects', '-classes_given'))
+		customers = Customer.objects.filter(no_subjects__gt=0).filter(classes_given__gt=0).extra(order_by = ('-no_subjects', '-classes_given'))
 		customerSkillList = []
 		for customer1 in customers:
 			customerSkill = CustomerSkill(customer1)
@@ -175,4 +168,117 @@ def ajax_skill_search( request ):
 		).order_by('-classes_given','-no_teachers','-clicks')
 		print results
 	        return render_to_response( 'proj/results_new.html', { 'results': results, } )
-	return HttpResponse("Here" + str(results))
+	return HttpResponse("Some error occurred")
+
+def ajax_skill_topics(request):
+	try:
+		q = request.GET.get('q')
+		# q = "f"
+		if q is None:
+			q = ""
+		skill_topic_list = SkillTopic.objects.extra(order_by=('-classes_given', '-clicks'))
+		skill_topics = []
+		# skill_list = []
+		other_skill_list = []
+		# orderskills = Skill.objects.extra(order_by = ('-classes_given','-no_teachers','-clicks'))[:20]
+		if len(q) <= 0:
+			skill_topics.append(PreDefTrending)
+		# skill_list.append(orderskills)
+		# newArrivals = Skill.objects.extra(order_by = ('-created_date', 'clicks'))[:20]
+		if len(q) <= 0:
+			skill_topics.append(PreDefNewArrival)
+		# skill_list.append(newArrivals)
+		for skillTopic in skill_topic_list:
+			skills = Skill.objects.filter(topic=skillTopic)
+			if re.search(q, skillTopic.topic_name, re.IGNORECASE) and len(skills) > 0:
+				skill_topics.append(skillTopic)
+			else:
+				skills = skills.filter(Q(skill_name__icontains=q))
+				if len(skills) > 0:
+					skill_topics.append(skillTopic)
+
+			# skill_list.append(skills)
+			# else:
+			#	if len(skills) > 0:
+			#		other_skill_list.extend(skills)
+			# if len(other_skill_list) > 0:
+			#	skill_topics.append("Others")
+			#	other_skill_list1 = sorted(other_skill_list, key = lambda x: (x.classes_given, x.no_teachers, x.clicks), reverse = True)
+			# skill_list.append(other_skill_list1)
+		template = loader.get_template('proj/results_main_list.html')
+		context = {
+			'skill_topic_list': skill_topics,
+		}
+		return HttpResponse(template.render(context, request))
+	except Exception as e:
+		print "exception caught"
+		print '%s (%s)' % (e.message, type(e))
+		traceback.print_exc(file=open("errlog.txt", "a"))
+
+def ajax_skills(request, skill_topic_id):
+	try:
+		q = request.GET.get('q')
+		if q is None:
+			q = ""
+		skillTopics = SkillTopic.objects.filter(id=skill_topic_id)
+		skillTopic = skillTopics[0]
+		if re.search(q, skillTopic.topic_name, re.IGNORECASE):
+			skills = Skill.objects.filter(topic__id=skill_topic_id).extra(
+				order_by=('-classes_given', '-no_teachers', '-clicks'))
+		else :
+			skills = Skill.objects.filter(topic__id=skill_topic_id).filter(Q(skill_name__icontains=q)).extra(
+				order_by=('-classes_given', '-no_teachers', '-clicks'))
+		if len(skills) > 0:
+			context, template = process_skill_list(skills)
+			return HttpResponse(template.render(context, request))
+		# return HttpResponse(call)
+		else:
+			return HttpResponse("Wrong skill topic")
+	except Exception as e:
+		print "exception caught"
+		print '%s (%s)' % (e.message, type(e))
+		traceback.print_exc(file=open("errlog.txt", "a"))
+
+
+def process_skill_list(skills):
+	skill_match_list = get_skill_match_list(skills)
+	template = loader.get_template('proj/results_skill_topic.html')
+	context = {
+		'skill_list': skills,
+		'skill_match_list': skill_match_list,
+	}
+	return context, template
+
+
+def get_skill_match_list(skills):
+	skill_match_list = []
+	for skil in skills:
+		skill_matches = SkillMatch.objects.filter(skill=skil)
+		skill_match_list.extend(skill_matches)
+	return skill_match_list
+
+
+def ajax_skills_predef(request, predef_name):
+	try:
+		#print predef_name
+		if predef_name.lower() == PreDefTrending.code.lower() :
+			orderskills = Skill.objects.extra(order_by=('-classes_given', '-no_teachers', '-clicks'))[:20]
+			if len(orderskills) > 0:
+				context, template = process_skill_list(orderskills)
+				return HttpResponse(template.render(context, request))
+			else:
+				return HttpResponse("Wrong topic")
+		elif predef_name.lower() == PreDefNewArrival.code.lower() :
+			newArrivals = Skill.objects.extra(order_by=('-created_date', 'clicks'))[:20]
+			if len(newArrivals) > 0:
+				context, template = process_skill_list(newArrivals)
+				return HttpResponse(template.render(context, request))
+			else:
+				return HttpResponse("Wrong topic")
+		# return HttpResponse(call)
+		else:
+			return HttpResponse("Wrong skill topic")
+	except Exception as e:
+		print "exception caught"
+		print '%s (%s)' % (e.message, type(e))
+		traceback.print_exc(file=open("errlog.txt", "a"))

@@ -1,0 +1,13 @@
+
+    {% for skill_topic in skill_topic_list %}
+        <li>
+            {% if forloop.counter == 1 %}
+                <a class="menu__item preload-item-js" style="background:lightgrey" id="{{ skill_topic.code }}"
+                   name="{{ skill_topic.id }}" href="#" clicky.log('#{{ skill_topic }}', '{{ skill_topic }}');>
+                {{ skill_topic }}</a>
+            {% else %}
+                <a class="menu__item" id="{{ skill_topic.code }}" name="{{ skill_topic.id }}" href="#" clicky.log('#
+                {{ skill_topic }}', '{{ skill_topic }}');>{{ skill_topic }}</a>
+            {% endif %}
+        </li>
+    {% endfor %}

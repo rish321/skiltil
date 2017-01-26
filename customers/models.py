@@ -10,8 +10,17 @@ from payment.models import Payment, Payout
 from django.utils.encoding import python_2_unicode_compatible
 from base.models import BaseModel
 
+GENDEROPTIONS = (
+	('f', 'Female'),
+	('m', 'Male'),
+    ('o', 'Other'),
+	('d', 'Decline to State'),
+)
+
 class Customer(BaseModel):
 	customer_name = models.CharField(max_length=200)
+	gender = models.CharField(max_length=1, choices=GENDEROPTIONS, default='d')
+	image = models.CharField(max_length=200, blank = True)
 	skype_id = models.CharField(max_length=200, blank = True)
 	gmail_id = models.CharField(max_length=200, blank = True)
 	paytm_id = models.CharField(max_length=200, blank = True)

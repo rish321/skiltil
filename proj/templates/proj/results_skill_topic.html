@@ -1,0 +1,94 @@
+{% load static %}
+<div class="container col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom:100px;">
+    {% if skill_match_list %}
+        {% if skill_match_list|length > 0 %}
+            <div class='row'>
+            <div class='col-md-offset-2 col-md-8'>
+                <div class="carousel slide" data-ride="carousel" id="quote-carousel">
+                    <!-- Carousel Slides / Quotes -->
+                    <div class="carousel-inner">
+                        <!-- Quote 1 -->
+                        {% for skill_match in skill_match_list %}
+                            {% if forloop.counter == 1 %}
+                                <div class="item active">
+                            {% else %}
+                                <div class="item">
+                            {% endif %}
+                        <blockquote style="border-left: 0px;">
+                            <div class="row">
+                                <div class="col-sm-3 text-center">
+                                    {% if skill_match.customer.gender == 'm' %}
+                                        <img class="img-circle lazyload" src="{% static "images/user.jpg" %}"
+                                             data-src="{{ skill_match.customer.image }}"
+                                             style="width: 100px;height:100px;">
+                                    {% elif skill_match.customer.gender == 'f' %}
+                                        <img class="img-circle lazyload" src="{% static "images/female-user.png" %}"
+                                             data-src="{{ skill_match.customer.image }}"
+                                             style="width: 100px;height:100px;">
+                                    {% else %}
+                                        <img class="img-circle lazyload" src="{% static "images/unkuser.png" %}"
+                                             data-src="{{ skill_match.customer.image }}"
+                                             style="width: 100px;height:100px;">
+                                    {% endif %}
+                                </div>
+                                <div class="col-sm-1">
+                                </div>
+                                <div class="col-sm-8">
+                                    <p>{{ skill_match.customer.customer_name }}</p>
+                                    <small>{{ skill_match.details }}</small>
+                                </div>
+                            </div>
+                        </blockquote>
+                        </div>
+                        {% endfor %}
+                        </div>
+                        <!-- Carousel Buttons Next/Prev -->
+                        {% if skill_match_list|length > 1 %}
+                            <a data-slide="prev" href="#quote-carousel" class="left carousel-control"
+                               style="width:0%"><i class="glyphicon glyphicon-chevron-left"></i></a>
+                            <a data-slide="next" href="#quote-carousel" class="right carousel-control" style="width:0%"><i
+                                    class="glyphicon glyphicon-chevron-right"></i></a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endif %}
+
+    {% if skill_list %}
+        {% for skill in skill_list %}
+            <!--div class="mi-slider"><ul-->
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <div class="lin col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <a href=# onclick="popUpWin('contact?skill={{ skill.skill_name }}', 600, 420)" ; clicky.log('#contact?skill={{ skill.skill_name }}','contact?skill={{ skill.skill_name }}');
+                    >
+                    <img src="{% static "images/loading_icon.gif" %}" data-src="{{ skill.image_src }}"
+                         class="lazyload"></img>
+                    <h4>{{ skill.skill_name }}</h4>
+                    <table border="0" width="100%" style="margin: 0px;">
+                        {% if skill.no_teachers > 0 %}
+                            <tr>
+                                <td>
+                                    Teachers on-board:
+                                </td>
+                                <td style="text-align: right;width:5%">
+                                    {{ skill.no_teachers }}
+                                </td>
+                            </tr>
+                        {% endif %}
+                        {% if skill.classes_given > 0 %}
+                            <tr>
+                                <td>
+                                    Successful classes:
+                                </td>
+                                <td style="text-align: right;width:5%">
+                                    {{ skill.classes_given }}
+                                </td>
+                            </tr>
+                        {% endif %}
+                    </table>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+    </div>

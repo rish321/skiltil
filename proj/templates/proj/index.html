@@ -9,8 +9,6 @@
     <link rel="stylesheet" type="text/css" href={% static "css/simple-sidebar.css" %}/>
     <link rel="stylesheet" type="text/css" href={% static "css/lin-style.css" %}/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src={% static "js/bootstrap.min.js" %}></script>
-    <script src={% static "js/jquery.js" %}></script>
 
 
 
@@ -27,7 +25,7 @@
                 //alert("here1");
                 //alert("here2");
                 $(".menu__item").css("background-color", "black");
-                $(this).css("background-color", "#FFEFFF");
+                $(this).css("background-color", "#f7f9e5");
                 var topic_id = e.target.id;
                 console.log(topic_id);
                 var sectionUrl = "/skills/" + topic_id;

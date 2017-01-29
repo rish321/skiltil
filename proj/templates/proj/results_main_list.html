@@ -3,10 +3,10 @@
         <li>
             {% if forloop.counter == 1 %}
                 <a class="menu__item preload-item-js" style="background:lightgrey" id="{{ skill_topic.code }}"
-                   name="{{ skill_topic.id }}" href="#" clicky.log('#{{ skill_topic }}', '{{ skill_topic }}');>
+                   name="{{ skill_topic.topic_code }}" href="#" clicky.log('#{{ skill_topic }}', '{{ skill_topic }}');>
                 {{ skill_topic }}</a>
             {% else %}
-                <a class="menu__item" id="{{ skill_topic.code }}" name="{{ skill_topic.id }}" href="#" clicky.log('#
+                <a class="menu__item" id="{{ skill_topic.code }}" name="{{ skill_topic.topic_code }}" href="#" clicky.log('#
                 {{ skill_topic }}', '{{ skill_topic }}');>{{ skill_topic }}</a>
             {% endif %}
         </li>

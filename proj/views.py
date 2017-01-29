@@ -52,18 +52,19 @@ def index(request):
 		traceback.print_exc(file=open("errlog.txt","a"))
 
 
-def contact(request):
+def contact(request, skill_code):
 	try:
-		skillName = request.GET.get('skill', '')
-		data = {'skill': skillName}
+		data = {'skill': ""}
 		form_class = ContactForm(initial=data)
 	
 
 		#print skillName
-		skills = Skill.objects.filter(skill_name = skillName)
+		skills = Skill.objects.filter(skill_code = skill_code)
 		if len(skills) > 0:
 			skill = skills[0]
-			Skill.objects.filter(skill_name = skillName).update(clicks=skill.clicks+1)
+			data = {'skill': skill.skill_name}
+			form_class = ContactForm(initial=data)
+			Skill.objects.filter(skill_name = skill.skill_name).update(clicks=skill.clicks+1)
 			SkillTopic.objects.filter(topic_name = skill.topic).update(clicks=F('clicks') + 1)
 	
 
@@ -215,18 +216,18 @@ def ajax_skill_topics(request):
 		print '%s (%s)' % (e.message, type(e))
 		traceback.print_exc(file=open("errlog.txt", "a"))
 
-def ajax_skills(request, skill_topic_id):
+def ajax_skills(request, skill_topic_code):
 	try:
 		q = request.GET.get('q')
 		if q is None:
 			q = ""
-		skillTopics = SkillTopic.objects.filter(id=skill_topic_id)
+		skillTopics = SkillTopic.objects.filter(topic_code=skill_topic_code)
 		skillTopic = skillTopics[0]
 		if re.search(q, skillTopic.topic_name, re.IGNORECASE):
-			skills = Skill.objects.filter(topic__id=skill_topic_id).extra(
+			skills = Skill.objects.filter(topic__topic_code=skill_topic_code).extra(
 				order_by=('-classes_given', '-no_teachers', '-clicks'))
 		else :
-			skills = Skill.objects.filter(topic__id=skill_topic_id).filter(Q(skill_name__icontains=q)).extra(
+			skills = Skill.objects.filter(topic__topic_code=skill_topic_code).filter(Q(skill_name__icontains=q)).extra(
 				order_by=('-classes_given', '-no_teachers', '-clicks'))
 		if len(skills) > 0:
 			context, template = process_skill_list(skills)

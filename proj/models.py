@@ -31,15 +31,43 @@ class CustomerRequest(BaseModel):
 
 
 
+def findVal(name):
+	splits = name.split()
+	first_name = ""
+	last_name = ""
+	if len(splits) > 0:
+		first_name = splits[0]
+	if len(splits) > 1:
+		last_name = splits[1]
+	val = "{0}{1}".format(first_name, last_name).lower()
+	return val
+
 
 class SkillTopic(BaseModel):
 	topic_name = models.CharField(max_length=200)
+	topic_code = models.CharField(max_length=200, default="")
 	clicks = models.IntegerField(default=0)
 	classes_given = models.IntegerField(default=0)
 	def __str__(self):
-	        return self.topic_name
+	    return self.topic_name
+
+	def generate_code(self, topic_name):
+		val = findVal(topic_name)
+		if SkillTopic.objects.filter(topic_code=val).count() != 0:
+			x = 2
+			while True:
+				val = "{0}{1}".format(val, x)
+				if SkillTopic.objects.filter(topic_code=val).count() == 0:
+					break
+				x += 1
+				if x > 10000000:
+					raise Exception("Name is super popular!")
+		return ''.join(e for e in val if e.isalnum())
+
 	def save(self, *args, **kwargs):
 		skills = Skill.objects.filter(topic = self)
+		if len(self.topic_code) == 0:
+			self.topic_code = self.generate_code(self.topic_name)
 		self.clicks = 0
 		self.classes_given = 0
 		for skill in skills:
@@ -54,18 +82,38 @@ class SkillQuerySet(models.QuerySet):
 		obj.delete(*args, **kwargs)
         super(SkillQuerySet, self).delete(*args, **kwargs)
 
+
+
+
 class Skill(BaseModel):
 	objects = SkillQuerySet.as_manager()
 	skill_name = models.CharField(max_length=200)
 	topic = models.ForeignKey(SkillTopic, default=None)
 	image_src = models.CharField(max_length=200, blank = True)
 	details = models.TextField(default="", blank = True)
+	skill_code = models.CharField(max_length=200, default="")
 	clicks = models.IntegerField(default=0)
 	classes_given = models.IntegerField(default=0)
 	no_teachers = models.IntegerField(default=0)
 	def __str__(self):
         	return self.skill_name + " - " + self.topic.topic_name
+
+	def generate_code(self, skill_name):
+		val = findVal(skill_name)
+		if Skill.objects.filter(skill_code=val).count() != 0:
+			x = 2
+			while True:
+				val = "{0}{1}".format(val, x)
+				if Skill.objects.filter(skill_code=val).count() == 0:
+					break
+				x += 1
+				if x > 10000000:
+					raise Exception("Name is super popular!")
+		return ''.join(e for e in val if e.isalnum())
+
 	def save(self, *args, **kwargs):
+		if len(self.skill_code) == 0:
+			self.skill_code = self.generate_code(self.skill_name)
 		self.classes_given = 0
 		skillMatches = SkillMatch.objects.filter(skill = self)
 		self.no_teachers = len(skillMatches)

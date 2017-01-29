@@ -2,83 +2,74 @@
 {% block title %} {{ skill.skill_name }} {% endblock %}
 {% block stylesheet %}
     {% load static %}
-    <style>
-        #id_contact_name {
-            width: 100%;
-            margin-bottom: 10px;
-            color: #555;
-        }
+    <link rel="stylesheet" type="text/css" href={% static "css/contact-form.css" %}/>
 
-        #id_contact_phone {
-            width: 100%;
-            margin-bottom: 10px;
-        }
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#loading').hide();
+        });
 
-        #id_contact_email {
-            width: 100%;
-            margin-bottom: 10px;
-        }
-
-        #id_skill {
-            width: 100%;
-            margin-bottom: 10px;
-        }
-
-        #id_preferred_communication_time {
-            width: 100%;
-            margin-bottom: 10px;
-        }
-
-        #id_content {
-            width: 100%;
-            margin-bottom: 10px;
-        }
-    </style>
+        $('#contact_form').submit(function () {
+            $('#loading').show();
+        });
+    </script>
 {% endblock %}
 
 {% block body %}
 
-    <div width=100% style="text-align:center; margin-top:20px;">
-        <img src="{{ skill.image_src }}" style="border-radius:10%;" height="100" width="130">
-        <h4>{{ skill.skill_name }}</h4>
-    </div>
+    <div class="container">
 
-    <div style="margin-left:10px; margin-right:10px">
-        {{ skill.details|linebreaksbr }}
-    </div>
-    <div style="margin-left:10px; margin-right:10px; margin-top:20px; margin-bottom:50px;text-align:center;">
-        <h4>To proceed,please fill your information. We'll get back to you.
+        <div id="loading"
+             style="position: absolute; z-index:3; width: 100%; height: 100%; background: url({% static "images/loading_big.gif" %}) no-repeat center center;">
 
-        </h4>
-        <form role="form" action="" method="post" style="text-align:center;">
-            {% csrf_token %}
-            <!--{{ form.as_p }}-->
+        </div>
 
-            <table style="width:100%;">
-                {% for field in form %}
-                    <tbody>
-                    <tr>
-                        <td>
-                            <label for="{{ field.label }}"
-                                   style="display:inline-block;vertical-align:middle;color:#33A">{{ field.label_tag }}</label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            {{ field }}
-                        </td>
-                    </tr>
-                    </tbody>
-                {% endfor %}
-            </table>
+        <div width=100% style="text-align:center; margin-top:20px;">
+            <img src="{{ skill.image_src }}" style="border-radius:10%;" height="100" width="130">
+            <h4>{{ skill.skill_name }}</h4>
+        </div>
 
-            <div style="text-align:center">
-                <button type="submit" style="width: 100px; height: 30px; margin-top:20px;">Submit</button>
-            </div>
-            <h4>
-                Or <span style="cursor:pointer;" onclick="openContactNav()"><u>Contact Us</u></span> directly.
+        <div style="margin-left:10px; margin-right:10px">
+            {{ skill.details|linebreaksbr }}
+        </div>
+
+
+        <div style="margin-left:10px; margin-right:10px; margin-top:20px; margin-bottom:50px;text-align:center;">
+            <h4>To proceed,please fill your information. We'll get back to you.
+
             </h4>
-        </form>
+            <form role="form" action="" method="post" id="contact_form" style="text-align:center;">
+                {% csrf_token %}
+                <!--{{ form.as_p }}-->
+
+                <table style="width:100%;">
+                    {% for field in form %}
+                        <tbody>
+                        <tr>
+                            <td>
+                                <label for="{{ field.label }}"
+                                       style="display:inline-block;vertical-align:middle;color:#33A">{{ field.label_tag }}</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                {{ field }}
+                            </td>
+                        </tr>
+                        </tbody>
+                    {% endfor %}
+                </table>
+
+                <div style="text-align:center">
+                    <button type="submit" style="width: 100px; height: 30px; margin-top:20px;">Submit</button>
+                </div>
+
+                <h4>
+                    Or <span style="cursor:pointer;" onclick="openContactNav()"><u>Contact Us</u></span> directly.
+                </h4>
+            </form>
+        </div>
+
     </div>
 
 {% endblock %}

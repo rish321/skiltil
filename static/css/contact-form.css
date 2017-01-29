@@ -1,0 +1,31 @@
+
+#id_contact_name {
+    width: 100%;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+#id_contact_phone {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#id_contact_email {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#id_skill {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#id_preferred_communication_time {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#id_content {
+    width: 100%;
+    margin-bottom: 10px;
+}

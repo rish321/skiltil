@@ -31,18 +31,6 @@ class CustomerRequest(BaseModel):
 
 
 
-def findVal(name):
-	splits = name.split()
-	first_name = ""
-	last_name = ""
-	if len(splits) > 0:
-		first_name = splits[0]
-	if len(splits) > 1:
-		last_name = splits[1]
-	val = "{0}{1}".format(first_name, last_name).lower()
-	return val
-
-
 class SkillTopic(BaseModel):
 	topic_name = models.CharField(max_length=200)
 	topic_code = models.CharField(max_length=200, default="")
@@ -52,7 +40,7 @@ class SkillTopic(BaseModel):
 	    return self.topic_name
 
 	def generate_code(self, topic_name):
-		val = findVal(topic_name)
+		val = BaseModel.findVal(topic_name)
 		if SkillTopic.objects.filter(topic_code=val).count() != 0:
 			x = 2
 			while True:
@@ -99,7 +87,7 @@ class Skill(BaseModel):
         	return self.skill_name + " - " + self.topic.topic_name
 
 	def generate_code(self, skill_name):
-		val = findVal(skill_name)
+		val = BaseModel.findVal(skill_name)
 		if Skill.objects.filter(skill_code=val).count() != 0:
 			x = 2
 			while True:

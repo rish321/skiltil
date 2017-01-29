@@ -2,6 +2,7 @@
 
 # Create your views here.
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 
 from django.template import loader
 from .models import Skill, SkillTopic, CustomerRequest
@@ -84,7 +85,7 @@ def contact(request, skill_code):
 	            		contact_email = request.POST.get(
         	        		'contact_email'
 	        	    	, '')
-	            		skill = request.POST.get(
+	            		skill_entered = request.POST.get(
         	        		'skill'
 				, '')
 				preferred_communication_time = request.POST.get(
@@ -92,12 +93,12 @@ def contact(request, skill_code):
         	                , '')
 
         		form_content = request.POST.get('content', '')
-			customerRequest = CustomerRequest(contact_name=contact_name, contact_phone=contact_phone, contact_email=contact_email, skill=skill, preferred_communication_time=preferred_communication_time, content=form_content, default_skill=skillName)
+			customerRequest = CustomerRequest(contact_name=contact_name, contact_phone=contact_phone, contact_email=contact_email, skill=skill_entered, preferred_communication_time=preferred_communication_time, content=form_content, default_skill=skill.skill_name)
 			customerRequest.save()
 	
         	    	template = get_template('proj/contact_template.txt')
             		context = Context({
-				'skill_name': skillName,
+				'skill_name': skill.skill_name,
 	                	'contact_name': contact_name,
 				'contact_phone': contact_phone,
 	        	        'contact_email': contact_email,
@@ -120,8 +121,13 @@ def contact(request, skill_code):
 	            	)
         	    	email.send()
             		#return redirect('contact')
-			return HttpResponse('<script type="text/javascript">window.close(); window.parent.location.href = "/";</script>')
-
+			#return HttpResponse('<script type="text/javascript">window.close(); window.parent.location.href = "/";</script>')
+			#return HttpResponse('<script>'
+			#					'$("#alert-success").show();'
+			#					'alert("Success! Thanks for your interest. We\'ll get back to you.");'
+			#					'window.close(); window.parent.location.href = "/";'
+			#					'</script>')
+			return HttpResponseRedirect('/thanks/')
 		return render(request, 'proj/contact.html', {
 
 			
@@ -158,6 +164,8 @@ def teachers(request):
                 print '%s (%s)' % (e.message, type(e))
                 traceback.print_exc(file=open("errlog.txt","a"))
 
+def thanks(request):
+	return render_to_response( 'proj/thanks.html')
 
 def ajax_skill_search( request ):
 	results = []

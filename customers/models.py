@@ -25,13 +25,28 @@ class Customer(BaseModel):
 	gmail_id = models.CharField(max_length=200, blank = True)
 	paytm_id = models.CharField(max_length=200, blank = True)
 	phone_number = models.CharField(max_length=200, blank = True)
+	customer_code = models.CharField(max_length=200, default="")
 	no_subjects = models.IntegerField(default=0)
 	wallet_amount = models.FloatField(default=0)
 	classes_taken = models.IntegerField(default=0)
 	classes_given = models.IntegerField(default=0)
 	def __str__(self):
                 return self.customer_name
+	def generate_code(self, customer_name):
+		val = BaseModel.findVal(customer_name)
+		if Customer.objects.filter(customer_code=val).count() != 0:
+			x = 2
+			while True:
+				val = "{0}{1}".format(val, x)
+				if Customer.objects.filter(customer_code=val).count() == 0:
+					break
+				x += 1
+				if x > 10000000:
+					raise Exception("Name is super popular!")
+		return ''.join(e for e in val if e.isalnum())
 	def save(self, *args, **kwargs):
+		if len(self.customer_code) == 0:
+			self.customer_code = self.generate_code(self.customer_name)
 		self.wallet_amount = 0
 		sessions = Session.objects.filter(student = self)
 		for session in sessions:

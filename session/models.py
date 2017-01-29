@@ -46,6 +46,7 @@ class SessionQuerySet(models.QuerySet):
 
 class Session(BaseModel):
 	objects = SessionQuerySet.as_manager()
+	order_id = models.CharField(max_length=20, default="")
 	skill_match = models.ForeignKey("customers.SkillMatch", default=None)
 	student = models.ForeignKey("customers.Customer", default=None)
 	status = models.IntegerField(choices=CALLOPTIONS, default=1)
@@ -100,6 +101,7 @@ class Session(BaseModel):
 
 	def save(self, *args, **kwargs):
 		calls = Call.objects.filter(belong_session = self)
+		self.order_id = hex(self.id + 100000).split('x')[1].upper()
 		self.total_duration = timedelta()
 		self.total_calls = 0
 		self.start_time = timezone.now()

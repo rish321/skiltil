@@ -10,6 +10,7 @@ urlpatterns = [
 	#url(r'^contact/$', views.contact, name='contact'),
 	url(r'^contact/(.*)/$', views.contact, name='contact'),
 	url(r'^teachers/', views.teachers, name='teachers'),
+	url(r'^thanks/', views.thanks, name='thanks'),
 	url(r'^skill/', views.ajax_skill_search, name='ajax_skill_search'),
 	url(r'^skills/topic/(.*)/$', views.ajax_skills, name='ajax_skills'),
 	url(r'^skill_topics/$', views.ajax_skill_topics, name='ajax_skill_topics'),

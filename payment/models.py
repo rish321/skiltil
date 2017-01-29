@@ -1,11 +1,19 @@
 from __future__ import unicode_literals
 
 from django.db import models
-#from customers.models import Customer
+# from customers.models import Customer
 from django.utils import timezone
 from base.models import BaseModel
 
+
 # Create your models here.
+
+PAYMENTMODECHOICES = (
+    ("paytm", "Paytm"),
+    ("account", "Account Transfer"),
+    ("cash", "Cash"),
+    ("other", "Others"),
+)
 
 class PaymentQuerySet(models.QuerySet):
     def delete(self, *args, **kwargs):
@@ -15,21 +23,26 @@ class PaymentQuerySet(models.QuerySet):
 
 
 class Payment(BaseModel):
-	objects = PaymentQuerySet.as_manager()
-        customer = models.ForeignKey("customers.Customer", default=None)
-        amount = models.FloatField(default=0)
-        time = models.DateTimeField(default=timezone.now)
-        def __str__(self):
-                return self.customer.customer_name + " - " + str(self.amount) + " - " + str(self.time)
-	def save(self, *args, **kwargs):
-                #self.customer.wallet_amount += self.amount
-                #super(Customer, self.customer).save(*args, **kwargs)
-                super(Payment, self).save(*args, **kwargs)
-		self.customer.save(*args, **kwargs)
-	def delete(self, *args, **kwargs):
-		customer = self.customer
-		super(Payment, self).delete(*args, **kwargs)
-		customer.save(*args, **kwargs)
+    objects = PaymentQuerySet.as_manager()
+    customer = models.ForeignKey("customers.Customer", default=None)
+    amount = models.FloatField(default=0)
+    time = models.DateTimeField(default=timezone.now)
+    mode = models.CharField(max_length=20, choices=PAYMENTMODECHOICES, default="paytm")
+    transaction_id = models.CharField(max_length=50, default="", blank=True)
+    def __str__(self):
+        return self.customer.customer_name + " - " + str(self.amount) + " - " + str(self.time)
+
+    def save(self, *args, **kwargs):
+        # self.customer.wallet_amount += self.amount
+        # super(Customer, self.customer).save(*args, **kwargs)
+        super(Payment, self).save(*args, **kwargs)
+        self.customer.save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        customer = self.customer
+        super(Payment, self).delete(*args, **kwargs)
+        customer.save(*args, **kwargs)
+
 
 class PayoutQuerySet(models.QuerySet):
     def delete(self, *args, **kwargs):
@@ -39,18 +52,23 @@ class PayoutQuerySet(models.QuerySet):
 
 
 class Payout(BaseModel):
-	objects = PayoutQuerySet.as_manager()
-        customer = models.ForeignKey("customers.Customer", default=None)
-        amount = models.FloatField(default=0)
-        time = models.DateTimeField(default=timezone.now)
-        def __str__(self):
-                return self.customer.customer_name + " - " + str(self.amount) + " - " + str(self.time)
-	def save(self, *args, **kwargs):
-                #self.customer.wallet_amount -= self.amount
-                #super(Customer, self.customer).save(*args, **kwargs)
-                super(Payout, self).save(*args, **kwargs)
-		self.customer.save(*args, **kwargs)
-	def delete(self, *args, **kwargs):
-		customer = self.customer
-		super(Payout, self).delete(*args, **kwargs)
-		customer.save(*args, **kwargs)
+    objects = PayoutQuerySet.as_manager()
+    customer = models.ForeignKey("customers.Customer", default=None)
+    amount = models.FloatField(default=0)
+    time = models.DateTimeField(default=timezone.now)
+    mode = models.CharField(max_length=20, choices=PAYMENTMODECHOICES, default="paytm")
+    transaction_id = models.CharField(max_length=50, default="", blank=True)
+
+    def __str__(self):
+        return self.customer.customer_name + " - " + str(self.amount) + " - " + str(self.time)
+
+    def save(self, *args, **kwargs):
+        # self.customer.wallet_amount -= self.amount
+        # super(Customer, self.customer).save(*args, **kwargs)
+        super(Payout, self).save(*args, **kwargs)
+        self.customer.save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        customer = self.customer
+        super(Payout, self).delete(*args, **kwargs)
+        customer.save(*args, **kwargs)

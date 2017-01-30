@@ -101,7 +101,6 @@ class Session(BaseModel):
 
 	def save(self, *args, **kwargs):
 		calls = Call.objects.filter(belong_session = self)
-		self.order_id = hex(self.id + 100000).split('x')[1].upper()
 		self.total_duration = timedelta()
 		self.total_calls = 0
 		self.start_time = timezone.now()
@@ -116,6 +115,8 @@ class Session(BaseModel):
 		self.money_refund = self.calculateStudentAmount(self.time_refund)
 		self.amount_from_student = self.calculateStudentAmount(self.total_duration)
 		self.balance_amount = self.amount_from_student - self.money_refund
+		super(Session, self).save(*args, **kwargs)
+		self.order_id = hex(self.id + 100000).split('x')[1].upper()
 		super(Session, self).save(*args, **kwargs)
 		sessions = Session.objects.filter(student = self.student).filter(skill_match__skill = self.skill_match.skill).order_by('start_time')
 		print sessions

@@ -17,39 +17,37 @@ import logging
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '=swlc(#&pqqdr^$3kumc_ul4+072x(57(2g#jzd)6g7viws6$g'
+SECRET_KEY = os.getenv('SECRET_KEY', "RAVEN SECRET KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', True)
 
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
 INSTALLED_APPS = [
-	'proj.apps.ProjConfig',
-	'customers.apps.CustomersConfig',
-	'session.apps.SessionConfig',
-	'payment.apps.PaymentConfig',
-	'base.apps.BaseConfig',
-	#'material',
-        #'material.frontend',
-        #'material.admin',
-	'django.contrib.admin',
-	'django.contrib.auth',
-	'django.contrib.contenttypes',
-	'django.contrib.sessions',
-	'django.contrib.messages',
-	'django.contrib.staticfiles',
+    'proj.apps.ProjConfig',
+    'customers.apps.CustomersConfig',
+    'session.apps.SessionConfig',
+    'payment.apps.PaymentConfig',
+    'base.apps.BaseConfig',
+    # 'material',
+    # 'material.frontend',
+    # 'material.admin',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
     'social.apps.django_app.default',
-	'raven.contrib.django.raven_compat',
-	'analytical',
+    'raven.contrib.django.raven_compat',
+    'analytical',
 ]
 
 MIDDLEWARE = [
@@ -61,6 +59,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'social.apps.django_app.middleware.SocialAuthExceptionMiddleware',
+    #'proj.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'projectX.urls'
@@ -85,28 +84,31 @@ TEMPLATES = [
 ]
 
 AUTHENTICATION_BACKENDS = (
-    ('django.contrib.auth.backends.ModelBackend'),
+    'django.contrib.auth.backends.ModelBackend',
     'social.backends.facebook.FacebookOAuth2',
     'social.backends.google.GoogleOAuth2',
 )
 
-WSGI_APPLICATION = 'projectX.wsgi.application'
 
+WSGI_APPLICATION = 'projectX.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
-
+DATABASE_NAME = os.getenv('DATABASE_NAME', 'MY DB NAME')
+DATABASE_USER = os.getenv('DATABASE_USER', 'MY DB USER')
+DATABASE_PASSWORD = os.getenv('DATABASE_PASSWORD', 'MY DB PASSWORD')
+DATABASE_HOST = os.getenv('DATABASE_HOST', 'MY HOST')
+DATABASE_PORT = os.getenv('DATABASE_PORT', 'MY PORT')
 DATABASES = {
     'default': {
-	'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'projectX',
-        'USER': 'rishabh',
-        'PASSWORD': 'rishabh321',
-        'HOST': 'localhost',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': DATABASE_NAME,
+        'USER': DATABASE_USER,
+        'PASSWORD': DATABASE_PASSWORD,
+        'HOST': DATABASE_HOST,
+        'PORT': DATABASE_PORT,
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -126,7 +128,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
@@ -140,14 +141,13 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-	os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, "static"),
 ]
 
 SOCIAL_AUTH_PIPELINE = (
@@ -163,47 +163,47 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.user.user_details',
 )
 
-#AUTH_USER_MODEL = 'customers.Customer'
-#SOCIAL_AUTH_USER_MODEL = 'customers.Customer'
+# AUTH_USER_MODEL = 'customers.Customer'
+# SOCIAL_AUTH_USER_MODEL = 'customers.Customer'
 
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = 'index'
 
 SOCIAL_AUTH_CLEAN_USERNAMES = True
+#SOCIAL_AUTH_RAISE_EXCEPTIONS = False
 
-
-SOCIAL_AUTH_FACEBOOK_KEY = "1291723094225037"
-SOCIAL_AUTH_FACEBOOK_SECRET = "53bb6c281e65d1f6a1255fb2c92a3dee"
-SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+SOCIAL_AUTH_FACEBOOK_KEY = os.getenv('SOCIAL_AUTH_FACEBOOK_KEY', "MY SOCIAL AUTH FACEBOOK KEY")
+SOCIAL_AUTH_FACEBOOK_SECRET = os.getenv('SOCIAL_AUTH_FACEBOOK_SECRET', "MY SOCIAL AUTH FACEBOOK SECRET")
+SOCIAL_AUTH_FACEBOOK_SCOPE = []
 SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
-    'fields': 'id,name,email,gender,link,age_range,',
+    'fields': 'id,name,email,gender,link,',
 }
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '863940487694-enr4digdlj451hr0dlondrjke5ar9h45.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '9VHRqu6ldRRcpl_jLqIOzYk5'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.getenv('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY', 'MY SOCIAL AUTH GOOGLE OAUTH2 KEY')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.getenv('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET', 'MY SOCIAL AUTH FACEBOOK SECRET')
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_FILE_PATH = '~/Documents/app-messages' 
-DEFAULT_FROM_EMAIL = 'help_skiltil@gmail.com'
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'Skiltil'
-EMAIL_HOST_PASSWORD = 'skilil19987'
-#EMAIL_USE_TLS = False 
-EMAIL_PORT = 587
+EMAIL_FILE_PATH = '~/Documents/app-messages'
+DEFAULT_FROM_EMAIL = os.getenv('EMAIL_SENDER', 'MY EMAIL SENDER')
+EMAIL_HOST = os.getenv('EMAIL_PROVIDER', 'MY EMAIL PROVIDER')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'MY EMAIL HOST USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', 'MY EMAIL HOST PASSWORD')
+# EMAIL_USE_TLS = False
+EMAIL_PORT = os.getenv('EMAIL_PORT', 587)
 EMAIL_USE_TLS = True
 
-#CLICKY_SITE_ID = '101008337'
+# CLICKY_SITE_ID = '101008337'
 
-#RAVEN_CONFIG = {
+# RAVEN_CONFIG = {
 #	'dsn': 'https://41ec5e53e81f42a98a8c5f2de541fa94:c6e43498554a440f8cff16cc95a83417@sentry.io/119904',
 #	# If you are using git, you can also automatically configure the
 #	# release based on the git info.
 #	'release': raven.fetch_git_sha(os.path.dirname(os.pardir)),
-#}
+# }
 
-#logger = logging.getLogger("sentry.errors")
-#handler = logging.StreamHandler()
-#formatter = logging.Formatter("[%(levelname)s] %(name)s: %(message)s")
-#handler.setFormatter(formatter)
-#logger.addHandler(handler)
+# logger = logging.getLogger("sentry.errors")
+# handler = logging.StreamHandler()
+# formatter = logging.Formatter("[%(levelname)s] %(name)s: %(message)s")
+# handler.setFormatter(formatter)
+# logger.addHandler(handler)

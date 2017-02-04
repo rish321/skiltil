@@ -22,10 +22,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '=swlc(#&pqqdr^$3kumc_ul4+072x(57(2g#jzd)6g7viws6$g'
+SECRET_KEY = os.getenv('SECRET_KEY', "=swlc(#&pqqdr^$3kumc_ul4+072x(57(2g#jzd)6g7viws6$g")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', False)
 
 ALLOWED_HOSTS = ['*']
 
@@ -85,7 +85,7 @@ TEMPLATES = [
 ]
 
 AUTHENTICATION_BACKENDS = (
-    ('django.contrib.auth.backends.ModelBackend'),
+    'django.contrib.auth.backends.ModelBackend',
     'social.backends.facebook.FacebookOAuth2',
     'social.backends.google.GoogleOAuth2',
 )
@@ -95,15 +95,19 @@ WSGI_APPLICATION = 'projectX.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
-
+DATABASE_NAME = os.getenv('DATABASE_NAME', 'projectX')
+DATABASE_USER = os.getenv('DATABASE_USER', 'rishabh')
+DATABASE_PASSWORD = os.getenv('DATABASE_PASSWORD', 'rishabh321')
+DATABASE_HOST = os.getenv('DATABASE_HOST', 'localhost')
+DATABASE_PORT = os.getenv('DATABASE_PORT', '')
 DATABASES = {
     'default': {
 	'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'projectX',
-        'USER': 'rishabh',
-        'PASSWORD': 'rishabh321',
-        'HOST': 'localhost',
-        'PORT': '',
+        'NAME': DATABASE_NAME,
+        'USER': DATABASE_USER,
+        'PASSWORD': DATABASE_PASSWORD,
+        'HOST': DATABASE_HOST,
+        'PORT': DATABASE_PORT,
     }
 }
 
@@ -173,20 +177,20 @@ LOGIN_REDIRECT_URL = 'index'
 SOCIAL_AUTH_CLEAN_USERNAMES = True
 
 
-SOCIAL_AUTH_FACEBOOK_KEY = "1291723094225037"
-SOCIAL_AUTH_FACEBOOK_SECRET = "53bb6c281e65d1f6a1255fb2c92a3dee"
+SOCIAL_AUTH_FACEBOOK_KEY = os.getenv('SOCIAL_AUTH_FACEBOOK_KEY', "1291723094225037")
+SOCIAL_AUTH_FACEBOOK_SECRET = os.getenv('SOCIAL_AUTH_FACEBOOK_SECRET', "53bb6c281e65d1f6a1255fb2c92a3dee")
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '863940487694-enr4digdlj451hr0dlondrjke5ar9h45.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '9VHRqu6ldRRcpl_jLqIOzYk5'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.getenv('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY', '863940487694-enr4digdlj451hr0dlondrjke5ar9h45.apps.googleusercontent.com')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.getenv('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET', '9VHRqu6ldRRcpl_jLqIOzYk5')
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_FILE_PATH = '~/Documents/app-messages' 
-DEFAULT_FROM_EMAIL = 'help_skiltil@gmail.com'
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'Skiltil'
-EMAIL_HOST_PASSWORD = 'skilil19987'
+DEFAULT_FROM_EMAIL = os.getenv('DATABASE_PORT', 'help_skiltil@gmail.com')
+EMAIL_HOST = os.getenv('EMAIL_HOST', 'smtp.sendgrid.net')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'Skiltil')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', 'skilil19987')
 #EMAIL_USE_TLS = False 
-EMAIL_PORT = 587
+EMAIL_PORT = os.getenv('EMAIL_PORT', 587)
 EMAIL_USE_TLS = True
 
 #CLICKY_SITE_ID = '101008337'

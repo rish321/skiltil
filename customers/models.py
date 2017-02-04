@@ -10,7 +10,7 @@ from payment.models import Payment, Payout
 from django.utils.encoding import python_2_unicode_compatible
 from base.models import BaseModel
 
-from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import User
 
 GENDEROPTIONS = (
 	('f', 'Female'),
@@ -19,7 +19,7 @@ GENDEROPTIONS = (
 	('d', 'Decline to State'),
 )
 
-class Customer(BaseModel, AbstractBaseUser):
+class Customer(BaseModel):
 	customer_name = models.CharField(max_length=200)
 	gender = models.CharField(max_length=1, choices=GENDEROPTIONS, default='d')
 	image = models.CharField(max_length=200, blank = True)
@@ -28,13 +28,13 @@ class Customer(BaseModel, AbstractBaseUser):
 	paytm_id = models.CharField(max_length=200, blank = True)
 	phone_number = models.CharField(max_length=200, blank = True)
 	user_name = models.CharField(max_length=200, default="")
-	email = models.CharField(max_length=200, default="", unique=True)
+	email = models.CharField(max_length=200, default="", blank = True)
 	no_subjects = models.IntegerField(default=0)
 	wallet_amount = models.FloatField(default=0)
 	classes_taken = models.IntegerField(default=0)
 	classes_given = models.IntegerField(default=0)
 
-	USERNAME_FIELD = 'email'
+	#USERNAME_FIELD = 'email'
 
 
 	def __str__(self):

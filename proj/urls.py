@@ -8,6 +8,7 @@ from django.views.generic.base import RedirectView
 
 
 urlpatterns = [
+	url('', include('django.contrib.auth.urls', namespace='auth')),
 	url(r'^$', views.index, name='index'),
 	#url(r'^contact/$', views.contact, name='contact'),
 	url(r'^contact/(.*)/$', views.contact, name='contact'),
@@ -21,6 +22,6 @@ urlpatterns = [
 
 	url(r'^login/$', auth_views.login, name='login'),
 	url(r'^logout/$', auth_views.logout, name='logout'),
-	url(r'^oauth/login/google/', include('social.apps.django_app.urls', namespace='social')),
+	#lurl(r'^oauth/login/google/', include('social.apps.django_app.urls', namespace='social')),
 	url(r'^oauth/', include('social.apps.django_app.urls', namespace='social')),
 ]

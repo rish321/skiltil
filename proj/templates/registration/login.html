@@ -3,27 +3,57 @@
 {% block stylesheet %}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.min.css"
           rel="stylesheet">
+
+    <script type="text/javascript">
+
+
+        /*$(document).ready(function () {
+            var is_authenticated = {{ request.user.is_authenticated|yesno:"true,false" }};
+            if (is_authenticated) {
+                $('#login-container').hide();
+                $('#logout-container').show();
+            } else {
+                $('#login-container').show();
+                $('#logout-container').hide();
+            }
+        });*/
+
+    </script>
 {% endblock %}
 
 {% block body %}
     <div class="container" style="max-width:80%; text-align: center; padding-top: 50px;">
-        <div class="container hidden-xs" style="width: 350px;">
-            <h3>Login With</h3>
-            <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-block btn-lg btn-social btn-facebook" style="margin-top: 20px;">
-                <span class="fa fa-facebook"></span> Login with Facebook
-            </a>
-            <a href="{% url 'social:begin' 'google' %}" class="btn btn-block btn-lg btn-social btn-google" style="margin-top: 20px;">
-                <span class="fa fa-google"></span> Login with Google
-            </a>
-        </div>
-        <div class="container visible-xs" style="width: 250px;">
-            <h3>Login With</h3>
-            <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-block btn-social btn-facebook" style="margin-top: 10px;">
-                <span class="fa fa-facebook"></span> Login with Facebook
-            </a>
-            <a href="{% url 'social:begin' 'google' %}" class="btn btn-block btn-social btn-google" style="margin-top: 10px;">
-                <span class="fa fa-google"></span> Login with Google
-            </a>
-        </div>
+        {% if request.user.is_authenticated %}
+            <div id="logout-container">
+                <a href="{% url 'auth:logout' %}?next={{ request.path }}" class="btn btn-info btn-lg">
+                    <span class="glyphicon glyphicon-log-out"></span> Logout
+                </a>
+            </div>
+        {% else %}
+            <div id="login-container">
+                <div class="container hidden-xs" style="width: 350px;">
+                    <h3>Login With</h3>
+                    <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}"
+                       class="btn btn-block btn-lg btn-social btn-facebook" style="margin-top: 20px;">
+                        <span class="fa fa-facebook"></span> Login with Facebook
+                    </a>
+                    <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}"
+                       class="btn btn-block btn-lg btn-social btn-google" style="margin-top: 20px;">
+                        <span class="fa fa-google"></span> Login with Google
+                    </a>
+                </div>
+                <div class="container visible-xs" style="width: 250px;">
+                    <h3>Login With</h3>
+                    <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}"
+                       class="btn btn-block btn-social btn-facebook" style="margin-top: 10px;">
+                        <span class="fa fa-facebook"></span> Login with Facebook
+                    </a>
+                    <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}"
+                       class="btn btn-block btn-social btn-google" style="margin-top: 10px;">
+                        <span class="fa fa-google"></span> Login with Google
+                    </a>
+                </div>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}

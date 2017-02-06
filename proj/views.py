@@ -20,6 +20,9 @@ from django.db.models import Q
 import traceback
 from django.db.models import F
 import re
+from django.contrib.auth import logout as auth_logout
+
+from django.contrib.auth import authenticate
 
 class SkillCount(object):
 	def __init__(self, skill_name, count):
@@ -57,7 +60,7 @@ def contact(request, skill_code):
 	try:
 		data = {'skill': ""}
 		form_class = ContactForm(initial=data)
-	
+
 
 		#print skillName
 		skills = Skill.objects.filter(skill_code = skill_code)
@@ -67,13 +70,13 @@ def contact(request, skill_code):
 			form_class = ContactForm(initial=data)
 			Skill.objects.filter(skill_name = skill.skill_name).update(clicks=skill.clicks+1)
 			SkillTopic.objects.filter(topic_name = skill.topic).update(clicks=F('clicks') + 1)
-	
+
 
 		# new logic!
 		if request.method == 'POST':
 	        	form = ContactForm(data=request.POST)
 
-			
+
 
 	        	if form.is_valid():
         	    		contact_name = request.POST.get(
@@ -95,7 +98,7 @@ def contact(request, skill_code):
         		form_content = request.POST.get('content', '')
 			customerRequest = CustomerRequest(contact_name=contact_name, contact_phone=contact_phone, contact_email=contact_email, skill=skill_entered, preferred_communication_time=preferred_communication_time, content=form_content, default_skill=skill.skill_name)
 			customerRequest.save()
-	
+
         	    	template = get_template('proj/contact_template.txt')
             		context = Context({
 				'skill_name': skill.skill_name,
@@ -107,8 +110,8 @@ def contact(request, skill_code):
 	        	        'form_content': form_content,
         	    	})
 	        	content = template.render(context)
-            	
-			# Email the profile with the 
+
+			# Email the profile with the
         	    	# contact information
 
 
@@ -130,7 +133,7 @@ def contact(request, skill_code):
 			return HttpResponseRedirect('/thanks/')
 		return render(request, 'proj/contact.html', {
 
-			
+
 			'form': form_class,
 			'skill': skill,
 		})
@@ -143,7 +146,7 @@ class CustomerSkill(object):
         def __init__(self, customer):
                 self.customer = customer
 		self.skillMatchs = []
-                
+
 
 def teachers(request):
         try:
@@ -171,8 +174,8 @@ def ajax_skill_search( request ):
 	results = []
         q = request.GET.get( 'q' )
 	print q
-        if q is not None:            
-	        results = Skill.objects.filter( 
+        if q is not None:
+	        results = Skill.objects.filter(
 	               	Q( skill_name__icontains = q ) | Q( topic__topic_name__icontains = q )
 		).order_by('-classes_given','-no_teachers','-clicks')
 		print results
@@ -291,3 +294,10 @@ def ajax_skills_predef(request, predef_name):
 		print "exception caught"
 		print '%s (%s)' % (e.message, type(e))
 		traceback.print_exc(file=open("errlog.txt", "a"))
+
+#def login(request):
+
+
+#def logout(request):
+#    auth_logout(request)
+#    return redirect('/')

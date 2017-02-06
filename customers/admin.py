@@ -14,6 +14,7 @@ class SkillMatchAdmin(admin.ModelAdmin):
 
 @admin.register(Customer)
 class CustomerAdmin(admin.ModelAdmin):
+	raw_id_fields = ["social"]
 	list_display = ["user_name", "customer_name", "skype_id", "gmail_id", "paytm_id", "phone_number", "no_subjects", "wallet_amount", "classes_taken", "classes_given"]
 	search_fields = ["user_name", "customer_name", "skype_id", "gmail_id", "paytm_id", "phone_number"]
 	readonly_fields = ["user_name", "no_subjects", "wallet_amount", "classes_taken", "classes_given"]

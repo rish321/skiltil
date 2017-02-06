@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',
     'social.apps.django_app.default',
     'raven.contrib.django.raven_compat',
     'analytical',
@@ -59,7 +60,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'social.apps.django_app.middleware.SocialAuthExceptionMiddleware',
-    #'proj.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'projectX.urls'
@@ -84,7 +84,7 @@ TEMPLATES = [
 ]
 
 AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',
+    ('django.contrib.auth.backends.ModelBackend'),
     'social.backends.facebook.FacebookOAuth2',
     'social.backends.google.GoogleOAuth2',
 )
@@ -156,6 +156,7 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.auth_allowed',
     'social_core.pipeline.social_auth.social_user',
     'social_core.pipeline.user.get_username',
+    'social_core.pipeline.social_auth.associate_by_email',
     'social_core.pipeline.user.create_user',
     'proj.save_profile.save_profile',  # <--- set the path to the function
     'social_core.pipeline.social_auth.associate_user',
@@ -166,18 +167,19 @@ SOCIAL_AUTH_PIPELINE = (
 # AUTH_USER_MODEL = 'customers.Customer'
 # SOCIAL_AUTH_USER_MODEL = 'customers.Customer'
 
-LOGIN_URL = 'login'
-LOGOUT_URL = 'logout'
-LOGIN_REDIRECT_URL = 'index'
+LOGIN_URL = '/login'
+LOGOUT_URL = '/logout'
+LOGIN_REDIRECT_URL = '/'
+#SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
 
 SOCIAL_AUTH_CLEAN_USERNAMES = True
 #SOCIAL_AUTH_RAISE_EXCEPTIONS = False
 
 SOCIAL_AUTH_FACEBOOK_KEY = os.getenv('SOCIAL_AUTH_FACEBOOK_KEY', "MY SOCIAL AUTH FACEBOOK KEY")
 SOCIAL_AUTH_FACEBOOK_SECRET = os.getenv('SOCIAL_AUTH_FACEBOOK_SECRET', "MY SOCIAL AUTH FACEBOOK SECRET")
-SOCIAL_AUTH_FACEBOOK_SCOPE = []
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
-    'fields': 'id,name,email,gender,link,',
+    'fields': 'id,name,email,gender,link',
 }
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.getenv('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY', 'MY SOCIAL AUTH GOOGLE OAUTH2 KEY')

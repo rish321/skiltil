@@ -20,9 +20,13 @@ from django.db.models import Q
 import traceback
 from django.db.models import F
 import re
-from django.contrib.auth import logout as auth_logout
+#from django.contrib.auth import logout as auth_logout
 
-from django.contrib.auth import authenticate
+#from django.contrib.auth import authenticate
+
+#from django.contrib.auth.signals import user_logged_in
+
+#from django.contrib.auth.models import User
 
 class SkillCount(object):
 	def __init__(self, skill_name, count):
@@ -42,8 +46,17 @@ PreDefNewArrival = PreDefStrings("New Arrivals", "new_arrivals")
 TRENDING = "Trending"
 NEW_ARRIVALS = "New Arrivals"
 
+#USER = User()
+
+#def update_user(sender, user, **kwargs):
+#	USER = user
+#user_logged_in.connect(update_user)
+
 def index(request):
 	try:
+		#print USER._meta
+		#request["user"] = USER
+
 		template = loader.get_template('proj/index.html')
 		context = {
 			#'skill_list': skill_list,

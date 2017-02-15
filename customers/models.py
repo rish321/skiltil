@@ -19,12 +19,13 @@ GENDEROPTIONS = (
 
 class Customer(BaseModel):
 	customer_name = models.CharField(max_length=200)
+	email = models.CharField(max_length=200, blank=True)
+	phone_number = models.CharField(max_length=200, blank=True)
 	gender = models.CharField(max_length=1, choices=GENDEROPTIONS, default='d')
 	image = models.CharField(max_length=200, blank = True)
 	skype_id = models.CharField(max_length=200, blank = True)
 	gmail_id = models.CharField(max_length=200, blank = True)
 	paytm_id = models.CharField(max_length=200, blank = True)
-	phone_number = models.CharField(max_length=200, blank = True)
 	customer_code = models.CharField(max_length=200, default="")
 	no_subjects = models.IntegerField(default=0)
 	wallet_amount = models.FloatField(default=0)

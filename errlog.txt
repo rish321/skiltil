@@ -4120,3 +4120,45 @@ Traceback (most recent call last):
   File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/social_core/utils.py", line 256, in wrapper
     raise AuthCanceled(args[0], response=err.response)
 AuthCanceled: Authentication process canceled
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 48, in index
+    username = request.POST["username"]
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/utils/datastructures.py", line 85, in __getitem__
+    raise MultiValueDictKeyError(repr(key))
+MultiValueDictKeyError: "'username'"
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 48, in index
+    username = request.POST.get["username"]
+TypeError: 'instancemethod' object has no attribute '__getitem__'
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 47, in index
+    print request.user._meta.get_fields()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/utils/functional.py", line 235, in inner
+    return func(self._wrapped, *args)
+AttributeError: 'AnonymousUser' object has no attribute '_meta'
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 47, in index
+    print request.user._meta.get_fields()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/utils/functional.py", line 235, in inner
+    return func(self._wrapped, *args)
+AttributeError: 'AnonymousUser' object has no attribute '_meta'
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 47, in index
+    print request.user._meta.get_fields()
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/utils/functional.py", line 235, in inner
+    return func(self._wrapped, *args)
+AttributeError: 'AnonymousUser' object has no attribute '_meta'
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/proj/views.py", line 66, in index
+    return render(request, template, context)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/shortcuts.py", line 30, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader.py", line 67, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/Users/rishabh/projectX/projectXenv/lib/python2.7/site-packages/django/template/loader.py", line 25, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+TemplateDoesNotExist: <django.template.backends.django.Template object at 0x10d984890>
+Traceback (most recent call last):
+  File "/Users/rishabh/projectX/session/views.py", line 51, in call_invoice_student
+    email.attach_alternative(html)
+TypeError: attach_alternative() takes exactly 3 arguments (2 given)

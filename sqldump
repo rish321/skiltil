@@ -1,0 +1,2873 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.6.1
+-- Dumped by pg_dump version 9.6.1
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: auth_group; Type: TABLE; Schema: public; Owner: rishabh
+--
+
+CREATE TABLE auth_group (
+    id integer NOT NULL,
+    name character varying(80) NOT NULL
+);
+
+
+ALTER TABLE auth_group OWNER TO rishabh;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE; Schema: public; Owner: rishabh
+--
+
+CREATE SEQUENCE auth_group_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE auth_group_id_seq OWNER TO rishabh;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rishabh
+--
+
+ALTER SEQUENCE auth_group_id_seq OWNED BY auth_group.id;
+
+
+--
+-- Name: auth_group_permissions; Type: TABLE; Schema: public; Owner: rishabh
+--
+
+CREATE TABLE auth_group_permissions (
+    id integer NOT NULL,
+    group_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE auth_group_permissions OWNER TO rishabh;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: rishabh
+--
+
+CREATE SEQUENCE auth_group_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE auth_group_permissions_id_seq OWNER TO rishabh;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rishabh
+--
+
+ALTER SEQUENCE auth_group_permissions_id_seq OWNED BY auth_group_permissions.id;
+
+
+--
+-- Name: auth_permission; Type: TABLE; Schema: public; Owner: rishabh
+--
+
+CREATE TABLE auth_permission (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    content_type_id integer NOT NULL,
+    codename character varying(100) NOT NULL
+);
+
+
+ALTER TABLE auth_permission OWNER TO rishabh;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE; Schema: public; Owner: rishabh
+--
+
+CREATE SEQUENCE auth_permission_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE auth_permission_id_seq OWNER TO rishabh;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rishabh
+--
+
+ALTER SEQUENCE auth_permission_id_seq OWNED BY auth_permission.id;
+
+
+--
+-- Name: auth_user; Type: TABLE; Schema: public; Owner: rishabh
+--
+
+CREATE TABLE auth_user (
+    id integer NOT NULL,
+    password character varying(128) NOT NULL,
+    last_login timestamp with time zone,
+    is_superuser boolean NOT NULL,
+    username character varying(150) NOT NULL,
+    first_name character varying(30) NOT NULL,
+    last_name character varying(30) NOT NULL,
+    email character varying(254) NOT NULL,
+    is_staff boolean NOT NULL,
+    is_active boolean NOT NULL,
+    date_joined timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE auth_user OWNER TO rishabh;
+
+--
+-- Name: auth_user_groups; Type: TABLE; Schema: public; Owner: rishabh
+--
+
+CREATE TABLE auth_user_groups (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    group_id integer NOT NULL
+);
+
+
+ALTER TABLE auth_user_groups OWNER TO rishabh;
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: rishabh
+--
+
+CREATE SEQUENCE auth_user_groups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE auth_user_groups_id_seq OWNER TO rishabh;
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rishabh
+--
+
+ALTER SEQUENCE auth_user_groups_id_seq OWNED BY auth_user_groups.id;
+
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE; Schema: public; Owner: rishabh
+--
+
+CREATE SEQUENCE auth_user_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE auth_user_id_seq OWNER TO rishabh;
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rishabh
+--
+
+ALTER SEQUENCE auth_user_id_seq OWNED BY auth_user.id;
+
+
+--
+-- Name: auth_user_user_permissions; Type: TABLE; Schema: public; Owner: rishabh
+--
+
+CREATE TABLE auth_user_user_permissions (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE auth_user_user_permissions OWNER TO rishabh;
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: rishabh
+--
+
+CREATE SEQUENCE auth_user_user_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE auth_user_user_permissions_id_seq OWNER TO rishabh;
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rishabh
+--
+
+ALTER SEQUENCE auth_user_user_permissions_id_seq OWNED BY auth_user_user_permissions.id;
+
+
+--
+-- Name: customers_customer; Type: TABLE; Schema: public; Owner: rishabh
+--
+
+CREATE TABLE customers_customer (
+    id integer NOT NULL,
+    customer_name character varying(200) NOT NULL,
+    skype_id character varying(200) NOT NULL,
+    gmail_id character varying(200) NOT NULL,
+    wallet_amount double precision NOT NULL,
+    classes_taken integer NOT NULL,
+    classes_given integer NOT NULL,
+    paytm_id character varying(200) NOT NULL,
+    no_subjects integer NOT NULL,
+    created_date timestamp with time zone NOT NULL,
+    modified_date timestamp with time zone NOT NULL,
+    phone_number character varying(200) NOT NULL,
+    gender character varying(1) NOT NULL,
+    image character varying(200) NOT NULL,
+    email character varying(200) NOT NULL,
+    user_name character varying(200) NOT NULL,
+    social_id integer
+);
+
+
+ALTER TABLE customers_customer OWNER TO rishabh;
+
+--
+-- Name: customers_customer_id_seq; Type: SEQUENCE; Schema: public; Owner: rishabh
+--
+
+CREATE SEQUENCE customers_customer_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE customers_customer_id_seq OWNER TO rishabh;
+
+--
+-- Name: customers_customer_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rishabh
+--
+
+ALTER SEQUENCE customers_customer_id_seq OWNED BY customers_customer.id;
+
+
+--
+-- Name: customers_skillmatch; Type: TABLE; Schema: public; Owner: rishabh
+--
+
+CREATE TABLE customers_skillmatch (
+    id integer NOT NULL,
+    customer_id integer NOT NULL,
+    skill_id integer NOT NULL,
+    classes_given integer NOT NULL,
+    details text NOT NULL,
+    created_date timestamp with time zone NOT NULL,
+    modified_date timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE customers_skillmatch OWNER TO rishabh;
+
+--
+-- Name: customers_skillmatch_id_seq; Type: SEQUENCE; Schema: public; Owner: rishabh
+--
+
+CREATE SEQUENCE customers_skillmatch_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE customers_skillmatch_id_seq OWNER TO rishabh;
+
+--
+-- Name: customers_skillmatch_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rishabh
+--
+
+ALTER SEQUENCE customers_skillmatch_id_seq OWNED BY customers_skillmatch.id;
+
+
+--
+-- Name: django_admin_log; Type: TABLE; Schema: public; Owner: rishabh
+--
+
+CREATE TABLE django_admin_log (
+    id integer NOT NULL,
+    action_time timestamp with time zone NOT NULL,
+    object_id text,
+    object_repr character varying(200) NOT NULL,
+    action_flag smallint NOT NULL,
+    change_message text NOT NULL,
+    content_type_id integer,
+    user_id integer NOT NULL,
+    CONSTRAINT django_admin_log_action_flag_check CHECK ((action_flag >= 0))
+);
+
+
+ALTER TABLE django_admin_log OWNER TO rishabh;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE; Schema: public; Owner: rishabh
+--
+
+CREATE SEQUENCE django_admin_log_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE django_admin_log_id_seq OWNER TO rishabh;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rishabh
+--
+
+ALTER SEQUENCE django_admin_log_id_seq OWNED BY django_admin_log.id;
+
+
+--
+-- Name: django_content_type; Type: TABLE; Schema: public; Owner: rishabh
+--
+
+CREATE TABLE django_content_type (
+    id integer NOT NULL,
+    app_label character varying(100) NOT NULL,
+    model character varying(100) NOT NULL
+);
+
+
+ALTER TABLE django_content_type OWNER TO rishabh;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE; Schema: public; Owner: rishabh
+--
+
+CREATE SEQUENCE django_content_type_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE django_content_type_id_seq OWNER TO rishabh;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rishabh
+--
+
+ALTER SEQUENCE django_content_type_id_seq OWNED BY django_content_type.id;
+
+
+--
+-- Name: django_migrations; Type: TABLE; Schema: public; Owner: rishabh
+--
+
+CREATE TABLE django_migrations (
+    id integer NOT NULL,
+    app character varying(255) NOT NULL,
+    name character varying(255) NOT NULL,
+    applied timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE django_migrations OWNER TO rishabh;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: rishabh
+--
+
+CREATE SEQUENCE django_migrations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE django_migrations_id_seq OWNER TO rishabh;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rishabh
+--
+
+ALTER SEQUENCE django_migrations_id_seq OWNED BY django_migrations.id;
+
+
+--
+-- Name: django_session; Type: TABLE; Schema: public; Owner: rishabh
+--
+
+CREATE TABLE django_session (
+    session_key character varying(40) NOT NULL,
+    session_data text NOT NULL,
+    expire_date timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE django_session OWNER TO rishabh;
+
+--
+-- Name: payment_payment; Type: TABLE; Schema: public; Owner: rishabh
+--
+
+CREATE TABLE payment_payment (
+    id integer NOT NULL,
+    amount double precision NOT NULL,
+    "time" timestamp with time zone NOT NULL,
+    customer_id integer NOT NULL,
+    created_date timestamp with time zone NOT NULL,
+    modified_date timestamp with time zone NOT NULL,
+    mode character varying(20) NOT NULL,
+    transaction_id character varying(50) NOT NULL
+);
+
+
+ALTER TABLE payment_payment OWNER TO rishabh;
+
+--
+-- Name: payment_payment_id_seq; Type: SEQUENCE; Schema: public; Owner: rishabh
+--
+
+CREATE SEQUENCE payment_payment_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE payment_payment_id_seq OWNER TO rishabh;
+
+--
+-- Name: payment_payment_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rishabh
+--
+
+ALTER SEQUENCE payment_payment_id_seq OWNED BY payment_payment.id;
+
+
+--
+-- Name: payment_payout; Type: TABLE; Schema: public; Owner: rishabh
+--
+
+CREATE TABLE payment_payout (
+    id integer NOT NULL,
+    amount double precision NOT NULL,
+    "time" timestamp with time zone NOT NULL,
+    customer_id integer NOT NULL,
+    created_date timestamp with time zone NOT NULL,
+    modified_date timestamp with time zone NOT NULL,
+    mode character varying(20) NOT NULL,
+    transaction_id character varying(50) NOT NULL
+);
+
+
+ALTER TABLE payment_payout OWNER TO rishabh;
+
+--
+-- Name: payment_payout_id_seq; Type: SEQUENCE; Schema: public; Owner: rishabh
+--
+
+CREATE SEQUENCE payment_payout_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE payment_payout_id_seq OWNER TO rishabh;
+
+--
+-- Name: payment_payout_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rishabh
+--
+
+ALTER SEQUENCE payment_payout_id_seq OWNED BY payment_payout.id;
+
+
+--
+-- Name: proj_customerrequest; Type: TABLE; Schema: public; Owner: rishabh
+--
+
+CREATE TABLE proj_customerrequest (
+    id integer NOT NULL,
+    created_date timestamp with time zone NOT NULL,
+    modified_date timestamp with time zone NOT NULL,
+    contact_name character varying(50) NOT NULL,
+    contact_phone character varying(50) NOT NULL,
+    contact_email character varying(50) NOT NULL,
+    preferred_communication_time character varying(50) NOT NULL,
+    content text NOT NULL,
+    skill character varying(200) NOT NULL,
+    default_skill character varying(50) NOT NULL
+);
+
+
+ALTER TABLE proj_customerrequest OWNER TO rishabh;
+
+--
+-- Name: proj_customerrequest_id_seq; Type: SEQUENCE; Schema: public; Owner: rishabh
+--
+
+CREATE SEQUENCE proj_customerrequest_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE proj_customerrequest_id_seq OWNER TO rishabh;
+
+--
+-- Name: proj_customerrequest_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rishabh
+--
+
+ALTER SEQUENCE proj_customerrequest_id_seq OWNED BY proj_customerrequest.id;
+
+
+--
+-- Name: proj_skill; Type: TABLE; Schema: public; Owner: rishabh
+--
+
+CREATE TABLE proj_skill (
+    id integer NOT NULL,
+    topic_id integer NOT NULL,
+    skill_name character varying(200) NOT NULL,
+    image_src character varying(200) NOT NULL,
+    details text NOT NULL,
+    clicks integer NOT NULL,
+    classes_given integer NOT NULL,
+    no_teachers integer NOT NULL,
+    created_date timestamp with time zone NOT NULL,
+    modified_date timestamp with time zone NOT NULL,
+    skill_code character varying(200) NOT NULL
+);
+
+
+ALTER TABLE proj_skill OWNER TO rishabh;
+
+--
+-- Name: proj_skill_id_seq; Type: SEQUENCE; Schema: public; Owner: rishabh
+--
+
+CREATE SEQUENCE proj_skill_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE proj_skill_id_seq OWNER TO rishabh;
+
+--
+-- Name: proj_skill_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rishabh
+--
+
+ALTER SEQUENCE proj_skill_id_seq OWNED BY proj_skill.id;
+
+
+--
+-- Name: proj_skilltopic; Type: TABLE; Schema: public; Owner: rishabh
+--
+
+CREATE TABLE proj_skilltopic (
+    id integer NOT NULL,
+    topic_name character varying(200) NOT NULL,
+    clicks integer NOT NULL,
+    classes_given integer NOT NULL,
+    created_date timestamp with time zone NOT NULL,
+    modified_date timestamp with time zone NOT NULL,
+    topic_code character varying(200) NOT NULL
+);
+
+
+ALTER TABLE proj_skilltopic OWNER TO rishabh;
+
+--
+-- Name: proj_skilltopic_id_seq; Type: SEQUENCE; Schema: public; Owner: rishabh
+--
+
+CREATE SEQUENCE proj_skilltopic_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE proj_skilltopic_id_seq OWNER TO rishabh;
+
+--
+-- Name: proj_skilltopic_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rishabh
+--
+
+ALTER SEQUENCE proj_skilltopic_id_seq OWNED BY proj_skilltopic.id;
+
+
+--
+-- Name: session_call; Type: TABLE; Schema: public; Owner: rishabh
+--
+
+CREATE TABLE session_call (
+    id integer NOT NULL,
+    status integer NOT NULL,
+    follow_up boolean NOT NULL,
+    start_time timestamp with time zone NOT NULL,
+    end_time timestamp with time zone NOT NULL,
+    call_duration interval NOT NULL,
+    belong_session_id integer NOT NULL,
+    created_date timestamp with time zone NOT NULL,
+    modified_date timestamp with time zone NOT NULL,
+    call_mode character varying(20) NOT NULL,
+    monitored character varying(20) NOT NULL,
+    platform_tries integer NOT NULL,
+    student_audible boolean NOT NULL,
+    student_visible boolean NOT NULL,
+    teacher_audible boolean NOT NULL,
+    teacher_visible boolean NOT NULL,
+    video_call_rating integer NOT NULL
+);
+
+
+ALTER TABLE session_call OWNER TO rishabh;
+
+--
+-- Name: session_call_id_seq; Type: SEQUENCE; Schema: public; Owner: rishabh
+--
+
+CREATE SEQUENCE session_call_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE session_call_id_seq OWNER TO rishabh;
+
+--
+-- Name: session_call_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rishabh
+--
+
+ALTER SEQUENCE session_call_id_seq OWNED BY session_call.id;
+
+
+--
+-- Name: session_session; Type: TABLE; Schema: public; Owner: rishabh
+--
+
+CREATE TABLE session_session (
+    id integer NOT NULL,
+    status integer NOT NULL,
+    follow_up boolean NOT NULL,
+    total_calls integer NOT NULL,
+    total_duration interval NOT NULL,
+    minutes_duration integer NOT NULL,
+    start_time timestamp with time zone NOT NULL,
+    end_time timestamp with time zone NOT NULL,
+    call_time_range interval NOT NULL,
+    time_refund interval NOT NULL,
+    money_refund double precision NOT NULL,
+    amount_to_teacher double precision NOT NULL,
+    amount_from_student double precision NOT NULL,
+    balance_amount double precision NOT NULL,
+    skill_match_id integer NOT NULL,
+    student_id integer NOT NULL,
+    created_date timestamp with time zone NOT NULL,
+    modified_date timestamp with time zone NOT NULL,
+    session_number integer NOT NULL,
+    student_comments text NOT NULL,
+    student_rating integer NOT NULL,
+    teacher_comments text NOT NULL,
+    teacher_rating integer NOT NULL,
+    order_id character varying(20) NOT NULL
+);
+
+
+ALTER TABLE session_session OWNER TO rishabh;
+
+--
+-- Name: session_session_id_seq; Type: SEQUENCE; Schema: public; Owner: rishabh
+--
+
+CREATE SEQUENCE session_session_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE session_session_id_seq OWNER TO rishabh;
+
+--
+-- Name: session_session_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rishabh
+--
+
+ALTER SEQUENCE session_session_id_seq OWNED BY session_session.id;
+
+
+--
+-- Name: skills; Type: TABLE; Schema: public; Owner: rishabh
+--
+
+CREATE TABLE skills (
+    id integer NOT NULL,
+    skill_name text NOT NULL
+);
+
+
+ALTER TABLE skills OWNER TO rishabh;
+
+--
+-- Name: social_auth_association; Type: TABLE; Schema: public; Owner: rishabh
+--
+
+CREATE TABLE social_auth_association (
+    id integer NOT NULL,
+    server_url character varying(255) NOT NULL,
+    handle character varying(255) NOT NULL,
+    secret character varying(255) NOT NULL,
+    issued integer NOT NULL,
+    lifetime integer NOT NULL,
+    assoc_type character varying(64) NOT NULL
+);
+
+
+ALTER TABLE social_auth_association OWNER TO rishabh;
+
+--
+-- Name: social_auth_association_id_seq; Type: SEQUENCE; Schema: public; Owner: rishabh
+--
+
+CREATE SEQUENCE social_auth_association_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE social_auth_association_id_seq OWNER TO rishabh;
+
+--
+-- Name: social_auth_association_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rishabh
+--
+
+ALTER SEQUENCE social_auth_association_id_seq OWNED BY social_auth_association.id;
+
+
+--
+-- Name: social_auth_code; Type: TABLE; Schema: public; Owner: rishabh
+--
+
+CREATE TABLE social_auth_code (
+    id integer NOT NULL,
+    email character varying(254) NOT NULL,
+    code character varying(32) NOT NULL,
+    verified boolean NOT NULL
+);
+
+
+ALTER TABLE social_auth_code OWNER TO rishabh;
+
+--
+-- Name: social_auth_code_id_seq; Type: SEQUENCE; Schema: public; Owner: rishabh
+--
+
+CREATE SEQUENCE social_auth_code_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE social_auth_code_id_seq OWNER TO rishabh;
+
+--
+-- Name: social_auth_code_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rishabh
+--
+
+ALTER SEQUENCE social_auth_code_id_seq OWNED BY social_auth_code.id;
+
+
+--
+-- Name: social_auth_nonce; Type: TABLE; Schema: public; Owner: rishabh
+--
+
+CREATE TABLE social_auth_nonce (
+    id integer NOT NULL,
+    server_url character varying(255) NOT NULL,
+    "timestamp" integer NOT NULL,
+    salt character varying(65) NOT NULL
+);
+
+
+ALTER TABLE social_auth_nonce OWNER TO rishabh;
+
+--
+-- Name: social_auth_nonce_id_seq; Type: SEQUENCE; Schema: public; Owner: rishabh
+--
+
+CREATE SEQUENCE social_auth_nonce_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE social_auth_nonce_id_seq OWNER TO rishabh;
+
+--
+-- Name: social_auth_nonce_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rishabh
+--
+
+ALTER SEQUENCE social_auth_nonce_id_seq OWNED BY social_auth_nonce.id;
+
+
+--
+-- Name: social_auth_partial; Type: TABLE; Schema: public; Owner: rishabh
+--
+
+CREATE TABLE social_auth_partial (
+    id integer NOT NULL,
+    token character varying(32) NOT NULL,
+    next_step smallint NOT NULL,
+    backend character varying(32) NOT NULL,
+    data text NOT NULL,
+    CONSTRAINT social_auth_partial_next_step_check CHECK ((next_step >= 0))
+);
+
+
+ALTER TABLE social_auth_partial OWNER TO rishabh;
+
+--
+-- Name: social_auth_partial_id_seq; Type: SEQUENCE; Schema: public; Owner: rishabh
+--
+
+CREATE SEQUENCE social_auth_partial_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE social_auth_partial_id_seq OWNER TO rishabh;
+
+--
+-- Name: social_auth_partial_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rishabh
+--
+
+ALTER SEQUENCE social_auth_partial_id_seq OWNED BY social_auth_partial.id;
+
+
+--
+-- Name: social_auth_usersocialauth; Type: TABLE; Schema: public; Owner: rishabh
+--
+
+CREATE TABLE social_auth_usersocialauth (
+    id integer NOT NULL,
+    provider character varying(32) NOT NULL,
+    uid character varying(255) NOT NULL,
+    extra_data text NOT NULL,
+    user_id integer NOT NULL
+);
+
+
+ALTER TABLE social_auth_usersocialauth OWNER TO rishabh;
+
+--
+-- Name: social_auth_usersocialauth_id_seq; Type: SEQUENCE; Schema: public; Owner: rishabh
+--
+
+CREATE SEQUENCE social_auth_usersocialauth_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE social_auth_usersocialauth_id_seq OWNER TO rishabh;
+
+--
+-- Name: social_auth_usersocialauth_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rishabh
+--
+
+ALTER SEQUENCE social_auth_usersocialauth_id_seq OWNED BY social_auth_usersocialauth.id;
+
+
+--
+-- Name: auth_group id; Type: DEFAULT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY auth_group ALTER COLUMN id SET DEFAULT nextval('auth_group_id_seq'::regclass);
+
+
+--
+-- Name: auth_group_permissions id; Type: DEFAULT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY auth_group_permissions ALTER COLUMN id SET DEFAULT nextval('auth_group_permissions_id_seq'::regclass);
+
+
+--
+-- Name: auth_permission id; Type: DEFAULT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY auth_permission ALTER COLUMN id SET DEFAULT nextval('auth_permission_id_seq'::regclass);
+
+
+--
+-- Name: auth_user id; Type: DEFAULT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY auth_user ALTER COLUMN id SET DEFAULT nextval('auth_user_id_seq'::regclass);
+
+
+--
+-- Name: auth_user_groups id; Type: DEFAULT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY auth_user_groups ALTER COLUMN id SET DEFAULT nextval('auth_user_groups_id_seq'::regclass);
+
+
+--
+-- Name: auth_user_user_permissions id; Type: DEFAULT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY auth_user_user_permissions ALTER COLUMN id SET DEFAULT nextval('auth_user_user_permissions_id_seq'::regclass);
+
+
+--
+-- Name: customers_customer id; Type: DEFAULT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY customers_customer ALTER COLUMN id SET DEFAULT nextval('customers_customer_id_seq'::regclass);
+
+
+--
+-- Name: customers_skillmatch id; Type: DEFAULT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY customers_skillmatch ALTER COLUMN id SET DEFAULT nextval('customers_skillmatch_id_seq'::regclass);
+
+
+--
+-- Name: django_admin_log id; Type: DEFAULT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY django_admin_log ALTER COLUMN id SET DEFAULT nextval('django_admin_log_id_seq'::regclass);
+
+
+--
+-- Name: django_content_type id; Type: DEFAULT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY django_content_type ALTER COLUMN id SET DEFAULT nextval('django_content_type_id_seq'::regclass);
+
+
+--
+-- Name: django_migrations id; Type: DEFAULT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY django_migrations ALTER COLUMN id SET DEFAULT nextval('django_migrations_id_seq'::regclass);
+
+
+--
+-- Name: payment_payment id; Type: DEFAULT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY payment_payment ALTER COLUMN id SET DEFAULT nextval('payment_payment_id_seq'::regclass);
+
+
+--
+-- Name: payment_payout id; Type: DEFAULT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY payment_payout ALTER COLUMN id SET DEFAULT nextval('payment_payout_id_seq'::regclass);
+
+
+--
+-- Name: proj_customerrequest id; Type: DEFAULT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY proj_customerrequest ALTER COLUMN id SET DEFAULT nextval('proj_customerrequest_id_seq'::regclass);
+
+
+--
+-- Name: proj_skill id; Type: DEFAULT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY proj_skill ALTER COLUMN id SET DEFAULT nextval('proj_skill_id_seq'::regclass);
+
+
+--
+-- Name: proj_skilltopic id; Type: DEFAULT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY proj_skilltopic ALTER COLUMN id SET DEFAULT nextval('proj_skilltopic_id_seq'::regclass);
+
+
+--
+-- Name: session_call id; Type: DEFAULT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY session_call ALTER COLUMN id SET DEFAULT nextval('session_call_id_seq'::regclass);
+
+
+--
+-- Name: session_session id; Type: DEFAULT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY session_session ALTER COLUMN id SET DEFAULT nextval('session_session_id_seq'::regclass);
+
+
+--
+-- Name: social_auth_association id; Type: DEFAULT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY social_auth_association ALTER COLUMN id SET DEFAULT nextval('social_auth_association_id_seq'::regclass);
+
+
+--
+-- Name: social_auth_code id; Type: DEFAULT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY social_auth_code ALTER COLUMN id SET DEFAULT nextval('social_auth_code_id_seq'::regclass);
+
+
+--
+-- Name: social_auth_nonce id; Type: DEFAULT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY social_auth_nonce ALTER COLUMN id SET DEFAULT nextval('social_auth_nonce_id_seq'::regclass);
+
+
+--
+-- Name: social_auth_partial id; Type: DEFAULT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY social_auth_partial ALTER COLUMN id SET DEFAULT nextval('social_auth_partial_id_seq'::regclass);
+
+
+--
+-- Name: social_auth_usersocialauth id; Type: DEFAULT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY social_auth_usersocialauth ALTER COLUMN id SET DEFAULT nextval('social_auth_usersocialauth_id_seq'::regclass);
+
+
+--
+-- Data for Name: auth_group; Type: TABLE DATA; Schema: public; Owner: rishabh
+--
+
+COPY auth_group (id, name) FROM stdin;
+\.
+
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rishabh
+--
+
+SELECT pg_catalog.setval('auth_group_id_seq', 1, false);
+
+
+--
+-- Data for Name: auth_group_permissions; Type: TABLE DATA; Schema: public; Owner: rishabh
+--
+
+COPY auth_group_permissions (id, group_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rishabh
+--
+
+SELECT pg_catalog.setval('auth_group_permissions_id_seq', 1, false);
+
+
+--
+-- Data for Name: auth_permission; Type: TABLE DATA; Schema: public; Owner: rishabh
+--
+
+COPY auth_permission (id, name, content_type_id, codename) FROM stdin;
+1	Can add log entry	1	add_logentry
+2	Can change log entry	1	change_logentry
+3	Can delete log entry	1	delete_logentry
+4	Can add permission	2	add_permission
+5	Can change permission	2	change_permission
+6	Can delete permission	2	delete_permission
+7	Can add user	3	add_user
+8	Can change user	3	change_user
+9	Can delete user	3	delete_user
+10	Can add group	4	add_group
+11	Can change group	4	change_group
+12	Can delete group	4	delete_group
+13	Can add content type	5	add_contenttype
+14	Can change content type	5	change_contenttype
+15	Can delete content type	5	delete_contenttype
+16	Can add session	6	add_session
+17	Can change session	6	change_session
+18	Can delete session	6	delete_session
+19	Can add skill	7	add_skill
+20	Can change skill	7	change_skill
+21	Can delete skill	7	delete_skill
+22	Can add skill topic	8	add_skilltopic
+23	Can change skill topic	8	change_skilltopic
+24	Can delete skill topic	8	delete_skilltopic
+25	Can add customer	9	add_customer
+26	Can change customer	9	change_customer
+27	Can delete customer	9	delete_customer
+28	Can add skill match	10	add_skillmatch
+29	Can change skill match	10	change_skillmatch
+30	Can delete skill match	10	delete_skillmatch
+31	Can add call	11	add_call
+32	Can change call	11	change_call
+33	Can delete call	11	delete_call
+34	Can add session	12	add_session
+35	Can change session	12	change_session
+36	Can delete session	12	delete_session
+37	Can add payment	13	add_payment
+38	Can change payment	13	change_payment
+39	Can delete payment	13	delete_payment
+40	Can add payout	14	add_payout
+41	Can change payout	14	change_payout
+42	Can delete payout	14	delete_payout
+43	Can add customer request	15	add_customerrequest
+44	Can change customer request	15	change_customerrequest
+45	Can delete customer request	15	delete_customerrequest
+46	Can add nonce	16	add_nonce
+47	Can change nonce	16	change_nonce
+48	Can delete nonce	16	delete_nonce
+49	Can add code	17	add_code
+50	Can change code	17	change_code
+51	Can delete code	17	delete_code
+52	Can add user social auth	18	add_usersocialauth
+53	Can change user social auth	18	change_usersocialauth
+54	Can delete user social auth	18	delete_usersocialauth
+55	Can add association	19	add_association
+56	Can change association	19	change_association
+57	Can delete association	19	delete_association
+58	Can add partial	20	add_partial
+59	Can change partial	20	change_partial
+60	Can delete partial	20	delete_partial
+\.
+
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rishabh
+--
+
+SELECT pg_catalog.setval('auth_permission_id_seq', 60, true);
+
+
+--
+-- Data for Name: auth_user; Type: TABLE DATA; Schema: public; Owner: rishabh
+--
+
+COPY auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
+2	pbkdf2_sha256$30000$vujPcP0ltZYa$V5cxmdruCghw6ihba57VI28mN4DYFWxhI9wLkavqBDc=	2016-11-21 18:32:06.670202+00	f	vaibhav	Vaibhav	Srivastava	vaibhav.srivastava.1830@gmail.com	t	t	2016-11-21 18:28:47+00
+3	pbkdf2_sha256$30000$IKmQC7buU42J$E53bPE8lT4pQOwSbFHIQGlMELQ+O7jb6te2UiNWyePw=	2017-02-05 21:32:44.41137+00	f	shreya	Shreya	Srivastava	ssrivastava87@gmail.com	t	t	2016-11-21 18:35:56+00
+1	pbkdf2_sha256$30000$zVnNSsALTq8H$sVXCo4BZ93LBv2nw+tSKBov4iUIoXrB+2z8efrox8m0=	2017-02-09 02:56:48.26514+00	t	rishabh	Rishabh	Srivastava	ris.90s@gmail.com	t	t	2016-11-20 14:41:24.381192+00
+10	!cCRXfvaJv2yJ8JAX8LxcYjsYQsSK3TrUfONhsEzu	2017-02-06 13:41:22.293666+00	f	help.skiltil	skiltil		help.skiltil@gmail.com	f	t	2017-02-05 21:09:12.244122+00
+\.
+
+
+--
+-- Data for Name: auth_user_groups; Type: TABLE DATA; Schema: public; Owner: rishabh
+--
+
+COPY auth_user_groups (id, user_id, group_id) FROM stdin;
+\.
+
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rishabh
+--
+
+SELECT pg_catalog.setval('auth_user_groups_id_seq', 1, false);
+
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rishabh
+--
+
+SELECT pg_catalog.setval('auth_user_id_seq', 10, true);
+
+
+--
+-- Data for Name: auth_user_user_permissions; Type: TABLE DATA; Schema: public; Owner: rishabh
+--
+
+COPY auth_user_user_permissions (id, user_id, permission_id) FROM stdin;
+1	2	19
+2	2	20
+3	2	21
+4	2	22
+5	2	23
+6	2	24
+13	3	1
+14	3	2
+15	3	3
+16	3	4
+17	3	5
+18	3	6
+19	3	7
+20	3	8
+21	3	9
+22	3	13
+23	3	14
+24	3	15
+25	3	46
+26	3	47
+27	3	48
+28	3	49
+29	3	50
+30	3	51
+31	3	52
+32	3	53
+33	3	54
+34	3	55
+35	3	56
+36	3	57
+37	3	58
+38	3	59
+39	3	60
+\.
+
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rishabh
+--
+
+SELECT pg_catalog.setval('auth_user_user_permissions_id_seq', 39, true);
+
+
+--
+-- Data for Name: customers_customer; Type: TABLE DATA; Schema: public; Owner: rishabh
+--
+
+COPY customers_customer (id, customer_name, skype_id, gmail_id, wallet_amount, classes_taken, classes_given, paytm_id, no_subjects, created_date, modified_date, phone_number, gender, image, email, user_name, social_id) FROM stdin;
+3	Aparna Chaganty	aparna214	aparna214@gmail.com	15	0	2	0	1	2016-12-22 14:28:14.711593+00	2017-02-01 17:56:42.436637+00		d		aparnachaganty	aparnachaganty	\N
+12	Vaibhav Srivastava	vaibhav.srivastava.1830	vaibhav.srivastava.1830@gmail.com	0	0	0		0	2016-12-22 14:28:14.711593+00	2017-02-01 17:56:42.443728+00		d		vaibhavsrivastava	vaibhavsrivastava	\N
+11	Sumit Srivastava	sumit4n2008	sumit4n2008@gmail.com	0	0	0		1	2016-12-22 14:28:14.711593+00	2017-02-01 17:56:42.451665+00		d		sumitsrivastava	sumitsrivastava	\N
+9	Pallavi Sharma			114.208333333333002	0	1		1	2016-12-22 14:28:14.711593+00	2017-02-01 17:56:42.460269+00		f		pallavisharma	pallavisharma	\N
+10	Jyothir bindu Jaladi			-645244	3	0		0	2016-12-22 14:28:14.711593+00	2017-02-01 17:56:42.467117+00		d		jyothirbindu2	jyothirbindu	\N
+15	Rishabh Srivastava			0	0	0		0	2017-02-05 16:43:23.833875+00	2017-02-09 02:53:12.556862+00		m	http://graph.facebook.com/10210643662915072/picture?type=large	ris.90s@gmail.com	rishabhsrivastava	10
+13	Kshitij Mishra	khistijmishra23	khistijmishra23@gmail.com	403203.666666666977	1	2		2	2016-12-22 14:28:14.711593+00	2017-02-01 19:18:37.736994+00		m	http://graph.facebook.com/1452774488/picture	khistijmishra23@gmail.com	kshitijmishra	\N
+4	Shreya Srivastava	+91 9886330700	ssrivastava87@gmail.com	-1	1	0	0	1	2016-12-22 14:28:14.711593+00	2017-02-05 21:32:44.393275+00		f	http://graph.facebook.com/1306545962744857/picture?type=large	ssrivastava87@gmail.com	shreyasrivastava	12
+\.
+
+
+--
+-- Name: customers_customer_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rishabh
+--
+
+SELECT pg_catalog.setval('customers_customer_id_seq', 17, true);
+
+
+--
+-- Data for Name: customers_skillmatch; Type: TABLE DATA; Schema: public; Owner: rishabh
+--
+
+COPY customers_skillmatch (id, customer_id, skill_id, classes_given, details, created_date, modified_date) FROM stdin;
+12	4	29	0		2016-12-22 14:28:14.811575+00	2016-12-22 14:28:14.858001+00
+8	11	55	0		2016-12-22 14:28:14.811575+00	2016-12-22 14:28:14.858001+00
+13	13	24	0		2016-12-22 14:28:14.811575+00	2016-12-22 14:28:14.858001+00
+9	9	96	1		2016-12-22 14:28:14.811575+00	2017-01-29 14:48:07.185398+00
+11	13	74	2	Exellent teacher for beginners	2016-12-22 14:28:14.811575+00	2017-01-29 14:48:07.298675+00
+10	3	50	2		2016-12-22 14:28:14.811575+00	2017-01-30 17:48:48.240257+00
+\.
+
+
+--
+-- Name: customers_skillmatch_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rishabh
+--
+
+SELECT pg_catalog.setval('customers_skillmatch_id_seq', 13, true);
+
+
+--
+-- Data for Name: django_admin_log; Type: TABLE DATA; Schema: public; Owner: rishabh
+--
+
+COPY django_admin_log (id, action_time, object_id, object_repr, action_flag, change_message, content_type_id, user_id) FROM stdin;
+1	2016-11-20 18:36:21.285681+00	2	Creative Art	1	[{"added": {}}]	8	1
+2	2016-11-20 18:36:33.397582+00	3	Singing	1	[{"added": {}}]	8	1
+3	2016-11-20 18:44:52.636093+00	2	3D sketching Creative Art	1	[{"added": {}}]	7	1
+4	2016-11-20 18:46:01.806183+00	3	Candle Making - Creative Art	1	[{"added": {}}]	7	1
+5	2016-11-20 20:59:00.11495+00	4	Religious Songs - Singing	1	[{"added": {}}]	7	1
+6	2016-11-21 13:35:34.115231+00	4	Religious Songs - Singing	2	[{"changed": {"fields": ["image_src"]}}]	7	1
+7	2016-11-21 13:43:08.645058+00	3	Candle Making - Creative Art	2	[{"changed": {"fields": ["image_src"]}}]	7	1
+8	2016-11-21 13:44:02.006224+00	3	Candle Making - Creative Art	2	[{"changed": {"fields": ["image_src"]}}]	7	1
+9	2016-11-21 13:44:49.973466+00	2	3D sketching - Creative Art	2	[{"changed": {"fields": ["image_src"]}}]	7	1
+10	2016-11-21 18:28:47.702975+00	2	vaibhav	1	[{"added": {}}]	3	1
+11	2016-11-21 18:31:32.243442+00	2	vaibhav	2	[{"changed": {"fields": ["first_name", "last_name", "email", "is_staff"]}}]	3	1
+12	2016-11-21 18:35:57.062367+00	3	shreya	1	[{"added": {}}]	3	1
+13	2016-11-21 18:36:29.414178+00	3	shreya	2	[{"changed": {"fields": ["first_name", "last_name", "email", "is_staff"]}}]	3	1
+14	2016-11-23 11:48:48.873207+00	3	Candle Making - Creative Art	2	[{"changed": {"fields": ["image_src"]}}]	7	1
+15	2016-11-23 11:49:37.337824+00	3	Candle Making - Creative Art	2	[{"changed": {"fields": ["image_src"]}}]	7	1
+16	2016-11-23 11:50:08.921869+00	2	3D sketching - Creative Art	2	[{"changed": {"fields": ["image_src"]}}]	7	1
+17	2016-11-23 11:56:27.030574+00	5	3 D painting - Creative Art	1	[{"added": {}}]	7	1
+18	2016-11-23 11:57:36.336266+00	6	Candle Stand - Creative Art	1	[{"added": {}}]	7	1
+19	2016-11-23 11:59:16.017535+00	6	Candle Stand - Creative Art	2	[{"changed": {"fields": ["image_src"]}}]	7	1
+20	2016-11-23 12:00:52.230804+00	6	Candle Stand - Creative Art	2	[{"changed": {"fields": ["image_src"]}}]	7	1
+21	2016-11-23 12:03:21.094873+00	6	Candle Stand - Creative Art	2	[{"changed": {"fields": ["image_src"]}}]	7	1
+22	2016-11-23 12:04:32.886508+00	6	Candle Stand - Creative Art	2	[{"changed": {"fields": ["image_src"]}}]	7	1
+23	2016-11-23 12:04:43.078036+00	5	3 D painting - Creative Art	2	[{"changed": {"fields": ["image_src"]}}]	7	1
+24	2016-11-23 12:05:13.734039+00	5	3 D painting - Creative Art	2	[{"changed": {"fields": ["image_src"]}}]	7	1
+25	2016-11-23 13:06:22.703738+00	6	Candle Stand - Creative Art	2	[{"changed": {"fields": ["image_src"]}}]	7	1
+26	2016-11-23 13:07:26.342654+00	7	Clay Modelling - Creative Art	1	[{"added": {}}]	7	1
+27	2016-11-25 16:25:41.353444+00	134	Tamagoyaki - Food	2	[{"changed": {"fields": ["image_src"]}}]	7	1
+28	2016-12-02 16:33:48.09038+00	71	Japanese - Languages	2	[{"changed": {"fields": ["image_src", "details"]}}]	7	1
+29	2016-12-03 10:44:28.159778+00	21	Others	1	[{"added": {}}]	8	1
+30	2016-12-04 21:03:26.846436+00	22	Free Classes	1	[{"added": {}}]	8	1
+31	2016-12-04 21:06:42.193902+00	140	Cashless Payments - Free Classes	1	[{"added": {}}]	7	1
+32	2016-12-06 13:09:29.729595+00	21	Others	3		8	1
+33	2016-12-06 13:11:19.012897+00	23	Others	1	[{"added": {}}]	8	1
+34	2016-12-07 14:18:36.7911+00	134	Tamagoyaki - Food	2	[{"changed": {"fields": ["details", "clicks"]}}]	7	1
+35	2016-12-07 14:19:29.599608+00	91	Aachar (Pickel) - Food	2	[{"changed": {"fields": ["image_src", "details", "clicks"]}}]	7	1
+36	2016-12-10 13:21:49.720502+00	71	Japanese - Languages	2	[{"changed": {"fields": ["clicks"]}}]	7	1
+37	2016-12-10 13:38:02.514437+00	63	Badminton - Game/Sport training 	2	[{"changed": {"fields": ["image_src", "details"]}}]	7	1
+38	2016-12-10 13:38:59.265125+00	63	Badminton - Game/Sport training 	2	[]	7	1
+39	2016-12-10 15:26:24.699179+00	1	Sumit Srivastava	1	[{"added": {}}]	9	1
+40	2016-12-10 15:26:56.883316+00	2	Vaibhav Srivastava	1	[{"added": {}}]	9	1
+41	2016-12-10 15:32:14.105447+00	2	Men's Styling - Sumit Srivastava	1	[{"added": {}}]	10	1
+42	2016-12-10 18:08:42.662096+00	5	inserted	1	[{"added": {}}]	11	1
+43	2016-12-10 18:12:11.733195+00	5	inserted	2	[]	11	1
+44	2016-12-10 19:18:33.177469+00	6	2016-10-15 14:30:00+00:00 - 2016-10-15 14:47:30+00:00	1	[{"added": {}}]	11	1
+45	2016-12-10 20:44:36.962483+00	7	2016-10-15 14:30:00+00:00 - 2016-10-15 14:47:30+00:00	1	[{"added": {}}]	11	1
+46	2016-12-11 05:29:25.647256+00	1	2016-10-15 14:30:00+00:00 - 2016-10-15 14:47:30+00:00	1	[{"added": {}}]	11	1
+47	2016-12-11 06:46:43.295937+00	27	inserted	1	[{"added": {}}]	12	1
+48	2016-12-11 06:47:16.000091+00	27	inserted	3		12	1
+49	2016-12-11 07:33:21.851684+00	31	inserted	1	[{"added": {}}]	12	1
+50	2016-12-11 07:33:43.264916+00	31	inserted	3		12	1
+51	2016-12-11 08:04:08.588185+00	36	inserted	1	[{"added": {}}]	12	1
+52	2016-12-11 08:09:07.119592+00	36	inserted	2	[]	12	1
+53	2016-12-11 08:37:39.169398+00	36	inserted	2	[]	12	1
+54	2016-12-11 08:41:01.835222+00	36	inserted	2	[]	12	1
+55	2016-12-11 11:28:01.969157+00	1	inserted	1	[{"added": {}}]	12	1
+56	2016-12-11 11:28:44.359693+00	1	2016-10-15 14:30:00+00:00 - 2016-10-15 14:47:30+00:00	1	[{"added": {}}]	11	1
+57	2016-12-11 11:44:20.290528+00	1	2016-10-15 14:30:00+00:00 - 2016-10-15 14:47:30+00:00	2	[]	11	1
+58	2016-12-11 11:50:43.844317+00	1	2016-10-15 14:30:00+00:00 - 2016-10-15 14:47:30+00:00	2	[]	11	1
+59	2016-12-11 11:51:13.386019+00	1	inserted	3		12	1
+60	2016-12-11 11:51:24.005404+00	2	inserted	1	[{"added": {}}]	12	1
+61	2016-12-11 11:51:56.536527+00	2	2016-10-15 14:30:00+00:00 - 2016-10-15 14:47:30+00:00	1	[{"added": {}}]	11	1
+62	2016-12-11 11:59:45.049111+00	2	inserted	3		12	1
+63	2016-12-11 12:01:35.431482+00	3	inserted	1	[{"added": {}}]	12	1
+64	2016-12-11 12:01:53.570292+00	3	2016-10-15 14:30:00+00:00 - 2016-10-15 14:47:30+00:00	1	[{"added": {}}]	11	1
+65	2016-12-11 12:10:48.399481+00	3	inserted	3		12	1
+66	2016-12-11 12:11:01.709715+00	4	inserted	1	[{"added": {}}]	12	1
+67	2016-12-11 12:11:28.198493+00	4	2016-10-15 14:30:00+00:00 - 2016-10-15 14:47:30+00:00	1	[{"added": {}}]	11	1
+68	2016-12-11 12:28:36.834204+00	4	inserted	3		12	1
+69	2016-12-11 12:28:46.288404+00	5	inserted	1	[{"added": {}}]	12	1
+70	2016-12-11 12:29:04.649406+00	5	2016-10-15 14:30:00+00:00 - 2016-10-15 14:47:30+00:00	1	[{"added": {}}]	11	1
+71	2016-12-11 12:33:29.118768+00	5	inserted	3		12	1
+72	2016-12-11 12:33:57.387037+00	6	inserted	1	[{"added": {}}]	12	1
+73	2016-12-11 12:34:14.049992+00	6	2016-10-15 14:30:00+00:00 - 2016-10-15 14:47:30+00:00	1	[{"added": {}}]	11	1
+74	2016-12-11 12:34:49.888464+00	6	inserted	3		12	1
+75	2016-12-11 12:34:57.985315+00	7	inserted	1	[{"added": {}}]	12	1
+76	2016-12-11 12:35:12.238749+00	7	2016-10-15 14:30:00+00:00 - 2016-10-15 14:47:30+00:00	1	[{"added": {}}]	11	1
+77	2016-12-11 12:36:06.655021+00	7	inserted	3		12	1
+78	2016-12-11 12:36:17.395358+00	8	inserted	1	[{"added": {}}]	12	1
+79	2016-12-11 12:36:31.69772+00	8	2016-10-15 14:30:00+00:00 - 2016-10-15 14:47:30+00:00	1	[{"added": {}}]	11	1
+80	2016-12-11 12:37:20.118841+00	8	inserted	3		12	1
+81	2016-12-11 12:37:31.722135+00	9	inserted	1	[{"added": {}}]	12	1
+82	2016-12-11 12:37:47.603576+00	9	2016-10-15 14:30:00+00:00 - 2016-10-15 14:47:30+00:00	1	[{"added": {}}]	11	1
+83	2016-12-11 12:41:45.230296+00	9	inserted	3		12	1
+84	2016-12-11 12:41:54.422561+00	10	inserted	1	[{"added": {}}]	12	1
+85	2016-12-11 12:42:09.062974+00	10	2016-10-15 14:30:00+00:00 - 2016-10-15 14:47:30+00:00	1	[{"added": {}}]	11	1
+86	2016-12-11 12:42:42.79288+00	10	inserted	3		12	1
+87	2016-12-11 12:42:53.649861+00	11	inserted	1	[{"added": {}}]	12	1
+88	2016-12-11 12:43:08.050524+00	11	2016-10-15 14:30:00+00:00 - 2016-10-15 14:47:30+00:00	1	[{"added": {}}]	11	1
+89	2016-12-11 12:44:51.844127+00	3	Aparna Chaganty	1	[{"added": {}}]	9	1
+90	2016-12-11 12:45:24.827268+00	4	Shreya Srivastava	1	[{"added": {}}]	9	1
+91	2016-12-11 12:45:45.2838+00	3	Surya Namaskar - Aparna Chaganty	1	[{"added": {}}]	10	1
+92	2016-12-11 12:46:19.256153+00	12	inserted	1	[{"added": {}}]	12	1
+93	2016-12-11 12:46:37.318973+00	12	2016-10-15 14:30:00+00:00 - 2016-10-15 14:47:30+00:00	1	[{"added": {}}]	11	1
+94	2016-12-11 12:47:34.851584+00	11	2016-10-15 17:55:00+00:00 - 2016-10-15 18:19:00+00:00	2	[{"changed": {"fields": ["start_time", "end_time", "belong_session"]}}]	11	1
+95	2016-12-11 13:11:38.565481+00	12	inserted	3		12	1
+96	2016-12-11 13:11:48.668821+00	11	inserted	3		12	1
+97	2016-12-11 13:12:09.320537+00	13	inserted	1	[{"added": {}}]	12	1
+98	2016-12-11 13:12:34.930021+00	13	2016-10-15 14:30:00+00:00 - 2016-10-15 14:47:30+00:00	1	[{"added": {}}]	11	1
+99	2016-12-11 13:14:51.929321+00	13	inserted	3		12	1
+100	2016-12-11 13:15:01.232257+00	14	inserted	1	[{"added": {}}]	12	1
+101	2016-12-11 13:15:16.990099+00	14	2016-10-15 14:30:00+00:00 - 2016-10-15 14:47:30+00:00	1	[{"added": {}}]	11	1
+102	2016-12-11 13:20:05.10248+00	14	inserted	3		12	1
+103	2016-12-11 13:20:13.447311+00	15	inserted	1	[{"added": {}}]	12	1
+104	2016-12-11 13:20:27.206387+00	15	2016-10-15 14:30:00+00:00 - 2016-10-15 14:47:30+00:00	1	[{"added": {}}]	11	1
+105	2016-12-11 13:36:48.62492+00	1	inserted	1	[{"added": {}}]	12	1
+106	2016-12-11 13:37:05.765088+00	1	2016-10-15 14:30:00+00:00 - 2016-10-15 14:47:30+00:00	1	[{"added": {}}]	11	1
+107	2016-12-11 13:39:48.581773+00	2	Surya Namaskar - Aparna Chaganty - Shreya Srivastava	1	[{"added": {}}]	12	1
+108	2016-12-11 13:40:06.663508+00	2	2016-10-15 17:55:00+00:00 - 2016-10-15 18:19:00+00:00	1	[{"added": {}}]	11	1
+109	2016-12-11 14:12:18.690353+00	5	Pallavi Sharma	1	[{"added": {}}]	9	1
+110	2016-12-11 14:16:00.466613+00	6	Jyothirbindu Jaladi	1	[{"added": {}}]	9	1
+111	2016-12-11 14:16:17.180122+00	3	Surya Namaskar - Aparna Chaganty	3		10	1
+112	2016-12-11 14:16:17.183525+00	2	Men's Styling - Sumit Srivastava	3		10	1
+113	2016-12-11 14:16:33.595271+00	4	Men's Styling - Sumit Srivastava	1	[{"added": {}}]	10	1
+114	2016-12-11 14:18:05.510854+00	3	Men's Styling - Sumit Srivastava - Vaibhav Srivastava	1	[{"added": {}}]	12	1
+115	2016-12-11 14:18:58.477558+00	3	2016-10-15 14:30:00+00:00 - 2016-10-15 14:47:30+00:00	1	[{"added": {}}]	11	1
+116	2016-12-11 14:23:35.530298+00	3	Men's Styling - Sumit Srivastava - Vaibhav Srivastava	3		12	1
+117	2016-12-11 14:23:43.683168+00	4	Men's Styling - Sumit Srivastava - Vaibhav Srivastava	1	[{"added": {}}]	12	1
+118	2016-12-11 14:23:56.521766+00	4	2016-10-15 14:30:00+00:00 - 2016-10-15 14:47:30+00:00	1	[{"added": {}}]	11	1
+119	2016-12-11 14:35:58.215906+00	4	Men's Styling - Sumit Srivastava - Vaibhav Srivastava	3		12	1
+120	2016-12-11 14:36:09.521777+00	5	Men's Styling - Sumit Srivastava - Vaibhav Srivastava	1	[{"added": {}}]	12	1
+121	2016-12-11 14:37:38.539005+00	5	2016-10-15 14:30:00+00:00 - 2016-10-15 14:47:30+00:00	1	[{"added": {}}]	11	1
+122	2016-12-11 14:38:45.593155+00	1	Sumit Srivastava	3		9	1
+123	2016-12-11 14:38:52.236353+00	2	Vaibhav Srivastava	3		9	1
+124	2016-12-11 14:39:17.703096+00	7	Sumit Srivastava	1	[{"added": {}}]	9	1
+125	2016-12-11 14:39:33.721838+00	8	Vaibhav Srivastava	1	[{"added": {}}]	9	1
+126	2016-12-11 14:39:53.533423+00	5	Men's Styling - Sumit Srivastava	1	[{"added": {}}]	10	1
+127	2016-12-11 14:40:13.426671+00	6	Men's Styling - Sumit Srivastava - Vaibhav Srivastava	1	[{"added": {}}]	12	1
+128	2016-12-11 14:40:28.330405+00	6	2016-10-15 14:30:00+00:00 - 2016-10-15 14:47:30+00:00	1	[{"added": {}}]	11	1
+129	2016-12-11 14:42:30.925151+00	6	Biscuit - Pallavi Sharma	1	[{"added": {}}]	10	1
+130	2016-12-11 14:42:42.794319+00	7	Biscuit - Pallavi Sharma - Jyothirbindu Jaladi	1	[{"added": {}}]	12	1
+131	2016-12-11 14:43:50.823522+00	7	2016-11-23 18:51:00+00:00 - 2016-11-23 19:19:00+00:00	1	[{"added": {}}]	11	1
+132	2016-12-11 14:47:40.821806+00	7	2016-11-23 18:51:00+00:00 - 2016-11-23 19:19:39+00:00	2	[{"changed": {"fields": ["end_time"]}}]	11	1
+133	2016-12-11 15:07:28.437177+00	7	2016-11-23 18:51:00+00:00 - 2016-11-23 19:19:40+00:00	2	[{"changed": {"fields": ["end_time"]}}]	11	1
+134	2016-12-11 15:07:55.777446+00	7	Biscuit - Pallavi Sharma - Jyothirbindu Jaladi	3		12	1
+135	2016-12-11 15:08:12.846072+00	6	Men's Styling - Sumit Srivastava - Vaibhav Srivastava	3		12	1
+136	2016-12-11 15:08:22.203955+00	6	Biscuit - Pallavi Sharma	3		10	1
+137	2016-12-11 15:08:22.206903+00	5	Men's Styling - Sumit Srivastava	3		10	1
+138	2016-12-11 15:08:29.158201+00	8	Vaibhav Srivastava	3		9	1
+139	2016-12-11 15:08:29.161725+00	7	Sumit Srivastava	3		9	1
+140	2016-12-11 15:08:39.219845+00	9	Pallavi Sharma	1	[{"added": {}}]	9	1
+141	2016-12-11 15:08:48.742072+00	10	Jyothirbindu Jaladi	1	[{"added": {}}]	9	1
+142	2016-12-11 15:09:32.115722+00	7	Biscuit - Jyothirbindu Jaladi	1	[{"added": {}}]	10	1
+143	2016-12-11 15:09:52.386883+00	7	Biscuit - Pallavi Sharma	2	[{"changed": {"fields": ["customer"]}}]	10	1
+144	2016-12-11 15:10:08.053248+00	8	Biscuit - Pallavi Sharma - Jyothirbindu Jaladi	1	[{"added": {}}]	12	1
+145	2016-12-11 15:19:23.732063+00	8	2016-11-23 18:51:00+00:00 - 2016-11-23 18:19:00+00:00	1	[{"added": {}}]	11	1
+146	2016-12-11 15:20:46.254782+00	8	2016-11-23 18:51:00+00:00 - 2016-11-23 19:19:39+00:00	2	[{"changed": {"fields": ["end_time"]}}]	11	1
+147	2016-12-11 15:22:22.280081+00	8	2016-11-23 18:51:00+00:00 - 2016-11-23 19:19:39+00:00	2	[]	11	1
+148	2016-12-11 15:23:50.199952+00	8	2016-11-23 18:51:00+00:00 - 2016-11-23 19:19:39+00:00	2	[]	11	1
+149	2016-12-11 15:24:22.176619+00	8	2016-11-23 18:51:00+00:00 - 2016-11-23 19:19:39+00:00	2	[]	11	1
+150	2016-12-11 15:30:52.86238+00	8	2016-11-23 18:51:00+00:00 - 2016-11-23 19:19:39+00:00	2	[]	11	1
+151	2016-12-11 15:32:13.56864+00	8	2016-11-23 18:51:00+00:00 - 2016-11-23 19:19:39+00:00	2	[]	11	1
+152	2016-12-11 15:32:44.159727+00	8	2016-11-23 18:51:00+00:00 - 2016-11-23 19:19:39+00:00	2	[]	11	1
+153	2016-12-11 15:37:19.86294+00	8	2016-11-23 18:51:00+00:00 - 2016-11-23 19:19:39+00:00	2	[]	11	1
+154	2016-12-11 15:39:27.350874+00	8	2016-11-23 18:51:00+00:00 - 2016-11-23 19:19:39+00:00	2	[]	11	1
+155	2016-12-11 15:39:42.31425+00	8	Biscuit - Pallavi Sharma - Jyothirbindu Jaladi	2	[{"changed": {"fields": ["time_refund"]}}]	12	1
+156	2016-12-11 15:42:30.275813+00	8	2016-11-23 18:51:00+00:00 - 2016-11-23 19:19:39+00:00	2	[{"changed": {"fields": ["follow_up"]}}]	11	1
+157	2016-12-11 15:44:26.261001+00	9	2016-11-23 19:20:00+00:00 - 2016-11-23 19:21:23+00:00	1	[{"added": {}}]	11	1
+158	2016-12-11 15:45:21.234055+00	10	2016-11-23 19:39:00+00:00 - 2016-11-23 19:40:28+00:00	1	[{"added": {}}]	11	1
+159	2016-12-11 16:36:08.796834+00	8	2016-11-23 18:51:00+00:00 - 2016-11-23 19:19:39+00:00	2	[]	11	1
+160	2016-12-11 16:36:44.798981+00	11	2016-11-23 19:40:00+00:00 - 2016-11-23 19:45:29+00:00	1	[{"added": {}}]	11	1
+161	2016-12-11 16:37:34.749378+00	12	2016-11-24 10:30:00+00:00 - 2016-11-24 10:41:33+00:00	1	[{"added": {}}]	11	1
+162	2016-12-11 16:38:46.518613+00	8	Biscuit - Pallavi Sharma - Jyothirbindu Jaladi	2	[{"changed": {"fields": ["time_refund", "money_refund", "amount_to_teacher", "balance_amount"]}}]	12	1
+163	2016-12-11 16:38:52.821749+00	12	2016-11-24 10:30:00+00:00 - 2016-11-24 10:41:33+00:00	2	[]	11	1
+164	2016-12-11 17:01:11.318374+00	12	2016-11-24 10:30:00+00:00 - 2016-11-24 10:41:33+00:00	2	[]	11	1
+165	2016-12-11 17:02:31.893719+00	6	Jyothirbindu Jaladi	2	[{"changed": {"fields": ["wallet_amount", "classes_taken"]}}]	9	1
+166	2016-12-11 17:02:51.226876+00	6	Jyothirbindu Jaladi	3		9	1
+167	2016-12-11 17:03:03.821024+00	5	Pallavi Sharma	3		9	1
+168	2016-12-11 17:03:32.574731+00	11	Sumit Srivastava	1	[{"added": {}}]	9	1
+169	2016-12-11 17:03:49.622394+00	12	Vaibhav Srivastava	1	[{"added": {}}]	9	1
+170	2016-12-11 17:07:19.814048+00	8	Men's Styling - Sumit Srivastava	1	[{"added": {}}]	10	1
+171	2016-12-11 17:07:36.237712+00	9	Men's Styling - Sumit Srivastava - Vaibhav Srivastava	1	[{"added": {}}]	12	1
+172	2016-12-11 17:07:49.850228+00	13	2016-10-15 14:30:00+00:00 - 2016-10-15 14:47:30+00:00	1	[{"added": {}}]	11	1
+173	2016-12-11 17:18:14.498371+00	13	2016-10-15 14:30:00+00:00 - 2016-10-15 14:47:30+00:00	2	[{"changed": {"fields": ["follow_up"]}}]	11	1
+174	2016-12-11 17:18:32.543922+00	13	2016-10-15 14:30:00+00:00 - 2016-10-15 14:47:30+00:00	2	[]	11	1
+175	2016-12-11 17:26:00.601044+00	13	2016-10-15 14:30:00+00:00 - 2016-10-15 14:47:30+00:00	2	[{"changed": {"fields": ["follow_up"]}}]	11	1
+176	2016-12-11 17:26:32.371432+00	8	Men's Styling - Sumit Srivastava	2	[{"changed": {"fields": ["classes_given"]}}]	10	1
+177	2016-12-11 17:26:38.651244+00	12	Vaibhav Srivastava	2	[{"changed": {"fields": ["classes_taken"]}}]	9	1
+178	2016-12-11 17:26:44.006932+00	11	Sumit Srivastava	2	[{"changed": {"fields": ["classes_given"]}}]	9	1
+179	2016-12-11 17:26:51.306291+00	9	Men's Styling - Sumit Srivastava - Vaibhav Srivastava	3		12	1
+180	2016-12-11 17:27:10.768536+00	10	Men's Styling - Sumit Srivastava - Vaibhav Srivastava	1	[{"added": {}}]	12	1
+181	2016-12-11 17:27:27.630556+00	14	2016-10-15 14:30:00+00:00 - 2016-10-15 14:47:30+00:00	1	[{"added": {}}]	11	1
+182	2016-12-11 17:30:30.957215+00	14	2016-10-15 14:30:00+00:00 - 2016-10-15 14:47:30+00:00	2	[]	11	1
+183	2016-12-11 17:32:32.397586+00	10	Men's Styling - Sumit Srivastava - Vaibhav Srivastava	3		12	1
+184	2016-12-11 17:32:42.844373+00	11	Men's Styling - Sumit Srivastava - Vaibhav Srivastava	1	[{"added": {}}]	12	1
+185	2016-12-11 17:32:59.423638+00	15	2016-10-15 14:30:00+00:00 - 2016-10-15 14:47:30+00:00	1	[{"added": {}}]	11	1
+186	2016-12-11 17:33:14.536276+00	8	Men's Styling - Sumit Srivastava	2	[{"changed": {"fields": ["classes_given"]}}]	10	1
+187	2016-12-11 17:33:22.073212+00	12	Vaibhav Srivastava	2	[{"changed": {"fields": ["classes_taken"]}}]	9	1
+188	2016-12-11 17:35:41.948729+00	15	2016-10-15 14:30:00+00:00 - 2016-10-15 14:47:30+00:00	2	[]	11	1
+189	2016-12-11 17:35:59.057783+00	11	Men's Styling - Sumit Srivastava - Vaibhav Srivastava	3		12	1
+190	2016-12-11 17:36:06.698261+00	8	Men's Styling - Sumit Srivastava	2	[{"changed": {"fields": ["classes_given"]}}]	10	1
+191	2016-12-11 17:36:14.27184+00	12	Vaibhav Srivastava	2	[{"changed": {"fields": ["wallet_amount", "classes_taken"]}}]	9	1
+192	2016-12-11 17:36:29.062934+00	12	Men's Styling - Sumit Srivastava - Vaibhav Srivastava	1	[{"added": {}}]	12	1
+193	2016-12-11 17:36:48.009062+00	16	2016-10-15 14:30:00+00:00 - 2016-10-15 14:47:30+00:00	1	[{"added": {}}]	11	1
+194	2016-12-11 17:38:29.115387+00	11	Sumit Srivastava	2	[{"changed": {"fields": ["wallet_amount", "classes_given"]}}]	9	1
+195	2016-12-11 17:38:35.415161+00	12	Vaibhav Srivastava	2	[{"changed": {"fields": ["wallet_amount", "classes_taken"]}}]	9	1
+196	2016-12-11 17:38:40.964691+00	8	Men's Styling - Sumit Srivastava	2	[{"changed": {"fields": ["classes_given"]}}]	10	1
+197	2016-12-11 17:38:48.10757+00	12	Men's Styling - Sumit Srivastava - Vaibhav Srivastava	3		12	1
+198	2016-12-11 17:38:59.865431+00	13	Men's Styling - Sumit Srivastava - Vaibhav Srivastava	1	[{"added": {}}]	12	1
+199	2016-12-11 17:39:12.932778+00	17	2016-10-15 14:30:00+00:00 - 2016-10-15 14:47:30+00:00	1	[{"added": {}}]	11	1
+200	2016-12-11 17:40:05.261249+00	9	Biscuit - Pallavi Sharma	1	[{"added": {}}]	10	1
+201	2016-12-11 17:40:25.270157+00	14	Biscuit - Pallavi Sharma - Jyothirbindu Jaladi	1	[{"added": {}}]	12	1
+202	2016-12-11 17:41:23.620826+00	18	2016-11-23 18:51:00+00:00 - 2016-11-23 19:19:39+00:00	1	[{"added": {}}]	11	1
+203	2016-12-11 17:42:07.623809+00	19	2016-11-23 19:20:00+00:00 - 2016-11-23 19:21:23+00:00	1	[{"added": {}}]	11	1
+204	2016-12-11 17:42:59.317854+00	20	2016-11-23 19:39:00+00:00 - 2016-11-23 19:40:28+00:00	1	[{"added": {}}]	11	1
+205	2016-12-11 17:43:48.220607+00	21	2016-10-15 19:41:00+00:00 - 2016-10-15 19:46:29+00:00	1	[{"added": {}}]	11	1
+206	2016-12-11 17:44:20.802211+00	22	2016-11-24 10:30:00+00:00 - 2016-11-24 10:41:33+00:00	1	[{"added": {}}]	11	1
+207	2016-12-11 18:24:10.077456+00	10	Surya Namaskar - Aparna Chaganty	1	[{"added": {}}]	10	1
+208	2016-12-11 18:24:26.648126+00	15	Surya Namaskar - Aparna Chaganty - Shreya Srivastava	1	[{"added": {}}]	12	1
+209	2016-12-11 18:24:54.714529+00	23	2016-10-15 17:55:00+00:00 - 2016-10-15 18:19:00+00:00	1	[{"added": {}}]	11	1
+210	2016-12-11 18:29:39.8899+00	4	Shreya Srivastava - -1.0 - 2016-12-11 18:29:33+00:00	1	[{"added": {}}]	13	1
+211	2016-12-11 18:32:40.237215+00	1	Aparna Chaganty - 60.0 - 2016-12-11 18:32:32+00:00	1	[{"added": {}}]	14	1
+212	2016-12-11 19:14:04.521936+00	13	Kshitij Mishra	1	[{"added": {}}]	9	1
+213	2016-12-11 19:14:17.770972+00	11	Flute - Kshitij Mishra	1	[{"added": {}}]	10	1
+214	2016-12-11 19:14:28.263347+00	16	Flute - Kshitij Mishra - Kshitij Mishra	1	[{"added": {}}]	12	1
+215	2016-12-11 19:14:58.256631+00	24	2016-11-23 19:39:00+00:00 - 2016-11-23 19:40:28+00:00	1	[{"added": {}}]	11	1
+216	2016-12-11 19:38:52.837665+00	12	3D sketching - Shreya Srivastava	1	[{"added": {}}]	10	1
+217	2016-12-11 19:41:46.834161+00	12	Gardening - Shreya Srivastava	2	[{"changed": {"fields": ["skill"]}}]	10	1
+218	2016-12-12 16:38:01.41741+00	20	2016-11-23 19:39:00+00:00 - 2016-11-23 19:40:28+00:00	2	[]	11	1
+219	2016-12-12 16:38:15.701832+00	14	Biscuit - Pallavi Sharma - Jyothirbindu Jaladi	2	[{"changed": {"fields": ["amount_to_teacher"]}}]	12	1
+220	2016-12-12 18:27:33.404333+00	24	2016-11-23 19:39:00+00:00 - 2016-11-23 19:40:28+00:00	2	[]	11	1
+221	2016-12-12 18:28:00.066721+00	24	2016-11-23 19:39:00+00:00 - 2016-11-23 19:40:28+00:00	2	[]	11	1
+222	2016-12-12 18:32:58.554758+00	24	2016-11-23 19:39:00+00:00 - 2016-11-23 19:40:28+00:00	2	[]	11	1
+223	2016-12-12 18:33:53.341472+00	24	2016-11-23 19:39:00+00:00 - 2016-11-23 19:40:28+00:00	2	[]	11	1
+224	2016-12-12 18:34:13.658532+00	24	2016-11-23 19:39:00+00:00 - 2016-11-23 19:40:28+00:00	2	[]	11	1
+225	2016-12-12 18:34:32.044443+00	24	2016-11-23 19:39:00+00:00 - 2016-11-23 19:40:28+00:00	2	[]	11	1
+226	2016-12-12 18:34:54.379713+00	24	2016-11-23 19:39:00+00:00 - 2016-11-23 19:40:28+00:00	2	[]	11	1
+227	2016-12-12 18:35:17.313866+00	24	2016-11-23 19:39:00+00:00 - 2016-11-23 19:40:28+00:00	2	[]	11	1
+228	2016-12-12 18:35:42.829282+00	24	2016-11-23 19:39:00+00:00 - 2016-11-23 19:40:28+00:00	2	[]	11	1
+229	2016-12-12 18:36:03.772037+00	24	2016-11-23 19:39:00+00:00 - 2016-11-23 19:40:28+00:00	2	[]	11	1
+230	2016-12-12 18:36:23.914718+00	24	2016-11-23 19:39:00+00:00 - 2016-11-23 19:40:28+00:00	2	[]	11	1
+231	2016-12-12 18:37:34.188401+00	24	2016-11-23 19:39:00+00:00 - 2016-11-23 19:40:28+00:00	2	[]	11	1
+232	2016-12-12 18:42:44.124056+00	20	2016-11-23 19:39:00+00:00 - 2016-11-23 19:40:28+00:00	2	[]	11	1
+233	2016-12-12 18:42:47.246886+00	24	2016-11-23 19:39:00+00:00 - 2016-11-23 19:40:28+00:00	2	[]	11	1
+234	2016-12-12 18:42:50.18468+00	23	2016-10-15 17:55:00+00:00 - 2016-10-15 18:19:00+00:00	2	[]	11	1
+235	2016-12-12 18:42:52.76408+00	22	2016-11-24 10:30:00+00:00 - 2016-11-24 10:41:33+00:00	2	[]	11	1
+236	2016-12-12 18:42:55.387038+00	21	2016-10-15 19:41:00+00:00 - 2016-10-15 19:46:29+00:00	2	[]	11	1
+237	2016-12-12 18:42:57.732897+00	20	2016-11-23 19:39:00+00:00 - 2016-11-23 19:40:28+00:00	2	[]	11	1
+238	2016-12-12 18:43:00.283691+00	19	2016-11-23 19:20:00+00:00 - 2016-11-23 19:21:23+00:00	2	[]	11	1
+239	2016-12-12 18:43:03.548679+00	18	2016-11-23 18:51:00+00:00 - 2016-11-23 19:19:39+00:00	2	[]	11	1
+240	2016-12-12 18:43:06.708764+00	17	2016-10-15 14:30:00+00:00 - 2016-10-15 14:47:30+00:00	2	[]	11	1
+241	2016-12-12 18:44:40.761412+00	14	Musical Instrument	2	[]	8	1
+242	2016-12-12 18:45:02.085612+00	1	Aparna Chaganty - 60.0 - 2016-12-11 18:32:32+00:00	2	[]	14	1
+243	2016-12-12 18:45:10.300795+00	1	Aparna Chaganty - 45.0 - 2016-12-11 18:32:32+00:00	2	[{"changed": {"fields": ["amount"]}}]	14	1
+244	2016-12-17 09:35:47.056464+00	24	2016-11-23 19:39:00+00:00 - 2016-11-23 19:40:28+00:00	2	[]	11	1
+245	2016-12-17 09:36:16.972064+00	20	2016-11-23 19:39:00+00:00 - 2016-11-23 19:40:28+00:00	3		11	1
+246	2016-12-17 10:06:56.015433+00	19	2016-11-23 19:20:00+00:00 - 2016-11-23 19:21:23+00:00	3		11	1
+247	2016-12-17 10:07:16.721435+00	17	2016-10-15 14:30:00+00:00 - 2016-10-15 14:47:30+00:00	3		11	1
+248	2016-12-17 10:08:21.299513+00	13	Men's Styling - Sumit Srivastava - Vaibhav Srivastava	3		12	1
+249	2016-12-17 15:59:27.518571+00	11	Flute - Kshitij Mishra	2	[{"changed": {"fields": ["details"]}}]	10	1
+250	2016-12-19 14:15:08.367222+00	11	Sumit Srivastava	2	[]	9	1
+251	2016-12-19 14:15:56.442396+00	15	Surya Namaskar - Aparna Chaganty - Shreya Srivastava	2	[]	12	1
+252	2016-12-19 14:15:59.486401+00	14	Biscuit - Pallavi Sharma - Jyothirbindu Jaladi	2	[{"changed": {"fields": ["amount_to_teacher"]}}]	12	1
+253	2016-12-19 14:26:01.76333+00	13	Paper Quilling - Kshitij Mishra	1	[{"added": {}}]	10	1
+254	2016-12-19 14:26:52.488046+00	13	Paper Quilling - Kshitij Mishra	2	[{"changed": {"fields": ["details"]}}]	10	1
+255	2016-12-22 13:17:53.560571+00	140	Cashless Payments - Free Classes	2	[]	7	1
+256	2016-12-22 13:18:25.507732+00	140	Cashless Payments - Free Classes	2	[{"changed": {"fields": ["details"]}}]	7	1
+257	2016-12-22 13:38:11.209141+00	71	Japanese - Languages	2	[]	7	1
+258	2016-12-22 13:39:24.788994+00	63	Badminton - Game/Sport training 	2	[]	7	1
+259	2017-01-07 15:54:44.884185+00	14	Biscuit - Pallavi Sharma - Jyothirbindu Jaladi	2	[{"changed": {"fields": ["time_refund", "amount_to_teacher"]}}]	12	1
+260	2017-01-07 15:58:38.574666+00	14	Biscuit - Pallavi Sharma - Jyothirbindu Jaladi	2	[{"changed": {"fields": ["time_refund", "amount_to_teacher"]}}]	12	1
+261	2017-01-07 16:00:25.225459+00	14	Biscuit - Pallavi Sharma - Jyothirbindu Jaladi	2	[{"changed": {"fields": ["time_refund", "amount_to_teacher"]}}]	12	1
+262	2017-01-07 17:41:30.041079+00	17	Flute - Kshitij Mishra - Jyothirbindu Jaladi - Session1	1	[{"added": {}}]	12	1
+263	2017-01-07 17:43:27.958891+00	14	Biscuit - Pallavi Sharma - Jyothirbindu Jaladi - Session1	2	[{"changed": {"fields": ["amount_to_teacher"]}}]	12	1
+264	2017-01-07 17:45:56.410623+00	17	Flute - Kshitij Mishra - Jyothirbindu Jaladi - Session1	2	[]	12	1
+265	2017-01-07 17:48:16.808693+00	17	Flute - Kshitij Mishra - Jyothirbindu Jaladi - Session1	2	[]	12	1
+266	2017-01-07 17:48:39.825813+00	17	Flute - Kshitij Mishra - Jyothirbindu Jaladi - Session1	2	[]	12	1
+267	2017-01-07 17:51:07.253239+00	17	Flute - Kshitij Mishra - Jyothirbindu Jaladi - Session1	2	[]	12	1
+268	2017-01-07 17:54:02.191874+00	17	Flute - Kshitij Mishra - Jyothirbindu Jaladi - Session1	2	[]	12	1
+269	2017-01-07 18:00:59.541352+00	17	Flute - Kshitij Mishra - Jyothirbindu Jaladi - Session1	2	[]	12	1
+270	2017-01-07 18:01:44.343811+00	17	Flute - Kshitij Mishra - Jyothirbindu Jaladi - Session1	2	[]	12	1
+271	2017-01-07 18:02:05.056413+00	17	Flute - Kshitij Mishra - Jyothirbindu Jaladi - Session3	2	[]	12	1
+272	2017-01-07 18:02:33.836327+00	17	Flute - Kshitij Mishra - Jyothirbindu Jaladi - Session2	2	[{"changed": {"fields": ["start_time"]}}]	12	1
+273	2017-01-07 18:02:47.51772+00	17	Flute - Kshitij Mishra - Jyothirbindu Jaladi - Session2	2	[{"changed": {"fields": ["start_time"]}}]	12	1
+274	2017-01-07 18:03:09.900273+00	16	Flute - Kshitij Mishra - Jyothirbindu Jaladi - Session1	2	[{"changed": {"fields": ["student", "amount_to_teacher"]}}]	12	1
+275	2017-01-07 18:03:37.317821+00	24	2016-08-03 19:39:00+00:00 - 2016-11-23 19:40:28+00:00	2	[{"changed": {"fields": ["start_time"]}}]	11	1
+276	2017-01-07 18:19:13.351726+00	16	Flute - Kshitij Mishra - Jyothirbindu Jaladi - Session1	2	[{"changed": {"fields": ["amount_to_teacher"]}}]	12	1
+277	2017-01-07 18:19:27.818389+00	17	Flute - Kshitij Mishra - Jyothirbindu Jaladi - Session2	2	[]	12	1
+278	2017-01-07 18:19:31.253836+00	14	Biscuit - Pallavi Sharma - Jyothirbindu Jaladi - Session2	2	[{"changed": {"fields": ["amount_to_teacher"]}}]	12	1
+279	2017-01-07 18:19:44.657758+00	17	Flute - Kshitij Mishra - Jyothirbindu Jaladi - Session2	2	[]	12	1
+280	2017-01-26 11:45:17.696953+00	13	Kshitij Mishra	2	[{"changed": {"fields": ["gender"]}}]	9	1
+281	2017-01-26 11:45:29.532842+00	4	Shreya Srivastava	2	[{"changed": {"fields": ["gender"]}}]	9	1
+282	2017-01-26 11:54:04.186558+00	9	Pallavi Sharma	2	[{"changed": {"fields": ["gender"]}}]	9	1
+283	2017-01-26 12:11:05.445358+00	13	Kshitij Mishra	2	[{"changed": {"fields": ["image"]}}]	9	1
+284	2017-01-29 08:01:16.832807+00	141	Velvet Cake 2 - Vedic Astrology	1	[{"added": {}}]	7	1
+285	2017-01-29 08:05:02.607366+00	141	Velvet Cake 2 - Vedic Astrology	2	[]	7	1
+286	2017-01-29 08:05:07.619101+00	141	Velvet Cake 2 - Vedic Astrology	2	[]	7	1
+287	2017-01-29 08:05:56.411365+00	141	Velvet Cake 2 - Vedic Astrology	2	[]	7	1
+288	2017-01-29 10:27:15.227449+00	24	2016-08-03 19:39:00+00:00 - 2016-11-23 19:40:28+00:00	2	[{"changed": {"fields": ["call_mode", "platform_tries", "video_call_rating", "monitored"]}}]	11	1
+289	2017-01-29 10:44:14.491307+00	17	Flute - Kshitij Mishra - Jyothirbindu Jaladi - Session2	2	[{"changed": {"fields": ["student_rating", "teacher_rating"]}}]	12	1
+290	2017-01-29 19:08:55.760507+00	10	Jyothir bindu Jaladi	2	[{"changed": {"fields": ["customer_name"]}}]	9	1
+291	2017-01-30 17:48:48.266348+00	18	Surya Namaskar - Aparna Chaganty - Kshitij Mishra - Session1	1	[{"added": {}}]	12	1
+292	2017-02-01 19:18:37.745631+00	13	khistijmishra23@gmail.com	2	[{"changed": {"fields": ["password", "email"]}}]	9	1
+293	2017-02-01 19:18:58.08841+00	4	ssrivastava87@gmail.com	2	[{"changed": {"fields": ["password"]}}]	9	1
+294	2017-02-05 21:24:56.428899+00	3	shreya	2	[]	3	1
+\.
+
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rishabh
+--
+
+SELECT pg_catalog.setval('django_admin_log_id_seq', 294, true);
+
+
+--
+-- Data for Name: django_content_type; Type: TABLE DATA; Schema: public; Owner: rishabh
+--
+
+COPY django_content_type (id, app_label, model) FROM stdin;
+1	admin	logentry
+2	auth	permission
+3	auth	user
+4	auth	group
+5	contenttypes	contenttype
+6	sessions	session
+7	proj	skill
+8	proj	skilltopic
+9	customers	customer
+10	customers	skillmatch
+11	session	call
+12	session	session
+13	payment	payment
+14	payment	payout
+15	proj	customerrequest
+16	social_django	nonce
+17	social_django	code
+18	social_django	usersocialauth
+19	social_django	association
+20	social_django	partial
+\.
+
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rishabh
+--
+
+SELECT pg_catalog.setval('django_content_type_id_seq', 20, true);
+
+
+--
+-- Data for Name: django_migrations; Type: TABLE DATA; Schema: public; Owner: rishabh
+--
+
+COPY django_migrations (id, app, name, applied) FROM stdin;
+1	contenttypes	0001_initial	2016-11-20 14:40:48.520051+00
+2	auth	0001_initial	2016-11-20 14:40:48.642758+00
+3	admin	0001_initial	2016-11-20 14:40:48.673719+00
+4	admin	0002_logentry_remove_auto_add	2016-11-20 14:40:48.697962+00
+5	contenttypes	0002_remove_content_type_name	2016-11-20 14:40:48.73598+00
+6	auth	0002_alter_permission_name_max_length	2016-11-20 14:40:48.758053+00
+7	auth	0003_alter_user_email_max_length	2016-11-20 14:40:48.77752+00
+8	auth	0004_alter_user_username_opts	2016-11-20 14:40:48.792791+00
+9	auth	0005_alter_user_last_login_null	2016-11-20 14:40:48.810944+00
+10	auth	0006_require_contenttypes_0002	2016-11-20 14:40:48.816535+00
+11	auth	0007_alter_validators_add_error_messages	2016-11-20 14:40:48.835156+00
+12	auth	0008_alter_user_username_max_length	2016-11-20 14:40:48.852525+00
+13	sessions	0001_initial	2016-11-20 14:40:48.869582+00
+14	proj	0001_initial	2016-11-20 17:51:12.310562+00
+15	proj	0002_auto_20161120_1801	2016-11-20 18:02:26.405055+00
+16	proj	0003_skilltopic_topic_name	2016-11-20 18:35:45.023666+00
+17	proj	0004_skill_skill_name	2016-11-20 18:38:55.979539+00
+18	proj	0005_skill_image_src	2016-11-21 13:31:29.84707+00
+19	proj	0006_skill_details	2016-12-02 15:55:05.202108+00
+20	proj	0007_skill_clicks	2016-12-07 14:10:04.141261+00
+21	proj	0008_skilltopic_clicks	2016-12-10 13:18:29.352375+00
+22	customers	0001_initial	2016-12-10 14:45:07.870995+00
+32	session	0001_initial	2016-12-11 13:35:32.059882+00
+33	session	0002_auto_20161211_1350	2016-12-11 13:51:10.202871+00
+34	session	0003_auto_20161211_1354	2016-12-11 13:54:53.68913+00
+35	customers	0002_auto_20161211_1408	2016-12-11 14:08:43.814699+00
+36	session	0004_auto_20161211_1408	2016-12-11 14:08:43.834829+00
+37	customers	0003_auto_20161211_1411	2016-12-11 14:11:40.611403+00
+38	session	0005_auto_20161211_1411	2016-12-11 14:11:40.63257+00
+39	session	0006_auto_20161211_1433	2016-12-11 14:33:06.76905+00
+40	customers	0004_skillmatch_classes_given	2016-12-11 14:35:35.750331+00
+41	session	0007_auto_20161211_1435	2016-12-11 14:35:35.773437+00
+42	session	0008_auto_20161211_1437	2016-12-11 14:37:19.206533+00
+43	customers	0005_auto_20161211_1438	2016-12-11 14:38:38.294846+00
+44	session	0009_auto_20161211_1438	2016-12-11 14:38:38.316732+00
+45	session	0010_auto_20161211_1506	2016-12-11 15:06:51.827633+00
+46	session	0011_auto_20161211_1513	2016-12-11 15:13:26.223663+00
+47	session	0012_auto_20161211_1519	2016-12-11 15:19:04.242873+00
+48	session	0013_auto_20161211_1520	2016-12-11 15:20:10.72214+00
+49	session	0014_auto_20161211_1520	2016-12-11 15:20:10.745171+00
+50	session	0015_auto_20161211_1521	2016-12-11 15:21:21.726954+00
+51	session	0016_auto_20161211_1521	2016-12-11 15:21:49.138202+00
+52	session	0017_auto_20161211_1522	2016-12-11 15:22:18.449534+00
+53	session	0018_auto_20161211_1523	2016-12-11 15:23:22.660543+00
+54	session	0019_auto_20161211_1523	2016-12-11 15:23:46.46217+00
+55	session	0020_auto_20161211_1524	2016-12-11 15:24:16.108661+00
+56	session	0021_auto_20161211_1530	2016-12-11 15:30:44.920581+00
+57	session	0022_auto_20161211_1531	2016-12-11 15:31:13.810098+00
+58	session	0023_auto_20161211_1537	2016-12-11 15:37:12.867202+00
+59	session	0024_auto_20161211_1539	2016-12-11 15:39:21.708305+00
+60	session	0025_auto_20161211_1635	2016-12-11 16:35:57.310424+00
+61	session	0026_auto_20161211_1717	2016-12-11 17:17:13.718317+00
+62	session	0027_auto_20161211_1735	2016-12-11 17:35:27.073941+00
+63	payment	0001_initial	2016-12-11 18:00:43.858042+00
+64	session	0028_auto_20161211_1755	2016-12-11 18:00:43.882739+00
+65	session	0029_auto_20161211_1756	2016-12-11 18:00:43.911438+00
+66	session	0030_auto_20161211_1800	2016-12-11 18:00:43.939921+00
+67	session	0031_auto_20161211_1810	2016-12-11 18:10:33.526266+00
+68	payment	0002_payout	2016-12-11 18:12:59.954044+00
+69	session	0032_auto_20161211_1812	2016-12-11 18:12:59.979954+00
+70	session	0033_auto_20161211_1813	2016-12-11 18:13:19.764852+00
+71	session	0034_auto_20161211_1816	2016-12-11 18:16:33.7371+00
+72	proj	0009_auto_20161211_1822	2016-12-11 18:22:19.437719+00
+73	session	0035_auto_20161211_1822	2016-12-11 18:22:19.501275+00
+74	proj	0010_skill_no_teachers	2016-12-11 19:38:33.984858+00
+75	session	0036_auto_20161211_1828	2016-12-11 19:38:34.010821+00
+76	session	0037_auto_20161211_1832	2016-12-11 19:38:34.044801+00
+77	session	0038_auto_20161211_1938	2016-12-11 19:38:34.075794+00
+78	session	0039_auto_20161212_1631	2016-12-12 16:31:50.691973+00
+79	customers	0006_skillmatch_details	2016-12-17 10:05:01.690639+00
+80	customers	0007_customer_no_subjects	2016-12-17 15:59:01.003414+00
+81	customers	0008_auto_20161222_1311	2016-12-22 13:11:44.511881+00
+82	proj	0011_auto_20161222_1311	2016-12-22 13:11:44.64716+00
+83	customers	0009_auto_20161222_1427	2016-12-22 14:28:14.887712+00
+84	payment	0003_auto_20161222_1427	2016-12-22 14:28:15.068674+00
+85	session	0040_auto_20161222_1427	2016-12-22 14:28:15.295321+00
+86	proj	0012_customerrequest	2016-12-23 08:00:15.116001+00
+87	proj	0013_customerrequest_skill	2016-12-23 08:10:01.591174+00
+88	proj	0014_customerrequest_default_skill	2016-12-23 08:20:48.913307+00
+89	session	0041_session_session_number	2017-01-07 17:38:46.316969+00
+90	customers	0010_customer_phone_number	2017-01-08 11:15:20.277072+00
+91	session	0042_auto_20170108_1115	2017-01-08 11:15:20.309083+00
+92	customers	0011_customer_gender	2017-01-26 11:44:44.551245+00
+93	proj	0015_auto_20170126_1144	2017-01-26 11:44:44.585779+00
+94	customers	0012_customer_image	2017-01-26 12:09:17.757234+00
+95	proj	0016_skill_skill_code	2017-01-29 07:49:30.613105+00
+96	proj	0017_skilltopic_topic_code	2017-01-29 08:59:58.820093+00
+97	session	0043_call_call_mode	2017-01-29 10:13:23.719082+00
+98	session	0044_auto_20170129_1026	2017-01-29 10:26:52.611209+00
+99	session	0045_auto_20170129_1043	2017-01-29 10:43:56.664445+00
+100	payment	0004_auto_20170129_1407	2017-01-29 14:07:22.069148+00
+101	session	0046_session_order_id	2017-01-29 14:35:27.418204+00
+102	customers	0013_customer_customer_code	2017-01-29 18:58:19.853856+00
+103	default	0001_initial	2017-01-31 16:08:26.984722+00
+104	social_auth	0001_initial	2017-01-31 16:08:26.992431+00
+105	default	0002_add_related_name	2017-01-31 16:08:27.079102+00
+106	social_auth	0002_add_related_name	2017-01-31 16:08:27.081679+00
+107	default	0003_alter_email_max_length	2017-01-31 16:08:27.094682+00
+108	social_auth	0003_alter_email_max_length	2017-01-31 16:08:27.097725+00
+109	default	0004_auto_20160423_0400	2017-01-31 16:08:27.130518+00
+110	social_auth	0004_auto_20160423_0400	2017-01-31 16:08:27.134383+00
+111	social_auth	0005_auto_20160727_2333	2017-01-31 16:08:27.151592+00
+112	social_django	0006_partial	2017-01-31 16:08:27.17259+00
+113	social_django	0004_auto_20160423_0400	2017-01-31 16:08:27.180273+00
+114	social_django	0003_alter_email_max_length	2017-01-31 16:08:27.183312+00
+115	social_django	0002_add_related_name	2017-01-31 16:08:27.188021+00
+116	social_django	0001_initial	2017-01-31 16:08:27.193567+00
+117	social_django	0005_auto_20160727_2333	2017-01-31 16:08:27.196923+00
+118	customers	0014_auto_20170131_1810	2017-01-31 18:10:13.053+00
+119	customers	0015_auto_20170201_1541	2017-02-01 15:41:44.544928+00
+120	customers	0016_auto_20170201_1914	2017-02-01 19:14:15.426746+00
+121	customers	0017_auto_20170204_1234	2017-02-04 12:34:45.193888+00
+122	customers	0018_auto_20170205_1607	2017-02-05 16:07:51.722844+00
+123	customers	0019_customer_social	2017-02-05 17:54:35.354976+00
+\.
+
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rishabh
+--
+
+SELECT pg_catalog.setval('django_migrations_id_seq', 123, true);
+
+
+--
+-- Data for Name: django_session; Type: TABLE DATA; Schema: public; Owner: rishabh
+--
+
+COPY django_session (session_key, session_data, expire_date) FROM stdin;
+rhh2eehuzbo40r2tpm3ws16xzbv0kb8l	Zjk0NDBiOGQzOTU2YWE5ZDY3NjdlZWQ0YjU1MTJiNzI0ZDg4OGE0ODp7Il9hdXRoX3VzZXJfaGFzaCI6ImVlNTY5MmQ0YTA4YWZiOThjYTQ1MGRlNDU3YTQ2YjgyMDE3MjUzNmUiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=	2016-12-04 14:42:45.081084+00
+nm8u2meexed0gd0dq8x6xicwrwy8sfjy	Zjk0NDBiOGQzOTU2YWE5ZDY3NjdlZWQ0YjU1MTJiNzI0ZDg4OGE0ODp7Il9hdXRoX3VzZXJfaGFzaCI6ImVlNTY5MmQ0YTA4YWZiOThjYTQ1MGRlNDU3YTQ2YjgyMDE3MjUzNmUiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=	2016-12-05 16:22:05.358886+00
+t556vyk4bcy2afp7zbfgbha9r4xmo1pn	Zjk0NDBiOGQzOTU2YWE5ZDY3NjdlZWQ0YjU1MTJiNzI0ZDg4OGE0ODp7Il9hdXRoX3VzZXJfaGFzaCI6ImVlNTY5MmQ0YTA4YWZiOThjYTQ1MGRlNDU3YTQ2YjgyMDE3MjUzNmUiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=	2016-12-05 18:35:13.956954+00
+ic5cfyae77vk97yezbd7qtpag281i12c	Zjk0NDBiOGQzOTU2YWE5ZDY3NjdlZWQ0YjU1MTJiNzI0ZDg4OGE0ODp7Il9hdXRoX3VzZXJfaGFzaCI6ImVlNTY5MmQ0YTA4YWZiOThjYTQ1MGRlNDU3YTQ2YjgyMDE3MjUzNmUiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=	2016-12-07 11:47:44.982773+00
+tov31uqwdlgdnwah4t8fpfjgqg5ag8t3	Zjk0NDBiOGQzOTU2YWE5ZDY3NjdlZWQ0YjU1MTJiNzI0ZDg4OGE0ODp7Il9hdXRoX3VzZXJfaGFzaCI6ImVlNTY5MmQ0YTA4YWZiOThjYTQ1MGRlNDU3YTQ2YjgyMDE3MjUzNmUiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=	2016-12-20 13:09:05.732201+00
+pleb86zwlgj0t6ako2r93nnztlll6i14	Zjk0NDBiOGQzOTU2YWE5ZDY3NjdlZWQ0YjU1MTJiNzI0ZDg4OGE0ODp7Il9hdXRoX3VzZXJfaGFzaCI6ImVlNTY5MmQ0YTA4YWZiOThjYTQ1MGRlNDU3YTQ2YjgyMDE3MjUzNmUiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=	2017-01-05 13:12:18.33991+00
+qn4917abt838yinhht368543ue8q8t4o	Zjk0NDBiOGQzOTU2YWE5ZDY3NjdlZWQ0YjU1MTJiNzI0ZDg4OGE0ODp7Il9hdXRoX3VzZXJfaGFzaCI6ImVlNTY5MmQ0YTA4YWZiOThjYTQ1MGRlNDU3YTQ2YjgyMDE3MjUzNmUiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=	2017-01-21 07:14:51.803862+00
+lz31pyol8zwu4gp7htqgenynrmj0r6qc	YzY5NTRlNTAyNDMwZDg0YTlhZjU2YjFiYmY4NWFiOWYwNzQyY2YwZDp7ImZhY2Vib29rX3N0YXRlIjoiM3hUanU5TVJOMXA5azdKZ2ZHc1FLYXFCeU96eVd6RXYifQ==	2017-02-14 16:11:42.253911+00
+dp2p1i3ad7wpqszmep911ohm2omyswim	OWJhM2QyOGU5MDRmNjg2ODk0YjE1YmIzYzM5YmEzN2E0NGVkZmFmZDp7Imdvb2dsZS1vYXV0aDJfc3RhdGUiOiJNVzlycGpLVnFvRlRrZDlWZ29CVTc3N3JOeG5CcWhJNSIsIl9hdXRoX3VzZXJfaWQiOiIxMCIsInNvY2lhbF9hdXRoX2xhc3RfbG9naW5fYmFja2VuZCI6Imdvb2dsZS1vYXV0aDIiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJzb2NpYWxfY29yZS5iYWNrZW5kcy5nb29nbGUuR29vZ2xlT0F1dGgyIiwibmV4dCI6Ii9sb2dpbi8iLCJmYWNlYm9va19zdGF0ZSI6IjhRNnE0QkdIaDNPZkdVQ2s0WHdWWm9IWXpYeFduMTFLIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjE3NzkwYTNhM2I0ZjliYTgxZmM2MTEwNTI3MjUwZDBmMDhmZTMzNyJ9	2017-02-20 13:41:22.307641+00
+k4u61ipw89kz8aii4doqxkgeekhjdrcz	M2ViN2M5NDNjMGVlMWI2OWI4Nzg1Nzk2Y2ZiZTYzY2JmZWZjOWY0Njp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiZmFjZWJvb2tfc3RhdGUiOiJ1OXNzMzl3eW5UeXAwVTJCU3BkMjhPRFhDc1JkR0x6eSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwibmV4dCI6Ii9sb2dpbi8iLCJzb2NpYWxfYXV0aF9sYXN0X2xvZ2luX2JhY2tlbmQiOiJmYWNlYm9vayIsIl9hdXRoX3VzZXJfaGFzaCI6IjA5ZTM2NWJjNGQ1OWMyZjhhOTU4MmRmNjZiODZjODJhOWQ1YTZjMmMifQ==	2017-02-22 17:06:23.485709+00
+53gy14mekfahqstud9bcdu6o36cunhin	ZjBiMTVlN2Y2ZGZjODk4ZTcyZWQxOTRhMDdmNzA1ODgxYjAwNWMxZTp7ImZhY2Vib29rX3N0YXRlIjoibFFqblg3Z1RNekZhOXY4MVBhZGV1ZlFGdWkwZXY5WU8iLCJzb2NpYWxfYXV0aF9sYXN0X2xvZ2luX2JhY2tlbmQiOiJmYWNlYm9vayIsIl9hdXRoX3VzZXJfaGFzaCI6IjA5ZTM2NWJjNGQ1OWMyZjhhOTU4MmRmNjZiODZjODJhOWQ1YTZjMmMiLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6InNvY2lhbF9jb3JlLmJhY2tlbmRzLmZhY2Vib29rLkZhY2Vib29rT0F1dGgyIn0=	2017-02-22 17:29:24.460134+00
+qkuzwdu4gdj0or8bhh9lol2sklrors4e	NTkxY2YyMDgxYjkyMDM5NDQ1ZTIzMmFhMTEzNGQ5MTBmYmMxYTllZTp7ImZhY2Vib29rX3N0YXRlIjoiOTFxWTkyWlliTGNocG5GM2pJdVBONVBaOTZjRXI3ZWQiLCJzb2NpYWxfYXV0aF9sYXN0X2xvZ2luX2JhY2tlbmQiOiJmYWNlYm9vayIsIl9hdXRoX3VzZXJfaGFzaCI6IjA5ZTM2NWJjNGQ1OWMyZjhhOTU4MmRmNjZiODZjODJhOWQ1YTZjMmMiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJzb2NpYWxfY29yZS5iYWNrZW5kcy5mYWNlYm9vay5GYWNlYm9va09BdXRoMiIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=	2017-02-22 17:30:57.105162+00
+jdytc6lxfttmf4pdnd6yv56hutg6lfwb	MjQ4NjgxYzM5Mjk4YzBhNWNhZTNmZjI3MWYwOTY5NTdkMTAwMzhlOTp7ImZhY2Vib29rX3N0YXRlIjoiNmZhaTZHVElQNVdCdWVvdnZKV2EwQ3RmcUpFZUhoNEsiLCJzb2NpYWxfYXV0aF9sYXN0X2xvZ2luX2JhY2tlbmQiOiJmYWNlYm9vayIsIl9hdXRoX3VzZXJfaGFzaCI6IjA5ZTM2NWJjNGQ1OWMyZjhhOTU4MmRmNjZiODZjODJhOWQ1YTZjMmMiLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6InNvY2lhbF9jb3JlLmJhY2tlbmRzLmZhY2Vib29rLkZhY2Vib29rT0F1dGgyIn0=	2017-02-23 03:03:52.579783+00
+\.
+
+
+--
+-- Data for Name: payment_payment; Type: TABLE DATA; Schema: public; Owner: rishabh
+--
+
+COPY payment_payment (id, amount, "time", customer_id, created_date, modified_date, mode, transaction_id) FROM stdin;
+4	67	2016-12-11 18:29:33+00	4	2016-12-22 14:28:14.921927+00	2016-12-22 14:28:14.974237+00	paytm	
+\.
+
+
+--
+-- Name: payment_payment_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rishabh
+--
+
+SELECT pg_catalog.setval('payment_payment_id_seq', 4, true);
+
+
+--
+-- Data for Name: payment_payout; Type: TABLE DATA; Schema: public; Owner: rishabh
+--
+
+COPY payment_payout (id, amount, "time", customer_id, created_date, modified_date, mode, transaction_id) FROM stdin;
+1	45	2016-12-11 18:32:32+00	3	2016-12-22 14:28:15.01377+00	2016-12-22 14:28:15.057545+00	paytm	
+\.
+
+
+--
+-- Name: payment_payout_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rishabh
+--
+
+SELECT pg_catalog.setval('payment_payout_id_seq', 1, true);
+
+
+--
+-- Data for Name: proj_customerrequest; Type: TABLE DATA; Schema: public; Owner: rishabh
+--
+
+COPY proj_customerrequest (id, created_date, modified_date, contact_name, contact_phone, contact_email, preferred_communication_time, content, skill, default_skill) FROM stdin;
+1	2016-12-23 08:20:58.985182+00	2016-12-23 08:20:58.985231+00	Abodh	9844850018	ris.90s@gmail.com	6:20PM	aasasas	ASD	Tamagoyaki
+2	2016-12-23 08:38:39.579532+00	2016-12-23 08:38:39.579574+00	Abodh	9844850018	ris.90s@gmail.com	8:20 PM	asass	Tamagoyak	Tamagoyaki
+3	2017-01-29 14:57:09.614127+00	2017-01-29 14:57:09.614168+00	Rishabh	9407078067	chandni.247@gmail.com	7:30 PM		Flute	Flute
+4	2017-01-29 14:57:54.587097+00	2017-01-29 14:57:54.587124+00	Rishabh	9407078067	ris.90s@gmail.com	6:20PM		Flute	Flute
+5	2017-01-29 15:14:10.306759+00	2017-01-29 15:14:10.306788+00	Shreya	9844850018	chandni.247@gmail.com	6:20PM	sasasa	Flute	Flute
+6	2017-01-29 15:19:13.09181+00	2017-01-29 15:19:13.091848+00	Shreya	9844850018	chandni.247@gmail.com	6:20PM	xxsx	Flute	Flute
+7	2017-01-29 15:21:08.825982+00	2017-01-29 15:21:08.826012+00	Richa	8303923248	chandni.247@gmail.com	6:20PM	ssdds	Flute	Flute
+8	2017-01-29 15:24:26.321036+00	2017-01-29 15:24:26.321064+00	Shreya	9844850018	chandni.247@gmail.com	6:20PM		Flute	Flute
+9	2017-01-29 15:25:09.164008+00	2017-01-29 15:25:09.164049+00	Rishabh	9407078067	chandni.247@gmail.com	6:20PM		Flute	Flute
+10	2017-01-29 15:26:25.710522+00	2017-01-29 15:26:25.710565+00	Shreya	9844850018	chandni.247@gmail.com	7:30 PM		Flute	Flute
+11	2017-01-29 15:27:26.018855+00	2017-01-29 15:27:26.018881+00	Shreya	9844850018	chandni.247@gmail.com			Flute	Flute
+12	2017-01-29 15:30:37.636908+00	2017-01-29 15:30:37.636969+00	Rishabh	9407078067	chandni.247@gmail.com	qwqw		Flute	Flute
+13	2017-01-29 15:31:56.551999+00	2017-01-29 15:31:56.552038+00	Rishabh	9407078067	chandni.247@gmail.com	6:20PM		Flute	Flute
+14	2017-01-29 15:33:01.181945+00	2017-01-29 15:33:01.181979+00	Shreya	9844850018	chandni.247@gmail.com	6:20PM		Flute	Flute
+15	2017-01-29 15:33:20.42082+00	2017-01-29 15:33:20.420847+00	Richa	8303923248	chandni.247@gmail.com	7:30 PM		Flute	Flute
+16	2017-01-29 18:21:05.808479+00	2017-01-29 18:21:05.808522+00	Shreya	9844850018	chandni.247@gmail.com			Flute	Flute
+17	2017-01-29 18:22:53.675945+00	2017-01-29 18:22:53.676063+00	Abodh	9844850018	ris.90s@gmail.com			Flute	Flute
+18	2017-01-29 18:29:31.278796+00	2017-01-29 18:29:31.278824+00	Rishabh	9407078067				Flute	Flute
+19	2017-01-29 18:31:12.884504+00	2017-01-29 18:31:12.884531+00	Shreya	9844850018				Flute	Flute
+20	2017-01-29 18:33:19.973726+00	2017-01-29 18:33:19.973753+00	Richa	8303923248				Flute	Flute
+21	2017-01-29 18:40:32.312323+00	2017-01-29 18:40:32.312368+00	Richa	8303923248				Flute	Flute
+22	2017-01-29 18:40:51.043391+00	2017-01-29 18:40:51.043432+00	Richa	8303923248	ris.90s@gmail.com			Flute	Flute
+23	2017-01-29 18:41:23.057865+00	2017-01-29 18:41:23.057905+00	Richa	8303923248				Cashless Payments	Cashless Payments
+24	2017-01-29 18:41:39.021151+00	2017-01-29 18:41:39.021211+00	Richa	8303923248				Aachar (Pickel)	Aachar (Pickel)
+\.
+
+
+--
+-- Name: proj_customerrequest_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rishabh
+--
+
+SELECT pg_catalog.setval('proj_customerrequest_id_seq', 24, true);
+
+
+--
+-- Data for Name: proj_skill; Type: TABLE DATA; Schema: public; Owner: rishabh
+--
+
+COPY proj_skill (id, topic_id, skill_name, image_src, details, clicks, classes_given, no_teachers, created_date, modified_date, skill_code) FROM stdin;
+37	7	C			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:25.884299+00	c
+38	7	DBMS			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:25.893125+00	dbms
+40	7	JAVA			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:25.916166+00	java
+41	7	Networking			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:25.925001+00	networking
+43	7	Solaris			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:25.933909+00	solaris
+44	7	Veritas			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:25.942801+00	veritas
+45	8	Basic Yoga			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:25.951887+00	basicyoga
+46	8	Facial exercise			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:25.960912+00	facialexercise
+47	8	Gymming			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:25.972221+00	gymming
+48	8	Home Workouts			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:25.981241+00	homeworkouts
+49	8	Shambhavi Mahamudra			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:25.989914+00	shambhavimahamudra
+51	8	Aerobics			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:25.998807+00	aerobics
+53	9	Hair Growth Tips			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.016594+00	hairgrowth
+54	9	Ladies makeup & Home Salon			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.025547+00	ladiesmakeup
+56	9	Nail Art			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.034641+00	nailart
+57	9	Saree Draping (Regional)			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.043365+00	sareedraping
+58	9	Women's Grooming			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.052704+00	womensgrooming
+59	9	Women's Grooming (formal)			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.061825+00	womensgrooming
+60	9	Women's Hairstyling			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.071041+00	womenshairstyling
+61	9	Men's Home Salon			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.079399+00	menshome
+65	11	Clash Royale 			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.095844+00	clashroyale
+66	11	Pool/Snooker			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.105002+00	poolsnooker
+67	11	Volleyball			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.114155+00	volleyball
+68	12	English			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.123351+00	english
+30	5	Excel			3	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.861178+00	excel
+70	12	Hindi			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.141054+00	hindi
+72	12	Kannada			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.150101+00	kannada
+73	13	Legal Advice			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.159557+00	legaladvice
+75	14	Guitar			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.16811+00	guitar
+76	15	Oratory			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.177309+00	oratory
+77	15	Resume writing			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.186218+00	resumewriting
+78	15	Anchoring tips			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.195207+00	anchoringtips
+80	16	Professional Photography			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.213106+00	professionalphotography
+81	16	Wildlife Photography			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.221529+00	wildlifephotography
+84	17	Shaadi Rasam Songs			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.230492+00	shaadirasam
+85	3	Shaadi Rasam Songs			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.240613+00	shaadirasam0
+86	18	Mathematics			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.250068+00	mathematics
+87	18	Physics			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.25888+00	physics
+88	19	Palmistry			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.268398+00	palmistry
+90	19	Vaastu Shastra			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.285159+00	vaastushastra
+92	20	Apple Jam			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.293875+00	applejam
+93	20	Baati Chokha			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.303242+00	baatichokha
+95	20	Banana Pancake			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.313177+00	bananapancake
+97	20	Bread making			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.323026+00	breadmaking
+98	20	Caramel Sauce			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.332305+00	caramelsauce
+99	20	Cake without icing			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.341351+00	cakewithout
+100	20	Cake with icing			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.350568+00	cakewith
+102	20	Chicken Malai Tikka			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.369289+00	chickenmalai
+103	20	Chilli Rava Toast			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.378017+00	chillirava
+104	20	Choco Lava Cake			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.38681+00	chocolava
+105	20	Chola Bhatura			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.396026+00	cholabhatura
+106	20	Chutneys			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.404905+00	chutneys
+107	20	Dhokla			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.414241+00	dhokla
+108	20	Doughnut			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.423558+00	doughnut
+109	20	French Fries			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.433723+00	frenchfries
+111	20	Hyderabadi Biryani			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.452873+00	hyderabadibiryani
+112	20	Ice cream			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.462502+00	icecream
+113	20	Idli			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.471712+00	idli
+115	20	Kadhai Paneer			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.481044+00	kadhaipaneer
+116	20	Laccha Paratha			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.491572+00	lacchaparatha
+117	20	Lasagna			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.500767+00	lasagna
+118	20	Malpua - Rabri			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.664593+00	malpua
+119	20	Mocktails			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.676123+00	mocktails
+120	20	Momos			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.68656+00	momos
+121	20	Noodles			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.696785+00	noodles
+123	20	Paneer Tikka Masala			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.7187+00	paneertikka
+124	20	Papad			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.73145+00	papad
+29	4	Gardening			0	0	1	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.741228+00	gardening
+69	12	German			1	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.132288+00	german
+18	4	Knitting			1	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.759192+00	knitting
+19	4	Mandir Decoration			1	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.76824+00	mandirdecoration
+16	4	Foil Painting			1	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.777162+00	foilpainting
+22	4	Origami			3	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.786202+00	origami
+20	4	Mehandi			13	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.795342+00	mehandi
+23	4	Painting			1	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.804202+00	painting
+28	4	Stocking flower			1	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.822306+00	stockingflower
+26	4	Rangoli			14	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.832271+00	rangoli
+21	4	Oil Painting			6	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.84172+00	oilpainting
+27	4	Stitching			1	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.851719+00	stitching
+55	9	Men's Styling			2	0	1	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.75037+00	mensstyling
+13	4	Craft			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:25.862757+00	craft
+39	7	Discrete Structure			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:25.906624+00	discretestructure
+52	9	Apparel Designing			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.007688+00	appareldesigning
+62	10	Financial Advice			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.087069+00	financialadvice
+79	16	Mobile Photography			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.204051+00	mobilephotography
+89	19	Tarot Card Reading			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.27654+00	tarotcard
+101	20	Chicken Kabab			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.359972+00	chickenkabab
+110	20	Honey Chilli Potato			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.443916+00	honeychilli
+122	20	Paneer Butter Masala			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.707653+00	paneerbutter
+25	4	Pencil Sketching			1	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.813323+00	pencilsketching
+31	5	Using a Computer			1	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.870182+00	usinga
+32	6	Moonwalk			1	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.878807+00	moonwalk
+33	6	Salsa			1	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.887549+00	salsa
+36	7	Basic Android App			4	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.896819+00	basicandroid
+42	7	OS			1	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.905978+00	os
+6	2	Candle Stand	https://upload.wikimedia.org/wikipedia/commons/e/e7/Base_of_Candlestand_LACMA_M.2002.1.575_%281_of_3%29.jpg		1	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.915359+00	candlestand
+4	3	Religious Songs	https://upload.wikimedia.org/wikipedia/commons/4/46/Singer_icon_transparent.png		1	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.92429+00	religioussongs
+82	17	Religious Songs			1	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.934462+00	religioussongs0
+7	2	Clay Modelling	https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Figurines_from_Clay_Critters.jpg/440px-Figurines_from_Clay_Critters.jpg		2	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.943283+00	claymodelling
+12	4	Clay Modelling			2	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.953674+00	claymodelling0
+94	20	Baby corn manchuria			1	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.96283+00	babycorn
+15	4	Festival Decoration Advice			1	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.974261+00	festivaldecoration
+14	4	Diya Painting			1	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.984242+00	diyapainting
+125	20	Pastry			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:26.993562+00	pastry
+126	20	Pav Bhaji			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:27.003803+00	pavbhaji
+127	20	Rabri			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:27.013516+00	rabri
+34	6	Song  Choreography			1	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:27.022776+00	songchoreography
+35	6	Bharatnatyam			1	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:27.032334+00	bharatnatyam
+128	20	Raita			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:27.040965+00	raita
+129	20	Salad			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:27.051904+00	salad
+10	4	Candle Making			1	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:27.062103+00	candlemaking
+64	11	Basketball			2	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:27.071338+00	basketball
+130	20	Samosa			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:27.080625+00	samosa
+131	20	Sauteed Mushroom			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:27.090372+00	sauteedmushroom
+132	20	Shakshuka			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:27.100149+00	shakshuka
+133	20	Strawberry Panna Cotta			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:27.109616+00	strawberrypanna
+135	20	Tandoori Chicken			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:27.118997+00	tandoorichicken
+136	20	Thai Curry Manchurian			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:27.128436+00	thaicurry
+96	20	Biscuit			12	1	1	2016-12-22 13:11:44.538512+00	2017-01-29 14:48:07.188271+00	biscuit
+138	20	Veg. Manchurian			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:27.148982+00	vegmanchurian
+139	20	Garlic Bread			0	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:27.158207+00	garlicbread
+3	2	Candle Making	https://upload.wikimedia.org/wikipedia/commons/f/fa/Candle-flame-and-reflection.jpg		1	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:27.169948+00	candlemaking0
+140	22	Cashless Payments	https://c1.staticflickr.com/9/8615/16033558463_294e767380_b.jpg	1) How to transfer money\r\n2) How to purchase online/book ticket\r\n3) How to use e-wallet	32	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:27.229504+00	cashlesspayments
+5	2	3 D painting	https://upload.wikimedia.org/wikipedia/commons/4/46/The_two_horses_3D_chalk_painting.jpg		4	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:27.188099+00	3d
+11	4	Candle Stand			1	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:27.208764+00	candlestand0
+83	3	Religious Songs			1	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:27.220393+00	religioussongs1
+50	8	Surya Namaskar			1	2	1	2016-12-22 13:11:44.538512+00	2017-01-30 17:48:48.242382+00	suryanamaskar
+63	11	Badminton	s	s	3	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:27.238342+00	badminton
+134	20	Tamagoyaki	https://upload.wikimedia.org/wikipedia/commons/a/ab/Tamagoyaki_by_naotakem_in_Tokyo.jpg	It is a food	27	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:27.247208+00	tamagoyaki
+24	4	Paper Quilling			1	0	1	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:27.256919+00	paperquilling
+91	20	Aachar (Pickel)	https://upload.wikimedia.org/wikipedia/commons/3/30/ChessStartingPosition.jpg	asasasa	8	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:27.197328+00	aacharpickel
+2	2	3D sketching	https://upload.wikimedia.org/wikipedia/commons/3/3d/Palaeontological_memoirs_and_notes_of_H._Falconer%2C_with_a_biographical_sketch_of_the_author_%28Vol._I%2C_Plate_34%29_%288427803894%29.jpg		3	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:27.275699+00	3dsketching
+9	4	3D sketching			3	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:27.286552+00	3dsketching0
+17	4	Interior Decoration Advice			2	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:27.296561+00	interiordecoration
+114	20	Indian Sweets (balu shahi, meethi papdi, modak, jalebi, rasgulla, gulab jamun, gujhiya)			2	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:27.315411+00	indiansweets
+137	20	Velvet Cake			1	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:27.13865+00	velvetcake
+74	14	Flute			107	2	1	2016-12-22 13:11:44.538512+00	2017-01-29 14:48:07.303034+00	flute
+141	19	Velvet Cake 2			1	0	0	2017-01-29 08:01:16.827474+00	2017-01-29 08:05:56.407776+00	velvetcake3
+71	12	Japanese	https://upload.wikimedia.org/wikipedia/commons/a/a2/Japanese-language.jpg	Lesson 1:\r\nHiragana Characters\r\nWriting and pronunciation\r\nJapanese sentence formation\r\nUseful daily expressions\r\n\r\nLesson 2:\r\nHiragana Characters Revision Test\r\nUseful daily expressions\r\nKatakana Characters\r\nWriting and pronunciation\r\nPractice Test\r\n\r\nLesson 3:\r\nMeeting People\r\nIdentify people and things\r\nGrammar\r\nUseful words\r\nKey sentences\r\nPractice Test\r\n\r\nLesson 4:\r\nMeeting People - Official\r\nUseful vocabulary\r\nKey sentences\r\nPractice Test\r\n\r\nLesson 5:\r\nShopping \r\nUseful Vocabulary\r\nKey sentences\r\nPractice test	52	0	0	2016-12-22 13:11:44.538512+00	2017-01-29 07:58:27.340896+00	japanese
+\.
+
+
+--
+-- Name: proj_skill_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rishabh
+--
+
+SELECT pg_catalog.setval('proj_skill_id_seq', 141, true);
+
+
+--
+-- Data for Name: proj_skilltopic; Type: TABLE DATA; Schema: public; Owner: rishabh
+--
+
+COPY proj_skilltopic (id, topic_name, clicks, classes_given, created_date, modified_date, topic_code) FROM stdin;
+23	Others	0	0	2016-12-22 13:11:44.619797+00	2017-01-29 09:35:09.893542+00	others
+19	Vedic Astrology	1	0	2016-12-22 13:11:44.619797+00	2017-01-29 09:35:09.910934+00	vedicastrology
+7	Education	5	0	2016-12-22 13:11:44.619797+00	2017-01-29 09:35:09.923669+00	education
+17	Singing	1	0	2016-12-22 13:11:44.619797+00	2017-01-29 09:35:09.92748+00	singing
+6	Dance	4	0	2016-12-22 13:11:44.619797+00	2017-01-29 09:35:09.931764+00	dance
+10	Finance	0	0	2016-12-22 13:11:44.619797+00	2017-01-29 09:35:09.935991+00	finance
+13	Law	0	0	2016-12-22 13:11:44.619797+00	2017-01-29 09:35:09.940604+00	law
+15	Personality	0	0	2016-12-22 13:11:44.619797+00	2017-01-29 09:35:09.944764+00	personality
+16	Photography	0	0	2016-12-22 13:11:44.619797+00	2017-01-29 09:35:09.94916+00	photography
+18	School Subject Classes	0	0	2016-12-22 13:11:44.619797+00	2017-01-29 09:35:09.95315+00	schoolsubject
+3	Singing	2	0	2016-12-22 13:11:44.619797+00	2017-01-29 09:35:09.962146+00	singing2
+11	Game/Sport training 	5	0	2016-12-22 13:11:44.619797+00	2017-01-29 09:35:09.971502+00	gamesporttraining
+2	Creative Art	11	0	2016-12-22 13:11:44.619797+00	2017-01-29 09:35:09.975946+00	creativeart
+4	Art	55	0	2016-12-22 13:11:44.619797+00	2017-01-29 09:35:09.980345+00	art
+22	Free Classes	32	0	2016-12-22 13:11:44.619797+00	2017-01-29 09:35:09.966653+00	freeclasses
+20	Food	51	1	2016-12-22 13:11:44.619797+00	2017-01-29 14:48:07.194227+00	food
+5	Computer Skills	4	0	2016-12-22 13:11:44.619797+00	2017-01-29 09:35:09.914718+00	computerskills
+9	Fashion	2	0	2016-12-22 13:11:44.619797+00	2017-01-29 09:35:09.904844+00	fashion
+8	Exercise	1	2	2016-12-22 13:11:44.619797+00	2017-01-30 17:48:48.246273+00	exercise
+14	Musical Instrument	107	2	2016-12-22 13:11:44.619797+00	2017-01-29 14:48:07.306847+00	musicalinstrument
+12	Languages	53	0	2016-12-22 13:11:44.619797+00	2017-01-29 09:35:09.984678+00	languages
+\.
+
+
+--
+-- Name: proj_skilltopic_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rishabh
+--
+
+SELECT pg_catalog.setval('proj_skilltopic_id_seq', 23, true);
+
+
+--
+-- Data for Name: session_call; Type: TABLE DATA; Schema: public; Owner: rishabh
+--
+
+COPY session_call (id, status, follow_up, start_time, end_time, call_duration, belong_session_id, created_date, modified_date, call_mode, monitored, platform_tries, student_audible, student_visible, teacher_audible, teacher_visible, video_call_rating) FROM stdin;
+23	1	f	2016-10-15 17:55:00+00	2016-10-15 18:19:00+00	00:24:00	15	2016-12-22 14:28:15.148977+00	2016-12-22 14:28:15.196554+00	skype	fully	1	t	t	t	t	4
+22	1	f	2016-11-24 10:30:00+00	2016-11-24 10:41:33+00	00:11:33	14	2016-12-22 14:28:15.148977+00	2016-12-22 14:28:15.196554+00	skype	fully	1	t	t	t	t	4
+21	1	t	2016-10-15 19:41:00+00	2016-10-15 19:46:29+00	00:05:29	14	2016-12-22 14:28:15.148977+00	2016-12-22 14:28:15.196554+00	skype	fully	1	t	t	t	t	4
+18	1	t	2016-11-23 18:51:00+00	2016-11-23 19:19:39+00	00:28:39	14	2016-12-22 14:28:15.148977+00	2016-12-22 14:28:15.196554+00	skype	fully	1	t	t	t	t	4
+24	1	f	2016-08-03 19:39:00+00	2016-11-23 19:40:28+00	112 days 00:01:28	16	2016-12-22 14:28:15.148977+00	2017-01-29 10:27:15.159743+00	appear	partially	3	t	t	t	t	2
+\.
+
+
+--
+-- Name: session_call_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rishabh
+--
+
+SELECT pg_catalog.setval('session_call_id_seq', 24, true);
+
+
+--
+-- Data for Name: session_session; Type: TABLE DATA; Schema: public; Owner: rishabh
+--
+
+COPY session_session (id, status, follow_up, total_calls, total_duration, minutes_duration, start_time, end_time, call_time_range, time_refund, money_refund, amount_to_teacher, amount_from_student, balance_amount, skill_match_id, student_id, created_date, modified_date, session_number, student_comments, student_rating, teacher_comments, teacher_rating, order_id) FROM stdin;
+14	1	f	3	00:45:41	46	2016-10-15 19:41:00+00	2016-11-24 10:41:33+00	39 days 15:00:33	00:10:00	12	114.208333333333002	156	144	9	10	2016-12-22 14:28:15.236279+00	2017-01-29 14:48:07.180503+00	1		-1		-1	186AE
+16	1	f	1	112 days 00:01:28	161282	2016-08-03 19:39:00+00	2016-11-23 19:40:28+00	112 days 00:01:28	00:00:00	0	403203.666666666977	645100	645100	11	10	2016-12-22 14:28:15.236279+00	2017-01-29 14:48:07.289665+00	1		-1		-1	186B0
+17	1	f	0	00:00:00	0	2017-01-29 14:48:07.268793+00	1970-01-01 00:00:00.268803+00	-17196 days +09:11:53.00001	00:00:00	0	0	0	0	11	10	2017-01-07 17:41:30.010734+00	2017-01-29 14:48:07.292245+00	2		7		10	186B1
+15	1	f	1	00:24:00	24	2016-10-15 17:55:00+00	2016-10-15 18:19:00+00	00:24:00	00:00:00	0	60	68	68	10	4	2016-12-22 14:28:15.236279+00	2017-01-29 14:48:07.340341+00	1		-1		-1	186AF
+18	1	f	0	00:00:00	0	2017-01-30 17:48:48.210836+00	1970-01-01 00:00:00.210845+00	-17197 days +06:11:12.000009	00:00:00	0	0	0	0	10	13	2017-01-30 17:48:48.214463+00	2017-01-30 17:48:48.237817+00	1		-1		-1	186B2
+\.
+
+
+--
+-- Name: session_session_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rishabh
+--
+
+SELECT pg_catalog.setval('session_session_id_seq', 18, true);
+
+
+--
+-- Data for Name: skills; Type: TABLE DATA; Schema: public; Owner: rishabh
+--
+
+COPY skills (id, skill_name) FROM stdin;
+\.
+
+
+--
+-- Data for Name: social_auth_association; Type: TABLE DATA; Schema: public; Owner: rishabh
+--
+
+COPY social_auth_association (id, server_url, handle, secret, issued, lifetime, assoc_type) FROM stdin;
+\.
+
+
+--
+-- Name: social_auth_association_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rishabh
+--
+
+SELECT pg_catalog.setval('social_auth_association_id_seq', 1, false);
+
+
+--
+-- Data for Name: social_auth_code; Type: TABLE DATA; Schema: public; Owner: rishabh
+--
+
+COPY social_auth_code (id, email, code, verified) FROM stdin;
+\.
+
+
+--
+-- Name: social_auth_code_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rishabh
+--
+
+SELECT pg_catalog.setval('social_auth_code_id_seq', 1, false);
+
+
+--
+-- Data for Name: social_auth_nonce; Type: TABLE DATA; Schema: public; Owner: rishabh
+--
+
+COPY social_auth_nonce (id, server_url, "timestamp", salt) FROM stdin;
+\.
+
+
+--
+-- Name: social_auth_nonce_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rishabh
+--
+
+SELECT pg_catalog.setval('social_auth_nonce_id_seq', 1, false);
+
+
+--
+-- Data for Name: social_auth_partial; Type: TABLE DATA; Schema: public; Owner: rishabh
+--
+
+COPY social_auth_partial (id, token, next_step, backend, data) FROM stdin;
+\.
+
+
+--
+-- Name: social_auth_partial_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rishabh
+--
+
+SELECT pg_catalog.setval('social_auth_partial_id_seq', 1, false);
+
+
+--
+-- Data for Name: social_auth_usersocialauth; Type: TABLE DATA; Schema: public; Owner: rishabh
+--
+
+COPY social_auth_usersocialauth (id, provider, uid, extra_data, user_id) FROM stdin;
+11	google-oauth2	ris.90s@gmail.com	{"access_token": "ya29.GlvpAyyFWK1fuGx7IKVFlUh-dJQ4DT5A9T8Q3okVFxjqx29M3Y7T6Qr4p5UCogz3LydX9RD4RQxvhIcsK7L3oclqWUpBctMHDrF3tww8H7iRjVuf5mURt0_sUP-u", "expires": 3600, "token_type": "Bearer", "auth_time": 1486331006}	1
+13	google-oauth2	help.skiltil@gmail.com	{"access_token": "ya29.GlzqAzylfGq0JF2TixTVHYIPbd-GNQiuehHztNxsrjFJA3haMIqy1DWCCoWm5CxbsY53OhaKgrr-qhXsCprlzLrMQFtP0fZXB23L2dJlbMhI18DMlykHlw1yJle7ig", "expires": 3600, "token_type": "Bearer", "auth_time": 1486388482}	10
+10	facebook	10210643662915072	{"granted_scopes": ["user_likes", "email", "contact_email", "public_profile"], "access_token": "EAASW0Lgt8I0BAEQA43oUHrUFT2VHpm3bPwnGnhZAs1o9jhNyCSTQBZBTXQaYBo4CKIaNvIAdwtX9qZC87IVLlJUnvqLMf2SPecLZCVgLY24Sh4gNCZCniXZAtZAq5pTjq1HWjZB3DG2MDew2FVOVd1lG2h6S456uACkZD", "expires": null, "denied_scopes": null, "token_type": null, "auth_time": 1486608792, "id": "10210643662915072"}	1
+12	facebook	1306545962744857	{"granted_scopes": ["email", "contact_email", "public_profile"], "access_token": "EAASW0Lgt8I0BABY2a4WPh51ia4MWsZCq6JiJPxGzrfdZBrEkEx3Y0Bgl36iA1mNeVxcnp0lcQjvG2qL41SZAFJijbdDYVMmESvR0aLxYLecJQspUxYe51NPTFXLgLQeyTKLAfvx4lbZBY9MULuiLNKmAaOmKZC6lzNIVMKIrMUwZDZD", "expires": null, "denied_scopes": null, "token_type": null, "auth_time": 1486330364, "id": "1306545962744857"}	3
+\.
+
+
+--
+-- Name: social_auth_usersocialauth_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rishabh
+--
+
+SELECT pg_catalog.setval('social_auth_usersocialauth_id_seq', 13, true);
+
+
+--
+-- Name: auth_group auth_group_name_key; Type: CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY auth_group
+    ADD CONSTRAINT auth_group_name_key UNIQUE (name);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_group_id_0cd325b0_uniq; Type: CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_0cd325b0_uniq UNIQUE (group_id, permission_id);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group auth_group_pkey; Type: CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY auth_group
+    ADD CONSTRAINT auth_group_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_permission auth_permission_content_type_id_01ab375a_uniq; Type: CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_01ab375a_uniq UNIQUE (content_type_id, codename);
+
+
+--
+-- Name: auth_permission auth_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY auth_permission
+    ADD CONSTRAINT auth_permission_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_groups auth_user_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT auth_user_groups_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_groups auth_user_groups_user_id_94350c0c_uniq; Type: CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT auth_user_groups_user_id_94350c0c_uniq UNIQUE (user_id, group_id);
+
+
+--
+-- Name: auth_user auth_user_pkey; Type: CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY auth_user
+    ADD CONSTRAINT auth_user_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_user_permissions auth_user_user_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_user_permissions auth_user_user_permissions_user_id_14a6b632_uniq; Type: CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_user_id_14a6b632_uniq UNIQUE (user_id, permission_id);
+
+
+--
+-- Name: auth_user auth_user_username_key; Type: CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY auth_user
+    ADD CONSTRAINT auth_user_username_key UNIQUE (username);
+
+
+--
+-- Name: customers_customer customers_customer_email_300e404b_uniq; Type: CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY customers_customer
+    ADD CONSTRAINT customers_customer_email_300e404b_uniq UNIQUE (email);
+
+
+--
+-- Name: customers_customer customers_customer_pkey; Type: CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY customers_customer
+    ADD CONSTRAINT customers_customer_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: customers_skillmatch customers_skillmatch_pkey; Type: CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY customers_skillmatch
+    ADD CONSTRAINT customers_skillmatch_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_admin_log django_admin_log_pkey; Type: CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT django_admin_log_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_content_type django_content_type_app_label_76bd3d3b_uniq; Type: CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY django_content_type
+    ADD CONSTRAINT django_content_type_app_label_76bd3d3b_uniq UNIQUE (app_label, model);
+
+
+--
+-- Name: django_content_type django_content_type_pkey; Type: CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY django_content_type
+    ADD CONSTRAINT django_content_type_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_migrations django_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY django_migrations
+    ADD CONSTRAINT django_migrations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_session django_session_pkey; Type: CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY django_session
+    ADD CONSTRAINT django_session_pkey PRIMARY KEY (session_key);
+
+
+--
+-- Name: payment_payment payment_payment_pkey; Type: CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY payment_payment
+    ADD CONSTRAINT payment_payment_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: payment_payout payment_payout_pkey; Type: CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY payment_payout
+    ADD CONSTRAINT payment_payout_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: proj_customerrequest proj_customerrequest_pkey; Type: CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY proj_customerrequest
+    ADD CONSTRAINT proj_customerrequest_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: proj_skill proj_skill_pkey; Type: CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY proj_skill
+    ADD CONSTRAINT proj_skill_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: proj_skilltopic proj_skilltopic_pkey; Type: CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY proj_skilltopic
+    ADD CONSTRAINT proj_skilltopic_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: session_call session_call_pkey; Type: CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY session_call
+    ADD CONSTRAINT session_call_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: session_session session_session_pkey; Type: CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY session_session
+    ADD CONSTRAINT session_session_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: skills skills_pkey; Type: CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY skills
+    ADD CONSTRAINT skills_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: social_auth_association social_auth_association_pkey; Type: CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY social_auth_association
+    ADD CONSTRAINT social_auth_association_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: social_auth_association social_auth_association_server_url_078befa2_uniq; Type: CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY social_auth_association
+    ADD CONSTRAINT social_auth_association_server_url_078befa2_uniq UNIQUE (server_url, handle);
+
+
+--
+-- Name: social_auth_code social_auth_code_email_801b2d02_uniq; Type: CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY social_auth_code
+    ADD CONSTRAINT social_auth_code_email_801b2d02_uniq UNIQUE (email, code);
+
+
+--
+-- Name: social_auth_code social_auth_code_pkey; Type: CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY social_auth_code
+    ADD CONSTRAINT social_auth_code_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: social_auth_nonce social_auth_nonce_pkey; Type: CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY social_auth_nonce
+    ADD CONSTRAINT social_auth_nonce_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: social_auth_nonce social_auth_nonce_server_url_f6284463_uniq; Type: CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY social_auth_nonce
+    ADD CONSTRAINT social_auth_nonce_server_url_f6284463_uniq UNIQUE (server_url, "timestamp", salt);
+
+
+--
+-- Name: social_auth_partial social_auth_partial_pkey; Type: CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY social_auth_partial
+    ADD CONSTRAINT social_auth_partial_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: social_auth_usersocialauth social_auth_usersocialauth_pkey; Type: CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY social_auth_usersocialauth
+    ADD CONSTRAINT social_auth_usersocialauth_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: social_auth_usersocialauth social_auth_usersocialauth_provider_e6b5e668_uniq; Type: CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY social_auth_usersocialauth
+    ADD CONSTRAINT social_auth_usersocialauth_provider_e6b5e668_uniq UNIQUE (provider, uid);
+
+
+--
+-- Name: auth_group_name_a6ea08ec_like; Type: INDEX; Schema: public; Owner: rishabh
+--
+
+CREATE INDEX auth_group_name_a6ea08ec_like ON auth_group USING btree (name varchar_pattern_ops);
+
+
+--
+-- Name: auth_group_permissions_0e939a4f; Type: INDEX; Schema: public; Owner: rishabh
+--
+
+CREATE INDEX auth_group_permissions_0e939a4f ON auth_group_permissions USING btree (group_id);
+
+
+--
+-- Name: auth_group_permissions_8373b171; Type: INDEX; Schema: public; Owner: rishabh
+--
+
+CREATE INDEX auth_group_permissions_8373b171 ON auth_group_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_permission_417f1b1c; Type: INDEX; Schema: public; Owner: rishabh
+--
+
+CREATE INDEX auth_permission_417f1b1c ON auth_permission USING btree (content_type_id);
+
+
+--
+-- Name: auth_user_groups_0e939a4f; Type: INDEX; Schema: public; Owner: rishabh
+--
+
+CREATE INDEX auth_user_groups_0e939a4f ON auth_user_groups USING btree (group_id);
+
+
+--
+-- Name: auth_user_groups_e8701ad4; Type: INDEX; Schema: public; Owner: rishabh
+--
+
+CREATE INDEX auth_user_groups_e8701ad4 ON auth_user_groups USING btree (user_id);
+
+
+--
+-- Name: auth_user_user_permissions_8373b171; Type: INDEX; Schema: public; Owner: rishabh
+--
+
+CREATE INDEX auth_user_user_permissions_8373b171 ON auth_user_user_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_user_user_permissions_e8701ad4; Type: INDEX; Schema: public; Owner: rishabh
+--
+
+CREATE INDEX auth_user_user_permissions_e8701ad4 ON auth_user_user_permissions USING btree (user_id);
+
+
+--
+-- Name: auth_user_username_6821ab7c_like; Type: INDEX; Schema: public; Owner: rishabh
+--
+
+CREATE INDEX auth_user_username_6821ab7c_like ON auth_user USING btree (username varchar_pattern_ops);
+
+
+--
+-- Name: customers_customer_e80e5f86; Type: INDEX; Schema: public; Owner: rishabh
+--
+
+CREATE INDEX customers_customer_e80e5f86 ON customers_customer USING btree (social_id);
+
+
+--
+-- Name: customers_customer_email_300e404b_like; Type: INDEX; Schema: public; Owner: rishabh
+--
+
+CREATE INDEX customers_customer_email_300e404b_like ON customers_customer USING btree (email varchar_pattern_ops);
+
+
+--
+-- Name: customers_skillmatch_cb24373b; Type: INDEX; Schema: public; Owner: rishabh
+--
+
+CREATE INDEX customers_skillmatch_cb24373b ON customers_skillmatch USING btree (customer_id);
+
+
+--
+-- Name: customers_skillmatch_d38d4c39; Type: INDEX; Schema: public; Owner: rishabh
+--
+
+CREATE INDEX customers_skillmatch_d38d4c39 ON customers_skillmatch USING btree (skill_id);
+
+
+--
+-- Name: django_admin_log_417f1b1c; Type: INDEX; Schema: public; Owner: rishabh
+--
+
+CREATE INDEX django_admin_log_417f1b1c ON django_admin_log USING btree (content_type_id);
+
+
+--
+-- Name: django_admin_log_e8701ad4; Type: INDEX; Schema: public; Owner: rishabh
+--
+
+CREATE INDEX django_admin_log_e8701ad4 ON django_admin_log USING btree (user_id);
+
+
+--
+-- Name: django_session_de54fa62; Type: INDEX; Schema: public; Owner: rishabh
+--
+
+CREATE INDEX django_session_de54fa62 ON django_session USING btree (expire_date);
+
+
+--
+-- Name: django_session_session_key_c0390e0f_like; Type: INDEX; Schema: public; Owner: rishabh
+--
+
+CREATE INDEX django_session_session_key_c0390e0f_like ON django_session USING btree (session_key varchar_pattern_ops);
+
+
+--
+-- Name: payment_payment_cb24373b; Type: INDEX; Schema: public; Owner: rishabh
+--
+
+CREATE INDEX payment_payment_cb24373b ON payment_payment USING btree (customer_id);
+
+
+--
+-- Name: payment_payout_cb24373b; Type: INDEX; Schema: public; Owner: rishabh
+--
+
+CREATE INDEX payment_payout_cb24373b ON payment_payout USING btree (customer_id);
+
+
+--
+-- Name: proj_skill_19b4d727; Type: INDEX; Schema: public; Owner: rishabh
+--
+
+CREATE INDEX proj_skill_19b4d727 ON proj_skill USING btree (topic_id);
+
+
+--
+-- Name: session_call_bd15eab3; Type: INDEX; Schema: public; Owner: rishabh
+--
+
+CREATE INDEX session_call_bd15eab3 ON session_call USING btree (belong_session_id);
+
+
+--
+-- Name: session_session_25e49a99; Type: INDEX; Schema: public; Owner: rishabh
+--
+
+CREATE INDEX session_session_25e49a99 ON session_session USING btree (skill_match_id);
+
+
+--
+-- Name: session_session_30a811f6; Type: INDEX; Schema: public; Owner: rishabh
+--
+
+CREATE INDEX session_session_30a811f6 ON session_session USING btree (student_id);
+
+
+--
+-- Name: social_auth_code_c1336794; Type: INDEX; Schema: public; Owner: rishabh
+--
+
+CREATE INDEX social_auth_code_c1336794 ON social_auth_code USING btree (code);
+
+
+--
+-- Name: social_auth_code_code_a2393167_like; Type: INDEX; Schema: public; Owner: rishabh
+--
+
+CREATE INDEX social_auth_code_code_a2393167_like ON social_auth_code USING btree (code varchar_pattern_ops);
+
+
+--
+-- Name: social_auth_partial_94a08da1; Type: INDEX; Schema: public; Owner: rishabh
+--
+
+CREATE INDEX social_auth_partial_94a08da1 ON social_auth_partial USING btree (token);
+
+
+--
+-- Name: social_auth_partial_token_3017fea3_like; Type: INDEX; Schema: public; Owner: rishabh
+--
+
+CREATE INDEX social_auth_partial_token_3017fea3_like ON social_auth_partial USING btree (token varchar_pattern_ops);
+
+
+--
+-- Name: social_auth_usersocialauth_e8701ad4; Type: INDEX; Schema: public; Owner: rishabh
+--
+
+CREATE INDEX social_auth_usersocialauth_e8701ad4 ON social_auth_usersocialauth USING btree (user_id);
+
+
+--
+-- Name: auth_group_permissions auth_group_permiss_permission_id_84c5c92e_fk_auth_permission_id; Type: FK CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permiss_permission_id_84c5c92e_fk_auth_permission_id FOREIGN KEY (permission_id) REFERENCES auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_group_id_b120cbf9_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_b120cbf9_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_permission auth_permiss_content_type_id_2f476e4b_fk_django_content_type_id; Type: FK CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY auth_permission
+    ADD CONSTRAINT auth_permiss_content_type_id_2f476e4b_fk_django_content_type_id FOREIGN KEY (content_type_id) REFERENCES django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_groups auth_user_groups_group_id_97559544_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT auth_user_groups_group_id_97559544_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_groups auth_user_groups_user_id_6a12ed8b_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT auth_user_groups_user_id_6a12ed8b_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_user_permissions auth_user_user_per_permission_id_1fbb5f2c_fk_auth_permission_id; Type: FK CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_per_permission_id_1fbb5f2c_fk_auth_permission_id FOREIGN KEY (permission_id) REFERENCES auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_user_permissions auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: customers_customer customers_c_social_id_00f7af3f_fk_social_auth_usersocialauth_id; Type: FK CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY customers_customer
+    ADD CONSTRAINT customers_c_social_id_00f7af3f_fk_social_auth_usersocialauth_id FOREIGN KEY (social_id) REFERENCES social_auth_usersocialauth(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: customers_skillmatch customers_skillma_customer_id_a0756f89_fk_customers_customer_id; Type: FK CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY customers_skillmatch
+    ADD CONSTRAINT customers_skillma_customer_id_a0756f89_fk_customers_customer_id FOREIGN KEY (customer_id) REFERENCES customers_customer(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: customers_skillmatch customers_skillmatch_skill_id_195b8f01_fk_proj_skill_id; Type: FK CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY customers_skillmatch
+    ADD CONSTRAINT customers_skillmatch_skill_id_195b8f01_fk_proj_skill_id FOREIGN KEY (skill_id) REFERENCES proj_skill(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log django_admin_content_type_id_c4bce8eb_fk_django_content_type_id; Type: FK CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT django_admin_content_type_id_c4bce8eb_fk_django_content_type_id FOREIGN KEY (content_type_id) REFERENCES django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log django_admin_log_user_id_c564eba6_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT django_admin_log_user_id_c564eba6_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: payment_payment payment_payment_customer_id_c21fdf7b_fk_customers_customer_id; Type: FK CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY payment_payment
+    ADD CONSTRAINT payment_payment_customer_id_c21fdf7b_fk_customers_customer_id FOREIGN KEY (customer_id) REFERENCES customers_customer(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: payment_payout payment_payout_customer_id_f4ac9c01_fk_customers_customer_id; Type: FK CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY payment_payout
+    ADD CONSTRAINT payment_payout_customer_id_f4ac9c01_fk_customers_customer_id FOREIGN KEY (customer_id) REFERENCES customers_customer(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: proj_skill proj_skill_topic_id_ed43fccd_fk_proj_skilltopic_id; Type: FK CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY proj_skill
+    ADD CONSTRAINT proj_skill_topic_id_ed43fccd_fk_proj_skilltopic_id FOREIGN KEY (topic_id) REFERENCES proj_skilltopic(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: session_call session_call_belong_session_id_d6ded11e_fk_session_session_id; Type: FK CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY session_call
+    ADD CONSTRAINT session_call_belong_session_id_d6ded11e_fk_session_session_id FOREIGN KEY (belong_session_id) REFERENCES session_session(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: session_session session_sess_skill_match_id_11c003df_fk_customers_skillmatch_id; Type: FK CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY session_session
+    ADD CONSTRAINT session_sess_skill_match_id_11c003df_fk_customers_skillmatch_id FOREIGN KEY (skill_match_id) REFERENCES customers_skillmatch(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: session_session session_session_student_id_d7febcd1_fk_customers_customer_id; Type: FK CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY session_session
+    ADD CONSTRAINT session_session_student_id_d7febcd1_fk_customers_customer_id FOREIGN KEY (student_id) REFERENCES customers_customer(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: social_auth_usersocialauth social_auth_usersocialauth_user_id_17d28448_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: rishabh
+--
+
+ALTER TABLE ONLY social_auth_usersocialauth
+    ADD CONSTRAINT social_auth_usersocialauth_user_id_17d28448_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- PostgreSQL database dump complete
+--
+

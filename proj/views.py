@@ -56,7 +56,7 @@ def index(request):
 	try:
 		#print USER._meta
 		#request["user"] = USER
-
+		print request.user
 		template = loader.get_template('proj/index.html')
 		context = {
 			#'skill_list': skill_list,

@@ -33,7 +33,7 @@
             <div id="login-container">
                 <h3>Login With</h3>
                 <div class="container hidden-xs" style="width: 350px;">
-                    <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}"
+                    <a href="{% url 'social:begin' 'facebook' %}"
                        class="btn btn-block btn-lg btn-social btn-facebook" style="margin-top: 20px;">
                         <span class="fa fa-facebook"></span> Login with Facebook
                     </a>
@@ -43,7 +43,7 @@
                     </a>
                 </div>
                 <div class="container visible-xs" style="width: 250px;">
-                    <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}"
+                    <a href="{% url 'social:begin' 'facebook' %}"
                        class="btn btn-block btn-social btn-facebook" style="margin-top: 10px;">
                         <span class="fa fa-facebook"></span> Login with Facebook
                     </a>

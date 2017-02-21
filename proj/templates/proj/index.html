@@ -1,10 +1,17 @@
 {% extends "proj/base.html" %}
-{% block title %} Learn from Home {% endblock %}
+{% block title %} Skiltil - Home {% endblock %}
 {% block stylesheet %}
+    <meta name="description" content="Wide variety of topics to choose from, learn at your own pace."/>
+    <meta name="keywords" content="skiltil, learn, home, video, call, personalized, feedback, corrective"/>
+
+    <meta property="og:site_name" content="Skiltil">
+    <meta property="og:title" content="Learn from Home"/>
+    <meta property="og:description" content="Wide variety of topics to choose from, learn at your own pace."/>
+    <meta property="og:image" itemprop="image" content="http://skiltil.com/static/images/logo.jpeg">
+    <meta property="og:type" content="website"/>
+
     {% load static %}
     <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
-    <!--link rel="stylesheet" type="text/css" href={% static "css/component.css" %} />
-		<link rel="stylesheet" type="text/css" href={% static "css/corousal-shape.css" %} /-->
     <link rel="stylesheet" type="text/css" href={% static "css/search_expand.css" %}/>
     <link rel="stylesheet" type="text/css" href={% static "css/simple-sidebar.css" %}/>
     <link rel="stylesheet" type="text/css" href={% static "css/lin-style.css" %}/>

@@ -4,6 +4,9 @@ from django.contrib import admin
 
 from .models import Session, Call
 
+from django.core import urlresolvers
+from django.utils.html import format_html
+
 
 @admin.register(Call)
 class CallAdmin(admin.ModelAdmin):
@@ -20,6 +23,25 @@ class CallAdmin(admin.ModelAdmin):
     readonly_fields = ['call_duration']
 
 
+def reverse_foreignkey_change_links(model, get_instances, description=None, get_link_html=None, empty_text='(None)'):
+    if not description:
+        description = model.__name__ + '(s)'
+
+    def model_change_link_function(_, obj):
+        instances = get_instances(obj)
+        if instances.count() == 0:
+            return empty_text
+        output = ''
+        links = []
+        for instance in instances:
+            change_url = urlresolvers.reverse('admin:%s_change' % model._meta.db_table, args=(instance.id,))
+            links.append('<a href="%s">%s</a>' % (change_url, unicode(instance)))
+        return format_html('<br> '.join(links))
+
+    model_change_link_function.short_description = description
+    model_change_link_function.allow_tags = True
+    return model_change_link_function
+
 @admin.register(Session)
 class SessionAdmin(admin.ModelAdmin):
     list_filter = ['session_number', 'skill_match__skill__topic', 'skill_match__skill', 'skill_match__customer',
@@ -30,9 +52,11 @@ class SessionAdmin(admin.ModelAdmin):
                      'skill_match__customer__customer_name', 'student__customer_name', 'session_number']
 
     raw_id_fields = ["skill_match", "student"]
-    readonly_fields = ['order_id', 'session_number', 'total_calls', 'total_duration', 'minutes_duration', 'start_time',
+    readonly_fields = ['order_id', 'session_number', 'total_calls', 'calls_list', 'total_duration', 'minutes_duration', 'start_time',
                        'end_time',
                        'call_time_range', 'money_refund', 'amount_to_teacher', 'amount_from_student', 'balance_amount']
+
+    calls_list = reverse_foreignkey_change_links(Call, lambda obj: Call.objects.filter(belong_session=obj))
 
 # admin.site.register(Session)
 # admin.site.register(Call)

@@ -14,8 +14,8 @@ class SkillMatchAdmin(admin.ModelAdmin):
 
 @admin.register(Customer)
 class CustomerAdmin(admin.ModelAdmin):
-	list_display = ["customer_code", "customer_name", "skype_id", "gmail_id", "paytm_id", "phone_number", "no_subjects", "wallet_amount", "classes_taken", "classes_given"]
-	search_fields = ["customer_code", "customer_name", "skype_id", "gmail_id", "paytm_id", "phone_number"]
+	list_display = ["customer_code", "customer_name", "email", "skype_id", "gmail_id", "paytm_id", "phone_number", "no_subjects", "wallet_amount", "classes_taken", "classes_given"]
+	search_fields = ["customer_code", "customer_name", "email", "skype_id", "gmail_id", "paytm_id", "phone_number"]
 	readonly_fields = ["customer_code", "no_subjects", "wallet_amount", "classes_taken", "classes_given"]
 
 #admin.site.register(SkillMatch)

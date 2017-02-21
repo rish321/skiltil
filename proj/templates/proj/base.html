@@ -7,21 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--title>Learn from Home</title-->
     <title>{% block title %}{% endblock %}</title>
-    <meta name="description" content="Wide variety of topics to choose from, learn at your own pace."/>
-    <meta name="keywords" content="skiltil, learn from home"/>
 
-    <meta property="og:site_name" content="Skiltil">
-    <meta property="og:title" content="Learn from Home"/>
-    <meta property="og:description" content="Wide variety of topics to choose from, learn at your own pace."/>
-    <meta property="og:image" itemprop="image" content="http://skiltil.in/static/images/logo.jpeg">
-    <meta property="og:type" content="website"/>
 
-    <!--link rel="shortcut icon" href="../favicon.ico"-->
+
+
     {% load static %}
     <link rel="shortcut icon" type="image/png" href={% static "/favicon.ico" %}/>
     <link rel="stylesheet" type="text/css" href={% static "css/contact.css" %}/>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <!--link rel="stylesheet" type="text/css" href={% static "css/style.css" %}/-->
     <script src={% static "js/modernizr.custom.63321.js" %}></script>
     <script src={% static "js/jquery-3.1.1.min.js" %}></script>
     <script src={% static "js/lazysizes.min.js" %} async=""></script>
@@ -70,9 +63,9 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
+                <li data-toggle="collapse" data-target=".in"><a href="http://www.skiltil.wordpress.com/" target="_blank">Blog</a></li>
                 <li data-toggle="collapse" data-target=".in"><a href="#" onclick="openNav()">How We Work</a></li>
                 <li data-toggle="collapse" data-target=".in"><a href="#" onclick="openPricingNav()">Pricing</a></li>
-
                 <li data-toggle="collapse" data-target=".in"><a href="#" onclick="openContactNav()">Contact Us</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
@@ -183,18 +176,19 @@
     </div>
 </div>
 
-<div id="video_play" class="overlay">
+<!--div id="video_play" class="overlay">
     <a href="javascript:void(0)" class="closebtn" onclick="closeVideoNav()">&times;</a>
     <div class="overlay-content" id="video_content">
         <iframe width="100%" height="450px" text-align="center" vertical-align="middle"
                 src="https://www.youtube.com/embed/nreOh6e3Kdg" frameborder="0" allowfullscreen></iframe>
     </div>
-</div>
+</div-->
 
 <div>
     {% block body %}
     {% endblock %}
 </div>
+
 
 <script>
     function openNav() {
@@ -284,7 +278,7 @@
             $("navbar-collapse").collapse('hide');
         });
 
-        function GetCookie(name) {
+        /*function GetCookie(name) {
             var arg = name + "=";
             var alen = arg.length;
             var clen = document.cookie.length;
@@ -309,7 +303,7 @@
         }
         var expire = new Date();
         expire = new Date(expire.getTime() + 7776000000);
-        document.cookie = "COOKIE2=here; expires=" + expire;
+        document.cookie = "COOKIE2=here; expires=" + expire;*/
     });
 </script>
 

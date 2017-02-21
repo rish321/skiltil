@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'raven.contrib.django.raven_compat',
     'analytical',
+    'django.contrib.sitemaps',
 ]
 
 MIDDLEWARE = [

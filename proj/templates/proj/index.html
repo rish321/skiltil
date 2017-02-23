@@ -17,6 +17,11 @@
     <link rel="stylesheet" type="text/css" href={% static "css/lin-style.css" %}/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+    <style>
+        disableClick {
+            pointer-events: none;
+        }
+    </style>
 
 
     <script type="text/javascript">
@@ -87,6 +92,8 @@
                         $(".preload-item-js").click();
                         $('#loading').hide();
                         $('#page-content-wrapper').show();
+
+                        start_tour();
                     }
                 });
             }
@@ -106,9 +113,141 @@
                 ajax_skill_topics();
             });
 
+            //$("#sidebar-wrapper").addEventListener('webkitAnimationEnd',function( event ) { $("#sidebar-wrapper").style.display = 'block'; }, false);
+
+            var tour = new Tour({
+                name: "main-tour",
+                template: "<div class='popover tour'>" +
+                " <div class='arrow'></div>" +
+                " <h3 class='popover-title' style='font-size:130%;font-weight:bold'></h3>" +
+                " <div class='popover-content'></div>" +
+                " <div class='popover-navigation'>" +
+                " <button class='btn btn-default' data-role='prev'>« Prev</button>" +
+                " <span data-role='separator'>|</span>" +
+                " <button class='btn btn-default' data-role='next'>Next »</button>" +
+                " <span data-role='separator'>|</span>" +
+                " <button class='btn btn-default' data-role='end'>End</button>" +
+                " </div>" +
+                " </div>",
+                steps: [
+                    {
+                        title: "Welcome to Skitil",
+                        content: "Welcome on board. This is just a few second tutorial of how you can make the best use of Skiltil.",
+                        orphan: true,
+                        backdrop: true,
+                        backdropContainer: "body"
+                    },
+                    {
+                        element: "#quote-carousel",
+                        title: "Details of our teachers",
+                        content: "Here you can get to know more about our teachers.",
+                        backdrop: true,
+                        placement: "bottom auto"
+                    },
+                    {
+                        element: "#menu-toggle",
+                        title: "Explore categories",
+                        content: "Click on this menu item to see more categories.",
+                        backdrop: true,
+                        backdropPadding: 10,
+                        placement: "bottom auto",
+                        onShow: function (tour) {
+                            if ($('#menu-toggle').is(':visible')) {
+                                $("#wrapper").toggleClass("toggled");
+                                $('#menu-toggle').css("pointer-events", "none");
+                            }
+                        }
+                    },
+                    {
+                        element: "#sidebar-brand",
+                        title: "Search directly",
+                        content: "Type in to search any skill.",
+                        backdrop: true,
+                        backdropContainer: "#sidebar-nav",
+                        placement: "bottom auto",
+                        onShow: function (tour) {
+                            $("#form-group").addClass("hover");
+                            $('#search_skiltil').keypress(function (event) {
+                                event.preventDefault();
+                                return false;
+                            });
+                        },
+                        onHidden: function (tour) {
+                            $("#form-group").removeClass("hover");
+                            $('#search_skiltil').keypress(function (event) {
+                                //event.preventDefault();
+                                return true;
+                            });
+                        }
+                    },
+                    {
+                        element: "#sidebar-nav",
+                        title: "Select a category to explore more skills",
+                        content: "Click a category to explore more options.",
+                        backdrop: true,
+                        backdropContainer: "#sidebar-wrapper",
+                        onHidden: function (tour) {
+                            if ($('#menu-toggle').is(':visible')) {
+                                $("#wrapper").toggleClass("toggled");
+                                $('#menu-toggle').css("pointer-events", "");
+                            }
+                        }
+                    },
+                    {
+                        element: "#skill-list",
+                        title: "Select a skill",
+                        content: "Click on any skill of your choice. Remove the popup blocker for skiltil, if enabled.",
+                        backdrop: true,
+                        backdropContainer: "body",
+                        placement: "top auto"
+                    },
+                    {
+                        element: "#navigation_down",
+                        title: "Click here to know more about us.",
+                        content: "Check out how we work, our pricing, blogs and contact details.",
+                        backdrop: true,
+                        backdropContainer: "#navigation_bar",
+                        placement: "bottom auto",
+                        onShow: function (tour) {
+                            $("#navigation_down").click();
+                        }
+                    },
+                    {
+                        element: "#nav_pricing",
+                        title: "Extremely affordable classes",
+                        content: "Click here to know about our pricing.",
+                        backdrop: true,
+                        backdropContainer: "#navigation_bar",
+                        placement: "bottom auto",
+                        onShow: function (tour) {
+                            $("#nav_pricing").css("pointer-events", "none");
+                            /*$("#nav_pricing").click(function (e) {
+                                event.preventDefault();
+                                return false;
+                            });*/
+                        },
+                        onHidden: function (tour) {
+                            $("#navigation_down").click();
+                            /*$("#nav_pricing").click(function (e) {
+                                return true;
+                            });*/
+                            $("#nav_pricing").css("pointer-events", "");
+                        }
+                    }
+                ]
+            });
+
+
+            function start_tour() {
+                // Initialize the tour
+                tour.init();
+
+                // Start the tour
+                tour.start();
+            }
+
 
         });
-
 
 
     </script>
@@ -128,8 +267,8 @@
         <div id="wrapper">
             <!-- Sidebar -->
             <div id="sidebar-wrapper">
-                <ul class="sidebar-nav">
-                    <li class="sidebar-brand">
+                <ul class="sidebar-nav" id="sidebar-nav">
+                    <li class="sidebar-brand" id="sidebar-brand">
                         <div class="row" style="margin:20px;">
                             <form action="" class="search-form">
                                 <div class="form-group has-feedback" id="form-group">
@@ -194,7 +333,7 @@
         });
     </script>
 
-    <script>
+    <!--script>
         $(document).ready(function () {
             var trigger = $('#menu-toggle'),
 
@@ -219,6 +358,6 @@
                 }
             }
         });
-    </script>
+    </script-->
 
 {% endblock %}

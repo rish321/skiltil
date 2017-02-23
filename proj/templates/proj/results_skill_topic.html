@@ -56,39 +56,43 @@
     {% endif %}
 
     {% if skill_list %}
-        {% for skill in skill_list %}
-            <!--div class="mi-slider"><ul-->
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <div class="lin col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <a href=# onclick="popUpWin('contact/{{ skill.skill_code }}', 800, 420)" ; clicky.log('contact/{{ skill.skill_code }}','contact/{{ skill.skill_code }}');
-                    >
-                    <img src="{% static "images/loading_icon.png" %}" data-src="{{ skill.image_src }}"
-                         class="lazyload"></img>
-                    <h4>{{ skill.skill_name }}</h4>
-                    <table border="0" width="100%" style="margin: 0px;">
-                        {% if skill.no_teachers > 0 %}
-                            <tr>
-                                <td>
-                                    Teachers on-board:
-                                </td>
-                                <td style="text-align: right;width:5%">
-                                    {{ skill.no_teachers }}
-                                </td>
-                            </tr>
-                        {% endif %}
-                        {% if skill.classes_given > 0 %}
-                            <tr>
-                                <td>
-                                    Successful classes:
-                                </td>
-                                <td style="text-align: right;width:5%">
-                                    {{ skill.classes_given }}
-                                </td>
-                            </tr>
-                        {% endif %}
-                    </table>
+        <div id="skill-list">
+            {% for skill in skill_list %}
+                <!--div class="mi-slider"><ul-->
+                <div class="col-xl-4 col-xl-offset-0 col-lg-4 col-lg-offset-0 col-md-4 col-md-offset-0 col-sm-6 col-sm-offset-0 col-xs-8 col-xs-offset-2">
+                    <div class="lin col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <a href=# onclick="popUpWin('contact/{{ skill.skill_code }}', 800, 420)" ;
+                           clicky.log('contact/{{ skill.skill_code }}','contact/{{ skill.skill_code }}');
+                        >
+                        <img src="{% static "images/loading_icon.png" %}" data-src="{{ skill.image_src }}"
+                             class="lazyload"></img>
+                        <h4>{{ skill.skill_name }}</h4>
+                        <table border="0" width="100%" style="margin: 0px;">
+                            {% if skill.no_teachers > 0 %}
+                                <tr>
+                                    <td>
+                                        Teachers on-board:
+                                    </td>
+                                    <td style="text-align: right;width:5%">
+                                        {{ skill.no_teachers }}
+                                    </td>
+                                </tr>
+                            {% endif %}
+                            {% if skill.classes_given > 0 %}
+                                <tr>
+                                    <td>
+                                        Successful classes:
+                                    </td>
+                                    <td style="text-align: right;width:5%">
+                                        {{ skill.classes_given }}
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        </table>
+                    </div>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     {% endif %}
     </div>
+</div>

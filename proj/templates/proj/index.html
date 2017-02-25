@@ -127,6 +127,7 @@
 
             var tour = new Tour({
                 name: "main-tour",
+                //storage: false,
                 template: "<div class='popover tour'>" +
                 " <div class='arrow'></div>" +
                 " <h3 class='popover-title' style='font-size:130%;font-weight:bold'></h3>" +
@@ -220,8 +221,11 @@
                         placement: "bottom auto",
                         onShow: function (tour) {
                             $("#navigation_down").click();
+                        },
+                        onHidden: function (tour) {
+                            $("#navigation_down").click();
                         }
-                    },
+                    }/*,
                     {
                         element: "#nav_pricing",
                         title: "Extremely affordable classes",
@@ -231,19 +235,12 @@
                         placement: "bottom auto",
                         onShow: function (tour) {
                             $("#nav_pricing").css("pointer-events", "none");
-                            /*$("#nav_pricing").click(function (e) {
-                             event.preventDefault();
-                             return false;
-                             });*/
                         },
                         onHidden: function (tour) {
                             $("#navigation_down").click();
-                            /*$("#nav_pricing").click(function (e) {
-                             return true;
-                             });*/
                             $("#nav_pricing").css("pointer-events", "");
                         }
-                    }
+                    }*/
                 ]
             });
 

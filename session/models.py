@@ -15,6 +15,8 @@ from datetime import datetime
 from operator import attrgetter
 from django.utils import timezone
 from base.models import BaseModel
+#from base.fields import SeparatedValuesField
+from django.contrib.postgres.fields import JSONField
 
 # from proj.models import BaseModel
 # from djangotoolbox.fields import ListField
@@ -23,6 +25,7 @@ CALLOPTIONS = (
     (0, 'OnGoing'),
     (1, 'Finished'),
     (2, 'Unfinished'),
+    (3, 'Scheduled'),
 )
 
 RATINGOPTIONS = (
@@ -52,7 +55,11 @@ class Session(BaseModel):
     order_id = models.CharField(max_length=20, default="")
     skill_match = models.ForeignKey("customers.SkillMatch", default=None)
     student = models.ForeignKey("customers.Customer", default=None)
-    status = models.IntegerField(choices=CALLOPTIONS, default=1)
+    scheduled_time = models.DateTimeField(null=True, blank=True)
+    rescheduled_time = models.DateTimeField(null=True, blank=True)
+    estimate_duration = models.DurationField(default=timedelta)
+    #scheduled_time_dump = JSONField(blank=True, null=True)
+    status = models.IntegerField(choices=CALLOPTIONS, default=3)
     time_refund = models.DurationField(default=timedelta)
     follow_up = models.BooleanField()
     student_rating = models.IntegerField(choices=RATINGOPTIONS, default=-1)
@@ -71,6 +78,9 @@ class Session(BaseModel):
     amount_from_student = models.FloatField(default=0)
     balance_amount = models.FloatField(default=0)
 
+    def get_start_time(self):
+        return self.start_time
+
     def __str__(self):
         return self.skill_match.skill.skill_name + " - " + self.skill_match.customer.customer_name + " - " + self.student.customer_name + " - Session" + str(
             self.session_number)
@@ -78,6 +88,9 @@ class Session(BaseModel):
     def calculateTeacherAmount(self, timeDuration):
         timeSeconds = timeDuration.total_seconds()
         return (2.5 * timeSeconds) / 60
+
+    def getEstimatedMinutes(self):
+        return self.estimate_duration.total_seconds()/60
 
     def calculateStudentAmount(self, timeDuration):
         seconds = timeDuration.total_seconds()
@@ -104,12 +117,32 @@ class Session(BaseModel):
         self.minutes_duration = roundedTimeDuration
         return cost
 
+    def calculateEstimatedStudentAmount(self):
+        return self.calculateStudentAmount(self.estimate_duration)
+
+    def calculateEstimatedTeacherAmount(self):
+        return self.calculateTeacherAmount(self.estimate_duration)
+
     def save(self, *args, **kwargs):
         calls = Call.objects.filter(belong_session=self)
         self.total_duration = timedelta()
         self.total_calls = 0
         self.start_time = timezone.now()
         self.end_time = timezone.now().replace(year=1970, month=1, day=1, hour=0, minute=0, second=0)
+        '''existingList = self.scheduled_time_dump
+        if existingList is None:
+            existingList = []
+        if len(existingList) == 0:
+            existingList.append(self.scheduled_time)
+        if self.rescheduled_time is not None:
+            existingList.append(self.rescheduled_time)
+        if existingList is None:
+            if self.rescheduled_time is not None:
+                existingList = [self.rescheduled_time]
+        #existingList.append(self.rescheduled_time)
+        self.scheduled_time_dump = existingList'''
+        if self.rescheduled_time == None:
+            self.rescheduled_time = self.scheduled_time
         for call in calls:
             self.start_time = min(call.start_time, self.start_time)
             self.end_time = max(call.end_time, self.end_time)

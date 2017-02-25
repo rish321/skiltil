@@ -41,6 +41,10 @@
                                class="historylink">{% trans "Send Student Invoice" %}</a></li>
                         <li><a href="/session/invoice/teacher/{{ original.pk }}/"
                                class="historylink">{% trans "Send Teacher Invoice" %}</a></li>
+                        <li><a href="/session/schedule/student/{{ original.pk }}/"
+                               class="historylink">{% trans "Send Schedule Student" %}</a></li>
+                        <li><a href="/session/schedule/teacher/{{ original.pk }}/"
+                               class="historylink">{% trans "Send Schedule Teacher" %}</a></li>
 
                         <li>
                             {% url opts|admin_urlname:'history' original.pk|admin_urlquote as history_url %}

@@ -65,6 +65,17 @@
                     complete: function () {
                         $('#loading').hide();
                         $('#page-content-wrapper').show();
+
+                        /*var head;
+                        var script;
+
+                        head = $$('head')[0];
+                        if (head) {
+                            script = new Element('script', {type: 'application/ld+json', src: 'dynamic_skills.js'});
+                            head.appendChild(script);
+                        }*/
+
+                        start_tour();
                     }
                 });
             });
@@ -93,7 +104,6 @@
                         $('#loading').hide();
                         $('#page-content-wrapper').show();
 
-                        start_tour();
                     }
                 });
             }
@@ -222,15 +232,15 @@
                         onShow: function (tour) {
                             $("#nav_pricing").css("pointer-events", "none");
                             /*$("#nav_pricing").click(function (e) {
-                                event.preventDefault();
-                                return false;
-                            });*/
+                             event.preventDefault();
+                             return false;
+                             });*/
                         },
                         onHidden: function (tour) {
                             $("#navigation_down").click();
                             /*$("#nav_pricing").click(function (e) {
-                                return true;
-                            });*/
+                             return true;
+                             });*/
                             $("#nav_pricing").css("pointer-events", "");
                         }
                     }

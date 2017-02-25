@@ -74,8 +74,6 @@
                             script = new Element('script', {type: 'application/ld+json', src: 'dynamic_skills.js'});
                             head.appendChild(script);
                         }*/
-
-                        start_tour();
                     }
                 });
             });
@@ -104,6 +102,8 @@
                         $('#loading').hide();
                         $('#page-content-wrapper').show();
 
+
+                        start_tour();
                     }
                 });
             }

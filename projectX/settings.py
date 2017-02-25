@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'raven.contrib.django.raven_compat',
     'analytical',
     'django.contrib.sitemaps',
+    'tinymce',
 ]
 
 MIDDLEWARE = [

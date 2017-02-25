@@ -9,6 +9,7 @@ from customers.models import SkillMatch
 from base.models import BaseModel
 
 from django.utils import timezone
+from tinymce import models as tinymce_models
 
 #class BaseModel(models.Model):
 #	created_date = models.DateTimeField(auto_now_add=True)
@@ -78,7 +79,11 @@ class Skill(BaseModel):
 	skill_name = models.CharField(max_length=200)
 	topic = models.ForeignKey(SkillTopic, default=None)
 	image_src = models.CharField(max_length=200, blank = True)
-	details = models.TextField(default="", blank = True)
+	details = tinymce_models.HTMLField(default="", blank = True)
+	'''exclusive = models.BooleanField(default=False)
+	first_class_time = models.DurationField(default=timezone.timedelta)
+	total_classes = models.IntegerField(default=1)
+	subsequent_class_time = models.DurationField(default=timezone.timedelta)'''
 	skill_code = models.CharField(max_length=200, default="")
 	clicks = models.IntegerField(default=0)
 	classes_given = models.IntegerField(default=0)

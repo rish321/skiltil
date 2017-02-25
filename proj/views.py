@@ -170,12 +170,12 @@ def thanks(request):
 def ajax_skill_search( request ):
 	results = []
         q = request.GET.get( 'q' )
-	print q
+	#print q
         if q is not None:            
 	        results = Skill.objects.filter( 
 	               	Q( skill_name__icontains = q ) | Q( topic__topic_name__icontains = q )
 		).order_by('-classes_given','-no_teachers','-clicks')
-		print results
+		#print results
 	        return render_to_response( 'proj/results_new.html', { 'results': results, } )
 	return HttpResponse("Some error occurred")
 

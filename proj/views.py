@@ -119,7 +119,7 @@ def contact(request, skill_code):
                 		['help.skiltil@gmail.com'],
                 		headers = {'Reply-To': contact_email }
 	            	)
-        	    	email.send()
+        	    	#email.send()
             		#return redirect('contact')
 			#return HttpResponse('<script type="text/javascript">window.close(); window.parent.location.href = "/";</script>')
 			#return HttpResponse('<script>'

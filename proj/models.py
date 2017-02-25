@@ -80,10 +80,10 @@ class Skill(BaseModel):
 	topic = models.ForeignKey(SkillTopic, default=None)
 	image_src = models.CharField(max_length=200, blank = True)
 	details = tinymce_models.HTMLField(default="", blank = True)
-	'''exclusive = models.BooleanField(default=False)
-	first_class_time = models.DurationField(default=timezone.timedelta)
+	exclusive = models.BooleanField(default=False)
 	total_classes = models.IntegerField(default=1)
-	subsequent_class_time = models.DurationField(default=timezone.timedelta)'''
+	first_class_time = models.DurationField(default=timezone.timedelta, blank=True)
+	subsequent_class_time = models.DurationField(default=timezone.timedelta, blank=True)
 	skill_code = models.CharField(max_length=200, default="")
 	clicks = models.IntegerField(default=0)
 	classes_given = models.IntegerField(default=0)

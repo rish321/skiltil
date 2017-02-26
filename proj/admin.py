@@ -13,8 +13,8 @@ class SkillTopicAdmin(admin.ModelAdmin):
 @admin.register(Skill)
 class SkillAdmin(admin.ModelAdmin):
 	raw_id_fields = ["topic"]
-	list_filter = ["no_teachers", "topic"]
-	list_display = ['skill_code', "skill_name", "topic", "clicks", "classes_given", "no_teachers"]
+	list_filter = ["no_teachers", "topic", "exclusive"]
+	list_display = ['skill_code', "skill_name", "topic", "clicks", "classes_given", "no_teachers", "exclusive"]
 	search_fields = ['skill_code', "skill_name", "topic__topic_name"]
 	readonly_fields = ['skill_code', 'clicks', 'classes_given', 'no_teachers']
 

@@ -37,6 +37,17 @@
     // background-size: contain;
 }
 
+/*.lin imgexc {
+    background-position: right;
+    background-repeat: no-repeat;
+    height: 150px;
+    width: 150px;
+    // border: none;
+    // border: 2 px solid blue;
+    //border-radius: 20%;
+    // background-size: contain;
+}*/
+
 .lin h4 {
     //display: inline-block;
     font-family: Baskerville, "Baskerville Old Face", "Hoefler Text", Garamond, "Times New Roman", serif;

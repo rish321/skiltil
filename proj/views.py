@@ -35,6 +35,7 @@ class PreDefStrings(object):
 
 PreDefTrending = PreDefStrings("Trending", "trending")
 PreDefNewArrival = PreDefStrings("New Arrivals", "new_arrivals")
+PreDefExclusive = PreDefStrings("Skiltil Exclusive", "exclusive")
 
 TRENDING = "Trending"
 NEW_ARRIVALS = "New Arrivals"
@@ -192,6 +193,8 @@ def ajax_skill_topics(request):
 		# orderskills = Skill.objects.extra(order_by = ('-classes_given','-no_teachers','-clicks'))[:20]
 		if len(q) <= 0:
 			skill_topics.append(PreDefTrending)
+		if len(q) <= 0:
+			skill_topics.append(PreDefExclusive)
 		# skill_list.append(orderskills)
 		# newArrivals = Skill.objects.extra(order_by = ('-created_date', 'clicks'))[:20]
 		if len(q) <= 0:
@@ -271,16 +274,23 @@ def ajax_skills_predef(request, predef_name):
 	try:
 		#print predef_name
 		if predef_name.lower() == PreDefTrending.code.lower() :
-			orderskills = Skill.objects.extra(order_by=('-classes_given', '-no_teachers', '-clicks'))[:20]
+			orderskills = Skill.objects.filter(exclusive=False).extra(order_by=('-classes_given', '-no_teachers', '-clicks'))[:20]
 			if len(orderskills) > 0:
 				context, template = process_skill_list(orderskills)
 				return HttpResponse(template.render(context, request))
 			else:
 				return HttpResponse("Wrong topic")
 		elif predef_name.lower() == PreDefNewArrival.code.lower() :
-			newArrivals = Skill.objects.extra(order_by=('-created_date', 'clicks'))[:20]
+			newArrivals = Skill.objects.filter(exclusive=False).extra(order_by=('-created_date', 'clicks'))[:20]
 			if len(newArrivals) > 0:
 				context, template = process_skill_list(newArrivals)
+				return HttpResponse(template.render(context, request))
+			else:
+				return HttpResponse("Wrong topic")
+		elif predef_name.lower() == PreDefExclusive.code.lower():
+			exclusives = Skill.objects.filter(exclusive=True).extra(order_by=('-classes_given', '-no_teachers', '-clicks'))
+			if len(exclusives) > 0:
+				context, template = process_skill_list(exclusives)
 				return HttpResponse(template.render(context, request))
 			else:
 				return HttpResponse("Wrong topic")

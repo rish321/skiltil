@@ -14,7 +14,7 @@
     },
     "priceSpecification" : {
       "@type" : "PriceSpecification",
-      "priceCurrency" : "Rs.",
+      "priceCurrency" : "&#8377;",
       "price" : "{{ session.balance_amount|floatformat:2 }}"
     }
   },
@@ -154,12 +154,12 @@
                 <b>Spending</b>
             </td>
             <td style="width:25%;">
-                <b>Rs. {{ session.balance_amount|floatformat:2 }}</b>
+                <b>&#8377; {{ session.balance_amount|floatformat:2 }}</b>
             </td>
         </tr>
     </table>
     <div style="margin-top: 20px;">
-        <h3>To pay, transfer <b>Rs. {{ session.balance_amount|floatformat:2 }}</b> through <img
+        <h3>To pay, transfer <b>&#8377; {{ session.balance_amount|floatformat:2 }}</b> through <img
                 src="https://upload.wikimedia.org/wikipedia/en/4/42/Paytm_logo.png" height="18"/> wallet on <b>8861756350</b>.
         </h3>
     </div>

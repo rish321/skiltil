@@ -42,19 +42,20 @@ def reverse_foreignkey_change_links(model, get_instances, description=None, get_
     model_change_link_function.allow_tags = True
     return model_change_link_function
 
+
 @admin.register(Session)
 class SessionAdmin(admin.ModelAdmin):
     list_filter = ['session_number', 'skill_match__skill__topic', 'skill_match__skill', 'skill_match__customer',
-                   'student']
+                   'student', "student_pricing", "teacher_pricing"]
     list_display = ['order_id', 'skill_match', 'student', 'session_number', 'amount_to_teacher', 'balance_amount',
-                    'start_time', ]
+                    'start_time', "student_pricing", "teacher_pricing"]
     search_fields = ['order_id', 'skill_match__skill__topic__topic_name', 'skill_match__skill__skill_name',
                      'skill_match__customer__customer_name', 'student__customer_name', 'session_number']
 
-    raw_id_fields = ["skill_match", "student"]
-    readonly_fields = ['order_id', 'session_number', 'total_calls', 'calls_list', 'total_duration', 'minutes_duration', 'start_time',
-                       'end_time',
-                       'call_time_range', 'money_refund', 'amount_to_teacher', 'amount_from_student', 'balance_amount']
+    raw_id_fields = ["skill_match", "student", "student_pricing", "teacher_pricing"]
+    readonly_fields = ['order_id', 'session_number', 'total_calls', 'calls_list', 'total_duration', 'minutes_duration',
+                       'start_time', 'end_time', 'call_time_range', 'money_refund', 'amount_to_teacher',
+                       'amount_from_student', 'balance_amount']
 
     calls_list = reverse_foreignkey_change_links(Call, lambda obj: Call.objects.filter(belong_session=obj))
 

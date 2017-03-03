@@ -10,6 +10,8 @@ from base.models import BaseModel
 
 from django.utils import timezone
 from tinymce import models as tinymce_models
+import math
+from HTMLParser import HTMLParser
 
 
 # class BaseModel(models.Model):
@@ -18,6 +20,24 @@ from tinymce import models as tinymce_models
 #
 #	class Meta:
 #        	abstract = True
+
+class MLStripper(HTMLParser):
+    def __init__(self):
+        self.reset()
+        self.fed = []
+
+    def handle_data(self, d):
+        self.fed.append(d)
+
+    def get_data(self):
+        return ''.join(self.fed)
+
+
+def strip_tags(html):
+    s = MLStripper()
+    s.feed(html)
+    return s.get_data()
+
 
 class CustomerRequest(BaseModel):
     contact_name = models.CharField(max_length=50, blank=False)
@@ -88,9 +108,34 @@ class Skill(BaseModel):
     clicks = models.IntegerField(default=0)
     classes_given = models.IntegerField(default=0)
     no_teachers = models.IntegerField(default=0)
+    skill_rating = models.FloatField(default=0)
+    skill_rating_count = models.IntegerField(default=0)
+    student_pricing = models.ForeignKey("pricing.PriceModel", default=None, null=True, blank=True,
+                                        related_name='skill_student_pricing')
+    teacher_pricing = models.ForeignKey("pricing.PriceModel", default=None, null=True, blank=True,
+                                        related_name='skill_teacher_pricing')
 
     def __str__(self):
         return self.skill_name + " - " + self.topic.topic_name
+
+    def get_skill_rating(self):
+        return math.ceil(self.skill_rating / 2 * 10.0) / 10
+
+    def get_plain_text(self):
+        return strip_tags(self.details)
+
+    def add_skill_rating(self, skill_rating):
+        existingRating = self.skill_rating * self.skill_rating_count
+        existingRating += skill_rating
+        self.skill_rating_count += 1
+        self.skill_rating = existingRating / self.skill_rating_count
+        self.save()
+
+    def update_teacher_rating(self, old_skill_rating, skill_rating):
+        existingRating = self.skill_rating * self.skill_rating_count
+        existingRating += (skill_rating - old_skill_rating)
+        self.skill_rating = existingRating / self.skill_rating_count
+        self.save()
 
     def generate_code(self, skill_name):
         val = BaseModel.findVal(skill_name)
@@ -105,14 +150,44 @@ class Skill(BaseModel):
                     raise Exception("Name is super popular!")
         return ''.join(e for e in val if e.isalnum())
 
+    def remaining_classes(self):
+        return self.total_classes - 1
+
+    def first_session_time(self):
+        return str(int(self.first_class_time.total_seconds() / 60)) + " minutes"
+
+    def first_class_cost(self):
+        return int(self.student_pricing.calculateAmount(self.first_class_time, False))
+
+    def subsequent_session_time(self):
+        return str(int(self.subsequent_class_time.total_seconds() / 60)) + " minutes"
+
+    def discounted_price(self):
+        return int(math.ceil((self.first_class_cost() + (self.total_classes - 1) * self.subsequent_class_cost()) * 0.9))
+
+    def subsequent_class_cost(self):
+        return int(self.student_pricing.calculateAmount(self.subsequent_class_time, False))
+
+    def classes_single_column(self):
+        return self.total_classes == 1 and self.first_class_time.total_seconds() > 0
+
+    def first_class_show(self):
+        return self.first_class_time.total_seconds() > 0
+
     def save(self, *args, **kwargs):
         if len(self.skill_code) == 0:
             self.skill_code = self.generate_code(self.skill_name)
         self.classes_given = 0
         skillMatches = SkillMatch.objects.filter(skill=self)
         self.no_teachers = len(skillMatches)
+        self.skill_rating = 0
+        self.skill_rating_count = 0
         for skillMatch in skillMatches:
             self.classes_given += skillMatch.classes_given
+            self.skill_rating += skillMatch.teacher_rating * skillMatch.teacher_rating_count
+            self.skill_rating_count += skillMatch.teacher_rating_count
+        if self.skill_rating_count > 0:
+            self.skill_rating /= self.skill_rating_count
         super(Skill, self).save(*args, **kwargs)
         self.topic.save(*args, **kwargs)
 

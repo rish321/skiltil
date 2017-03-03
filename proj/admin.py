@@ -12,11 +12,11 @@ class SkillTopicAdmin(admin.ModelAdmin):
 
 @admin.register(Skill)
 class SkillAdmin(admin.ModelAdmin):
-	raw_id_fields = ["topic"]
-	list_filter = ["no_teachers", "topic", "exclusive"]
-	list_display = ['skill_code', "skill_name", "topic", "clicks", "classes_given", "no_teachers", "exclusive"]
+	raw_id_fields = ["topic", "student_pricing", "teacher_pricing"]
+	list_filter = ["no_teachers", "topic", "exclusive", 'skill_rating_count', "student_pricing", "teacher_pricing"]
+	list_display = ['skill_code', "skill_name", "topic", "clicks", "classes_given", "no_teachers", "exclusive", 'get_skill_rating', 'skill_rating_count', "student_pricing", "teacher_pricing"]
 	search_fields = ['skill_code', "skill_name", "topic__topic_name"]
-	readonly_fields = ['skill_code', 'clicks', 'classes_given', 'no_teachers']
+	readonly_fields = ['skill_code', 'clicks', 'classes_given', 'no_teachers', 'skill_rating', 'skill_rating_count']
 
 #admin.site.register(SkillTopic)
 #admin.site.register(Skill)

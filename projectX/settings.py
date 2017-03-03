@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'session.apps.SessionConfig',
     'payment.apps.PaymentConfig',
     'base.apps.BaseConfig',
+    'pricing.apps.PricingConfig',
     # 'material',
     # 'material.frontend',
     # 'material.admin',

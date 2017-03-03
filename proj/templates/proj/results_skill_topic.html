@@ -73,6 +73,11 @@
                         <img src="{% static "images/loading_icon.png" %}" data-src="{{ skill.image_src }}"
                              class="lazyload"></img>
                         <h4>{{ skill.skill_name }}</h4>
+                        <!--<input id="input-id" name="input-name" class="rating-loading" min=1 max=10 step=0.5 data-size="xs" data-rtl="true">
+                        {% if skill.get_skill_rating >= 3 %}
+                            <input id="input-3" name="input-3" value="{{ skill.get_skill_rating }}"
+                                   class="rating-loading" data-size="xs">
+                        {% endif %}-->
                         <table border="0" width="100%" style="margin: 0px;">
                             {% if skill.no_teachers > 0 %}
                                 <tr>

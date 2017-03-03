@@ -4,11 +4,14 @@
     <meta name="description" content="Wide variety of topics to choose from, learn at your own pace."/>
     <meta name="keywords" content="skiltil, learn, home, video, call, personalized, feedback, corrective"/>
 
+    <meta property="og:url" content="http://www.skiltil.com/"/>
     <meta property="og:site_name" content="Skiltil">
-    <meta property="og:title" content="Learn from Home"/>
-    <meta property="og:description" content="Wide variety of topics to choose from, learn at your own pace."/>
+    <meta property="og:title" content="Skiltil - Home"/>
+    <meta property="og:description"
+          content="Learn from home - Wide variety of topics to choose from, learn at your own pace."/>
     <meta property="og:image" itemprop="image" content="http://skiltil.com/static/images/logo.jpeg">
     <meta property="og:type" content="website"/>
+    <meta property="fb:app_id" content="1291723094225037"/>
 
     {% load static %}
     <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
@@ -59,21 +62,12 @@
                     },
                     success: function (htmlReturned) {
                         $("#right__panel").html(htmlReturned);
-                        //alert("This will only be executed once");
-                        /* Remove Loader */
                     },
                     complete: function () {
                         $('#loading').hide();
                         $('#page-content-wrapper').show();
 
-                        /*var head;
-                        var script;
-
-                        head = $$('head')[0];
-                        if (head) {
-                            script = new Element('script', {type: 'application/ld+json', src: 'dynamic_skills.js'});
-                            head.appendChild(script);
-                        }*/
+                        $('#input-3').rating({displayOnly: true, step: 0.5});
                     }
                 });
             });
@@ -227,21 +221,21 @@
                             $("#navigation_down").click();
                         }
                     }/*,
-                    {
-                        element: "#nav_pricing",
-                        title: "Extremely affordable classes",
-                        content: "Click here to know about our pricing.",
-                        backdrop: true,
-                        backdropContainer: "#navigation_bar",
-                        placement: "bottom auto",
-                        onShow: function (tour) {
-                            $("#nav_pricing").css("pointer-events", "none");
-                        },
-                        onHidden: function (tour) {
-                            $("#navigation_down").click();
-                            $("#nav_pricing").css("pointer-events", "");
-                        }
-                    }*/
+                     {
+                     element: "#nav_pricing",
+                     title: "Extremely affordable classes",
+                     content: "Click here to know about our pricing.",
+                     backdrop: true,
+                     backdropContainer: "#navigation_bar",
+                     placement: "bottom auto",
+                     onShow: function (tour) {
+                     $("#nav_pricing").css("pointer-events", "none");
+                     },
+                     onHidden: function (tour) {
+                     $("#navigation_down").click();
+                     $("#nav_pricing").css("pointer-events", "");
+                     }
+                     }*/
                 ]
             });
 
@@ -341,31 +335,12 @@
         });
     </script>
 
-    <!--script>
-        $(document).ready(function () {
-            var trigger = $('#menu-toggle'),
 
-                isClosed = false;
+    <script>
+        $(document).on('ready', function () {
 
-            trigger.click(function () {
-                hamburger_cross();
-            });
-
-            function hamburger_cross() {
-
-                if (isClosed == true) {
-
-                    trigger.removeClass('is-open');
-                    trigger.addClass('is-closed');
-                    isClosed = false;
-                } else {
-
-                    trigger.removeClass('is-closed');
-                    trigger.addClass('is-open');
-                    isClosed = true;
-                }
-            }
         });
-    </script-->
+    </script>
+
 
 {% endblock %}

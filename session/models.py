@@ -77,6 +77,8 @@ class Session(BaseModel):
     amount_to_teacher = models.FloatField(default=0)
     amount_from_student = models.FloatField(default=0)
     balance_amount = models.FloatField(default=0)
+    student_pricing = models.ForeignKey("pricing.PriceModel", default=None, null=True, blank=True, related_name='student_pricing')
+    teacher_pricing = models.ForeignKey("pricing.PriceModel", default=None, null=True, blank=True, related_name='teacher_pricing')
 
     def get_start_time(self):
         return self.start_time
@@ -86,17 +88,19 @@ class Session(BaseModel):
             self.session_number)
 
     def calculateTeacherAmount(self, timeDuration):
-        timeSeconds = timeDuration.total_seconds()
-        return (2.5 * timeSeconds) / 60
+        return self.teacher_pricing.calculateAmount(timeDuration, True)
+        '''timeSeconds = timeDuration.total_seconds()
+        return (2.5 * timeSeconds) / 60'''
 
     def getEstimatedMinutes(self):
         return self.estimate_duration.total_seconds()/60
 
     def calculateStudentAmount(self, timeDuration):
-        seconds = timeDuration.total_seconds()
-        minutes = seconds / 60
-        seconds = seconds % 60
-        if seconds > 0:
+        return self.student_pricing.calculateAmount(timeDuration, False)
+        '''timeSeconds = timeDuration.total_seconds()
+        minutes = timeSeconds / 60
+        timeSeconds = timeSeconds % 60
+        if timeSeconds > 0:
             minutes += 1
         roundedTimeDuration = minutes
         # print minutes
@@ -115,7 +119,15 @@ class Session(BaseModel):
                     noRedCost = int(minutes) * multiplicationFactor
         cost = fixedCost + redCost + noRedCost
         self.minutes_duration = roundedTimeDuration
-        return cost
+        return cost'''
+
+    def getMinuteDuration(self):
+        time_seconds = self.total_duration.total_seconds()
+        minutes = time_seconds / 60
+        time_seconds %= 60
+        if time_seconds > 0:
+            minutes += 1
+        return minutes
 
     def calculateEstimatedStudentAmount(self):
         return self.calculateStudentAmount(self.estimate_duration)
@@ -123,24 +135,17 @@ class Session(BaseModel):
     def calculateEstimatedTeacherAmount(self):
         return self.calculateTeacherAmount(self.estimate_duration)
 
+    def __init__(self, *args, **kwargs):
+        super(Session, self).__init__(*args, **kwargs)
+        self.__stud_rating = self.student_rating
+        self.__teach_rating = self.teacher_rating
+
     def save(self, *args, **kwargs):
         calls = Call.objects.filter(belong_session=self)
         self.total_duration = timedelta()
         self.total_calls = 0
         self.start_time = timezone.now()
         self.end_time = timezone.now().replace(year=1970, month=1, day=1, hour=0, minute=0, second=0)
-        '''existingList = self.scheduled_time_dump
-        if existingList is None:
-            existingList = []
-        if len(existingList) == 0:
-            existingList.append(self.scheduled_time)
-        if self.rescheduled_time is not None:
-            existingList.append(self.rescheduled_time)
-        if existingList is None:
-            if self.rescheduled_time is not None:
-                existingList = [self.rescheduled_time]
-        #existingList.append(self.rescheduled_time)
-        self.scheduled_time_dump = existingList'''
         if self.rescheduled_time == None:
             self.rescheduled_time = self.scheduled_time
         for call in calls:
@@ -149,16 +154,21 @@ class Session(BaseModel):
             self.total_duration += call.call_duration
             self.total_calls += 1
         self.call_time_range = self.end_time - self.start_time
+        if self.student_pricing is None:
+            self.student_pricing = self.skill_match.skill.student_pricing
+        if self.teacher_pricing is None:
+            self.teacher_pricing = self.skill_match.skill.teacher_pricing
         self.amount_to_teacher = self.calculateTeacherAmount(self.total_duration)
         self.money_refund = self.calculateStudentAmount(self.time_refund)
         self.amount_from_student = self.calculateStudentAmount(self.total_duration)
+        self.minutes_duration = self.getMinuteDuration()
         self.balance_amount = self.amount_from_student - self.money_refund
         super(Session, self).save(*args, **kwargs)
         self.order_id = hex(self.id + 100000).split('x')[1].upper()
         super(Session, self).save(*args, **kwargs)
         sessions = Session.objects.filter(student=self.student).filter(
             skill_match__skill=self.skill_match.skill).order_by('start_time')
-        print sessions
+        #print sessions
         number = 1
         for session in sessions:
             session.session_number = number

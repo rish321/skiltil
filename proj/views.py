@@ -265,7 +265,7 @@ def process_skill_list(skills):
 def get_skill_match_list(skills):
 	skill_match_list = []
 	for skil in skills:
-		skill_matches = SkillMatch.objects.filter(skill=skil)
+		skill_matches = SkillMatch.objects.filter(skill=skil).filter(classes_given__gt=0).order_by('-classes_given')
 		skill_match_list.extend(skill_matches)
 	return skill_match_list
 

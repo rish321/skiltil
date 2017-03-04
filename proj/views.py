@@ -20,6 +20,7 @@ from django.db.models import Q
 import traceback
 from django.db.models import F
 import re
+import operator
 
 class SkillCount(object):
 	def __init__(self, skill_name, count):
@@ -267,7 +268,8 @@ def get_skill_match_list(skills):
 	for skil in skills:
 		skill_matches = SkillMatch.objects.filter(skill=skil).filter(classes_given__gt=0).order_by('-classes_given')
 		skill_match_list.extend(skill_matches)
-	return skill_match_list
+	return sorted(skill_match_list, key=operator.attrgetter('classes_given'), reverse=True)
+	#return skill_match_list
 
 
 def ajax_skills_predef(request, predef_name):

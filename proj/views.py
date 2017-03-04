@@ -54,7 +54,7 @@ def index(request):
 		traceback.print_exc(file=open("errlog.txt","a"))
 
 
-def contact(request, skill_code):
+def details(request, skill_code):
 	try:
 		data = {'skill': ""}
 		form_class = ContactForm(initial=data)

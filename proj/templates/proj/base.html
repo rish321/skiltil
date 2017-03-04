@@ -12,6 +12,7 @@
 
 
     {% load static %}
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
     <link rel="shortcut icon" type="image/png" href={% static "/favicon.ico" %}/>
     <link rel="stylesheet" type="text/css" href={% static "css/contact.css" %}/>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -26,7 +27,7 @@
     <link rel="stylesheet" type="text/css" href={% static "css/bootstrap.min.css" %}/>
     <link rel="stylesheet" type="text/css" href={% static "css/bootstrap-tour.min.css" %}/>
     <link rel="stylesheet" type="text/css" href={% static "css/navbar.css" %}/>
-    <link rel="stylesheet" type="text/css" href={% static "css/star-rating.min.css" %}/>
+    <link rel="stylesheet" type="text/css" href={% static "css/bootstrap-rating.css" %}/>
 
 
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
@@ -34,7 +35,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src={% static "js/bootstrap-tour.min.js" %}></script>
 
-    <script src={% static "js/star-rating.min.js" %}></script>
+    <script src={% static "js/bootstrap-rating.min.js" %}></script>
 
 
     {% block stylesheet %}{% endblock %}
@@ -92,11 +93,11 @@
         </div>
         <div class="box_container">
             <div class="green_box_big">3.<img src={% static "images/four.jpg" %}   height="35" width="35"/></div>
-            <div class="red_box_big">For every session pay @ Rs.4/minute</div>
+            <div class="red_box_big">For every session pay @ &#8377;4/minute</div>
         </div>
         <div class="box_container">
             <div class="green_box_big">4.<img src={% static "images/offer.png" %}   height="55" width="35"/></div>
-            <div class="red_box_big">First 10 minutes of every session are charged @Rs. 12 only (total for 10 mins)</div>
+            <div class="red_box_big">First 10 minutes of every session are charged @ &#8377;10 only (total for 10 mins)</div>
         </div>
         <div class="box_container">
             <div class="green_box_big">5.<img src={% static "images/handshake.jpg" %}   height="35" width="35"/></div>

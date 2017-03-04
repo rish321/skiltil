@@ -102,7 +102,7 @@ class Skill(BaseModel):
     pre_requisites = tinymce_models.HTMLField(default="", blank=True)
     exclusive = models.BooleanField(default=False)
     total_classes = models.IntegerField(default=1)
-    first_class_time = models.DurationField(default=timezone.timedelta, blank=True)
+    first_class_time = models.DurationField(default=timezone.timedelta(minutes = 30), blank=True)
     subsequent_class_time = models.DurationField(default=timezone.timedelta, blank=True)
     skill_code = models.CharField(max_length=200, default="")
     clicks = models.IntegerField(default=0)
@@ -159,6 +159,9 @@ class Skill(BaseModel):
     def first_class_cost(self):
         return int(self.student_pricing.calculateAmount(self.first_class_time, False))
 
+    def first_class_cost_range(self):
+        return str(int(self.student_pricing.calculateAmount(self.first_class_time, False))) + " - " + str(int(self.student_pricing.calculateAmount(self.first_class_time + timezone.timedelta(minutes = 10), False)))
+
     def subsequent_session_time(self):
         return str(int(self.subsequent_class_time.total_seconds() / 60)) + " minutes"
 
@@ -167,6 +170,9 @@ class Skill(BaseModel):
 
     def subsequent_class_cost(self):
         return int(self.student_pricing.calculateAmount(self.subsequent_class_time, False))
+
+    def subsequent_class_cost_range(self):
+        return str(int(self.student_pricing.calculateAmount(self.subsequent_class_time, False))) + " - " + str(int(self.student_pricing.calculateAmount(self.subsequent_class_time + timezone.timedelta(minutes = 10), False)))
 
     def classes_single_column(self):
         return self.total_classes == 1 and self.first_class_time.total_seconds() > 0

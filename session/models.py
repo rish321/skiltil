@@ -194,9 +194,11 @@ class CallQuerySet(models.QuerySet):
 
 CALLMODEOPTIONS = (
     ("skype", 'Skype'),
-    ("gmail", 'Gmail'),
+    ("gmail", 'Gmail Call'),
     ("appear", 'Appear.in'),
     ("imo", 'Imo'),
+    ("whatsapp", 'Whatsapp Call'),
+    ("facebook", 'Facebook Call'),
     ("zoom", 'Zoom'),
     ("phone", 'Phone'),
     ("chat", 'Chat'),

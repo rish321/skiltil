@@ -62,12 +62,12 @@
                     },
                     success: function (htmlReturned) {
                         $("#right__panel").html(htmlReturned);
+                        $('#page-content-wrapper').show();
+
                     },
                     complete: function () {
                         $('#loading').hide();
-                        $('#page-content-wrapper').show();
 
-                        $('#input-3').rating({displayOnly: true, step: 0.5});
                     }
                 });
             });
@@ -89,12 +89,14 @@
                     success: function (htmlReturned) {
                         $("#left__panel").html(htmlReturned);
                         //alert("This will only be executed once");
+                        $(".preload-item-js").click();
+                        $('#page-content-wrapper').show();
                     },
                     complete: function () {
                         console.log("loaded first")
-                        $(".preload-item-js").click();
+
                         $('#loading').hide();
-                        $('#page-content-wrapper').show();
+
 
 
                         start_tour();
@@ -256,10 +258,6 @@
 
 {% endblock %}
 {% block body %}
-
-
-
-
 
     <div class="container">
         <div id="loading"

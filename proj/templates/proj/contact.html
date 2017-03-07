@@ -162,9 +162,18 @@
                     {{ skill.details|safe }}
                 </div>
 
+                {% if skill.course_structure|length > 0 %}
+                    <div class="row" style="margin-top: 20px;text-align: left">
+                        <p style="font-weight: 600; font-size: 16px">Course Structure:</p>
+                    </div>
+                    <div class="row" style="text-align: left; font-size:16px;">
+                        {{ skill.course_structure|safe }}
+                    </div>
+                {% endif %}
+
                 {% if skill.pre_requisites|length > 0 %}
                     <div class="row" style="margin-top: 20px;text-align: left">
-                        <h5>Good to Have:</h5>
+                        <p style="font-weight: 600; font-size: 16px">Good to Have:</p>
                     </div>
                     <div class="row" style="text-align: left; font-size:16px;">
                         {{ skill.pre_requisites|safe }}

@@ -99,6 +99,7 @@ class Skill(BaseModel):
     topic = models.ForeignKey(SkillTopic, default=None)
     image_src = models.CharField(max_length=200, blank=True)
     details = tinymce_models.HTMLField(default="", blank=True)
+    course_structure = tinymce_models.HTMLField(default="", blank=True)
     pre_requisites = tinymce_models.HTMLField(default="", blank=True)
     exclusive = models.BooleanField(default=False)
     total_classes = models.IntegerField(default=1)

@@ -71,13 +71,15 @@ def details(request, skill_code):
 
         if request.user.is_authenticated():
             user = request.user
-            socialAccount = SocialAccount.objects.filter(user_id=user.id)[0]
-            customer = Customer.objects.filter(social=socialAccount)[0]
+            socialAccounts = SocialAccount.objects.filter(user_id=user.id)
+            if len(socialAccounts) > 0 :
+                socialAccount = socialAccounts[0]
+                customer = Customer.objects.filter(social=socialAccount)[0]
 
-            data['contact_name'] = customer.customer_name
-            data['contact_email'] = customer.email
-            data['contact_phone'] = customer.phone_number
-            form_class = ContactForm(initial=data)
+                data['contact_name'] = customer.customer_name
+                data['contact_email'] = customer.email
+                data['contact_phone'] = customer.phone_number
+                form_class = ContactForm(initial=data)
 
         if len(skills) > 0:
             skill = skills[0]

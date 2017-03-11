@@ -9,6 +9,7 @@ from session.models import Session
 from payment.models import Payment, Payout, Transfer
 from django.utils.encoding import python_2_unicode_compatible
 from base.models import BaseModel
+from allauth.socialaccount.models import SocialAccount
 
 GENDEROPTIONS = (
     ('f', 'Female'),
@@ -20,6 +21,7 @@ GENDEROPTIONS = (
 
 class Customer(BaseModel):
     customer_name = models.CharField(max_length=200)
+    social = models.ForeignKey(SocialAccount, default=None, blank=True, null=True)
     email = models.CharField(max_length=200, blank=True)
     phone_number = models.CharField(max_length=200, blank=True)
     gender = models.CharField(max_length=1, choices=GENDEROPTIONS, default='d')

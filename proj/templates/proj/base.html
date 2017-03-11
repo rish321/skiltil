@@ -1,325 +1,258 @@
-{% load analytical %}
-<html>
-<head>
-    {% analytical_head_top %}
-    <meta charset="UTF-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--title>Learn from Home</title-->
-    <title>{% block title %}{% endblock %}</title>
-
-
-
-
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
-    <link rel="shortcut icon" type="image/png" href={% static "/favicon.ico" %}/>
-    <link rel="stylesheet" type="text/css" href={% static "css/contact.css" %}/>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src={% static "js/modernizr.custom.63321.js" %}></script>
-    <script src={% static "js/jquery-3.1.1.min.js" %}></script>
-    <script src={% static "js/jquery.js" %}></script>
-    <script src={% static "js/lazysizes.min.js" %} async=""></script>
-    <script src={% static "js/classie.js" %}></script>
-    <link rel="stylesheet" type="text/css" href={% static "css/overlay.css" %}/>
-    <link rel="stylesheet" type="text/css" href={% static "css/header-basic-light.css" %}/>
-    <link rel="stylesheet" type="text/css" href={% static "css/step.css" %}/>
-    <link rel="stylesheet" type="text/css" href={% static "css/bootstrap.min.css" %}/>
-    <link rel="stylesheet" type="text/css" href={% static "css/bootstrap-tour.min.css" %}/>
-    <link rel="stylesheet" type="text/css" href={% static "css/navbar.css" %}/>
-    <link rel="stylesheet" type="text/css" href={% static "css/bootstrap-rating.css" %}/>
-
-
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src={% static "js/bootstrap-tour.min.js" %}></script>
-
-    <script src={% static "js/bootstrap-rating.min.js" %}></script>
-
-
-    {% block stylesheet %}{% endblock %}
-    <!--link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css"-->
-
-
-    <link rel="stylesheet" type="text/css" href={% static "css/body.css" %}/>
-
-
-    {% analytical_head_bottom %}
-</head>
-
-<body>
-{% analytical_body_top %}
-
-<nav id="navigation_bar" class="navbar navbar-default navbar-fixed-top" style="margin-bottom:0px;">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header" id="navbar-header">
-            <button id="navigation_down" type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="glyphicon glyphicon-chevron-down"></span>
-            </button>
-            <a class="navbar-brand" href="#">
-                <img onclick="openHomePage()" src={% static "images/logo_big.png" %} height="100%" width="auto"
-                     alt="Skiltil"/>
-            </a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-                <li data-toggle="collapse" data-target=".in"><a href="http://www.skiltil.wordpress.com/" target="_blank" toggle="offline">Blog</a></li>
-                <li data-toggle="collapse" data-target=".in"><a href="#" onclick="openNav()" toggle="offline">How We Work</a></li>
-                <li data-toggle="collapse" data-target=".in" id="nav_pricing"><a href="#" onclick="openPricingNav()" toggle="offline">Pricing</a></li>
-                <li data-toggle="collapse" data-target=".in"><a href="#" onclick="openContactNav()" toggle="offline">Contact Us</a></li>
-            </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-</nav>
-
-
-<div id="pricingNav" class="overlay">
-    <a href="javascript:void(0)" class="closebtn" onclick="closePricingNav()">&times;</a>
-    <div class="overlay-content">
-        <div class="box_container">
-            <div class="green_box_big">1.<img src={% static "images/uniform_pricing.png" %}   height="35" width="35"/>
+{% extends "proj/base-body.html" %}
+{% load static %}
+{% block base-body %}
+    <nav id="navigation_bar" class="navbar navbar-default navbar-fixed-top" style="margin-bottom:0px;">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header" id="navbar-header">
+                <button id="navigation_down" type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </button>
+                <a class="navbar-brand" href="#">
+                    <img onclick="openHomePage()" src={% static "images/logo_big.png" %} height="100%" width="auto"
+                         alt="Skiltil"/>
+                </a>
             </div>
-            <div class="red_box_big">Learn any course at uniform pricing</div>
-        </div>
-        <div class="box_container">
-            <div class="green_box_big">2.<img src={% static "images/self-paced.jpg" %}   height="35" width="35"/></div>
-            <div class="red_box_big">Learn at your own pace. Teacher moves at your pace.</div>
-        </div>
-        <div class="box_container">
-            <div class="green_box_big">3.<img src={% static "images/four.jpg" %}   height="35" width="35"/></div>
-            <div class="red_box_big">For every session pay @ &#8377;4/minute</div>
-        </div>
-        <div class="box_container">
-            <div class="green_box_big">4.<img src={% static "images/offer.png" %}   height="55" width="35"/></div>
-            <div class="red_box_big">First 10 minutes of every session are charged @ &#8377;10 only (total for 10 mins)</div>
-        </div>
-        <div class="box_container">
-            <div class="green_box_big">5.<img src={% static "images/handshake.jpg" %}   height="35" width="35"/></div>
-            <div class="red_box_big">Payment method and session invoice will be shared with you post class.</div>
-        </div>
-        <div class="box_container">
-            <div class="green_box_big">6.<img src={% static "images/pay.png" %}   height="35" width="35"/></div>
-            <div class="red_box_big">Pay to us through any payment wallet or account transfer.</div>
-        </div>
-    </div>
-</div>
 
-<div id="contactNav" class="overlay" style="background:#334455;">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeContactNav()">&times;</a>
-    <div class="overlay-content" style="color:white;">
-        <h1 style="width:100%;text-align:center;margin-bottom:100px;"><b>Contact Skiltil</b></h1>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li data-toggle="collapse" data-target=".in"><a href="http://www.skiltil.wordpress.com/"
+                                                                    target="_blank"
+                                                                    toggle="offline">Blog</a></li>
+                    <li data-toggle="collapse" data-target=".in"><a href="#" onclick="openNav()" toggle="offline">How We
+                        Work</a></li>
+                    <li data-toggle="collapse" data-target=".in" id="nav_pricing"><a href="#" onclick="openPricingNav()"
+                                                                                     toggle="offline">Pricing</a></li>
+                    <li data-toggle="collapse" data-target=".in"><a href="#" onclick="openContactNav()"
+                                                                    toggle="offline">Contact
+                        Us</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {% if request.user.is_authenticated %}
+                        <li data-toggle="collapse" data-target=".in"><a href="/profile"><span
+                                class="glyphicon glyphicon-user"></span> Profile</a>
+                        </li>
+                        <li data-toggle="collapse" data-target=".in"><a
+                                href="{% url 'logout' %}?next={{ request.path }}"><span
+                                class="glyphicon glyphicon-log-out"></span> Logout</a>
+                        </li>
+                    {% else %}
+                        <li data-toggle="collapse" data-target=".in"><a
+                                href="{% url 'login' %}?next={{ request.path }}"><span
+                                class="glyphicon glyphicon-log-in"></span> Login</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
 
 
-        <div style="text-align: center">
-            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                <figure class="contactitem col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12"
-                        onclick="openContactMail()">
-                    <img src="{% static "images/mail.png" %}"/>
-                    <figcaption class="caption">email</figcaption>
-                    <info class="info">help.skiltil @gmail.com</info>
-                </figure>
+    <div id="pricingNav" class="overlay">
+        <a href="javascript:void(0)" class="closebtn" onclick="closePricingNav()">&times;</a>
+        <div class="overlay-content">
+            <div class="box_container">
+                <div class="green_box_big">1.<img src={% static "images/uniform_pricing.png" %}   height="35"
+                                                  width="35"/>
+                </div>
+                <div class="red_box_big">Learn any course at uniform pricing</div>
             </div>
-            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                <figure class="contactitem col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12" onclick="openContactFB()">
-                    <img src="{% static "images/fb.png" %}"/>
-                    <figcaption class="caption">Facebook</figcaption>
-                    <figinfo class="info">https://www.fb. com/skiltil.in</figinfo>
-                </figure>
+            <div class="box_container">
+                <div class="green_box_big">2.<img src={% static "images/self-paced.jpg" %}   height="35" width="35"/>
+                </div>
+                <div class="red_box_big">Learn at your own pace. Teacher moves at your pace.</div>
             </div>
-            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                <figure class="contactitem col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12"
-                        onclick="openContactTwitter()">
-                    <img src="{% static "images/twitter.png" %}"/>
-                    <figcaption class="caption">Twitter</figcaption>
-                    <figinfo class="info">@skiltil</figinfo>
-                </figure>
+            <div class="box_container">
+                <div class="green_box_big">3.<img src={% static "images/four.jpg" %}   height="35" width="35"/></div>
+                <div class="red_box_big">For every session pay @ &#8377;4/minute</div>
             </div>
-            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                <figure class="contactitem col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12"
-                        onclick="openContactPhone()">
-                    <img src="{% static "images/call.png" %}"/>
-                    <figcaption class="caption">Call/Whatsapp</figcaption>
-                    <figinfo class="info">9844850018</figinfo>
-                </figure>
+            <div class="box_container">
+                <div class="green_box_big">4.<img src={% static "images/offer.png" %}   height="55" width="35"/></div>
+                <div class="red_box_big">First 10 minutes of every session are charged @ &#8377;10 only (total for 10
+                    mins)
+                </div>
+            </div>
+            <div class="box_container">
+                <div class="green_box_big">5.<img src={% static "images/handshake.jpg" %}   height="35" width="35"/>
+                </div>
+                <div class="red_box_big">Payment method and session invoice will be shared with you post class.</div>
+            </div>
+            <div class="box_container">
+                <div class="green_box_big">6.<img src={% static "images/pay.png" %}   height="35" width="35"/></div>
+                <div class="red_box_big">Pay to us through any payment wallet or account transfer.</div>
             </div>
         </div>
     </div>
-</div>
 
-<div id="how_we_work_nav" class="overlay">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <div class="overlay-content">
-        <div class="box_container">
-            <div class="green_box">1.<img src={% static "images/check.png" %}   height="35" width="35"/></div>
-            <div class="red_box">Choose your interest.</div>
-        </div>
-        <div class="box_container">
-            <div class="green_box">2.<img src={% static "images/share.svg" %}   height="35" width="35"/></div>
-            <div class="red_box">Share your contact details with us.</div>
-        </div>
-        <div class="box_container">
-            <div class="green_box">3.<img src={% static "images/call.svg" %}   height="35" width="35"/></div>
-            <div class="red_box">We'll contact you on your preferred timings.</div>
-        </div>
-        <div class="box_container">
-            <div class="green_box">4.<img src={% static "images/video_call.png" %}   height="35" width="35"/></div>
-            <div class="red_box">We'll connect you through a video chat to a teacher.</div>
-        </div>
-        <div class="box_container">
-            <div class="green_box">5.<img src={% static "images/highlight.png" %}   height="35" width="35"/></div>
-            <div class="red_box">Highlights are shared after the class.</div>
-        </div>
-        <div class="box_container">
-            <div class="green_box">6.<img src={% static "images/invoice.png" %}   height="35" width="35"/></div>
-            <div class="red_box">Invoice is shared after which you can pay.</div>
+    <div id="contactNav" class="overlay" style="background:#334455;">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeContactNav()">&times;</a>
+        <div class="overlay-content" style="color:white;">
+            <h1 style="width:100%;text-align:center;margin-bottom:100px;"><b>Contact Skiltil</b></h1>
+
+
+            <div style="text-align: center">
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <figure class="contactitem col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12"
+                            onclick="openContactMail()">
+                        <img src="{% static "images/mail.png" %}"/>
+                        <figcaption class="caption">email</figcaption>
+                        <info class="info">help.skiltil @gmail.com</info>
+                    </figure>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <figure class="contactitem col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12"
+                            onclick="openContactFB()">
+                        <img src="{% static "images/fb.png" %}"/>
+                        <figcaption class="caption">Facebook</figcaption>
+                        <figinfo class="info">https://www.fb. com/skiltil.in</figinfo>
+                    </figure>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <figure class="contactitem col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12"
+                            onclick="openContactTwitter()">
+                        <img src="{% static "images/twitter.png" %}"/>
+                        <figcaption class="caption">Twitter</figcaption>
+                        <figinfo class="info">@skiltil</figinfo>
+                    </figure>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <figure class="contactitem col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12"
+                            onclick="openContactPhone()">
+                        <img src="{% static "images/call.png" %}"/>
+                        <figcaption class="caption">Call/Whatsapp</figcaption>
+                        <figinfo class="info">9844850018</figinfo>
+                    </figure>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 
-<!--div id="video_play" class="overlay">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeVideoNav()">&times;</a>
-    <div class="overlay-content" id="video_content">
-        <iframe width="100%" height="450px" text-align="center" vertical-align="middle"
-                src="https://www.youtube.com/embed/nreOh6e3Kdg" frameborder="0" allowfullscreen></iframe>
+    <div id="how_we_work_nav" class="overlay">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div class="overlay-content">
+            <div class="box_container">
+                <div class="green_box">1.<img src={% static "images/check.png" %}   height="35" width="35"/></div>
+                <div class="red_box">Choose your interest.</div>
+            </div>
+            <div class="box_container">
+                <div class="green_box">2.<img src={% static "images/share.svg" %}   height="35" width="35"/></div>
+                <div class="red_box">Share your contact details with us.</div>
+            </div>
+            <div class="box_container">
+                <div class="green_box">3.<img src={% static "images/call.svg" %}   height="35" width="35"/></div>
+                <div class="red_box">We'll contact you on your preferred timings.</div>
+            </div>
+            <div class="box_container">
+                <div class="green_box">4.<img src={% static "images/video_call.png" %}   height="35" width="35"/></div>
+                <div class="red_box">We'll connect you through a video chat to a teacher.</div>
+            </div>
+            <div class="box_container">
+                <div class="green_box">5.<img src={% static "images/highlight.png" %}   height="35" width="35"/></div>
+                <div class="red_box">Highlights are shared after the class.</div>
+            </div>
+            <div class="box_container">
+                <div class="green_box">6.<img src={% static "images/invoice.png" %}   height="35" width="35"/></div>
+                <div class="red_box">Invoice is shared after which you can pay.</div>
+            </div>
+        </div>
     </div>
-</div-->
 
-<div>
-    {% block body %}
-    {% endblock %}
-</div>
+    <!--div id="video_play" class="overlay">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeVideoNav()">&times;</a>
+        <div class="overlay-content" id="video_content">
+            <iframe width="100%" height="450px" text-align="center" vertical-align="middle"
+                    src="https://www.youtube.com/embed/nreOh6e3Kdg" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div-->
 
-
-<script>
-    function openNav() {
-        document.getElementById("how_we_work_nav").style.width = "100%";
-    }
-    function closeNav() {
-        document.getElementById("how_we_work_nav").style.width = "0%";
-    }
-</script>
-
-<script>
-    function openVideoNav() {
-        document.getElementById("video_play").style.width = "100%";
-    }
-    function closeVideoNav() {
-        document.getElementById("video_play").style.width = "0%";
-    }
-</script>
-
-<script>
-    function openPricingNav() {
-        document.getElementById("pricingNav").style.width = "100%";
-    }
-    function closePricingNav() {
-        document.getElementById("pricingNav").style.width = "0%";
-    }
-</script>
-
-<script>
-    function openContactNav() {
-        document.getElementById("contactNav").style.width = "100%";
-    }
-    function closeContactNav() {
-        document.getElementById("contactNav").style.width = "0%";
-    }
-</script>
+    <div>
+        {% block body %}
+        {% endblock %}
+    </div>
 
 
-<script>
-    function openHomePage() {
-        window.open("/", "_self")
-    }
-</script>
-
-<script>
-    function openTeachersPage() {
-        window.open("/teachers", "_self")
-    }
-</script>
-
-<script>
-    function openContactMail() {
-        window.open('mailto:help.skiltil@gmail.com');
-    }
-</script>
-
-<script>
-    function openContactFB() {
-        window.open('https://www.facebook.com/skiltil.in');
-    }
-</script>
-<script>
-    function openContactTwitter() {
-        window.open('https://twitter.com/skiltil');
-    }
-</script>
-<script>
-    function openContactPhone() {
-        window.open('tel:+91 9844850018');
-    }
-</script>
-
-<script>
-    $(document).keyup(function (e) {
-        if (e.keyCode == 27) {
-            closeVideoNav();
-            closeContactNav();
-            closePricingNav();
-            closeNav();
+    <script>
+        function openNav() {
+            document.getElementById("how_we_work_nav").style.width = "100%";
         }
-    });
-</script>
+        function closeNav() {
+            document.getElementById("how_we_work_nav").style.width = "0%";
+        }
+    </script>
 
-<!--script>
-    $(document).ready(function () {
-        $("navbar-collapse li").click(function (event) {
-            $("navbar-collapse").collapse('hide');
-        });
+    <script>
+        function openVideoNav() {
+            document.getElementById("video_play").style.width = "100%";
+        }
+        function closeVideoNav() {
+            document.getElementById("video_play").style.width = "0%";
+        }
+    </script>
 
-        /*function GetCookie(name) {
-            var arg = name + "=";
-            var alen = arg.length;
-            var clen = document.cookie.length;
-            var i = 0;
+    <script>
+        function openPricingNav() {
+            document.getElementById("pricingNav").style.width = "100%";
+        }
+        function closePricingNav() {
+            document.getElementById("pricingNav").style.width = "0%";
+        }
+    </script>
 
-            while (i < clen) {
-                var j = i + alen;
-                if (document.cookie.substring(i, j) == arg)
-                    return "here";
-                i = document.cookie.indexOf(" ", i) + 1;
-                if (i == 0)
-                    break;
+    <script>
+        function openContactNav() {
+            document.getElementById("contactNav").style.width = "100%";
+        }
+        function closeContactNav() {
+            document.getElementById("contactNav").style.width = "0%";
+        }
+    </script>
+
+
+    <script>
+        function openHomePage() {
+            window.open("/", "_self")
+        }
+    </script>
+
+    <script>
+        function openTeachersPage() {
+            window.open("/teachers", "_self")
+        }
+    </script>
+
+    <script>
+        function openContactMail() {
+            window.open('mailto:help.skiltil@gmail.com');
+        }
+    </script>
+
+    <script>
+        function openContactFB() {
+            window.open('https://www.facebook.com/skiltil.in');
+        }
+    </script>
+    <script>
+        function openContactTwitter() {
+            window.open('https://twitter.com/skiltil');
+        }
+    </script>
+    <script>
+        function openContactPhone() {
+            window.open('tel:+91 9844850018');
+        }
+    </script>
+
+    <script>
+        $(document).keyup(function (e) {
+            if (e.keyCode == 27) {
+                closeVideoNav();
+                closeContactNav();
+                closePricingNav();
+                closeNav();
             }
-
-            return null;
-        }
-
-        var visit = GetCookie("COOKIE2");
-
-        if (visit == null) {
-            openVideoNav();
-        }
-        var expire = new Date();
-        expire = new Date(expire.getTime() + 7776000000);
-        document.cookie = "COOKIE2=here; expires=" + expire;*/
-    });
-</script-->
-
-{% analytical_body_bottom %}
-<script src="//static.getclicky.com/js" type="text/javascript"></script>
-<script type="text/javascript">
-    try {
-        clicky.init(101008337);
-    } catch (e) {
-    }
-</script>
-</body>
-</html>
+        });
+    </script>
+{% endblock %}

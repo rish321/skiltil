@@ -1,0 +1,27 @@
+{% extends "proj/base-body.html" %}
+{% load static %}
+{% block base-body %}
+    <nav id="navigation_bar" class="navbar navbar-default navbar-fixed-top" style="margin-bottom:0px;">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header" id="navbar-header">
+                <a class="navbar-brand" href="#">
+                    <img onclick="openHomePage()" src={% static "images/logo_big.png" %} height="100%" width="auto"
+                         alt="Skiltil"/>
+                </a>
+            </div>
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <div>
+        {% block body %}
+        {% endblock %}
+    </div>
+
+    <script>
+        function openHomePage() {
+            window.open("/", "_self")
+        }
+    </script>
+
+{% endblock %}

@@ -29,3 +29,21 @@
     width: 100%;
     margin-bottom: 10px;
 }
+
+textarea, input, input[type], .uneditable-input {
+    border-radius: 2px;
+    //border: none;
+    border: 2px solid #D9F5F5;
+    //box-shadow: 0 1px 5px -2px rgba(0, 0, 0, .2);
+    padding: 2px;
+}
+
+textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {
+    box-shadow: 0 1px 5px -2px #D9F5F5;
+    border-bottom: 1px solid #39afe6;
+}
+
+textarea:hover, input:hover, input[type]:hover, .uneditable-input:hover {
+    box-shadow: 0 1px 5px -2px #39afe6;
+    //border-bottom: 1px solid #2196F3;
+}

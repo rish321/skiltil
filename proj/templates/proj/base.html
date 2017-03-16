@@ -8,10 +8,10 @@
                 <button id="navigation_down" type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                         data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                     <span class="sr-only">Toggle navigation</span>
-                    <span class="glyphicon glyphicon-chevron-down"></span>
+                    <span class="glyphicon glyphicon-chevron-down" style="color:#ecf0f1;"></span>
                 </button>
                 <a class="navbar-brand" href="#">
-                    <img onclick="openHomePage()" src={% static "images/logo_big.png" %} height="100%" width="auto"
+                    <img onclick="openHomePage()" src={% static "images/logo_big2.png" %} height="100%" width="auto"
                          alt="Skiltil"/>
                 </a>
             </div>
@@ -29,9 +29,8 @@
                     <li data-toggle="collapse" data-target=".in"><a href="#" onclick="openContactNav()"
                                                                     toggle="offline">Contact
                         Us</a></li>
-                </ul>
-                <!--ul class="nav navbar-nav navbar-right">
-                    {% if request.user.is_authenticated %}
+
+                    <!--{% if request.user.is_authenticated %}
                         <li data-toggle="collapse" data-target=".in"><a href="/profile"><span
                                 class="glyphicon glyphicon-user"></span> Profile</a>
                         </li>
@@ -44,8 +43,8 @@
                                 href="{% url 'login' %}?next={{ request.path }}"><span
                                 class="glyphicon glyphicon-log-in"></span> Login</a>
                         </li>
-                    {% endif %}
-                </ul-->
+                    {% endif %}-->
+                </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
@@ -183,14 +182,14 @@
         }
     </script>
 
-    <script>
+    <!--script>
         function openVideoNav() {
             document.getElementById("video_play").style.width = "100%";
         }
         function closeVideoNav() {
             document.getElementById("video_play").style.width = "0%";
         }
-    </script>
+    </script-->
 
     <script>
         function openPricingNav() {
@@ -248,7 +247,7 @@
     <script>
         $(document).keyup(function (e) {
             if (e.keyCode == 27) {
-                closeVideoNav();
+                //closeVideoNav();
                 closeContactNav();
                 closePricingNav();
                 closeNav();

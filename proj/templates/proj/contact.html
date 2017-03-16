@@ -308,7 +308,8 @@
     {% endif %}
 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <div style="text-align:center;margin-top: 20px;">
-        {% if request.user.is_authenticated %}
+        <h4>Please fill your details. This helps us in matching with the best teacher. We'll get back to you.</h4>
+        <!--{% if request.user.is_authenticated %}
             <h4>Please fill your details. This helps us in matching with the best teacher. We'll get back to you.</h4>
         {% else %}
             <div style="font-size: xx-large">
@@ -316,7 +317,7 @@
                 Login to continue </a>
             </div>
             <h4 style="margin-top: 30px;">Or fill your details. This helps us in matching with the best teacher. We'll get back to you.</h4>
-        {% endif %}
+        {% endif %}-->
         <form role="form" action="" method="post" id="contact_form" style="text-align:center;">
             {% csrf_token %}
             <table style="width:100%;">

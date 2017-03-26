@@ -206,12 +206,12 @@ class Skill(BaseModel):
             self.skill_rating /= self.skill_rating_count
         super(Skill, self).save(*args, **kwargs)
         self.topic.save(*args, **kwargs)
-        try:
+        '''try:
             ping_google()
         except Exception:
             # Bare 'except' because we could get a variety
             # of HTTP-related exceptions.
-            pass
+            pass'''
 
     def delete(self, *args, **kwargs):
         topic = self.topic

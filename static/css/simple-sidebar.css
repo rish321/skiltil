@@ -65,20 +65,39 @@
 
 .sidebar-nav li {
     text-indent: 20px;
-    line-height: 40px;
+    line-height: 30px;
 }
 
+
+
 .sidebar-nav li a {
-    display: block;
+    display: inline-block;
     text-decoration: none;
     color: #080808;
-    background: #39afe6;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 190px;
+    //background: #39afe6;
+}
+
+.sidebar-nav li img {
+    display: inline-block;
+    width: 20px;
+    height:20px;
+
+}
+
+.sidebar-nav li img path {
+    fill: #000 !important;
+}
+
+.sidebar-nav li:hover {
+    color: #5A5A5A;
 }
 
 .sidebar-nav li a:hover {
     text-decoration: none;
     color: #5A5A5A;
-    background: rgba(255,255,255,0.2);
 }
 
 
@@ -88,7 +107,11 @@
     text-decoration: none;
 }
 
-.sidebar-nav li a:active {
+/*.sidebar-nav li a:active {
+    background: gray;
+}*/
+
+.sidebar-nav li:active {
     background: gray;
 }
 

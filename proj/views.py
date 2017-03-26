@@ -2,7 +2,8 @@
 
 # Create your views here.
 from allauth.socialaccount.models import SocialAccount
-from django.http import HttpResponse
+from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
+from django.http import HttpResponse, JsonResponse
 from django.http import HttpResponseRedirect
 
 from django.template import loader
@@ -22,29 +23,22 @@ import traceback
 from django.db.models import F
 import re
 import operator
-
-
-class SkillCount(object):
-    def __init__(self, skill_name, count):
-        self.skill_name = skill_name
-        self.count = count
+import json
 
 
 class PreDefStrings(object):
-    def __init__(self, string, code):
+    def __init__(self, string, code, image_url):
         self.string = string
         self.code = code
+        self.image_url = image_url
 
     def __str__(self):
         return self.string
 
 
-PreDefTrending = PreDefStrings("Trending", "trending")
-PreDefNewArrival = PreDefStrings("New Arrivals", "new_arrivals")
-PreDefExclusive = PreDefStrings("Skiltil Exclusive", "exclusive")
-
-TRENDING = "Trending"
-NEW_ARRIVALS = "New Arrivals"
+PreDefTrending = PreDefStrings("Trending", "trending", "static/images/topic/trending.png")
+PreDefNewArrival = PreDefStrings("New Arrivals", "new_arrivals", "static/images/topic/new_arrival.png")
+PreDefExclusive = PreDefStrings("Skiltil Exclusive", "exclusive", "static/images/topic/exclusive.png")
 
 
 def index(request):
@@ -72,7 +66,7 @@ def details(request, skill_code):
         if request.user.is_authenticated():
             user = request.user
             socialAccounts = SocialAccount.objects.filter(user_id=user.id)
-            if len(socialAccounts) > 0 :
+            if len(socialAccounts) > 0:
                 socialAccount = socialAccounts[0]
                 customer = Customer.objects.filter(social=socialAccount)[0]
 
@@ -210,23 +204,14 @@ def ajax_skill_search(request):
 def ajax_skill_topics(request):
     try:
         q = request.GET.get('q')
-        # q = "f"
         if q is None:
             q = ""
         skill_topic_list = SkillTopic.objects.extra(order_by=('-classes_given', '-clicks'))
         skill_topics = []
-        # skill_list = []
-        other_skill_list = []
-        # orderskills = Skill.objects.extra(order_by = ('-classes_given','-no_teachers','-clicks'))[:20]
         if len(q) <= 0:
             skill_topics.append(PreDefTrending)
-        if len(q) <= 0:
             skill_topics.append(PreDefExclusive)
-        # skill_list.append(orderskills)
-        # newArrivals = Skill.objects.extra(order_by = ('-created_date', 'clicks'))[:20]
-        if len(q) <= 0:
             skill_topics.append(PreDefNewArrival)
-        # skill_list.append(newArrivals)
         for skillTopic in skill_topic_list:
             skills = Skill.objects.filter(topic=skillTopic)
             if re.search(q, skillTopic.topic_name, re.IGNORECASE) and len(skills) > 0:
@@ -235,15 +220,6 @@ def ajax_skill_topics(request):
                 skills = skills.filter(Q(skill_name__icontains=q))
                 if len(skills) > 0:
                     skill_topics.append(skillTopic)
-
-                # skill_list.append(skills)
-                # else:
-                #	if len(skills) > 0:
-                #		other_skill_list.extend(skills)
-                # if len(other_skill_list) > 0:
-                #	skill_topics.append("Others")
-                #	other_skill_list1 = sorted(other_skill_list, key = lambda x: (x.classes_given, x.no_teachers, x.clicks), reverse = True)
-                # skill_list.append(other_skill_list1)
         template = loader.get_template('proj/results_main_list.html')
         context = {
             'skill_topic_list': skill_topics,
@@ -330,6 +306,22 @@ def ajax_skills_predef(request, predef_name):
         # return HttpResponse(call)
         else:
             return HttpResponse("Wrong skill topic")
+    except Exception as e:
+        print "exception caught"
+        print '%s (%s)' % (e.message, type(e))
+        traceback.print_exc(file=open("errlog.txt", "a"))
+
+
+def skill_lookup(request):
+    try:
+        # Default return list
+        results = []
+        model_results = Skill.objects.filter(visible=True)
+        results = [{"skill_name": x.skill_name, "skill_code": x.skill_code, "topic_name": x.topic.topic_name} for x in model_results]
+        json1 = json.dumps(results)
+        #print json1
+        return HttpResponse(json1, content_type = 'application/json')
+        #return JsonResponse(dict(names=list(Skill.objects.filter(visible=True).values('skill_name'))))
     except Exception as e:
         print "exception caught"
         print '%s (%s)' % (e.message, type(e))

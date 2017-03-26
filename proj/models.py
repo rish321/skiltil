@@ -3,15 +3,19 @@
 # from django.db import models
 
 # Create your models here.
+from django.contrib.sitemaps import ping_google
 from django.db import models
+from django.urls import reverse
 from django.utils.encoding import python_2_unicode_compatible
 from customers.models import SkillMatch
 from base.models import BaseModel
+from base.sitemap import Sitemap
 
 from django.utils import timezone
 from tinymce import models as tinymce_models
 import math
 from HTMLParser import HTMLParser
+from django.contrib import sitemaps
 
 
 # class BaseModel(models.Model):
@@ -51,9 +55,13 @@ class CustomerRequest(BaseModel):
     def __str__(self):
         return self.contact_name + " - " + self.contact_phone + " - " + self.contact_email + " - " + self.default_skill + " - " + self.skill
 
+def content_file_name(instance, filename):
+    ext = filename.split('.')[-1]
+    return 'static/images/topic/{}.{}'.format(instance.topic_code, ext)
 
 class SkillTopic(BaseModel):
     topic_name = models.CharField(max_length=200)
+    topic_pic = models.ImageField(upload_to = content_file_name, null=True)
     topic_code = models.CharField(max_length=200, default="")
     clicks = models.IntegerField(default=0)
     classes_given = models.IntegerField(default=0)
@@ -102,6 +110,7 @@ class Skill(BaseModel):
     course_structure = tinymce_models.HTMLField(default="", blank=True)
     pre_requisites = tinymce_models.HTMLField(default="", blank=True)
     exclusive = models.BooleanField(default=False)
+    visible = models.BooleanField(default=True)
     total_classes = models.IntegerField(default=1)
     first_class_time = models.DurationField(default=timezone.timedelta(minutes = 30), blank=True)
     subsequent_class_time = models.DurationField(default=timezone.timedelta, blank=True)
@@ -197,8 +206,28 @@ class Skill(BaseModel):
             self.skill_rating /= self.skill_rating_count
         super(Skill, self).save(*args, **kwargs)
         self.topic.save(*args, **kwargs)
+        try:
+            ping_google()
+        except Exception:
+            # Bare 'except' because we could get a variety
+            # of HTTP-related exceptions.
+            pass
 
     def delete(self, *args, **kwargs):
         topic = self.topic
         super(Skill, self).delete(*args, **kwargs)
         topic.save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return '/skill/'+self.skill_code
+
+
+class SkillSitemap(sitemaps.Sitemap):
+    changefreq = 'weekly'
+    priority = 0.5
+
+    def items(self):
+        return Skill.objects.filter(visible=True)
+
+    def lastmod(self, obj):
+        return obj.modified_date

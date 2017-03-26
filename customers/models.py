@@ -137,6 +137,8 @@ class SkillMatch(BaseModel):
     skill = models.ForeignKey("proj.Skill", default=None)
     customer = models.ForeignKey(Customer, default=None)
     details = models.TextField(default="", blank=True)
+    verified = models.BooleanField(default=False)
+    visible = models.BooleanField(default=True)
     classes_given = models.IntegerField(default=0)
     teacher_rating = models.FloatField(default=0)
     teacher_rating_count = models.IntegerField(default=0)

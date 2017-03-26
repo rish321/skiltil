@@ -1,18 +1,39 @@
 {% load static %}
 {% for skill_topic in skill_topic_list %}
-    <li>
-        {% if forloop.counter == 1 %}
-            <a class="menu__item preload-item-js" style="background:lightgrey" id="{{ skill_topic.code }}"
-               name="{{ skill_topic.topic_code }}" href="#" clicky.log('#{{ skill_topic }}', '{{ skill_topic }}');>
-                <!--div class="excl" style="z-index:1; position: absolute;text-align: right; margin-top:3px; right: 10%;">
-                    <img style="width:25%; float: right;" src="{% static "images/rsz_exclusive_1.png" %}"></img>
-                </div-->
-                {{ skill_topic }}
+    <li class="menu__item" style="vertical-align: middle">
+        <!--data-toggle="collapse" data-target="#products" class="collapsed active"-->
 
+        {% if skill_topic.topic_pic %}
+            <img src="{{ skill_topic.topic_pic.url }}" style="vertical-align: middle;">
+        {% elif skill_topic.image_url %}
+            <img src="{{ skill_topic.image_url }}" style="vertical-align: middle;">
+        {% else %}
+            <img src="{% static "images/logo.svg" %}" style="vertical-align: middle;">
+        {% endif %}
+
+        {% if forloop.counter == 1 %}
+            <a class="preload-item-js" id="{{ skill_topic.code }}"
+               name="{{ skill_topic.topic_code }}" style="vertical-align: middle" href="#" clicky.log('#
+            {{ skill_topic }}', '{{ skill_topic }}');>
+            {{ skill_topic }}
             </a>
         {% else %}
-            <a class="menu__item" id="{{ skill_topic.code }}" name="{{ skill_topic.topic_code }}" href="#" clicky.log('#
-            {{ skill_topic }}', '{{ skill_topic }}');>{{ skill_topic }}</a>
+            <a id="{{ skill_topic.code }}" name="{{ skill_topic.topic_code }}" style="vertical-align: middle" href="#"
+               clicky.log('#
+            {{ skill_topic }}', '{{ skill_topic }}');> {{ skill_topic }} </a>
         {% endif %}
+
     </li>
+    <!--ul class="sub-menu collapse" id="products">
+                    <li class="active"><a href="#">CSS3 Animation</a></li>
+                    <li><a href="#">General</a></li>
+                    <li><a href="#">Buttons</a></li>
+                    <li><a href="#">Tabs & Accordions</a></li>
+                    <li><a href="#">Typography</a></li>
+                    <li><a href="#">FontAwesome</a></li>
+                    <li><a href="#">Slider</a></li>
+                    <li><a href="#">Panels</a></li>
+                    <li><a href="#">Widgets</a></li>
+                    <li><a href="#">Bootstrap Model</a></li>
+                </ul-->
 {% endfor %}

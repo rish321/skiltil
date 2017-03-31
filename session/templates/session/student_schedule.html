@@ -34,13 +34,13 @@
 <body style="width:90%;margin-left: auto;margin-right: auto;">
 <div style="text-align:left;">
     <div style="text-align:center;">
-        <a style="font-size:300%;color: blue;"> <img src="http://www.skiltil.com/static/images/logo.png" height="40"
+        <a href="http://www.skiltil.com" style="font-size:300%;color: blue;"> <img src="http://www.skiltil.com/static/images/logo.png" height="40"
                                                      width="40"/> Skiltil Schedule </a>
     </div>
     <br>
     Dear {{ session.student.customer_name }},
     <br>
-    Thanks for showing your interest in {{ session.skill_match.skill.skill_name }}. The teacher will connect
+    Thanks for showing your interest in <a href="http://www.skiltil.com/skill/{{ session.skill_match.skill.skill_code }}">{{ session.skill_match.skill.skill_name }}</a>. The teacher will connect
     at {{ session.rescheduled_time|date:'h:i:s A' }}, {{ session.rescheduled_time|date:'(M j, Y)' }}.
     <br>
     The first class will be {{ session.getEstimatedMinutes|floatformat:0 }} minutes.
@@ -73,7 +73,7 @@
                     <b style="font-size:120%;font-weight: bold;">{{ session.student.customer_name }}</b>
                 </td>
                 <td style="width:20%;text-align: left;">
-                    <b style="font-size:120%;font-weight: bold;">{{ session.skill_match.skill.skill_name }}</b>
+                    <b style="font-size:120%;font-weight: bold;"><a href="http://www.skiltil.com/skill/{{ session.skill_match.skill.skill_code }}">{{ session.skill_match.skill.skill_name }}</a></b>
                 </td>
                 <td style="width:25%;text-align: left;">
                     <b style="font-size:120%;font-weight: bold;">{{ session.rescheduled_time.date }}</b>

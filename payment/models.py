@@ -1,7 +1,9 @@
 from __future__ import unicode_literals
 
+from django.core.mail import EmailMultiAlternatives
 from django.db import models
 # from customers.models import Customer
+from django.template.loader import render_to_string
 from django.utils import timezone
 from base.models import BaseModel
 
@@ -34,8 +36,6 @@ class Payment(BaseModel):
         return self.customer.customer_name + " - " + str(self.amount) + " - " + str(self.time)
 
     def save(self, *args, **kwargs):
-        # self.customer.wallet_amount += self.amount
-        # super(Customer, self.customer).save(*args, **kwargs)
         super(Payment, self).save(*args, **kwargs)
         self.customer.save(*args, **kwargs)
 
@@ -64,8 +64,6 @@ class Payout(BaseModel):
         return self.customer.customer_name + " - " + str(self.amount) + " - " + str(self.time)
 
     def save(self, *args, **kwargs):
-        # self.customer.wallet_amount -= self.amount
-        # super(Customer, self.customer).save(*args, **kwargs)
         super(Payout, self).save(*args, **kwargs)
         self.customer.save(*args, **kwargs)
 
@@ -73,8 +71,6 @@ class Payout(BaseModel):
         customer = self.customer
         super(Payout, self).delete(*args, **kwargs)
         customer.save(*args, **kwargs)
-
-
 
 
 class TransferQuerySet(models.QuerySet):

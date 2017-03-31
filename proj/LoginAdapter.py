@@ -1,13 +1,23 @@
 from __future__ import print_function
 from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
 from allauth.socialaccount.models import SocialAccount
+from django.core.mail import EmailMultiAlternatives
 
 from django.db.models import Q
+from django.template.loader import render_to_string
 
 from customers.models import Customer
 
 
-def sendWelcomeMail():
+def sendWelcomeMail(customer):
+    html = render_to_string('customers/new_customer.html', {'customer': customer})
+    email = EmailMultiAlternatives(
+        'Welcome to skiltil',
+        'Hi ' + customer.customer_name + ',\n Your account has been activated. Now explore the endless learning experience only at Skiltil.',
+        'support@skiltil.com', [customer.email],
+        headers={'IsTransactional': "True"}, )
+    email.attach_alternative(html, "text/html")
+    email.send()
     pass
 
 
@@ -77,4 +87,4 @@ class LogAdapter(DefaultSocialAccountAdapter):
                                 image=image_large,
                                 gender=response_gender)
             customer.save()
-            sendWelcomeMail()
+            sendWelcomeMail(customer)

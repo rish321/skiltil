@@ -29,7 +29,7 @@
 {% endif %}
 
 {% block content %}
-    <div id="content-main">
+    <div id="content-main" style="margin-top: 20px">
         {% block object-tools %}
             {% if change %}{% if not is_popup %}
                 <ul class="object-tools">
@@ -45,6 +45,10 @@
                                class="historylink">{% trans "Send Schedule Student" %}</a></li>
                         <li><a href="/session/schedule/teacher/{{ original.pk }}/"
                                class="historylink">{% trans "Send Schedule Teacher" %}</a></li>
+                        <li><a href="/session/send_feedback/student/{{ original.pk }}/"
+                               class="historylink">{% trans "Send Feedback Mail Student" %}</a></li>
+                        <li><a href="/session/send_feedback/teacher/{{ original.pk }}/"
+                               class="historylink">{% trans "Send Feedback Mail Teacher" %}</a></li>
 
                         <li>
                             {% url opts|admin_urlname:'history' original.pk|admin_urlquote as history_url %}

@@ -1,0 +1,139 @@
+{% extends "proj/base-logo.html" %}
+{% block title %} Skiltil - Profile {% endblock %}
+{% block stylesheet %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href={% static "css/contact-form.css" %}
+            xmlns:width="http://www.w3.org/1999/xhtml"/>
+    <link rel="stylesheet" type="text/css" href={% static "css/profile.css" %}/>
+
+    <style>
+        .submit-skills {
+            background-color: beige;
+        }
+
+        .submit-skills.active {
+            background-color: bisque;
+        }
+    </style>
+
+    <style>
+        .custom-heart {
+            font-size: 2.3em;
+            color: red;
+        }
+    </style>
+
+    <script>
+
+        $(document).ready(function () {
+
+            $('#submit_feedback').click(function () {
+
+                var obj = new Object();
+                var oldRating = {{ rating }};
+                obj.rating = oldRating;
+                if (oldRating < 1) {
+                    obj.rating = $('.rating').val();
+                }
+                obj.comments = $('.comments').val();
+                var jsonString = JSON.stringify(obj);
+
+
+                function getCookie(name) {
+                    var cookieValue = null;
+                    if (document.cookie && document.cookie !== '') {
+                        var cookies = document.cookie.split(';');
+                        for (var i = 0; i < cookies.length; i++) {
+                            var cookie = jQuery.trim(cookies[i]);
+                            // Does this cookie string begin with the name we want?
+                            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                break;
+                            }
+                        }
+                    }
+                    return cookieValue;
+                }
+
+                var csrftoken = getCookie('csrftoken');
+
+                function csrfSafeMethod(method) {
+                    // these HTTP methods do not require CSRF protection
+                    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+                }
+
+                $.ajaxSetup({
+                    beforeSend: function (xhr, settings) {
+                        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                        }
+                    }
+                });
+
+                var post_url = '/session/feedback/' + "{{ session.order_id }}/";
+                console.log(post_url);
+
+                $.ajax({
+                    url: post_url,
+                    method: "POST",
+                    data: {msg: jsonString},
+                    success: function (response) {
+                        location.reload();
+                    },
+                    complete: function () {
+                    },
+                    error: function (xhr, textStatus, thrownError) {
+                    }
+                });
+
+
+            });
+        });
+    </script>
+
+{% endblock %}
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+                {% if already_rated %}
+                    <div class="row" style="text-align: center; margin-top: 20px;">
+                        <p>Your ratings have been taken</p>
+                        <button onclick="window.location='/';" type="button" class="btn btn-primary">
+                            Continue exploring and learning on Skiltil.
+                        </button>
+                    </div>
+                {% else %}
+                    <div style="margin-top: 10px;">
+                        {% if rating <= 0 %}
+                            <div class="row">
+
+                                <label style="width:100%"><p>Please rate your experience</p>
+                                    <input id="input-1" type="hidden" class="rating" data-start="0" data-stop="10"
+                                           data-filled="glyphicon glyphicon-heart custom-heart"
+                                           data-filled-selected="glyphicon glyphicon-heart custom-heart"
+                                           data-empty="glyphicon glyphicon-heart-empty custom-heart"/>
+                                </label>
+                            </div>
+                        {% endif %}
+
+                        <div class="row">
+                            <label style="width:100%"><p>Any additional comments</p>
+                                <textarea rows="4" style="width: 100%;" width="100%" class="comments"></textarea>
+                            </label>
+                        </div>
+
+                        <!-- Any comments box -->
+                        <div style="text-align: center">
+                            <button id="submit_feedback" type="button" class="submit-feedback btn btn-primary">Submit
+                                Feedback
+                            </button>
+                        </div>
+                    </div>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

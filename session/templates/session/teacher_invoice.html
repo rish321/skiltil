@@ -35,7 +35,7 @@
 
 <body style="width:90%;margin-left: auto;margin-right: auto;">
 <div style="text-align:center;">
-    <a style="font-size:300%;color: blue;"> <img src="http://www.skiltil.com/static/images/logo.png" height="40"
+    <a href="http://www.skiltil.com" style="font-size:300%;color: blue;"> <img src="http://www.skiltil.com/static/images/logo.png" height="40"
                                                  width="40"/> Skiltil Invoice </a>
     <br>
     <table style="width:100%;margin-left: auto;margin-right: auto;border: 1px solid black;">
@@ -59,7 +59,7 @@
                 <b style="font-size:120%;font-weight: bold;">{{ session.skill_match.customer.customer_name }}</b>
             </td>
             <td style="width:20%;">
-                <b style="font-size:120%;font-weight: bold;">{{ session.skill_match.skill.skill_name }}</b>
+                <b style="font-size:120%;font-weight: bold;"><a href="http://www.skiltil.com/skill/{{ session.skill_match.skill.skill_code }}">{{ session.skill_match.skill.skill_name }}</a></b>
             </td>
             <td style="width:25%;">
                 <b style="font-size:120%;font-weight: bold;">{{ session.start_time.date }}</b>

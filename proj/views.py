@@ -11,10 +11,10 @@ from .models import Skill, SkillTopic, CustomerRequest
 from customers.models import Customer, SkillMatch
 from .forms import ContactForm
 from django.shortcuts import render
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMessage, EmailMultiAlternatives
 from django.shortcuts import redirect
 from django.template import Context
-from django.template.loader import get_template
+from django.template.loader import get_template, render_to_string
 from django.shortcuts import render_to_response
 from django.http import Http404
 from django.db.models import Q
@@ -53,6 +53,20 @@ def index(request):
         print "exception caught"
         print '%s (%s)' % (e.message, type(e))
         traceback.print_exc(file=open("errlog.txt", "a"))
+
+
+def sendConfirmationMail(customerRequest):
+    if customerRequest.contact_email is None:
+        return
+    html = render_to_string('customers/new_customer_request.html', {'customer_request': customerRequest})
+    email = EmailMultiAlternatives(
+        'Your request for ' + customerRequest.skill + " has been received",
+        'Hi ' + customerRequest.contact_name + ",\n We have received your request. We\'ll contact you on " + customerRequest.contact_phone + " at your preferred time. Now explore the endless learning experience only at Skiltil.",
+        'support@skiltil.com', [customerRequest.contact_email],
+        headers={'IsTransactional': "True"}, )
+    email.attach_alternative(html, "text/html")
+    email.send()
+    pass
 
 
 def details(request, skill_code):
@@ -110,6 +124,7 @@ def details(request, skill_code):
                                               preferred_communication_time=preferred_communication_time,
                                               content=form_content, default_skill=skill.skill_name)
             customerRequest.save()
+            sendConfirmationMail(customerRequest)
 
             template = get_template('proj/contact_template.txt')
             context = Context({

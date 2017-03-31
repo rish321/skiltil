@@ -61,7 +61,7 @@ def show_profile(request):
 
             return HttpResponse(template.render(context, request))
         else:
-            return HttpResponseRedirect('/login')
+            return HttpResponseRedirect('/accounts/login')
     except Exception as e:
         print "exception caught"
         print '%s (%s)' % (e.message, type(e))
@@ -86,7 +86,7 @@ def update_skills(request):
 
             return HttpResponseRedirect('/profile-updated/')
         else:
-            return HttpResponseRedirect('/login')
+            return HttpResponseRedirect('/accounts/login')
 
     except Exception as e:
         print "exception caught"

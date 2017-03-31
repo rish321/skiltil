@@ -12,8 +12,8 @@ from django.utils.html import format_html
 class CallAdmin(admin.ModelAdmin):
     list_filter = ['belong_session', 'belong_session__session_number', 'belong_session__skill_match__skill__topic',
                    'belong_session__skill_match__skill', 'belong_session__skill_match__customer',
-                   'belong_session__student']
-    list_display = ['start_time', 'end_time', 'belong_session']
+                   'belong_session__student', "follow_up"]
+    list_display = ['start_time', 'end_time', 'belong_session', "follow_up"]
     search_fields = ['start_time', 'end_time', 'belong_session__skill_match__skill__topic__topic_name',
                      'belong_session__skill_match__skill__skill_name',
                      'belong_session__skill_match__customer__customer_name', 'belong_session__student__customer_name',
@@ -46,9 +46,9 @@ def reverse_foreignkey_change_links(model, get_instances, description=None, get_
 @admin.register(Session)
 class SessionAdmin(admin.ModelAdmin):
     list_filter = ['session_number', 'skill_match__skill__topic', 'skill_match__skill', 'skill_match__customer',
-                   'student', "student_pricing", "teacher_pricing"]
+                   'student', "student_pricing", "teacher_pricing", "follow_up"]
     list_display = ['order_id', 'skill_match', 'student', 'session_number', 'amount_to_teacher', 'balance_amount',
-                    'start_time', "student_pricing", "teacher_pricing"]
+                    'start_time', "student_pricing", "teacher_pricing", "follow_up"]
     search_fields = ['order_id', 'skill_match__skill__topic__topic_name', 'skill_match__skill__skill_name',
                      'skill_match__customer__customer_name', 'student__customer_name', 'session_number']
 

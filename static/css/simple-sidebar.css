@@ -63,6 +63,7 @@
     list-style: none;
 }
 
+.sidebar-nav ul,
 .sidebar-nav li {
     text-indent: 20px;
     line-height: 30px;
@@ -70,7 +71,7 @@
 
 
 
-.sidebar-nav li a {
+.sidebar-nav li a{
     display: inline-block;
     text-decoration: none;
     color: #080808;
@@ -129,6 +130,8 @@
     color: #fff;
     background: none;
 }
+
+
 
 @media(min-width:768px) {
     #wrapper {

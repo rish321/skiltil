@@ -7,6 +7,8 @@ from django.http import HttpResponse, JsonResponse
 from django.http import HttpResponseRedirect
 
 from django.template import loader
+from django.template.defaulttags import register
+
 from .models import Skill, SkillTopic, CustomerRequest
 from customers.models import Customer, SkillMatch
 from .forms import ContactForm
@@ -221,29 +223,59 @@ def ajax_skill_topics(request):
         q = request.GET.get('q')
         if q is None:
             q = ""
-        skill_topic_list = SkillTopic.objects.extra(order_by=('-classes_given', '-clicks'))
-        skill_topics = []
+        skill_topic_list = SkillTopic.objects.filter(parent_topic__isnull=False).extra(order_by=('-classes_given', '-clicks'))
+        #print skill_topic_list
+        skill_parent_topics = []
+        predef_list = []
+        parent_topic_dict = {}
         if len(q) <= 0:
-            skill_topics.append(PreDefTrending)
-            skill_topics.append(PreDefExclusive)
-            skill_topics.append(PreDefNewArrival)
+            predef_list.append(PreDefTrending)
+            predef_list.append(PreDefExclusive)
+            predef_list.append(PreDefNewArrival)
+
         for skillTopic in skill_topic_list:
+            #print skillTopic
             skills = Skill.objects.filter(topic=skillTopic)
+            #print skills
             if re.search(q, skillTopic.topic_name, re.IGNORECASE) and len(skills) > 0:
-                skill_topics.append(skillTopic)
+                populate_skill_topics(parent_topic_dict, skillTopic, skill_parent_topics)
             else:
                 skills = skills.filter(Q(skill_name__icontains=q))
                 if len(skills) > 0:
-                    skill_topics.append(skillTopic)
+                    populate_skill_topics(parent_topic_dict, skillTopic, skill_parent_topics)
+        print parent_topic_dict
+        print skill_parent_topics
         template = loader.get_template('proj/results_main_list.html')
         context = {
-            'skill_topic_list': skill_topics,
+            'pre_def_list': predef_list,
+            'skill_topic_list': skill_parent_topics,
+            'parent_topic_dict': parent_topic_dict,
         }
         return HttpResponse(template.render(context, request))
     except Exception as e:
         print "exception caught"
         print '%s (%s)' % (e.message, type(e))
         traceback.print_exc(file=open("errlog.txt", "a"))
+
+
+def populate_skill_topics(parent_topic_dict, skillTopic, skill_parent_topics):
+    #print parent_topic_dict
+    #print skillTopic
+    #print skill_parent_topics
+    parent_topic_name = skillTopic.parent_topic.topic_name
+    #print parent_topic_name
+    if not skill_parent_topics.__contains__(parent_topic_name):
+        #print parent_topic_name
+        skill_parent_topics.append(parent_topic_name)
+    if parent_topic_name in parent_topic_dict:
+        skill_topics = parent_topic_dict[parent_topic_name]
+    else:
+        skill_topics = []
+        parent_topic_dict[parent_topic_name] = skill_topics
+    #print parent_topic_dict
+    #print skill_topics
+    skill_topics.append(skillTopic)
+    #return skill_topics
 
 
 def ajax_skills(request, skill_topic_code):
@@ -341,3 +373,9 @@ def skill_lookup(request):
         print "exception caught"
         print '%s (%s)' % (e.message, type(e))
         traceback.print_exc(file=open("errlog.txt", "a"))
+
+#@register.filter
+def get_item(dictionary, key):
+    return dictionary.get(key)
+register.filter('get_item', get_item)
+

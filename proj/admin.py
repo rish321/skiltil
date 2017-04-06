@@ -1,18 +1,22 @@
 from django.contrib import admin
 
-from .models import SkillTopic, Skill, CustomerRequest
+from .models import SkillTopic, Skill, CustomerRequest, Event
 
 # Register your models here.
 
+admin.site.register(Event)
+
 @admin.register(SkillTopic)
 class SkillTopicAdmin(admin.ModelAdmin):
-	list_display = ['topic_code', 'topic_name', 'clicks', 'classes_given']
-	search_fields = ['topic_code', 'topic_name']
+	raw_id_fields = ["parent_topic",]
+	list_display = ['topic_code', 'topic_name', 'clicks', 'classes_given', "parent_topic",]
+	list_filter = ["parent_topic",]
+	search_fields = ['topic_code', 'topic_name', "parent_topic",]
 	readonly_fields = ['topic_code', 'clicks', 'classes_given']
 
 @admin.register(Skill)
 class SkillAdmin(admin.ModelAdmin):
-	raw_id_fields = ["topic", "student_pricing", "teacher_pricing"]
+	raw_id_fields = ["topic", "student_pricing", "teacher_pricing",]
 	list_filter = ["no_teachers", "topic", "exclusive", "visible", 'skill_rating_count', "student_pricing", "teacher_pricing"]
 	list_display = ['skill_code', "skill_name", "topic", "clicks", "classes_given", "no_teachers", "exclusive", "visible", 'get_skill_rating', 'skill_rating_count', "student_pricing", "teacher_pricing"]
 	search_fields = ['skill_code', "skill_name", "topic__topic_name"]

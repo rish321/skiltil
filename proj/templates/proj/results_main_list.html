@@ -1,16 +1,7 @@
 {% load static %}
-{% for skill_topic in skill_topic_list %}
-    <li class="menu__item" style="vertical-align: middle">
-        <!--data-toggle="collapse" data-target="#products" class="collapsed active"-->
-
-        {% if skill_topic.topic_pic %}
-            <img src="{{ skill_topic.topic_pic.url }}" style="vertical-align: middle;">
-        {% elif skill_topic.image_url %}
-            <img src="{{ skill_topic.image_url }}" style="vertical-align: middle;">
-        {% else %}
-            <img src="{% static "images/logo.svg" %}" style="vertical-align: middle;">
-        {% endif %}
-
+{% for skill_topic in pre_def_list %}
+    <li class="menu__item">
+        <img src="{{ skill_topic.image_url }}" style="vertical-align: middle;">
         {% if forloop.counter == 1 %}
             <a class="preload-item-js" id="{{ skill_topic.code }}"
                name="{{ skill_topic.topic_code }}" style="vertical-align: middle" href="#" clicky.log('#
@@ -18,22 +9,52 @@
             {{ skill_topic }}
             </a>
         {% else %}
-            <a id="{{ skill_topic.code }}" name="{{ skill_topic.topic_code }}" style="vertical-align: middle" href="#"
+            <a id="{{ skill_topic.code }}" name="{{ skill_topic.topic_code }}"
+               style="vertical-align: middle"
+               href="#"
                clicky.log('#
             {{ skill_topic }}', '{{ skill_topic }}');> {{ skill_topic }} </a>
         {% endif %}
-
     </li>
-    <!--ul class="sub-menu collapse" id="products">
-                    <li class="active"><a href="#">CSS3 Animation</a></li>
-                    <li><a href="#">General</a></li>
-                    <li><a href="#">Buttons</a></li>
-                    <li><a href="#">Tabs & Accordions</a></li>
-                    <li><a href="#">Typography</a></li>
-                    <li><a href="#">FontAwesome</a></li>
-                    <li><a href="#">Slider</a></li>
-                    <li><a href="#">Panels</a></li>
-                    <li><a href="#">Widgets</a></li>
-                    <li><a href="#">Bootstrap Model</a></li>
-                </ul-->
+{% endfor %}
+
+
+
+{% for parent_skill_topic in skill_topic_list %}
+
+    <li class="panel menu__item" data-toggle="collapse" href="#{{ parent_skill_topic }}">
+
+        <!--img src="{% static "images/logo.svg" %}" style="vertical-align: middle;"-->
+        <a id="{{ parent_skill_topic }}" name="{{ parent_skill_topic }}"
+           style="vertical-align: middle"
+           href="#"
+           clicky.log('#
+        {{ parent_skill_topic }}', '{{ parent_skill_topic }}');> {{ parent_skill_topic }} <span
+            class="caret"></span></a>
+
+        <div id="{{ parent_skill_topic }}" class="panel-collapse collapse">
+            <div class="panel-body">
+                <ul class="nav navbar-nav" id="{{ parent_skill_topic }}">
+                    {% for skill_topic in parent_topic_dict|get_item:parent_skill_topic %}
+                        <li class="menu__item">
+
+                            <!--{% if skill_topic.topic_pic %}
+                            <img src="{{ skill_topic.topic_pic.url }}" style="vertical-align: middle;">
+                        {% else %}
+                            <img src="{% static "images/logo.svg" %}" style="vertical-align: middle;">
+                        {% endif %}-->
+
+
+                            <a id="{{ skill_topic.code }}" name="{{ skill_topic.topic_code }}"
+                               style="vertical-align: middle"
+                               href="#"
+                               clicky.log('#
+                            {{ skill_topic }}', '{{ skill_topic }}');> {{ skill_topic }} </a>
+
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </li>
 {% endfor %}

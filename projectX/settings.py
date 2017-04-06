@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'raven.contrib.django.raven_compat',
+    'django.contrib.postgres',
     'analytical',
     'django.contrib.sitemaps',
     'tinymce',

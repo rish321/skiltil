@@ -42,11 +42,18 @@
                     //alert("here2");
                     $(".menu__item").css("background-color", "#39afe6");
                     $(this).css("background-color", "white");
-                    var topic_id = e.target.id;
+                    var topic_id = $(this).closest('li')[0].id;
+                    /*if(topic_id == "") {
+                        var closestLi = $(this).closest('li');
+                        topic_id = closestLi[0].id;
+                    }*/
                     console.log(topic_id);
                     var sectionUrl = "/skills/" + topic_id;
-                    if (topic_id == "")
-                        sectionUrl = "/skills/topic/" + e.target.name;
+                    if (topic_id == "") {
+                        /*var closestLi = $(this).closest('li');
+                        console.log(closestLi[0].getAttribute("name"));*/
+                        sectionUrl = "/skills/topic/" + $(this).closest('li')[0].getAttribute("name");
+                    }
                     /*You can add a loader function here;*/
                     console.log(sectionUrl);
                     $.ajax({

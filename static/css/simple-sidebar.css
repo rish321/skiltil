@@ -67,6 +67,7 @@
 .sidebar-nav li {
     text-indent: 20px;
     line-height: 30px;
+    cursor: pointer;
 }
 
 

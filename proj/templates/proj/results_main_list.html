@@ -1,20 +1,14 @@
 {% load static %}
 {% for skill_topic in pre_def_list %}
-    <li class="menu__item">
-        <img src="{{ skill_topic.image_url }}" style="vertical-align: middle;">
-        {% if forloop.counter == 1 %}
-            <a class="preload-item-js" id="{{ skill_topic.code }}"
-               name="{{ skill_topic.topic_code }}" style="vertical-align: middle" href="#" clicky.log('#
-            {{ skill_topic }}', '{{ skill_topic }}');>
-            {{ skill_topic }}
-            </a>
-        {% else %}
-            <a id="{{ skill_topic.code }}" name="{{ skill_topic.topic_code }}"
-               style="vertical-align: middle"
-               href="#"
-               clicky.log('#
-            {{ skill_topic }}', '{{ skill_topic }}');> {{ skill_topic }} </a>
-        {% endif %}
+    {% if forloop.counter == 1 %}
+        <li class="menu__item preload-item-js" id="{{ skill_topic.code }}"
+               name="{{ skill_topic.topic_code }}">
+    {% else %}
+        <li class="menu__item" id="{{ skill_topic.code }}"
+               name="{{ skill_topic.topic_code }}">
+    {% endif %}
+    <img src="{{ skill_topic.image_url }}" style="vertical-align: middle;">
+    <a style="vertical-align: middle" href="#" clicky.log('#{{ skill_topic }}', '{{ skill_topic }}');>{{ skill_topic }}</a>
     </li>
 {% endfor %}
 
@@ -22,29 +16,18 @@
 
 {% for skill_topic in skill_topic_list %}
 
-    <li class="menu__item">
+    {% if pre_def_list|length == 0 and forloop.counter == 1 %}
+    <li class="menu__item preload-item-js" name="{{ skill_topic.topic_code }}">
+    {% else %}
+    <li class="menu__item" name="{{ skill_topic.topic_code }}">
+    {% endif %}
 
         {% if skill_topic.topic_pic %}
             <img src="{{ skill_topic.topic_pic.url }}" style="vertical-align: middle;">
         {% else %}
             <img src="{% static "images/logo.svg" %}" style="vertical-align: middle;">
         {% endif %}
-
-
-        {% if pre_def_list|length == 0 and forloop.counter == 1 %}
-            <a class="preload-item-js" name="{{ skill_topic.topic_code }}"
-               style="vertical-align: middle"
-               href="#"
-               clicky.log('#
-            {{ skill_topic }}', '{{ skill_topic }}');> {{ skill_topic }} </a>
-        {% else %}
-            <a name="{{ skill_topic.topic_code }}"
-               style="vertical-align: middle"
-               href="#"
-               clicky.log('#
-            {{ skill_topic }}', '{{ skill_topic }}');> {{ skill_topic }} </a>
-
-        {% endif %}
+        <a style="vertical-align: middle" href="#" clicky.log('#{{ skill_topic }}', '{{ skill_topic }}');> {{ skill_topic }} </a>
 
     </li>
 

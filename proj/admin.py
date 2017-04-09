@@ -11,7 +11,7 @@ class SkillTopicAdmin(admin.ModelAdmin):
 	raw_id_fields = ["parent_topic",]
 	list_display = ['topic_code', 'topic_name', 'clicks', 'classes_given', "parent_topic",]
 	list_filter = ["parent_topic",]
-	search_fields = ['topic_code', 'topic_name', "parent_topic",]
+	search_fields = ['topic_code', 'topic_name', "parent_topic__topic_code", "parent_topic__topic_name"]
 	readonly_fields = ['topic_code', 'clicks', 'classes_given']
 
 @admin.register(Skill)

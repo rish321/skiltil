@@ -254,7 +254,7 @@ def ajax_skill_topics(request):
 
 def populate_skill_topics(parent_topic_dict, skillTopic, skill_parent_topics):
     parent_topic = skillTopic.parent_topic
-    if parent_topic is None:
+    if parent_topic is None and not skill_parent_topics.__contains__(skillTopic):
         skill_parent_topics.append(skillTopic)
     elif not skill_parent_topics.__contains__(parent_topic):
         skill_parent_topics.append(parent_topic)

@@ -1,10 +1,10 @@
 from django.contrib import admin
 
-from .models import SkillTopic, Skill, CustomerRequest, Event
+from .models import SkillTopic, Skill, CustomerRequest
 
 # Register your models here.
 
-admin.site.register(Event)
+#admin.site.register(Event)
 
 @admin.register(SkillTopic)
 class SkillTopicAdmin(admin.ModelAdmin):

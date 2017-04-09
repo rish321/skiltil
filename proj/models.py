@@ -55,9 +55,9 @@ class CustomerRequest(BaseModel):
     def __str__(self):
         return self.contact_name + " - " + self.contact_phone + " - " + self.contact_email + " - " + self.default_skill + " - " + self.skill
 
-class Event(BaseModel):
-    event_name = models.CharField(max_length=50)
-    event_code = models.CharField(max_length=50)
+#class Event(BaseModel):
+#    event_name = models.CharField(max_length=50)
+#    event_code = models.CharField(max_length=50)
 
 def content_file_name(instance, filename):
     ext = filename.split('.')[-1]
@@ -65,7 +65,7 @@ def content_file_name(instance, filename):
 
 class SkillTopic(BaseModel):
     topic_name = models.CharField(max_length=200)
-    topic_pic = models.ImageField(upload_to = content_file_name, null=True, default=None)
+    topic_pic = models.ImageField(upload_to = content_file_name, null=True, default=None, blank=True)
     topic_code = models.CharField(max_length=200, default="")
     parent_topic = models.ForeignKey("self", default=None, null=True)
     clicks = models.IntegerField(default=0)
@@ -129,7 +129,7 @@ class Skill(BaseModel):
                                         related_name='skill_student_pricing')
     teacher_pricing = models.ForeignKey("pricing.PriceModel", default=None, null=True, blank=True,
                                         related_name='skill_teacher_pricing')
-    events = models.ManyToManyField(Event)
+    #events = models.ManyToManyField(Event)
 
     def __str__(self):
         return self.skill_name + " - " + self.topic.topic_name

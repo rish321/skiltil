@@ -223,8 +223,7 @@ def ajax_skill_topics(request):
         q = request.GET.get('q')
         if q is None:
             q = ""
-        skill_topic_list = SkillTopic.objects.filter(parent_topic__isnull=False).extra(order_by=('-classes_given', '-clicks'))
-        #print skill_topic_list
+        skill_topic_list = SkillTopic.objects.extra(order_by=('-classes_given', '-clicks'))
         skill_parent_topics = []
         predef_list = []
         parent_topic_dict = {}
@@ -234,22 +233,17 @@ def ajax_skill_topics(request):
             predef_list.append(PreDefNewArrival)
 
         for skillTopic in skill_topic_list:
-            #print skillTopic
             skills = Skill.objects.filter(topic=skillTopic)
-            #print skills
             if re.search(q, skillTopic.topic_name, re.IGNORECASE) and len(skills) > 0:
                 populate_skill_topics(parent_topic_dict, skillTopic, skill_parent_topics)
             else:
                 skills = skills.filter(Q(skill_name__icontains=q))
                 if len(skills) > 0:
                     populate_skill_topics(parent_topic_dict, skillTopic, skill_parent_topics)
-        print parent_topic_dict
-        print skill_parent_topics
         template = loader.get_template('proj/results_main_list.html')
         context = {
             'pre_def_list': predef_list,
             'skill_topic_list': skill_parent_topics,
-            'parent_topic_dict': parent_topic_dict,
         }
         return HttpResponse(template.render(context, request))
     except Exception as e:
@@ -259,23 +253,17 @@ def ajax_skill_topics(request):
 
 
 def populate_skill_topics(parent_topic_dict, skillTopic, skill_parent_topics):
-    #print parent_topic_dict
-    #print skillTopic
-    #print skill_parent_topics
-    parent_topic_name = skillTopic.parent_topic.topic_name
-    #print parent_topic_name
-    if not skill_parent_topics.__contains__(parent_topic_name):
-        #print parent_topic_name
-        skill_parent_topics.append(parent_topic_name)
-    if parent_topic_name in parent_topic_dict:
-        skill_topics = parent_topic_dict[parent_topic_name]
+    parent_topic = skillTopic.parent_topic
+    if parent_topic is None:
+        skill_parent_topics.append(skillTopic)
+    elif not skill_parent_topics.__contains__(parent_topic):
+        skill_parent_topics.append(parent_topic)
+    '''if parent_topic in parent_topic_dict:
+        skill_topics = parent_topic_dict[parent_topic]
     else:
         skill_topics = []
-        parent_topic_dict[parent_topic_name] = skill_topics
-    #print parent_topic_dict
-    #print skill_topics
-    skill_topics.append(skillTopic)
-    #return skill_topics
+        parent_topic_dict[parent_topic] = skill_topics
+    skill_topics.append(skillTopic)'''
 
 
 def ajax_skills(request, skill_topic_code):
@@ -285,14 +273,19 @@ def ajax_skills(request, skill_topic_code):
             q = ""
         skillTopics = SkillTopic.objects.filter(topic_code=skill_topic_code)
         skillTopic = skillTopics[0]
-        if re.search(q, skillTopic.topic_name, re.IGNORECASE):
-            skills = Skill.objects.filter(topic__topic_code=skill_topic_code).extra(
-                order_by=('-classes_given', '-no_teachers', '-clicks'))
-        else:
-            skills = Skill.objects.filter(topic__topic_code=skill_topic_code).filter(Q(skill_name__icontains=q)).extra(
-                order_by=('-classes_given', '-no_teachers', '-clicks'))
+        subTopics = SkillTopic.objects.filter(parent_topic=skillTopic)
+        topic_list = []
+        topic_skill_dict = {}
+        skills = []
+        for topic in subTopics:
+            skills.extend(getSkillsTopics(q, topic, topic_list, topic_skill_dict))
+
+        skills.extend(getSkillsTopics(q, skillTopic, topic_list, topic_skill_dict))
+        #print skills
+        #print topic_list
+        #print topic_skill_dict
         if len(skills) > 0:
-            context, template = process_skill_list(skills)
+            context, template = process_skill_list(skills, topic_list, topic_skill_dict, skillTopic)
             return HttpResponse(template.render(context, request))
         # return HttpResponse(call)
         else:
@@ -303,21 +296,42 @@ def ajax_skills(request, skill_topic_code):
         traceback.print_exc(file=open("errlog.txt", "a"))
 
 
-def process_skill_list(skills):
+def getSkillsTopics(q, skillTopic, topic_list, topic_skill_dict):
+    if re.search(q, skillTopic.topic_name, re.IGNORECASE):
+        skills = Skill.objects.filter(topic__topic_code=skillTopic.topic_code).extra(
+            order_by=('-classes_given', '-no_teachers', '-clicks'))
+    else:
+        skills = Skill.objects.filter(topic__topic_code=skillTopic.topic_code).filter(Q(skill_name__icontains=q)).extra(
+            order_by=('-classes_given', '-no_teachers', '-clicks'))
+    if len(skills) > 0:
+        topic_list.append(skillTopic)
+        topic_skill_dict[skillTopic] = skills
+    return skills
+
+
+def process_skill_list(skills, topic_list, topic_skill_dict, skill_topic):
     skill_match_list = get_skill_match_list(skills)
+    #print skill_match_list
     template = loader.get_template('proj/results_skill_topic.html')
     context = {
         'skill_list': skills,
         'skill_match_list': skill_match_list,
+        'topic_list': topic_list,
+        'topic_skill_dict': topic_skill_dict,
+        'skill_topic': skill_topic,
     }
     return context, template
 
 
 def get_skill_match_list(skills):
     skill_match_list = []
+    #print skills
     for skil in skills:
+        #print skil
         skill_matches = SkillMatch.objects.filter(skill=skil).filter(classes_given__gt=0).filter(visible=True).order_by('-classes_given')
+        #print skill_matches
         skill_match_list.extend(skill_matches)
+        #print skill_match_list
     return sorted(skill_match_list, key=operator.attrgetter('classes_given'), reverse=True)
 
 
@@ -331,14 +345,22 @@ def ajax_skills_predef(request, predef_name):
             orderskills = Skill.objects.filter(exclusive=False).extra(
                 order_by=('-classes_given', '-no_teachers', '-clicks'))[:20]
             if len(orderskills) > 0:
-                context, template = process_skill_list(orderskills)
+                topic_list = []
+                topic_list.append(PreDefTrending)
+                topic_skill_dict = {}
+                topic_skill_dict[PreDefTrending] = orderskills
+                context, template = process_skill_list(orderskills, topic_list, topic_skill_dict, PreDefTrending)
                 return HttpResponse(template.render(context, request))
             else:
                 return HttpResponse("Wrong topic")
         elif predef_name.lower() == PreDefNewArrival.code.lower():
             newArrivals = Skill.objects.filter(exclusive=False).extra(order_by=('-created_date', 'clicks'))[:20]
             if len(newArrivals) > 0:
-                context, template = process_skill_list(newArrivals)
+                topic_list = []
+                topic_list.append(PreDefNewArrival)
+                topic_skill_dict = {}
+                topic_skill_dict[PreDefNewArrival] = newArrivals
+                context, template = process_skill_list(newArrivals, topic_list, topic_skill_dict, PreDefNewArrival)
                 return HttpResponse(template.render(context, request))
             else:
                 return HttpResponse("Wrong topic")
@@ -346,7 +368,11 @@ def ajax_skills_predef(request, predef_name):
             exclusives = Skill.objects.filter(exclusive=True).extra(
                 order_by=('-classes_given', '-no_teachers', '-clicks'))
             if len(exclusives) > 0:
-                context, template = process_skill_list(exclusives)
+                topic_list = []
+                topic_list.append(PreDefExclusive)
+                topic_skill_dict = {}
+                topic_skill_dict[PreDefExclusive] = exclusives
+                context, template = process_skill_list(exclusives, topic_list, topic_skill_dict, PreDefExclusive)
                 return HttpResponse(template.render(context, request))
             else:
                 return HttpResponse("Wrong topic")

@@ -20,29 +20,55 @@
 
 
 
-{% for parent_skill_topic in skill_topic_list %}
+{% for skill_topic in skill_topic_list %}
 
-    <li class="panel menu__item" data-toggle="collapse" href="#{{ parent_skill_topic }}">
+    <li class="menu__item">
 
-        <!--img src="{% static "images/logo.svg" %}" style="vertical-align: middle;"-->
-        <a id="{{ parent_skill_topic }}" name="{{ parent_skill_topic }}"
+        {% if skill_topic.topic_pic %}
+            <img src="{{ skill_topic.topic_pic.url }}" style="vertical-align: middle;">
+        {% else %}
+            <img src="{% static "images/logo.svg" %}" style="vertical-align: middle;">
+        {% endif %}
+
+
+        {% if pre_def_list|length == 0 and forloop.counter == 1 %}
+            <a class="preload-item-js" name="{{ skill_topic.topic_code }}"
+               style="vertical-align: middle"
+               href="#"
+               clicky.log('#
+            {{ skill_topic }}', '{{ skill_topic }}');> {{ skill_topic }} </a>
+        {% else %}
+            <a name="{{ skill_topic.topic_code }}"
+               style="vertical-align: middle"
+               href="#"
+               clicky.log('#
+            {{ skill_topic }}', '{{ skill_topic }}');> {{ skill_topic }} </a>
+
+        {% endif %}
+
+    </li>
+
+    <!--li class="panel" data-toggle="collapse" href="#{{ parent_skill_topic.topic_code }}"
+        style="background-color: #39afe6">
+
+        <a id="{{ parent_skill_topic.topic_name }}" name="{{ parent_skill_topic.topic_code }}"
            style="vertical-align: middle"
            href="#"
            clicky.log('#
-        {{ parent_skill_topic }}', '{{ parent_skill_topic }}');> {{ parent_skill_topic }} <span
-            class="caret"></span></a>
+        {{ parent_skill_topic }}', '{{ parent_skill_topic }}');> <span
+            class="caret"></span> {{ parent_skill_topic }} </a>
 
-        <div id="{{ parent_skill_topic }}" class="panel-collapse collapse">
+        <div id="{{ parent_skill_topic.topic_code }}" class="panel-collapse collapse">
             <div class="panel-body">
                 <ul class="nav navbar-nav" id="{{ parent_skill_topic }}">
                     {% for skill_topic in parent_topic_dict|get_item:parent_skill_topic %}
                         <li class="menu__item">
 
-                            <!--{% if skill_topic.topic_pic %}
-                            <img src="{{ skill_topic.topic_pic.url }}" style="vertical-align: middle;">
-                        {% else %}
-                            <img src="{% static "images/logo.svg" %}" style="vertical-align: middle;">
-                        {% endif %}-->
+                            {% if skill_topic.topic_pic %}
+                                <img src="{{ skill_topic.topic_pic.url }}" style="vertical-align: middle;">
+                            {% else %}
+                                <img src="{% static "images/logo.svg" %}" style="vertical-align: middle;">
+                            {% endif %}
 
 
                             <a id="{{ skill_topic.code }}" name="{{ skill_topic.topic_code }}"
@@ -56,5 +82,5 @@
                 </ul>
             </div>
         </div>
-    </li>
+    </li-->
 {% endfor %}

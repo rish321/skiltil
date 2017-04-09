@@ -67,7 +67,7 @@ class SkillTopic(BaseModel):
     topic_name = models.CharField(max_length=200)
     topic_pic = models.ImageField(upload_to = content_file_name, null=True, default=None, blank=True)
     topic_code = models.CharField(max_length=200, default="")
-    parent_topic = models.ForeignKey("self", default=None, null=True)
+    parent_topic = models.ForeignKey("self", default=None, null=True, blank=True)
     clicks = models.IntegerField(default=0)
     classes_given = models.IntegerField(default=0)
 

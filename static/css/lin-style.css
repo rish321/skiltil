@@ -72,6 +72,10 @@
     opacity: 0.7;
 }
 
+.lin:active {
+    opacity: 0.5;
+}
+
 .lin .icon {
     width: 16px;
     height: 16px;

@@ -2,18 +2,21 @@
     display: inline-block;
     padding-top: 5px;
     margin-top: 10px;
-    // width: 20 %;
+/ / width: 20 %;
     background: #D9F5F5;
     min-width: 20px;
     border-radius: 10%;
     max-height: 225px;
     min-height: 225px;
+    padding-left: 5px;
+    padding-right: 5px;
+    cursor: pointer;
 }
 
 .lin a {
     outline: none;
     cursor: pointer;
-    text-decoration:none;
+    text-decoration: none;
 }
 
 .lin a, img {
@@ -24,7 +27,7 @@
 .lin td {
     color: #000000;
     font-size: 18px;
-    text-decoration:none
+    text-decoration: none
 }
 
 .lin img {
@@ -32,10 +35,7 @@
     background-repeat: no-repeat;
     height: 150px;
     width: 100%;
-    // border: none;
-    // border: 2 px solid blue;
     border-radius: 10%;
-    // background-size: contain;
 }
 
 /*.lin imgexc {
@@ -50,28 +50,60 @@
 }*/
 
 .lin h4 {
-    //display: inline-block;
-    //font-family: Baskerville, "Baskerville Old Face", "Hoefler Text", Garamond, "Times New Roman", serif;
-    //font-style: italic;
     font-weight: 400;
     font-size: 16px;
     padding: 0px 10px 0;
     text-align: center;
     color: #000000;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .lin input {
     padding: 0px 10px 0;
     text-align: center;
-    //color: #6a1b9a;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .lin:hover {
     opacity: 0.7;
+}
+
+.lin .icon {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+}
+
+@media (max-width: 767px) {
+    .lin {
+        max-height: 155px;
+        min-height: 155px;
+    }
+
+    .lin img {
+        height: 80px;
+    }
+
+    .lin h4 {
+        font-size: 12px;
+    }
+
+    .lin td {
+        font-size: 12px;
+    }
+
+    .lin .icon {
+        width: 12px;
+        height: 12px;
+    }
+
+    .box {
+        padding-left: 5px;
+        padding-right: 5px;
+        padding-bottom: 5px;
+    }
 }

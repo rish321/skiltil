@@ -17,7 +17,7 @@ class SkillMatchAdmin(BaseAdmin):
 class CustomerAdmin(BaseAdmin):
 	raw_id_fields = ["social"]
 	list_display = ["customer_code", "social", "customer_name", "email", "wallet_amount", "skype_id", "gmail_id", "paytm_id", "phone_number", "no_subjects", "classes_taken", "classes_given", "student_rating", "student_rating_count", "teacher_rating", "teacher_rating_count"]
-	search_fields = ["customer_code", "social", "customer_name", "email", "skype_id", "gmail_id", "paytm_id", "phone_number"]
+	search_fields = ["customer_code", "customer_name", "email", "skype_id", "gmail_id", "paytm_id", "phone_number"]
 	readonly_fields = ["customer_code", "social", "no_subjects", "wallet_amount", "classes_taken", "classes_given", "student_rating", "student_rating_count", "teacher_rating", "teacher_rating_count"]
 	list_filter = ["student_rating", "student_rating_count", "teacher_rating", "teacher_rating_count"]
 

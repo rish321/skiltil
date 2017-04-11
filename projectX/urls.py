@@ -28,5 +28,4 @@ urlpatterns = [
 	url(r'^profile/', include('customers.urls')),
 	url(r'^tinymce/', include('tinymce.urls')),
 	url(r'^accounts/', include('allauth.urls')),
-	url(r'^adminactions/', include('adminactions.urls')),
 ]

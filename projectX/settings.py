@@ -12,6 +12,11 @@ import raven
 import logging
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+#from adminactions import actions
+#from django.contrib.admin import site
+#from django.contrib.admin import site
+#from adminactions import actions
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
@@ -37,6 +42,7 @@ INSTALLED_APPS = [
     # 'material',
     # 'material.frontend',
     # 'material.admin',
+    #'adminactions',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -200,6 +206,10 @@ EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', 'MY EMAIL HOST PASSWORD')
 # EMAIL_USE_TLS = False
 EMAIL_PORT = os.getenv('EMAIL_PORT', 587)
 EMAIL_USE_TLS = True
+
+#SECRET_KEY = "a"
+
+#actions.add_to_site(site)
 
 # CLICKY_SITE_ID = '101008337'
 

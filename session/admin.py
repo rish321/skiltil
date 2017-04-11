@@ -1,16 +1,17 @@
 from django.contrib import admin
 
 # Register your models here.
+from django.contrib.admin import DateFieldListFilter
 
 from .models import Session, Call
 
 from django.core import urlresolvers
 from django.utils.html import format_html
-
+from base.admin import BaseAdmin
 
 @admin.register(Call)
-class CallAdmin(admin.ModelAdmin):
-    list_filter = ['belong_session', 'belong_session__session_number', 'belong_session__skill_match__skill__topic',
+class CallAdmin(BaseAdmin):
+    list_filter = [('start_time', DateFieldListFilter), ('end_time', DateFieldListFilter), 'belong_session', 'belong_session__session_number', 'belong_session__skill_match__skill__topic',
                    'belong_session__skill_match__skill', 'belong_session__skill_match__customer',
                    'belong_session__student', "follow_up"]
     list_display = ['start_time', 'end_time', 'belong_session', "follow_up"]
@@ -44,7 +45,7 @@ def reverse_foreignkey_change_links(model, get_instances, description=None, get_
 
 
 @admin.register(Session)
-class SessionAdmin(admin.ModelAdmin):
+class SessionAdmin(BaseAdmin):
     list_filter = ['session_number', 'skill_match__skill__topic', 'skill_match__skill', 'skill_match__customer',
                    'student', "student_pricing", "teacher_pricing", "follow_up"]
     list_display = ['order_id', 'skill_match', 'student', 'session_number', 'amount_to_teacher', 'balance_amount',

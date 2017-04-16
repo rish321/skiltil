@@ -9,7 +9,7 @@ from django.http import HttpResponseRedirect
 from django.template import loader
 from django.template.defaulttags import register
 
-from .models import Skill, SkillTopic, CustomerRequest
+from .models import Skill, SkillTopic, CustomerRequest, Event
 from customers.models import Customer, SkillMatch
 from .forms import ContactForm
 from django.shortcuts import render
@@ -169,6 +169,31 @@ def details(request, skill_code):
         print '%s (%s)' % (e.message, type(e))
         traceback.print_exc(file=open("errlog.txt", "a"))
 
+def event(request, topic_code):
+    try:
+
+        # print skillName
+        events = Event.objects.filter(topic_code=topic_code)
+
+        if len(events) > 0:
+            event = events[0]
+            skills = Skill.objects.filter(events__in=[event])
+            print skills
+
+            return render(request, 'proj/event.html', {
+                'skill_list': skills,
+                'event_name': event.topic_name,
+            })
+
+        else:
+            return HttpResponse("Wrong Event Topic")
+
+
+    except Exception as e:
+        print "exception caught"
+        print '%s (%s)' % (e.message, type(e))
+        traceback.print_exc(file=open("errlog.txt", "a"))
+
 
 class CustomerSkill(object):
     def __init__(self, customer):
@@ -309,9 +334,13 @@ def getSkillsTopics(q, skillTopic, topic_list, topic_skill_dict):
     return skills
 
 
-def process_skill_list(skills, topic_list, topic_skill_dict, skill_topic):
+def process_skill_list(skills, topic_list, topic_skill_dict, skill_topic, all_events=False):
     skill_match_list = get_skill_match_list(skills)
-    #print skill_match_list
+    if all_events:
+        event_list = get_event_list()
+    else:
+        event_list = get_event_list(skills)
+    print event_list
     template = loader.get_template('proj/results_skill_topic.html')
     context = {
         'skill_list': skills,
@@ -319,8 +348,24 @@ def process_skill_list(skills, topic_list, topic_skill_dict, skill_topic):
         'topic_list': topic_list,
         'topic_skill_dict': topic_skill_dict,
         'skill_topic': skill_topic,
+        'event_list': event_list,
     }
     return context, template
+
+def get_event_list(skills=None):
+    if skills:
+        event_list = []
+        #print skills
+        for skil in skills:
+            #print skil
+            events = skil.events
+            #print events
+            #print skill_matches
+            event_list.extend(events.all())
+            #print skill_match_list
+        return set(event_list)
+    else:
+        return Event.objects.all()
 
 
 def get_skill_match_list(skills):
@@ -349,7 +394,7 @@ def ajax_skills_predef(request, predef_name):
                 topic_list.append(PreDefTrending)
                 topic_skill_dict = {}
                 topic_skill_dict[PreDefTrending] = orderskills
-                context, template = process_skill_list(orderskills, topic_list, topic_skill_dict, PreDefTrending)
+                context, template = process_skill_list(orderskills, topic_list, topic_skill_dict, PreDefTrending, True)
                 return HttpResponse(template.render(context, request))
             else:
                 return HttpResponse("Wrong topic")
@@ -360,7 +405,7 @@ def ajax_skills_predef(request, predef_name):
                 topic_list.append(PreDefNewArrival)
                 topic_skill_dict = {}
                 topic_skill_dict[PreDefNewArrival] = newArrivals
-                context, template = process_skill_list(newArrivals, topic_list, topic_skill_dict, PreDefNewArrival)
+                context, template = process_skill_list(newArrivals, topic_list, topic_skill_dict, PreDefNewArrival, True)
                 return HttpResponse(template.render(context, request))
             else:
                 return HttpResponse("Wrong topic")
@@ -372,7 +417,7 @@ def ajax_skills_predef(request, predef_name):
                 topic_list.append(PreDefExclusive)
                 topic_skill_dict = {}
                 topic_skill_dict[PreDefExclusive] = exclusives
-                context, template = process_skill_list(exclusives, topic_list, topic_skill_dict, PreDefExclusive)
+                context, template = process_skill_list(exclusives, topic_list, topic_skill_dict, PreDefExclusive, True)
                 return HttpResponse(template.render(context, request))
             else:
                 return HttpResponse("Wrong topic")

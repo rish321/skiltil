@@ -1,54 +1,35 @@
 {% load static %}
 <div class="container col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom:100px;">
-    {% if skill_match_list %}
-        {% if skill_match_list|length > 0 %}
+    {% if event_list %}
+        {% if event_list|length > 0 %}
             <div class='row'>
-            <div class='col-md-offset-2 col-md-8'>
-                <div class="carousel slide" data-ride="carousel" id="quote-carousel">
-                    <!-- Carousel Slides / Quotes -->
-                    <div class="carousel-inner">
-                        <!-- Quote 1 -->
-                        {% for skill_match in skill_match_list %}
-                            {% if forloop.counter == 1 %}
-                                <div class="item active">
-                            {% else %}
-                                <div class="item">
-                            {% endif %}
-                        <blockquote style="border-left: 0px;">
-                            <div class="row">
-                                <div class="col-sm-3 text-center">
-                                    {% if skill_match.customer.gender == 'm' %}
-                                        <img class="img-circle lazyload" src="{% static "images/user.jpg" %}"
-                                             data-src="{{ skill_match.customer.image }}"
-                                             style="width: 100px;height:100px;">
-                                    {% elif skill_match.customer.gender == 'f' %}
-                                        <img class="img-circle lazyload" src="{% static "images/female-user.png" %}"
-                                             data-src="{{ skill_match.customer.image }}"
-                                             style="width: 100px;height:100px;">
-                                    {% else %}
-                                        <img class="img-circle lazyload" src="{% static "images/unkuser.png" %}"
-                                             data-src="{{ skill_match.customer.image }}"
-                                             style="width: 100px;height:100px;">
-                                    {% endif %}
-                                </div>
-                                <div class="col-sm-1">
-                                </div>
-                                <div class="col-sm-8">
-                                    <p>{{ skill_match.customer.customer_name }}</p>
-                                    <small>{{ skill_match.details }}</small>
-                                </div>
+                <div class='col-md-offset-0 col-md-12'>
+                    <div class="scrolling-carousel">
+                        <div class="content-wrapper-hor">
+                            <div class="left-scroll-btn-div">
+                                <a href="javascript: void(0)" class="left-scroll-btn">
+                                    <i class="fa fa-chevron-circle-left"></i>
+                                </a>
                             </div>
-                        </blockquote>
+                            {% for event in event_list %}
+                                <div class="card"
+                                     onclick="window.open('/event/{{ event.topic_code }}', target='_blank')">
+                                    {% if event.topic_pic %}
+                                        <img src="{{ event.topic_pic.url }}">
+                                    {% else %}
+                                        <img src="{% static "images/logo.svg" %}">
+                                    {% endif %}
+                                    <p>
+                                        {{ event.topic_name }}
+                                    </p>
+                                </div>
+                            {% endfor %}
+                            <div class="right-scroll-btn-div">
+                                <a href="javascript: void(0)" class="right-scroll-btn">
+                                    <i class="fa fa-chevron-circle-right"></i>
+                                </a>
+                            </div>
                         </div>
-                        {% endfor %}
-                        </div>
-                        <!-- Carousel Buttons Next/Prev -->
-                        {% if skill_match_list|length > 1 %}
-                            <a data-slide="prev" href="#quote-carousel" class="left carousel-control"
-                               style="width:0%"><i class="glyphicon glyphicon-chevron-left" style="color:#39afe6;"></i></a>
-                            <a data-slide="next" href="#quote-carousel" class="right carousel-control" style="width:0%"><i
-                                    class="glyphicon glyphicon-chevron-right" style="color:#39afe6;"></i></a>
-                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -57,74 +38,108 @@
 
     {% if skill_list %}
         <div id="skill-list">
+            {% if topic_list|length > 1 %}
+                <div class="panel-group" id="accordion">
+            {% endif %}
             {% for topic in topic_list %}
-                {% if topic is skill_topic %}
-                    {% if topic_list|length > 1 %}
-                        <div class="col-xs-12" style="margin-top: 20px; color: #8e44ad;">
-                            <h4>---- Other ----</h4>
-                        </div>
-                    {% endif %}
-                {% else %}
-                    <div class="col-xs-12" style="margin-top: 20px; color: #8e44ad;">
-                        <h4>---- {{ topic.topic_name }} ----</h4>
-                    </div>
+                {% if topic_list|length > 1 %}
+                    <div class="panel panel-default" style="margin-top: 10px; border-style: solid;border-color: #800080;">
                 {% endif %}
-                {% for skill in topic_skill_dict|get_item:topic %}
-                    <!--div class="mi-slider"><ul-->
 
-                    <div class="box col-xl-4 col-xl-offset-0 col-lg-4 col-lg-offset-0 col-md-4 col-md-offset-0 col-sm-6 col-sm-offset-0 col-xs-6 col-xs-offset-0">
-                        <div class="lin col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12" onclick="window.open('skill/{{ skill.skill_code }}', target='_blank')">
-                            {% if skill.exclusive == True %}
-                                <div style="z-index:1; position: absolute;text-align: left;">
-                                    <img style="width:30%; height: 40%;float: left;"
-                                         src="{% static "images/rsz_exclusive_1.png" %}"></img>
-                                </div>
-                            {% endif %}
-                            <a
-                               clicky.log('details/{{ skill.skill_code }}','skill/{{ skill.skill_code }}');>
-                            <img src="{% static "images/loading_icon.png" %}" data-src="{{ skill.image_src }}"
-                                 class="lazyload">
-                            <h4>{{ skill.skill_name }}</h4>
-                            <!--{% if skill.get_skill_rating >= 3 %}
+            {% if topic is skill_topic %}
+                {% if topic_list|length > 1 %}
+                    <!--<div class="col-xs-12" style="margin-top: 20px; color: #8e44ad;">-->
+                    <!--h4>---- Other ----</h4-->
+                    <div data-toggle="collapse" data-parent="#accordion" href="#other" class="panel-heading" style="background:#800080;cursor: pointer;color: white">
+                        <h4 class="panel-title">
+                            <a>Other</a>
+                        </h4>
+                    </div>
+                    <div id="other" class="panel-collapse collapse">
+                        <div class="panel-body">
+                {% endif %}
+            {% else %}
+                <!--<div class="col-xs-12" style="margin-top: 20px; color: #8e44ad;">-->
+                <!--h4>---- {{ topic.topic_name }} ----</h4-->
+                <div data-toggle="collapse" data-parent="#accordion" href="#{{ topic.topic_code }}" class="panel-heading" style="background:#800080;cursor: pointer;color: white">
+                    <h4 class="panel-title">
+                        <a>{{ topic.topic_name }}</a>
+                    </h4>
+                </div>
+                <div id="{{ topic.topic_code }}" class="panel-collapse collapse">
+                    <div class="panel-body">
+            {% endif %}
+            {% for skill in topic_skill_dict|get_item:topic %}
+                <!--div class="mi-slider"><ul-->
+
+                <div class="box col-xl-4 col-xl-offset-0 col-lg-4 col-lg-offset-0 col-md-4 col-md-offset-0 col-sm-6 col-sm-offset-0 col-xs-6 col-xs-offset-0">
+                    <div class="lin col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12"
+                         onclick="window.open('skill/{{ skill.skill_code }}', target='_blank')">
+                        {% if skill.exclusive == True %}
+                            <div style="z-index:1; position: absolute;text-align: left;">
+                                <img style="width:30%; height: 40%;float: left;"
+                                     src="{% static "images/rsz_exclusive_1.png" %}"></img>
+                            </div>
+                        {% endif %}
+                        <a clicky.log('details/{{ skill.skill_code }}','skill/{{ skill.skill_code }}');>
+                        <img src="{% static "images/loading_icon.png" %}" data-src="{{ skill.image_src }}"
+                             class="lazyload">
+                        <h4>{{ skill.skill_name }}</h4>
+                        <!--{% if skill.get_skill_rating >= 3 %}
                                 <input type="hidden" class="rating" data-filled="glyphicon glyphicon-heart"
                                        data-filled-selected="glyphicon glyphicon-heart"
                                        data-empty="glyphicon glyphicon-heart-empty" data-readonly
                                        value="{{ skill.get_skill_rating }}"/>
                             {% endif %}-->
-                            <table border="0" width="100%" style="margin: 0px;">
-                                {% if skill.no_teachers > 0 %}
-                                    <tr>
-                                    <td valign="middle" align="center">
-                                        <img class="icon" src="{% static "images/teacher.png" %}"/>
-                                        : {{ skill.no_teachers }}
-                                    </td>
+                        <table border="0" width="100%" style="margin: 0px;">
+                            {% if skill.no_teachers > 0 %}
+                                <tr>
+                                <td valign="middle" align="center" data-placement="bottom" title="Teachers on board: {{ skill.no_teachers }}">
+                                    <img class="icon" src="{% static "images/teacher.png" %}"/>
+                                    : {{ skill.no_teachers }}
+                                </td>
 
-                                {% endif %}
+                            {% endif %}
 
-                                {% if skill.classes_given > 0 %}
+                            {% if skill.classes_given > 0 %}
 
-                                    <td valign="middle" align="center">
-                                        <img class="icon" src="{% static "images/student.png" %}"
-                                             style="width:16px;height:16px;display: inline-block;"/>
-                                        : {{ skill.classes_given }}
-                                    </td>
-                                {% endif %}
+                                <td valign="middle" align="center" data-placement="bottom" title="Classes held: {{ skill.classes_given }}">
+                                    <img class="icon" src="{% static "images/student.png" %}"
+                                         style="width:16px;height:16px;display: inline-block;"/>
+                                    : {{ skill.classes_given }}
+                                </td>
+                            {% endif %}
 
-                                {% if skill.first_class_cost > 0 %}
+                            {% if skill.first_class_cost > 0 %}
 
-                                    <td valign="middle" align="center">
-                                        <div class="hidden-xs">
-                                            <strong>&#8377; {{ skill.first_class_cost }}</strong>
-                                        </div>
-                                    </td>
-                                    </tr>
-                                {% endif %}
-                            </table>
-                        </div>
+                                <!--td valign="middle" align="center">
+                                    <div class="hidden-xs">
+                                        <strong>&#8377; {{ skill.first_class_cost }}</strong>
+                                    </div>
+                                </td-->
+                            {% endif %}
+                        </tr>
+                        </table>
                     </div>
-                {% endfor %}
+                </div>
             {% endfor %}
+            {% if topic is skill_topic %}
+                {% if topic_list|length > 1 %}
+                    </div>
+                    </div>
+                {% endif %}
+            {% else %}
+                </div>
+                </div>
+            {% endif %}
+                {% if topic_list|length > 1 %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% if topic_list|length > 1 %}
+            </div>
+        {% endif %}
         </div>
     {% endif %}
-    </div>
+</div>
 </div>

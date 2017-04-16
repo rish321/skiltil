@@ -1,0 +1,79 @@
+.scrolling-carousel {
+    width: 100%;
+    height: 110px;
+    overflow: scroll;
+    position: relative;
+}
+
+.content-wrapper-hor {
+    white-space: nowrap;
+    text-align: center;
+}
+
+.card {
+    display: inline-block;
+}
+
+.card img {
+    display: block;
+    width: 160px;
+    height: 70px;
+    cursor: pointer;
+}
+
+.card p {
+    display: block;
+    text-align: center;
+    margin-top: 0px;
+    white-space: nowrap;
+    max-width: 150px;
+}
+
+.left-scroll-btn-div {
+    font-size: 2rem;
+    left: 340px;
+    top: 140px;
+    position: fixed;
+}
+
+.right-scroll-btn-div {
+    font-size: 2rem;
+    right: 90px;
+    top: 140px;
+    position: fixed;
+}
+
+@media (max-width: 768px) {
+    .card img {
+        display: block;
+        width: 90px;
+        height: 50px;
+    }
+
+    .card p {
+        display: block;
+        text-align: center;
+        margin-top: 0px;
+        white-space: nowrap;
+        max-width: 90px;
+    }
+
+    .left-scroll-btn-div {
+        font-size: 1.5rem;
+        left: 1%;
+        top: 120px;
+        position: fixed;
+    }
+
+    .right-scroll-btn-div {
+        font-size: 1.5rem;
+        right: 1%;
+        top: 120px;
+        position: fixed;
+    }
+
+    .scrolling-carousel {
+        height: 90px;
+    }
+
+}

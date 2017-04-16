@@ -59,6 +59,7 @@ class CustomerRequest(BaseModel):
 #    event_name = models.CharField(max_length=50)
 #    event_code = models.CharField(max_length=50)
 
+
 def content_file_name(instance, filename):
     ext = filename.split('.')[-1]
     return 'static/images/topic/{}.{}'.format(instance.topic_code, ext)
@@ -68,6 +69,7 @@ class SkillTopic(BaseModel):
     topic_pic = models.ImageField(upload_to = content_file_name, null=True, default=None, blank=True)
     topic_code = models.CharField(max_length=200, default="")
     parent_topic = models.ForeignKey("self", default=None, null=True, blank=True)
+    #is_event = models.BooleanField(default=False)
     clicks = models.IntegerField(default=0)
     classes_given = models.IntegerField(default=0)
 
@@ -99,6 +101,9 @@ class SkillTopic(BaseModel):
         super(SkillTopic, self).save(*args, **kwargs)
 
 
+class Event(SkillTopic):
+    is_event = models.BooleanField(default=True)
+
 class SkillQuerySet(models.QuerySet):
     def delete(self, *args, **kwargs):
         for obj in self:
@@ -109,7 +114,7 @@ class SkillQuerySet(models.QuerySet):
 class Skill(BaseModel):
     objects = SkillQuerySet.as_manager()
     skill_name = models.CharField(max_length=200)
-    topic = models.ForeignKey(SkillTopic, default=None)
+    topic = models.ForeignKey(SkillTopic, default=None, related_name='skill_topic')
     image_src = models.CharField(max_length=200, blank=True)
     details = tinymce_models.HTMLField(default="", blank=True)
     course_structure = tinymce_models.HTMLField(default="", blank=True)
@@ -129,7 +134,7 @@ class Skill(BaseModel):
                                         related_name='skill_student_pricing')
     teacher_pricing = models.ForeignKey("pricing.PriceModel", default=None, null=True, blank=True,
                                         related_name='skill_teacher_pricing')
-    #events = models.ManyToManyField(Event)
+    events = models.ManyToManyField(Event, related_name='events')
 
     def __str__(self):
         return self.skill_name + " - " + self.topic.topic_name

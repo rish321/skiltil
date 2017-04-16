@@ -18,6 +18,7 @@
     <link rel="stylesheet" type="text/css" href={% static "css/search_expand.css" %}/>
     <link rel="stylesheet" type="text/css" href={% static "css/simple-sidebar.css" %}/>
     <link rel="stylesheet" type="text/css" href={% static "css/lin-style.css" %}/>
+    <link rel="stylesheet" type="text/css" href={% static "css/carousal-style.css" %}/>
     <!--link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"-->
 
     <style>
@@ -25,7 +26,6 @@
             pointer-events: none;
         }
     </style>
-
 
     <script type="text/javascript">
 
@@ -75,6 +75,24 @@
                         success: function (htmlReturned) {
                             $("#right__panel").html(htmlReturned);
                             $('#page-content-wrapper').show();
+
+                            //util function to check if an element has a scrollbar present
+                            jQuery.fn.hasScrollBar = function (direction) {
+                                if (direction == 'vertical') {
+                                    return this.get(0).scrollHeight > this.innerHeight();
+                                }
+                                else if (direction == 'horizontal') {
+                                    if(this.get(0) != null)
+                                        return this.get(0).scrollWidth > this.innerWidth();
+                                }
+                                return false;
+
+                            }
+
+                            if (!$('.content-wrapper-hor').hasScrollBar('horizontal')) {
+                                $('.left-scroll-btn-div').hide();
+                                $('.right-scroll-btn-div').hide();
+                            }
 
                         },
                         complete: function () {
@@ -356,8 +374,12 @@
     </script>
 
     <script>
-
     </script>
+
+
+    <script src={% static "js/carousal-script.js" %}></script>
+    <script src={% static "js/simpleDivXScroll.js" %}></script>
+
 
 
 {% endblock %}

@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     # url(r'^contact/$', views.contact, name='contact'),
     url(r'^skill/(.*)/$', views.details, name='skill'),
+    url(r'^event/(.*)/$', views.event, name='event'),
     url(r'^teachers/', RedirectView.as_view(url='/')),
     # url(r'^sitemap\.xml$', TemplateView.as_view(template_name='proj/sitemap.xml', content_type='text/xml')),
     url(r'^thanks/', views.thanks, name='thanks'),

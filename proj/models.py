@@ -134,7 +134,7 @@ class Skill(BaseModel):
                                         related_name='skill_student_pricing')
     teacher_pricing = models.ForeignKey("pricing.PriceModel", default=None, null=True, blank=True,
                                         related_name='skill_teacher_pricing')
-    events = models.ManyToManyField(Event, related_name='events')
+    events = models.ManyToManyField(Event, related_name='events', blank=True,)
 
     def __str__(self):
         return self.skill_name + " - " + self.topic.topic_name

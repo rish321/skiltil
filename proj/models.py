@@ -101,7 +101,7 @@ class SkillTopic(BaseModel):
         skillTopics = SkillTopic.objects.filter(parent_topic = self)
         for skillTopic in skillTopics:
             self.clicks += skillTopic.clicks
-            self.classes_given += skillTopics.classes_given
+            self.classes_given += skillTopic.classes_given
         super(SkillTopic, self).save(*args, **kwargs)
         if self.parent_topic is not None:
             self.parent_topic.save()

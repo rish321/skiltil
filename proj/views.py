@@ -313,11 +313,11 @@ def ajax_skill_topics(request):
             predef_list.append(PreDefNewArrival)
 
         for skillTopic in skill_topic_list:
-            skills = Skill.objects.filter(topic=skillTopic)
+            skills = Skill.objects.filter(topic=skillTopic).filter(visible=True)
             if re.search(q, skillTopic.topic_name, re.IGNORECASE) and len(skills) > 0:
                 populate_skill_topics(parent_topic_dict, skillTopic, skill_parent_topics)
             else:
-                skills = skills.filter(Q(skill_name__icontains=q))
+                skills = skills.filter(Q(skill_name__icontains=q)).filter(visible=True)
                 if len(skills) > 0:
                     populate_skill_topics(parent_topic_dict, skillTopic, skill_parent_topics)
         template = loader.get_template('proj/results_main_list.html')
@@ -378,10 +378,10 @@ def ajax_skills(request, skill_topic_code):
 
 def getSkillsTopics(q, skillTopic, topic_list, topic_skill_dict):
     if re.search(q, skillTopic.topic_name, re.IGNORECASE):
-        skills = Skill.objects.filter(topic__topic_code=skillTopic.topic_code).extra(
+        skills = Skill.objects.filter(topic__topic_code=skillTopic.topic_code).filter(visible=True).extra(
             order_by=('-classes_given', '-no_teachers', '-clicks'))
     else:
-        skills = Skill.objects.filter(topic__topic_code=skillTopic.topic_code).filter(Q(skill_name__icontains=q)).extra(
+        skills = Skill.objects.filter(topic__topic_code=skillTopic.topic_code).filter(Q(skill_name__icontains=q)).filter(visible=True).extra(
             order_by=('-classes_given', '-no_teachers', '-clicks'))
     if len(skills) > 0:
         topic_list.append(skillTopic)
@@ -442,7 +442,7 @@ def ajax_skills_predef(request, predef_name):
     try:
         # print predef_name
         if predef_name.lower() == PreDefTrending.code.lower():
-            orderskills = Skill.objects.filter(exclusive=False).extra(
+            orderskills = Skill.objects.filter(exclusive=False).filter(visible=True).extra(
                 order_by=('-classes_given', '-no_teachers', '-clicks'))[:20]
             if len(orderskills) > 0:
                 topic_list = []
@@ -454,7 +454,7 @@ def ajax_skills_predef(request, predef_name):
             else:
                 return HttpResponse("Wrong topic")
         elif predef_name.lower() == PreDefNewArrival.code.lower():
-            newArrivals = Skill.objects.filter(exclusive=False).extra(order_by=('-created_date', 'clicks'))[:20]
+            newArrivals = Skill.objects.filter(exclusive=False).filter(visible=True).extra(order_by=('-created_date', 'clicks'))[:20]
             if len(newArrivals) > 0:
                 topic_list = []
                 topic_list.append(PreDefNewArrival)
@@ -465,7 +465,7 @@ def ajax_skills_predef(request, predef_name):
             else:
                 return HttpResponse("Wrong topic")
         elif predef_name.lower() == PreDefExclusive.code.lower():
-            exclusives = Skill.objects.filter(exclusive=True).extra(
+            exclusives = Skill.objects.filter(exclusive=True).filter(visible=True).extra(
                 order_by=('-classes_given', '-no_teachers', '-clicks'))
             if len(exclusives) > 0:
                 topic_list = []

@@ -98,7 +98,13 @@ class SkillTopic(BaseModel):
         for skill in skills:
             self.clicks += skill.clicks
             self.classes_given += skill.classes_given
+        skillTopics = SkillTopic.objects.filter(parent_topic = self)
+        for skillTopic in skillTopics:
+            self.clicks += skillTopic.clicks
+            self.classes_given += skillTopics.classes_given
         super(SkillTopic, self).save(*args, **kwargs)
+        if self.parent_topic is not None:
+            self.parent_topic.save()
 
 
 class Event(SkillTopic):

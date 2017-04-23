@@ -169,6 +169,61 @@ def details(request, skill_code):
         print '%s (%s)' % (e.message, type(e))
         traceback.print_exc(file=open("errlog.txt", "a"))
 
+def request(request):
+    try:
+        data = {'skill': ""}
+        form_class = ContactForm(initial=data)
+
+        if request.user.is_authenticated():
+            user = request.user
+            socialAccounts = SocialAccount.objects.filter(user_id=user.id)
+            if len(socialAccounts) > 0:
+                socialAccount = socialAccounts[0]
+                customer = Customer.objects.filter(social=socialAccount)[0]
+
+                data['contact_name'] = customer.customer_name
+                data['contact_email'] = customer.email
+                data['contact_phone'] = customer.phone_number
+                form_class = ContactForm(initial=data)
+
+        # new logic!
+        if request.method == 'POST':
+            form = ContactForm(data=request.POST)
+
+            if form.is_valid():
+                contact_name = request.POST.get(
+                    'contact_name'
+                    , '')
+                contact_phone = request.POST.get(
+                    'contact_phone'
+                    , '')
+                contact_email = request.POST.get(
+                    'contact_email'
+                    , '')
+                skill_entered = request.POST.get(
+                    'skill'
+                    , '')
+                preferred_communication_time = request.POST.get(
+                    'preferred_communication_time'
+                    , '')
+
+            form_content = request.POST.get('content', '')
+            customerRequest = CustomerRequest(contact_name=contact_name, contact_phone=contact_phone,
+                                              contact_email=contact_email, skill=skill_entered,
+                                              preferred_communication_time=preferred_communication_time,
+                                              content=form_content)
+            customerRequest.save()
+            sendConfirmationMail(customerRequest)
+
+            return HttpResponseRedirect('/thanks/')
+        return render(request, 'proj/request_new.html', {
+            'form': form_class,
+        })
+    except Exception as e:
+        print "exception caught"
+        print '%s (%s)' % (e.message, type(e))
+        traceback.print_exc(file=open("errlog.txt", "a"))
+
 def event(request, topic_code):
     try:
 

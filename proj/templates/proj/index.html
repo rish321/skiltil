@@ -30,15 +30,57 @@
     <script type="text/javascript">
 
 
+        function ajax_skill_list(sectionUrl, query, getMethod) {
+            $.ajax({
+                url: sectionUrl,
+                data: {
+                    'q': query.val()
+                },
+                type: getMethod,
+                async: true,
+                dataType: 'html',
+                beforeSend: function () {
+                    $('#loading').show();
+                    $('#page-content-wrapper').hide();
+                },
+                success: function (htmlReturned) {
+                    $("#right__panel").html(htmlReturned);
+                    $('#page-content-wrapper').show();
+
+                    //util function to check if an element has a scrollbar present
+                    jQuery.fn.hasScrollBar = function (direction) {
+                        if (direction == 'vertical') {
+                            return this.get(0).scrollHeight > this.innerHeight();
+                        }
+                        else if (direction == 'horizontal') {
+                            if (this.get(0) != null)
+                                return this.get(0).scrollWidth > this.innerWidth();
+                        }
+                        return false;
+
+                    }
+
+                    if (!$('.content-wrapper-hor').hasScrollBar('horizontal')) {
+                        $('.left-scroll-btn-div').hide();
+                        $('.right-scroll-btn-div').hide();
+                    }
+
+                },
+                complete: function () {
+                    $('#loading').hide();
+
+                }
+            });
+        }
         $(document).ready(function () {
 
-                $('#loading').hide();
+            $('#loading').hide();
 
-                var getMethod = "GET";
-                var query = $('#search_skiltil');
+            var getMethod = "GET";
+            var query = $('#search_skiltil');
 
-                $(document).on("click", ".menu__item", function (e) {
-                    console.log(e.target);
+            $(document).on("click", ".menu__item", function (e) {
+                console.log(e.target);
                     //alert("here2");
                     $(".menu__item").css("background-color", "#39afe6");
                     $(this).css("background-color", "white");
@@ -60,46 +102,7 @@
                         $("#wrapper").toggleClass("toggled");
                         $('#menu-toggle').css("pointer-events", "");
                     }
-                    $.ajax({
-                        url: sectionUrl,
-                        data: {
-                            'q': query.val()
-                        },
-                        type: getMethod,
-                        async: true,
-                        dataType: 'html',
-                        beforeSend: function () {
-                            $('#loading').show();
-                            $('#page-content-wrapper').hide();
-                        },
-                        success: function (htmlReturned) {
-                            $("#right__panel").html(htmlReturned);
-                            $('#page-content-wrapper').show();
-
-                            //util function to check if an element has a scrollbar present
-                            jQuery.fn.hasScrollBar = function (direction) {
-                                if (direction == 'vertical') {
-                                    return this.get(0).scrollHeight > this.innerHeight();
-                                }
-                                else if (direction == 'horizontal') {
-                                    if(this.get(0) != null)
-                                        return this.get(0).scrollWidth > this.innerWidth();
-                                }
-                                return false;
-
-                            }
-
-                            if (!$('.content-wrapper-hor').hasScrollBar('horizontal')) {
-                                $('.left-scroll-btn-div').hide();
-                                $('.right-scroll-btn-div').hide();
-                            }
-
-                        },
-                        complete: function () {
-                            $('#loading').hide();
-
-                        }
-                    });
+                    ajax_skill_list(sectionUrl, query, getMethod);
                 });
 
                 function ajax_skill_topics() {

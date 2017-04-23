@@ -96,11 +96,12 @@ def details(request, skill_code):
             # data = {'skill': skill.skill_name}
             data['skill'] = skill.skill_name
             form_class = ContactForm(initial=data)
-            skill.update(clicks=skill.clicks + 1)
-            skillTopics = SkillTopic.objects.filter(topic=skill.topic)
-            skillTopics.update(clicks=F('clicks') + 1)
-            if skillTopics[0].parent_topic is not None:
-                skillTopics[0].parent_topic.update(clicks=F('clicks') + 1)
+            skill.clicks = skill.clicks + 1
+            skill.save()
+            skillTopic = skill.topic
+            skillTopic.clicks = skillTopic.clicks + 1
+            if skillTopic.parent_topic is not None:
+                skillTopic.parent_topic.clicks = skillTopic.parent_topic.clicks + 1
 
         # new logic!
         if request.method == 'POST':

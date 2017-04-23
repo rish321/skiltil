@@ -155,9 +155,15 @@ class Session(BaseModel):
             self.total_calls += 1
         self.call_time_range = self.end_time - self.start_time
         if self.student_pricing is None:
-            self.student_pricing = self.skill_match.skill.student_pricing
+            if self.skill_match.student_pricing is None:
+                self.student_pricing = self.skill_match.skill.student_pricing
+            else:
+                self.student_pricing = self.skill_match.student_pricing
         if self.teacher_pricing is None:
-            self.teacher_pricing = self.skill_match.skill.teacher_pricing
+            if self.skill_match.teacher_pricing is None:
+                self.teacher_pricing = self.skill_match.skill.teacher_pricing
+            else:
+                self.teacher_pricing = self.skill_match.teacher_pricing
         self.amount_to_teacher = self.calculateTeacherAmount(self.total_duration)
         self.money_refund = self.calculateStudentAmount(self.time_refund)
         self.amount_from_student = self.calculateStudentAmount(self.total_duration)

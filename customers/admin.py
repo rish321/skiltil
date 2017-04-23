@@ -7,9 +7,9 @@ from base.admin import BaseAdmin
 
 @admin.register(SkillMatch)
 class SkillMatchAdmin(BaseAdmin):
-	raw_id_fields = ["skill", "customer"]
-	list_filter = ["skill__topic", "skill", "customer", "verified", "visible", "teacher_rating", "teacher_rating_count"]
-	list_display = ["skill", "customer", "classes_given", "verified", "visible", "teacher_rating", "teacher_rating_count"]
+	raw_id_fields = ["skill", "customer", "student_pricing", "teacher_pricing", ]
+	list_filter = ["skill__topic", "skill", "customer", "verified", "visible", "teacher_rating", "teacher_rating_count", "student_pricing", "teacher_pricing", ]
+	list_display = ["skill", "customer", "classes_given", "verified", "visible", "teacher_rating", "teacher_rating_count", "student_pricing", "teacher_pricing", ]
 	search_fields = ["skill__topic__topic_name", "skill__skill_name", "customer__customer_name"]
 	readonly_fields = ["classes_given", "teacher_rating", "teacher_rating_count"]
 

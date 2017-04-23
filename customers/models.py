@@ -139,6 +139,10 @@ class SkillMatch(BaseModel):
     details = models.TextField(default="", blank=True)
     verified = models.BooleanField(default=False)
     visible = models.BooleanField(default=True)
+    student_pricing = models.ForeignKey("pricing.PriceModel", default=None, null=True, blank=True,
+                                        related_name='skillMatch_student_pricing')
+    teacher_pricing = models.ForeignKey("pricing.PriceModel", default=None, null=True, blank=True,
+                                        related_name='skillMatch_teacher_pricing')
     classes_given = models.IntegerField(default=0)
     teacher_rating = models.FloatField(default=0)
     teacher_rating_count = models.IntegerField(default=0)

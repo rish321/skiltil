@@ -1,8 +1,9 @@
 .scrolling-carousel {
-    width: 100%;
+    width: 85%;
     height: 110px;
     overflow: scroll;
     position: relative;
+    display: inline-block;
 }
 
 .content-wrapper-hor {
@@ -31,16 +32,18 @@
 
 .left-scroll-btn-div {
     font-size: 2rem;
-    left: 340px;
-    top: 140px;
-    position: fixed;
+    display: inline-block;
+    //left: 340px;
+    bottom: 60px;
+    position: relative;
 }
 
 .right-scroll-btn-div {
     font-size: 2rem;
-    right: 90px;
-    top: 140px;
-    position: fixed;
+    display: inline-block;
+    //right: 90px;
+    bottom: 60px;
+    position: relative;
 }
 
 @media (max-width: 768px) {
@@ -60,16 +63,16 @@
 
     .left-scroll-btn-div {
         font-size: 1.5rem;
-        left: 1%;
-        top: 120px;
-        position: fixed;
+        //left: 1%;
+        bottom: 50px;
+        position: relative;
     }
 
     .right-scroll-btn-div {
         font-size: 1.5rem;
-        right: 1%;
-        top: 120px;
-        position: fixed;
+        //right: 1%;
+        bottom: 50px;
+        position: relative;
     }
 
     .scrolling-carousel {

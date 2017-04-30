@@ -67,6 +67,28 @@ def show_profile(request):
         print '%s (%s)' % (e.message, type(e))
         traceback.print_exc(file=open("errlog.txt", "a"))
 
+def update_skill_detail(request):
+    try:
+        if request.user.is_authenticated():
+            json1 = json.loads(request.POST['msg'])
+
+            skillMatchCode = json1["id"]
+            skillMatchDetail = json1["text"]
+
+            skillMatches = SkillMatch.objects.filter(id = skillMatchCode)
+            if len(skillMatches) > 0:
+                skillMatch = skillMatches[0]
+                skillMatch.details = skillMatchDetail
+                skillMatch.save()
+
+            return HttpResponseRedirect("/profile-updated/")
+        else:
+            return HttpResponseRedirect('/accounts/login')
+
+    except Exception as e:
+        print "exception caught"
+        print '%s (%s)' % (e.message, type(e))
+        traceback.print_exc(file=open("errlog.txt", "a"))
 
 def update_skills(request):
     try:

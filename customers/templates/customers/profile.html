@@ -10,7 +10,16 @@
         .submit-skills {
             background-color: beige;
         }
+
         .submit-skills.active {
+            background-color: bisque;
+        }
+
+        .submit-skill-detail {
+            background-color: beige;
+        }
+
+        .submit-skill-detail.active {
             background-color: bisque;
         }
     </style>
@@ -18,25 +27,74 @@
     <script src={% static "js/bootstrap3-typeahead.min.js" %}></script>
 
     <script src={% static "js/add-skill.js" %}></script>
+    <script src={% static "js/jquery.toaster.js" %}></script>
     <script>
         $(document).ready(function () {
+            function getCookie(name) {
+                var cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    var cookies = document.cookie.split(';');
+                    for (var i = 0; i < cookies.length; i++) {
+                        var cookie = jQuery.trim(cookies[i]);
+                        // Does this cookie string begin with the name we want?
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+
+            var csrftoken = getCookie('csrftoken');
+
+            function csrfSafeMethod(method) {
+                // these HTTP methods do not require CSRF protection
+                return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+            }
+
+            $.ajaxSetup({
+                beforeSend: function (xhr, settings) {
+                    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    }
+                }
+            });
+
             $(".btn-pref .btn").click(function () {
                 $(".btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
                 // $(".tab").addClass("active"); // instead of this do the below
                 $(this).removeClass("btn-default").addClass("btn-primary");
             });
 
-            /*var query = $('#add-skill-inp');
-             query.bind('input', function () {
-             q = query.val();
-             console.log(q);
-             console.log(q.length);
-             //$(".list-group li").show();
-             //ajax_skill_topics();
-             });*/
+            $(document).on('click', '.submit-skill-detail', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log("clicked on save");
+                var element = $(this)[0];
+                var id = element.id;
+                var text = $("#text_area_" + id).val();
+                var jsonData = {};
+                jsonData["id"] = id;
+                jsonData["text"] = text;
+                var myJsonString = JSON.stringify(jsonData);
+
+                $.ajax({
+                    url: '/profile/update_skill_detail/',
+                    type: "POST",
+                    data: {msg: myJsonString},
+                    success: function (response) {
+                        $.toaster({ priority : 'success', title : 'Success', message : "Your details have been updated."});
+                    },
+                    error: function (xhr, textStatus, thrownError) {
+                        $.toaster({ priority : 'danger', title : 'Error', message : "Some problem occured. Please try again later."});
+                    }
+                });
+            });
 
 
             var typeahead_data = [];
+
 
             function get_skill_names() {
                 sectionUrl = "/skill_lookup/";
@@ -186,18 +244,24 @@
                                         </a>
                                         {% for skill_match in skill_matches_verified %}
 
-                                            <a href="/skill/{{ skill_match.skill.skill_code }}"
-                                               class="list-group-item list-group-item-action"
-                                               target="_blank">
-                                                <p><img src="{{ skill_match.skill.image_src }}" width="25px" ,
-                                                        height="18px"/> {{ skill_match.skill.skill_name }}</p>
-                                                <p>{{ skill_match.classes_given }} classes taught on Skiltil</p>
-                                                {% if skill_match.classes_given > 0 and skill_match.teacher_rating_count > 0 %}
-                                                    <p>{{ skill_match.teacher_rating }} rated by
-                                                        {{ skill_match.teacher_rating_count }} students.</p>
-                                                {% endif %}
-                                                <p>{{ skill_match.details }}</p>
-                                            </a>
+                                            <div class="list-group-item list-group-item-action">
+                                                <a href="/skill/{{ skill_match.skill.skill_code }}" target="_blank">
+                                                    <p><img src="{{ skill_match.skill.image_src }}" width="25px" ,
+                                                            height="18px"/> {{ skill_match.skill.skill_name }}</p>
+                                                    <p>{{ skill_match.classes_given }} classes taught on Skiltil</p>
+                                                    {% if skill_match.classes_given > 0 and skill_match.teacher_rating_count > 0 %}
+                                                        <p>{{ skill_match.teacher_rating }} rated by
+                                                            {{ skill_match.teacher_rating_count }} students.</p>
+                                                    {% endif %}
+                                                </a>
+                                                <form style="text-align: center;">
+                                                    <textarea id="text_area_{{ skill_match.id }}" style=" width: 100%;"
+                                                              placeholder="Please tell us why and how you know this skill. This information will directly be shared with the students.">{{ skill_match.details }}</textarea><br>
+                                                    <input style="padding-left: 20px; padding-right: 20px; margin-top: 5px;"
+                                                           type="submit" class="submit-skill-detail"
+                                                           id="{{ skill_match.id }}" value="Save">
+                                                </form>
+                                            </div>
                                         {% endfor %}
                                     </div>
                                 </div>
@@ -207,8 +271,21 @@
                                             Pending for verification
                                         </a>
                                         {% for skill_match in skill_matches_unverified %}
-                                            <a href="#"
-                                               class="list-group-item list-group-item-action">{{ skill_match.skill.skill_name }}</a>
+                                            <div class="list-group-item list-group-item-action">
+                                                <a href="/skill/{{ skill_match.skill.skill_code }}" target="_blank"><p>
+                                                    <img
+                                                            src="{{ skill_match.skill.image_src }}" width="25px" ,
+                                                            height="18px"/> {{ skill_match.skill.skill_name }}</p>
+                                                </a>
+                                                <form style="text-align: center;">
+                                                    <textarea id="text_area_{{ skill_match.id }}" style=" width: 100%;"
+                                                              placeholder="Please tell us why and how you know this skill. This information will directly be shared with the students.">{{ skill_match.details }}</textarea><br>
+                                                    <input style="padding-left: 20px; padding-right: 20px; margin-top: 5px;"
+                                                           type="submit" class="submit-skill-detail"
+                                                           id="{{ skill_match.id }}" value="Save">
+                                                </form>
+
+                                            </div>
                                         {% endfor %}
 
                                         <div style="background: white">
@@ -233,7 +310,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <a href="#" class="list-group-item submit-skills">
+                                        <a href="#" class="list-group-item submit-skills" id="submit-skills">
                                             Submit for review
                                         </a>
                                     </div>

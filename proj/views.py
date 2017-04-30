@@ -167,6 +167,7 @@ def details(request, skill_code):
         return render(request, 'proj/contact.html', {
             'form': form_class,
             'skill': skill,
+            'event_list': get_event_list(skills),
         })
     except Exception as e:
         print "exception caught"

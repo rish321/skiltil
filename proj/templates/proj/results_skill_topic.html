@@ -4,14 +4,15 @@
         {% if event_list %}
             {% if event_list|length > 0 %}
                 <div class='row'>
-                    <div class='col-md-offset-0 col-md-12'>
+                    <div class='col-md-offset-0 col-md-12' style="text-align: center">
+                        <div class="left-scroll-btn-div">
+                            <a href="javascript: void(0)" class="left-scroll-btn">
+                                <i class="fa fa-chevron-circle-left"></i>
+                            </a>
+                        </div>
                         <div class="scrolling-carousel">
                             <div class="content-wrapper-hor">
-                                <div class="left-scroll-btn-div">
-                                    <a href="javascript: void(0)" class="left-scroll-btn">
-                                        <i class="fa fa-chevron-circle-left"></i>
-                                    </a>
-                                </div>
+
                                 {% for event in event_list %}
                                     <div class="card"
                                          onclick="window.open('/event/{{ event.topic_code }}', target='_blank')">
@@ -25,12 +26,13 @@
                                         </p>
                                     </div>
                                 {% endfor %}
-                                <div class="right-scroll-btn-div">
-                                    <a href="javascript: void(0)" class="right-scroll-btn">
-                                        <i class="fa fa-chevron-circle-right"></i>
-                                    </a>
-                                </div>
+
                             </div>
+                        </div>
+                        <div class="right-scroll-btn-div">
+                            <a href="javascript: void(0)" class="right-scroll-btn">
+                                <i class="fa fa-chevron-circle-right"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -152,7 +154,9 @@
     </div>
 
 
-    <div class="row" style="background:#800080;cursor: pointer;color: white;margin-top: 20px;border-radius: 5px;padding: 5px" onclick="window.open('/request/')">
+    <div class="row"
+         style="background:#800080;cursor: pointer;color: white;margin-top: 20px;border-radius: 5px;padding: 5px"
+         onclick="window.open('/request/')">
         Couldn't find what you were looking for?
     </div>
 
